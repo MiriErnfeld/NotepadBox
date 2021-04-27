@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import './styles.css'
+import $ from 'jquery'
 
 export default function NotePad() {
 
     const [notesText, setNotesText] = useState("")
     const [noteList, setNoteList] = useState([])
+    const [style, setstyle] = useState('blue')
 
     function onSaveNotes() {
         debugger
@@ -30,10 +32,11 @@ export default function NotePad() {
         setNoteList(deleteNotes);
     }
 
-    function setColor(e) {
+    function setColor(e, index) {
         debugger
-        let color = e.targrt.value
-
+        let color = e
+        let currentclass = `notes-item ${index}`
+        $("." + { currentclass }).css("background-color", "color")
     }
 
     return (
@@ -64,8 +67,9 @@ export default function NotePad() {
                                     onClick={() => onDeleteNote(index)}
                                 >
                                     X
-                    </button>
-                                <input type="color" className="inputcolor" onChange={e => setColor(e.target.value)} ></input>
+                                </button>
+                                <input type="color" className="inputcolor"
+                                    onChange={e => setColor(e.target.value, index)} ></input>
                             </div>
                             {item.notes}
                         </div>
