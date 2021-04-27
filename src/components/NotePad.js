@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same time
+
 import './styles.css'
 import $ from 'jquery'
 
@@ -6,7 +8,7 @@ export default function NotePad() {
 
     const [notesText, setNotesText] = useState("")
     const [noteList, setNoteList] = useState([])
-    const [style, setstyle] = useState('blue')
+    const [styleColor, setstyleColor] = useState('')
 
     function onSaveNotes() {
         debugger
@@ -36,7 +38,8 @@ export default function NotePad() {
         debugger
         let color = e
         let currentclass = `notes-item ${index}`
-        $("." + { currentclass }).css("background-color", "color")
+        setstyleColor(color)
+        // $("." + currentclass).css("background-color", "color")
     }
 
     return (
@@ -57,9 +60,11 @@ export default function NotePad() {
                 </div>
             </div>
             <div className="display-notes">
+                <Draggable>
                 {noteList.length > 0
                     ? noteList.map((item, index) => (
-                        <div key={index} className={`notes-item ${index}`}>
+                        <div key={index} className={`notes-item ${index}`} 
+                        style={{backgroundColor: styleColor}}>
                             <div className="note-head">
                                 {/* <h3>Note {index}</h3> */}
                                 <button
@@ -75,6 +80,7 @@ export default function NotePad() {
                         </div>
                     ))
                     : ""}
+                    </Draggable>
             </div>
         </div>
     );
