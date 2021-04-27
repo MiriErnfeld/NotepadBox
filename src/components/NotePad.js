@@ -24,7 +24,8 @@ export default function NotePad() {
 
     function onDeleteNote(index) {
         debugger
-        const deleteNotes = noteList.filter(noteList, index);
+        const indexNote = noteList[index]
+        const deleteNotes = noteList.filter(noteList => noteList != indexNote);
         console.log(deleteNotes)
         setNoteList(deleteNotes);
     }
@@ -51,7 +52,7 @@ export default function NotePad() {
                     ? noteList.map((item, index) => (
                         <div key={index} className={`notes-item ${index}`}>
                             <div className="note-head">
-                                <h3>Note {index}</h3>
+                                {/* <h3>Note {index}</h3> */}
                                 <button
                                     className="delete-note"
                                     onClick={() => onDeleteNote(index)}
