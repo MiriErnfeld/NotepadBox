@@ -1,0 +1,19 @@
+-------------------- Auto-Git Log --------------------
+		Tue Apr 27 2021 17:37:59 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* package-lock.json
+* package.json
+* src/components/NotePad.js
+* src/components/styles.css
+
+
+Created files:
+* .autogit/logs/log-27-3-2021-17-7-39.txt
+
+
+Deleted files:
+
+
+Renamed files:
