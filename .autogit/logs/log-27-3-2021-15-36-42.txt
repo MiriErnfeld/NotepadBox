@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Tue Apr 27 2021 15:36:42 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/components/styles.css
+
+
+Created files:
+* .autogit/logs/log-27-3-2021-14-3-8.txt
+
+
+Deleted files:
+
+
+Renamed files:
