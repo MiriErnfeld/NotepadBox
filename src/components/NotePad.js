@@ -30,6 +30,12 @@ export default function NotePad() {
         setNoteList(deleteNotes);
     }
 
+    function setColor(e) {
+        debugger
+        let color = e.targrt.value
+
+    }
+
     return (
         <div className="Note-pad">
             <div className="some-test">
@@ -42,7 +48,7 @@ export default function NotePad() {
                         value={notesText}
                         onChange={(e) => onChangeValue(e.target.value)}
                     />
-                    <button className="save-button" onClick={onSaveNotes}>
+                    <button className="save-button" onClick={(e) => onSaveNotes(e)}>
                         +
             </button>
                 </div>
@@ -59,6 +65,7 @@ export default function NotePad() {
                                 >
                                     X
                     </button>
+                                <input type="color" className="inputcolor" onChange={e => setColor(e.target.value)} ></input>
                             </div>
                             {item.notes}
                         </div>
