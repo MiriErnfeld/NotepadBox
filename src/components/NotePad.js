@@ -36,12 +36,9 @@ export default function NotePad() {
         debugger
         let color = e
         let currentclass = `notes-item ${index}`
-        setstyleColor(color)
-        // $(currentclass).css("background-color", color)
-        let array = document.getElementsByName(currentclass)[0]
-        array.Style.backgroundColor = color
+        let note = document.getElementsByClassName(currentclass)[0]
+        note.style.backgroundColor = color
     }
-
     return (
         <div className="Note-pad">
             <div className="some-test">
@@ -72,7 +69,7 @@ export default function NotePad() {
                                 >
                                     X
                                 </button>
-                                <input type="color" className="inputcolor"
+                                <input type="color" className="inputColor"
                                     onChange={e => setColor(e.target.value, index)} ></input>
                             </div>
                             {item.notes}
