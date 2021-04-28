@@ -1,0 +1,15 @@
+-------------------- Auto-Git Log --------------------
+		Wed Apr 28 2021 10:23:12 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/components/NotePad.js
+
+
+Created files:
+
+
+Deleted files:
+
+
+Renamed files:
