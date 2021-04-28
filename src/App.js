@@ -6,20 +6,10 @@ import React, { useState } from 'react';
 import ReactStickyNotes from '@react-latest-ui/react-sticky-notes';
 import MyFirstStickyNotes from './components/StickyNote'
 
-import { SketchPicker } from 'react-color'
-
 function App() {
-  const [click, setclick] = useState(false)
 
-  function showColors() {
-    debugger
-    setclick(!click)
-  }
   return (
     <div className="App">
-      <button onClick={showColors}>...</button>
-      {click ?
-        <SketchPicker /> : " "}
       <MyFirstStickyNotes></MyFirstStickyNotes>
       {/* <ReactStickyNotes
         noteWidth={"140px"}

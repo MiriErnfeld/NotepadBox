@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import ReactStickies from 'react-stickies'; //ES6
+import { SketchPicker } from 'react-color'
 import $ from 'jquery'
 
 export default function MyFirstStickyNotes() {
     const [myNote, setMyNote] = useState([])
+    const [click, setclick] = useState(false)
 
-    let r = $('<div id="note">666</div>')
+    function showColors() {
+        debugger
+        setclick(!click)
+    }
+
+    let r = $('<button className="btn-colors">...</button>')
+    $('.btn-colors').addEvent('click', showColors)
     $(".title div").replaceWith(r)
+
 
     function onSave() {
         // Make sure to delete the editorState before saving to backend
@@ -24,10 +33,14 @@ export default function MyFirstStickyNotes() {
         debugger
         setMyNote(notes)
     }
-    return (
+    return (<>
+
+        {click ?
+            <SketchPicker /> : " "}
         <ReactStickies
             notes={myNote}
             onChange={onChange}
         />
+    </>
     )
 }
