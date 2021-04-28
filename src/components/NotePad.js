@@ -25,6 +25,7 @@ export default function NotePad() {
     }
 
     function onDeleteNote(index) {
+        /////
         debugger
         const indexNote = noteList[index]
         const deleteNotes = noteList.filter(noteList => noteList != indexNote);
