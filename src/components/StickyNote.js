@@ -13,7 +13,7 @@ export default function MyFirstStickyNotes() {
     }
 
     let r = $('<button className="btn-colors">...</button>')
-    $('.btn-colors').addEvent('click', showColors)
+    $('.btn-colors').on("click", showColors)
     $(".title div").replaceWith(r)
 
 
