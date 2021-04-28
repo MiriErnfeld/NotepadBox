@@ -1,0 +1,18 @@
+-------------------- Auto-Git Log --------------------
+		Wed Apr 28 2021 15:55:15 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/App.js
+* src/components/NotePad.js
+* src/components/StickyNote.js
+
+
+Created files:
+* .autogit/logs/log-28-3-2021-15-24-58.txt
+
+
+Deleted files:
+
+
+Renamed files:
