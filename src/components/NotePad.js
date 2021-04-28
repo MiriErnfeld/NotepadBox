@@ -37,7 +37,9 @@ export default function NotePad() {
         let color = e
         let currentclass = `notes-item ${index}`
         setstyleColor(color)
-        $(".notes-item 0").css("background-color", color)
+        // $(currentclass).css("background-color", color)
+        let array = document.getElementsByName(currentclass)[0]
+        array.Style.backgroundColor = color
     }
 
     return (
@@ -61,7 +63,7 @@ export default function NotePad() {
                 {noteList.length > 0
                     ? noteList.map((item, index) => (
                         <div key={index} className={`notes-item ${index}`}
-                            style={{ backgroundColor: styleColor }}>
+                        >
                             <div className="note-head">
                                 {/* <h3>Note {index}</h3> */}
                                 <button
