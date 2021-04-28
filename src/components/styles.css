@@ -6,7 +6,9 @@ body{
     font-family: sans-serif;
     text-align: center;
   }
-  
+  /* .rs-notes--navbar__item {
+    display: none !important;
+} */
   .add-item {
     width: 70px;
     height: 150px;
