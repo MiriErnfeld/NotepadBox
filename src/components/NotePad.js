@@ -37,7 +37,7 @@ export default function NotePad() {
         let color = e
         let currentclass = `notes-item ${index}`
         setstyleColor(color)
-        // $("." + currentclass).css("background-color", "color")
+        $(".notes-item 0").css("background-color", color)
     }
 
     return (
