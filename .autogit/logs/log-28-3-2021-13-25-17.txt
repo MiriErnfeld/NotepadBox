@@ -1,0 +1,19 @@
+-------------------- Auto-Git Log --------------------
+		Wed Apr 28 2021 13:25:17 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* package-lock.json
+* package.json
+* src/App.js
+* src/components/StickyNote.js
+
+
+Created files:
+* .autogit/logs/log-28-3-2021-12-54-56.txt
+
+
+Deleted files:
+
+
+Renamed files:

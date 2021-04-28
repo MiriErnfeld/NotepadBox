@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactStickies from 'react-stickies'; //ES6
+import $ from 'jquery'
 
 export default function MyFirstStickyNotes() {
     const [myNote, setMyNote] = useState([])
-    $(".note-header").append('<div id="note>666</div>')
+
+    let r = $('<div id="note">666</div>')
+    $(".title div").replaceWith(r)
 
     function onSave() {
         // Make sure to delete the editorState before saving to backend
