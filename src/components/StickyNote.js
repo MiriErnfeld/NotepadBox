@@ -3,6 +3,7 @@ import ReactStickies from 'react-stickies'; //ES6
 
 export default function MyFirstStickyNotes() {
     const [myNote, setMyNote] = useState([])
+    $(".note-header").add
 
     function onSave() {
         // Make sure to delete the editorState before saving to backend
