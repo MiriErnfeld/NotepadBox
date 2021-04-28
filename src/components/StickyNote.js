@@ -2,23 +2,27 @@ import React, { useState } from 'react';
 import ReactStickies from 'react-stickies'; //ES6
 
 export default function MyFirstStickyNotes() {
-    const [note, setNote] = useState([])
+    const [myNote, setMyNote] = useState([])
 
     function onSave() {
         // Make sure to delete the editorState before saving to backend
-        const notes = note;
-        notes.map(note => {
-            delete note.editorState;
+        const notes = myNote;
+        notes.map(myNote => {
+            delete myNote.editorState;
         })
         // Make service call to save notes
         // Code goes here...
     }
     function onChange(notes) {
-        setNote(notes)
+        debugger
+        console.log(myNote)
+        console.log(notes)
+        debugger
+        setMyNote(notes)
     }
     return (
         <ReactStickies
-            notes={note}
+            notes={myNote}
             onChange={onChange}
         />
     )
