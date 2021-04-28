@@ -7,16 +7,18 @@ export default function MyFirstStickyNotes() {
     const [myNote, setMyNote] = useState([])
     const [click, setclick] = useState(false)
 
-    function showColors() {
+    // function showColors() {
+    //     debugger
+    //     setclick(!click)
+    // }
+    let r = $('<button className="btn-colors">...</button>')
+    $(".title div").replaceWith(r)
+    debugger
+    r.onClick = function () {
         debugger
+        alert("clicked button")
         setclick(!click)
     }
-
-    let r = $('<button className="btn-colors">...</button>')
-    $('.btn-colors').on("click", showColors)
-    $(".title div").replaceWith(r)
-
-
     function onSave() {
         // Make sure to delete the editorState before saving to backend
         const notes = myNote;
