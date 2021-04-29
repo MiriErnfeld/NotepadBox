@@ -1,0 +1,21 @@
+-------------------- Auto-Git Log --------------------
+		Thu Apr 29 2021 13:11:20 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* package-lock.json
+* package.json
+* src/App.js
+* src/components/conva.js
+
+
+Created files:
+* .autogit/logs/log-29-3-2021-12-41-1.txt
+* src/components/portal.js
+* src/components/text.js
+
+
+Deleted files:
+
+
+Renamed files:

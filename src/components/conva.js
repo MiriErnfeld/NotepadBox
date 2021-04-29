@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './styles.css'
 import $ from 'jquery'
 import { Stage, Layer, Rect, Group, Text } from 'react-konva';
-import textObj from 
+import Portal from './portal'
 
 export default function Conva() {
 
@@ -22,14 +22,7 @@ export default function Conva() {
 
                         text="write here..."
                     />
-                    
-                              
-<TextObj
-                             
-                          
-
-                              />
-
+                    <Rect width={10} height={10} fill="yellow"></Rect>
 
                 </Group>
             </Layer>
