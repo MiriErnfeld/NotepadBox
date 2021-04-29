@@ -10,13 +10,10 @@ export default function MyFirstStickyNotes() {
 
     function showColors() {
         debugger
-        alert("clicked button")
+        // alert("clicked button")
         setclick(!click)
     }
-    let r = $('<button >...</button>')
-    $(".title div").replaceWith(r)
-    debugger
-    $(document).on('click', r, showColors);
+  
     // document.getElementsByClassName('btn-colors').addEventListener('click', function (event) {
     //     alert('This alert should not show up!');
     // }, false);
@@ -38,6 +35,11 @@ export default function MyFirstStickyNotes() {
     }
     function onChange(notes) {
         debugger
+
+        let r = $('<button >...</button>')
+        $(".title div").replaceWith(r)
+        debugger
+        $(document).on('click', r, showColors);
         console.log(myNote)
         console.log(notes)
         debugger
