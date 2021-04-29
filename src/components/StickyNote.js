@@ -7,14 +7,19 @@ export default function MyFirstStickyNotes() {
     const [myNote, setMyNote] = useState([])
     const [click, setclick] = useState(false)
 
-    // function showColors() {
-    //     debugger
-    //     setclick(!click)
-    // }
+
     let r = $('<button className="btn-colors">...</button>')
     $(".title div").replaceWith(r)
     debugger
-    r.onClick = function () {
+    document.getElementsByClassName('btn-colors').addEventListener('click', function (event) {
+        alert('This alert should not show up!');
+    }, false);
+    // r.onClick = function () {
+    //     debugger
+    //     alert("clicked button")
+    //     setclick(!click)
+    // }
+    function showColors() {
         debugger
         alert("clicked button")
         setclick(!click)
