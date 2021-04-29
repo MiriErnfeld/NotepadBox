@@ -1,0 +1,18 @@
+-------------------- Auto-Git Log --------------------
+		Thu Apr 29 2021 12:10:42 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/App.js
+
+
+Created files:
+* .autogit/logs/log-29-3-2021-11-40-23.txt
+* src/components/note3.css
+* src/components/notes3.js
+
+
+Deleted files:
+
+
+Renamed files:
