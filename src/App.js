@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import ReactStickyNotes from '@react-latest-ui/react-sticky-notes';
 import MyFirstStickyNotes from './components/StickyNote'
 import Note3 from './components/notes3'
+import Conva from './components/conva'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       /> */}
       {/* <Note3></Note3> */}
       {/* <NotePad></NotePad> */}
+      <Conva></Conva>
     </div>
   );
 }
