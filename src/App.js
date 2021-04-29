@@ -10,12 +10,12 @@ function App() {
 
   return (
     <div className="App">
-      <MyFirstStickyNotes></MyFirstStickyNotes>
+      {/* <MyFirstStickyNotes></MyFirstStickyNotes> */}
       {/* <ReactStickyNotes
         noteWidth={"140px"}
         noteHeight={"140px"}
       /> */}
-      {/* <NotePad></NotePad> */}
+      <NotePad></NotePad>
     </div>
   );
 }

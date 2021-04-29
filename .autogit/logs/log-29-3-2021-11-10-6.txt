@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Thu Apr 29 2021 11:10:06 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/components/StickyNote.js
+
+
+Created files:
+* .autogit/logs/log-29-3-2021-10-39-47.txt
+
+
+Deleted files:
+
+
+Renamed files:

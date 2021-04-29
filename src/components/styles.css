@@ -13,6 +13,9 @@
     text-align: center;
     padding: 10px;
   }
+  .title {
+    display: none !important;
+}
   
   .some-test {
     display: flex;
