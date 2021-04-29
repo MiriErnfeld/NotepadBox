@@ -5,6 +5,7 @@ import NotePad from './components/NotePad'
 import React, { useState } from 'react';
 import ReactStickyNotes from '@react-latest-ui/react-sticky-notes';
 import MyFirstStickyNotes from './components/StickyNote'
+import Note3 from './components/notes3'
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
         noteWidth={"140px"}
         noteHeight={"140px"}
       /> */}
-      <NotePad></NotePad>
+      <Note3></Note3>
+      {/* <NotePad></NotePad> */}
     </div>
   );
 }
