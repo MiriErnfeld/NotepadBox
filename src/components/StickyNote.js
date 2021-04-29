@@ -11,7 +11,7 @@ export default function MyFirstStickyNotes() {
     let r = $('<button className="btn-colors">...</button>')
     $(".title div").replaceWith(r)
     debugger
-    document.getElementsByClassName('btn-colors').addEventListener('click', function (event) {
+    document.getElementsByClassName('btn-colors')[0].addEventListener('click', function (event) {
         alert('This alert should not show up!');
     }, false);
     // r.onClick = function () {
