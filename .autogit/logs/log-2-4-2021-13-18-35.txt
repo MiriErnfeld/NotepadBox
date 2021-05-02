@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Sun May 02 2021 13:18:35 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/components/notes3.js
+
+
+Created files:
+* .autogit/logs/log-2-4-2021-12-48-14.txt
+
+
+Deleted files:
+
+
+Renamed files:

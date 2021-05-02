@@ -186,6 +186,10 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import $ from 'jquery'
 import './note3.css'
+import 'jquery-ui-dist/jquery-ui';
+import { BiEditAlt } from 'react-icons/fa/BiEditAlt';
+
+
 class Note extends React.Component {
 
     constructor(props) {
@@ -212,10 +216,9 @@ class Note extends React.Component {
             transform: 'rotate( ' + this.randomBetween(-15, 15) + 'deg)'
         };
     }
-    componentDidMount()
-    {
-        var mine = this._input;        
-        $(mine).draggable();
+    componentDidMount() {
+        var mine = this._input;
+        $('.note').draggable();
     }
     randomBetween(min, max) {
         return (min + Math.ceil(Math.random() * max));
@@ -240,7 +243,7 @@ class Note extends React.Component {
             <div ref={(c) => this._input = c} className='note' style={this.style}>
                 <p>{this.props.children}</p>
                 <span>
-
+                    <BiEditAlt></BiEditAlt>
                     <button onClick={this.edit} className='btn btn-primary glyphicon glyphicon-pencil'>edit</button>
 
                     <button onClick={this.remove} className='btn btn-danger glyphicon glyphicon-trash'>delete</button>
