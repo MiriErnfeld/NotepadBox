@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Draggable, {DraggableCore} from 'react-draggable'; // Both at the same tim
 import './styles.css'
 import $ from 'jquery'
 
@@ -60,7 +61,7 @@ export default function NotePad() {
             <div className="display-notes">
                 {noteList.length > 0
                     ? noteList.map((item, index) => (
-                        <div key={index} className={`notes-item ${index}`}
+                        <div key={index} className={`notes-item ${index}`} draggable={true}>
                         >
                             <div className="note-head">
                                 {/* <h3>Note {index}</h3> */}

@@ -17,9 +17,9 @@ function App() {
         noteWidth={"140px"}
         noteHeight={"140px"}
       /> */}
-       
-      <Board count={50}></Board>
-      {/* <NotePad></NotePad> */}
+
+      {/* <Board count={50}></Board> */}
+      <NotePad></NotePad>
       {/* <Conva></Conva> */}
     </div>
   );
