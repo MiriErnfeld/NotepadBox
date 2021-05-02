@@ -212,11 +212,11 @@ class Note extends React.Component {
             transform: 'rotate( ' + this.randomBetween(-15, 15) + 'deg)'
         };
     }
-    // componentDidMount() {
-    //     var mine = this._input;
-    //     debugger
-    //     $(mine).draggable();
-    // }
+    componentDidMount()
+    {
+        var mine = this._input;        
+        $(mine).draggable();
+    }
     randomBetween(min, max) {
         return (min + Math.ceil(Math.random() * max));
     }
