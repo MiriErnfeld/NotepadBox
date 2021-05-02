@@ -1,5 +1,7 @@
 @import url("http://fonts.googleapis.com/css?family=Shadows+Into+Light");
 @import url("https://fonts.googleapis.com/css?family=Tangerine");
+/* @import "~bootstrap/dist/css/bootstrap.css"; */
+
 
 body,
 html,
@@ -15,6 +17,7 @@ body {
 }
 
 div.board {
+    background-color: white !important;
     background-color:darkseagreen;
     width: 100%;
     background: #eab92d;
@@ -23,7 +26,7 @@ div.board {
     background: -webkit-radial-gradient(center, ellipse cover, #eab92d 57%, #c79810 99%);
     background: -o-radial-gradient(center, ellipse cover, #eab92d 57%, #c79810 99%);
     background: -ms-radial-gradient(center, ellipse cover, #eab92d 57%, #c79810 99%);
-    background: radial-gradient(ellipse at center, #eab92d 57%, #c79810 99%);
+    /* background: radial-gradient(ellipse at center, #eab92d 57%, #c79810 99%); */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eab92d', endColorstr='#c79810', GradientType=1);
 
 }

@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import $ from 'jquery'
 import './note3.css'
-
-export default class Note extends React.Component {
+class Note extends React.Component {
 
     constructor(props) {
         debugger;
@@ -31,7 +30,8 @@ export default class Note extends React.Component {
     }
     // componentDidMount() {
     //     var mine = this._input;
-    //     $(mine).draggable();
+    //     debugger
+    //     $(mine).draggable( "option", "addClasses", false );
     // }
     randomBetween(min, max) {
         return (min + Math.ceil(Math.random() * max));
@@ -93,7 +93,7 @@ export default class Note extends React.Component {
 }
 
 //parent component for notes
-class Board extends React.Component {
+export default class Board extends React.Component {
 
     constructor() {
         super();
