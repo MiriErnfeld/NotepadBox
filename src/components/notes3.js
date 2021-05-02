@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import $ from 'jquery'
 import './note3.css'
-class Note extends React.Component {
+function Note () {
 
     constructor(props) {
         debugger;
@@ -93,11 +93,7 @@ class Note extends React.Component {
 }
 
 //parent component for notes
-export default class Board extends React.Component {
-
-    constructor() {
-        super();
-        debugger;
+export default function Board () {
 
         this.update = this.update.bind(this);
         this.eachNote = this.eachNote.bind(this);
@@ -163,8 +159,11 @@ export default class Board extends React.Component {
 
     render() {
         return (
-            <div className='board'> {this.state.notesStringArray.map(this.eachNote)}
-                <button className='btn btn-sm glyphicon glyphicon-plus btn-success' onClick={this.add.bind(null, "New Note!")}>+</button>
+            <div className='board'>
+                {this.state.notesStringArray.map(this.eachNote)}
+                <button
+                    className='btn btn-sm glyphicon glyphicon-plus btn-success'
+                    onClick={this.add.bind(null, "New Note!")}>+</button>
             </div>
         );
     }
