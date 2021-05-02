@@ -58,8 +58,8 @@ div.note:hover > span {
 
 div.note > span {
     position: absolute;
-    bottom: 2px;
-    right: 2px;
+    bottom: 123px;
+    right: 44px;
     opacity: 0;
     transition: opacity .25s linear;
 }

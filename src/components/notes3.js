@@ -191,6 +191,12 @@ import 'jquery-ui-dist/jquery-ui';
 // import { FaBeer } from 'react-icons/fa';
 
 
+import { FaBeer } from 'react-icons/fa';
+
+
+
+
+
 class Note extends React.Component {
 
     constructor(props) {
@@ -243,11 +249,12 @@ class Note extends React.Component {
         return (
             <div ref={(c) => this._input = c} className='note' style={this.style}>
                 <p>{this.props.children}</p>
+                <h3> Lets go for a <FaBeer />? </h3>
                 <span>
                     {/* <BiEditAlt></BiEditAlt> */}
-                    <button onClick={this.edit} className='btn btn-primary glyphicon glyphicon-pencil'>edit</button>
+                    <button onClick={this.edit} className='btn btn-primary glyphicon glyphicon-pencil'>\</button>
 
-                    <button onClick={this.remove} className='btn btn-danger glyphicon glyphicon-trash'>delete</button>
+                    <button onClick={this.remove} className='btn btn-danger glyphicon glyphicon-trash'>X</button>
                 </span>
 
             </div>
