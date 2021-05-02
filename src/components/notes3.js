@@ -187,7 +187,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery'
 import './note3.css'
 import 'jquery-ui-dist/jquery-ui';
-import { BiEditAlt } from 'react-icons/fa/BiEditAlt';
+// import { BiEditAlt } from 'react-icons/all-files/fa/BiEditAlt';
+// import { FaBeer } from 'react-icons/fa';
 
 
 class Note extends React.Component {
@@ -243,7 +244,7 @@ class Note extends React.Component {
             <div ref={(c) => this._input = c} className='note' style={this.style}>
                 <p>{this.props.children}</p>
                 <span>
-                    <BiEditAlt></BiEditAlt>
+                    {/* <BiEditAlt></BiEditAlt> */}
                     <button onClick={this.edit} className='btn btn-primary glyphicon glyphicon-pencil'>edit</button>
 
                     <button onClick={this.remove} className='btn btn-danger glyphicon glyphicon-trash'>delete</button>
@@ -258,6 +259,7 @@ class Note extends React.Component {
                 <textarea ref='newText' defaultValue={this.props.children} className='form-control'></textarea>
                 <button className='btn btn-success btn-sm glyphicon glyphicon-floppy-disk' onClick={this.save}>save
          </button>
+         {/* <FaBeer></FaBeer> */}
 
             </div>
         );
