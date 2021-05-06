@@ -1,0 +1,19 @@
+-------------------- Auto-Git Log --------------------
+		Thu May 06 2021 11:23:10 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/App.js
+* src/components/colorPallete.css
+* src/components/myNote.css
+* src/components/myNote.js
+
+
+Created files:
+* .autogit/logs/log-6-4-2021-10-52-51.txt
+
+
+Deleted files:
+
+
+Renamed files:
