@@ -10,18 +10,13 @@ export default function Notes() {
 
     useEffect(() => {
         debugger
-
-
-        // const randomBetween = (min, max) => {
-        //     return (min + Math.ceil(Math.random() * max));
-        // }
         // setstyleNote({
         //     right: randomBetween(0, window.innerWidth - 150) + 'px',
         //     top: randomBetween(0, window.innerHeight - 150) + 'px',
         //     transform: 'rotate( ' + randomBetween(-15, 15) + 'deg)'
         // });
         // console.log("dtyle---" + styleNote)
-        // // $('.note33333').draggable();
+        $('.note33333').draggable();
     }, [])
 
     const [isClicked, setisClicked] = useState(false)
@@ -29,20 +24,13 @@ export default function Notes() {
     const [arr, setarr] = useState([])
     const [countNote, setcountNote] = useState(0)
     const [styleNote, setstyleNote] = useState()
+    const [arrnums, setarrnums] = useState([{}])
     const dispatch = useDispatch()
+    const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
-    // const myStyles = {
-    //     position: 'absolute',
-    //     left=Math.round(),
-    //     bottom: Math.floor(Math.random() * 50),
-    //     // left: '50%',
-    //     // transform: 'translate(-50%, -50%)'
-
-
-
-    // };
-
-
+    const randomBetween = (min = 1, max = 900) => {
+        return (min + Math.ceil(Math.random() * max));
+    }
 
     function insertNote() {
         debugger
@@ -52,7 +40,7 @@ export default function Notes() {
         setbtn(!btn)
         console.log(countNote);
         setarr([...arr, { text: "", color: "" }])
-
+        setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         // dispatch(actions.addNote({}))
         debugger
 
@@ -74,10 +62,10 @@ export default function Notes() {
             <div className="container">
                 <div className="row">
 
-                    {arr.map(item => <div className="note33333 col-3"
+                    {arr.map((item, index) => <div className="note33333 col-3"
                         style={{
-                            left: Math.random(),
-                            top: Math.random() 
+                            left: `${index * 150}px`,
+                            top: `${arrnums[index].x}px`
                         }} >
                         <button onClick={changeColor}>//</button></div>
                     )}
