@@ -187,6 +187,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery'
 import './note3.css'
 import 'jquery-ui-dist/jquery-ui';
+import Color from './colorPallete'
 // import { BiEditAlt } from 'react-icons/all-files/fa/BiEditAlt';
 // import { FaBeer } from 'react-icons/fa';
 
@@ -214,7 +215,6 @@ class Note extends React.Component {
         };
         console.log('view all props for Note class: ' + this.props.children);
     }
-
     //Event methods
     componentWillMount() {
         this.style = {
@@ -231,7 +231,9 @@ class Note extends React.Component {
         return (min + Math.ceil(Math.random() * max));
     }
     edit() {
+        debugger
         this.setState({ editing: true });
+        
     }
     save() {
         this.props.onChange(this.refs.newText.value, this.props.index);
@@ -249,7 +251,6 @@ class Note extends React.Component {
         return (
             <div ref={(c) => this._input = c} className='note' style={this.style}>
                 <p>{this.props.children}</p>
-                <h3> Lets go for a <FaBeer />? </h3>
                 <span>
                     {/* <BiEditAlt></BiEditAlt> */}
                     <button onClick={this.edit} className='btn btn-primary glyphicon glyphicon-pencil'>\</button>
@@ -266,7 +267,7 @@ class Note extends React.Component {
                 <textarea ref='newText' defaultValue={this.props.children} className='form-control'></textarea>
                 <button className='btn btn-success btn-sm glyphicon glyphicon-floppy-disk' onClick={this.save}>save
          </button>
-         {/* <FaBeer></FaBeer> */}
+                {/* <FaBeer></FaBeer> */}
 
             </div>
         );
@@ -281,13 +282,10 @@ class Note extends React.Component {
             return this.renderForm();
         }
         else {
-
             return this.renderDisplay();
         }
     };
-
 }
-
 //parent component for notes
 export default class Board extends React.Component {
 
@@ -365,8 +363,6 @@ export default class Board extends React.Component {
         );
     }
 }
-
-
 Board.propTypes = {
     count: function (props, propName) {
 

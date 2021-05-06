@@ -1,0 +1,18 @@
+
+ .curr{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    width: 4rem !important;
+  
+  }
+  .colorDiv{
+  width: 17px;
+  height: 17px;
+  margin: 3px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+ 
+}
