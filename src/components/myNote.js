@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import {useSelector,useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { actions } from './redux/actions/action'
 import './myNote.css'
 import Color from './colorPallete'
 import './colorPallete.css'
@@ -17,6 +18,11 @@ export default function Notes() {
     const [countNote, setcountNote] = useState(0)
     const dispatch = useDispatch()
 
+    const randomBetween=(min, max)=>
+    {
+        return (min + Math.ceil(Math.random() * max));
+    }
+
 
     function insertNote() {
         debugger
@@ -25,8 +31,10 @@ export default function Notes() {
         setcountNote(countNote + 1)
         setbtn(!btn)
         console.log(countNote);
-        dispatch(actions.addNote)
-        
+        setarr([...arr, { text: "", }])
+        // dispatch(actions.addNote({}))
+        debugger
+
     }
     const mycolors = [
         '#44D7B6', '#40D9ED', '#3598F4', '#8580FD', '#6236FC', '#B620E0', '#FD80E5', '#6DD41F', '#BFD41F', '#F0D923', '#F8B520'
@@ -38,14 +46,15 @@ export default function Notes() {
     }
     return (
         <>
-      <button onClick={addNote} >add note</button>
+            <button onClick={insertNote} >add note</button>
             {/* {btn ?
       
        <Notes></Notes> : " "} */}
             <div className="container">
                 <div className="row">
-                    <div className="note33333 col-3">
-                        <button onClick={changeColor}>//</button> </div>
+
+                    {arr.map(item => <div className="note33333 col-3">
+                        <button onClick={changeColor}>//</button> </div>)}
                     <div className="col-2">
                         {isClicked ?
                             <div className="curr" >
@@ -59,6 +68,10 @@ export default function Notes() {
                             </div>
                             : ""}
                     </div>
+
+
+
+
 
                 </div>
             </div>

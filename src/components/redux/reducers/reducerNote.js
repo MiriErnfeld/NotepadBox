@@ -1,16 +1,15 @@
 import produce from 'immer';
 import { createReducer } from "./reducerUtils";
-import moment from 'moment';
+
 
 
 const initialState = {
-    noteList:[]
+    noteList: []
 };
 
-const noteDAta = {
-
+const noteData = {
     addNote(state, action) {
-
+        debugger
         state.noteList.push = (action.payload);
     }
 };
