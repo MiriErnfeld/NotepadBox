@@ -9,26 +9,39 @@ import $ from 'jquery'
 export default function Notes() {
 
     useEffect(() => {
-        $('.note33333').draggable();
+        debugger
+
+
+        // const randomBetween = (min, max) => {
+        //     return (min + Math.ceil(Math.random() * max));
+        // }
+        // setstyleNote({
+        //     right: randomBetween(0, window.innerWidth - 150) + 'px',
+        //     top: randomBetween(0, window.innerHeight - 150) + 'px',
+        //     transform: 'rotate( ' + randomBetween(-15, 15) + 'deg)'
+        // });
+        // console.log("dtyle---" + styleNote)
+        // // $('.note33333').draggable();
     }, [])
 
     const [isClicked, setisClicked] = useState(false)
     const [btn, setbtn] = useState(false)
     const [arr, setarr] = useState([])
     const [countNote, setcountNote] = useState(0)
+    const [styleNote, setstyleNote] = useState()
     const dispatch = useDispatch()
 
-    // const ChipStyles = useRef({
+    // const myStyles = {
     //     position: 'absolute',
     //     left=Math.round(),
     //     bottom: Math.floor(Math.random() * 50),
     //     // left: '50%',
     //     // transform: 'translate(-50%, -50%)'
-    // });
 
-    const randomBetween = (min, max) => {
-        return (min + Math.ceil(Math.random() * max));
-    }
+
+
+    // };
+
 
 
     function insertNote() {
@@ -39,7 +52,7 @@ export default function Notes() {
         setbtn(!btn)
         console.log(countNote);
         setarr([...arr, { text: "", color: "" }])
-        randomBetween(1, 20)
+
         // dispatch(actions.addNote({}))
         debugger
 
@@ -61,7 +74,11 @@ export default function Notes() {
             <div className="container">
                 <div className="row">
 
-                    {arr.map(item => <div className="note33333 col-3" >
+                    {arr.map(item => <div className="note33333 col-3"
+                        style={{
+                            left: Math.random(),
+                            top: Math.random() 
+                        }} >
                         <button onClick={changeColor}>//</button></div>
                     )}
                     <div className="col-2">
