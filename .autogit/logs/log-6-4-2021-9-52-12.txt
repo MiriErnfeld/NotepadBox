@@ -1,0 +1,26 @@
+-------------------- Auto-Git Log --------------------
+		Thu May 06 2021 09:52:12 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* package-lock.json
+* package.json
+* src/App.js
+* src/components/notes3.js
+
+
+Created files:
+* src/components/colorPallete.css
+* src/components/colorPallete.js
+* src/components/myNote.css
+* src/components/myNote.js
+* src/components/redux/actions/action.js
+* src/components/redux/middleWare/NoteMiddleware.js
+* src/components/redux/reducers/reducerUtils.js
+* src/components/redux/store.js
+
+
+Deleted files:
+
+
+Renamed files:
