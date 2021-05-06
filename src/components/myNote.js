@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from './redux/actions/action'
 import './myNote.css'
@@ -18,8 +18,15 @@ export default function Notes() {
     const [countNote, setcountNote] = useState(0)
     const dispatch = useDispatch()
 
-    const randomBetween=(min, max)=>
-    {
+    // const ChipStyles = useRef({
+    //     position: 'absolute',
+    //     left=Math.round(),
+    //     bottom: Math.floor(Math.random() * 50),
+    //     // left: '50%',
+    //     // transform: 'translate(-50%, -50%)'
+    // });
+
+    const randomBetween = (min, max) => {
         return (min + Math.ceil(Math.random() * max));
     }
 
@@ -31,7 +38,8 @@ export default function Notes() {
         setcountNote(countNote + 1)
         setbtn(!btn)
         console.log(countNote);
-        setarr([...arr, { text: "", }])
+        setarr([...arr, { text: "", color: "" }])
+        randomBetween(1, 20)
         // dispatch(actions.addNote({}))
         debugger
 
@@ -53,8 +61,9 @@ export default function Notes() {
             <div className="container">
                 <div className="row">
 
-                    {arr.map(item => <div className="note33333 col-3">
-                        <button onClick={changeColor}>//</button> </div>)}
+                    {arr.map(item => <div className="note33333 col-3" >
+                        <button onClick={changeColor}>//</button></div>
+                    )}
                     <div className="col-2">
                         {isClicked ?
                             <div className="curr" >
@@ -69,16 +78,12 @@ export default function Notes() {
                             : ""}
                     </div>
 
-
-
-
-
                 </div>
             </div>
 
         </>
+
     )
-
-
-
 }
+
+

@@ -1,0 +1,20 @@
+-------------------- Auto-Git Log --------------------
+		Thu May 06 2021 12:23:48 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/App.js
+* src/components/myNote.css
+* src/components/myNote.js
+* src/components/redux/actions/action.js
+* src/components/redux/reducers/reducerNote.js
+
+
+Created files:
+* .autogit/logs/log-6-4-2021-11-53-29.txt
+
+
+Deleted files:
+
+
+Renamed files:
