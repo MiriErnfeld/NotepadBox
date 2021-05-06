@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <Colors></Colors>
+      {/* <Colors></Colors> */}
       <Notes></Notes>
       {/* <MyFirstStickyNotes></MyFirstStickyNotes> */}
       {/* <ReactStickyNotes
@@ -22,7 +22,7 @@ function App() {
         noteHeight={"140px"}
       /> */}
 
-      <Board count={50}></Board>
+      {/* <Board count={50}></Board> */}
       {/* <NotePad></NotePad> */}
       {/* <Conva></Conva> */}
     </div>
