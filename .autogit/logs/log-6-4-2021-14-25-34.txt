@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Thu May 06 2021 14:25:34 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/components/myNote.js
+
+
+Created files:
+* .autogit/logs/log-6-4-2021-13-54-46.txt
+
+
+Deleted files:
+
+
+Renamed files:

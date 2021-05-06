@@ -7,3 +7,12 @@ position: fixed;
 cursor: -webkit-grab;
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%);
 }
+.curr-container{
+        /* width: 4rem; */
+        position: absolute;
+        top: 0;
+        right: -11px;
+}
+.note-container{
+    position: relative;
+}

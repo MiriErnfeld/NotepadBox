@@ -62,24 +62,26 @@ export default function Notes() {
             <div className="container">
                 <div className="">
 
-                    {arr.map((item, index) => <div className="note33333 col-3"
-                        style={{
-                            top: `${index * 30}px`,
-                            left: `${arrnums[index].x}px`
-                        }} >
-                        <button onClick={changeColor}>//</button></div>
-                        <div className="">
-                        {isClicked ?
-                            <div className="curr" >
-                                {mycolors.map((c, i) => {
-                                    return <div className="divColors " className="colorDiv handPointer"
-                                        // style={{ backgroundColor: c }}
-                                        style={{ backgroundColor: c }}
-                                    >
-                                    </div>
-                                })}
-                            </div>
-                            : ""}
+                    {arr.map((item, index) => <div className="note33333 note-container">
+                        <div className=""
+                            style={{
+                                top: `${index * 30}px`,
+                                left: `${arrnums[index].x}px`
+                            }} >
+                            <button onClick={changeColor}>//</button></div>
+                        <div className="curr-container">
+                            {isClicked ?
+                                <div className="curr" >
+                                    {mycolors.map((c, i) => {
+                                        return <div className="divColors " className="colorDiv handPointer"
+                                            // style={{ backgroundColor: c }}
+                                            style={{ backgroundColor: c }}
+                                        >
+                                        </div>
+                                    })}
+                                </div>
+                                : ""}
+                        </div>
                     </div>
 
                     )}
