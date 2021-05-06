@@ -11,9 +11,21 @@ import Colors from './components/colorPallete'
 import Notes from './components/myNote'
 
 function App() {
+  const [btn, setbtn] = useState(false)
+  const [arr, setarr] = useState([])
+  const [countNote, setCountNote] = useState(0)
 
+
+  function addNote() {
+    debugger
+    setCountNote(countNote = countNote + 1)
+    setbtn(!btn)
+    console.log(countNote);
+  }
   return (
     <div className="App">
+      <button onClick={addNote} >add note</button>
+      {btn ? <Notes></Notes> && <h1>hhhhh</h1> : " "}
       {/* <Colors></Colors> */}
       <Notes></Notes>
       {/* <MyFirstStickyNotes></MyFirstStickyNotes> */}
