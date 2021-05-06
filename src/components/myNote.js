@@ -60,16 +60,15 @@ export default function Notes() {
       
        <Notes></Notes> : " "} */}
             <div className="container">
-                <div className="row">
+                <div className="">
 
                     {arr.map((item, index) => <div className="note33333 col-3"
                         style={{
-                            left: `${index * 150}px`,
-                            top: `${arrnums[index].x}px`
+                            top: `${index * 30}px`,
+                            left: `${arrnums[index].x}px`
                         }} >
                         <button onClick={changeColor}>//</button></div>
-                    )}
-                    <div className="col-2">
+                        <div className="">
                         {isClicked ?
                             <div className="curr" >
                                 {mycolors.map((c, i) => {
@@ -82,6 +81,9 @@ export default function Notes() {
                             </div>
                             : ""}
                     </div>
+
+                    )}
+
 
                 </div>
             </div>
