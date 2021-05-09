@@ -30,6 +30,32 @@ position: relative;
     box-shadow: 1px 11px 31px 0 rgb(0 0 0 / 25%);
     background-color: white;
   }
+  .openCloseEditor:hover{
+    width: 30px;
+    margin-left: "141px";
+    margin-top: " 12px";
+  }
+  .create-note{
+    top: 127px;
+left: 1700px;
+width: 114px;
+height: 24px;
+color: var(--unnamed-color-ffffff);
+text-align: center;
+font: normal normal bold 18px/24px Roboto;
+letter-spacing: 0.32px;
+color: #FFFFFF;
+text-transform: capitalize;
+opacity: 1;
+    top: 114px;
+left: 1628px;
+width: 258px;
+height: 50px;
+background: var(--unnamed-color-3598f4) 0% 0% no-repeat padding-box;
+background: #3598F4 0% 0% no-repeat padding-box;
+border-radius: 4px;
+opacity: 1;
+  }
   .colorDiv{
   width: 15px;
   height: 15px;

@@ -64,17 +64,18 @@ export default function Notes() {
     }
     return (
         <>
-            <button onClick={insertNote} >add note</button>
+            <div className="create-note" onClick={insertNote}>Create Note +</div>
+
             <div className="container">
                 <div className="">
                     {arr.map((item, index) =>
                         <>
                             <div key={index} className={`note ${index}`} style={{
-                                top: `${index * 30}px`,
+                                top: `${index * 30 + 50}px`,
                                 left: `${arrnums[index].x}px`
                             }}>
                                 <div className="header">
-                                    <BsPencil onClick={e => openCloseEditor(index, item)} style={{
+                                    <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(index, item)} style={{
                                         marginLeft: "121px",
                                         marginTop: " 8px"
                                     }}></BsPencil>
