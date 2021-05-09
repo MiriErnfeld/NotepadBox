@@ -23,7 +23,7 @@ export default function Notes() {
     const [indexNote, setindexNote] = useState("")
     const [currentIndex, setcurrentIndex] = useState("")
     const [btn, setbtn] = useState(false)
-    const [arr, setarr] = useState([])
+    let [arr, setarr] = useState([])
     const [countNote, setcountNote] = useState(0)
     const [styleNote, setstyleNote] = useState()
     const [arrnums, setarrnums] = useState([{}])
@@ -54,13 +54,13 @@ export default function Notes() {
     function changeColor(index, item) {
         debugger
         // setarr([...arr, { text: "", color: "", count: countNote,flagColor:false }])
-        arr[index].flagColor = true
+        arr[index].flagColor = !(arr[index].flagColor);
 
         console.log("arr[index].flagcoloer" + arr[index].flagColor);
-        console.log("isClicked" + isClicked);
+        // console.log("isClicked" + isClicked);
         // setcurrentIndex(arr[index].count)
         setindexNote(index)
-        setisClicked(true)
+        // setisClicked(true)
     }
     function close(index) {
         debugger
@@ -96,7 +96,7 @@ export default function Notes() {
                                 </div>
                                 <div className="curr-container">
 
-                                    {(isClicked) && ((arr[indexNote].flagColor) == "true") ?
+                                    {item.flagColor ?
                                         <div className="curr" >
                                             {mycolors.map((c, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
