@@ -54,13 +54,13 @@ export default function Notes() {
     function changeColor(index, item) {
         debugger
         // setarr([...arr, { text: "", color: "", count: countNote,flagColor:false }])
-        arr[index].flagColor = !(arr[index].flagColor);
+        arr[index].flagColor = true
 
         console.log("arr[index].flagcoloer" + arr[index].flagColor);
-        // console.log("isClicked" + isClicked);
+        console.log("isClicked" + isClicked);
         // setcurrentIndex(arr[index].count)
         setindexNote(index)
-        // setisClicked(true)
+        setisClicked(true)
     }
     function close(index) {
         debugger
