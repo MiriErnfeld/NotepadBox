@@ -19,9 +19,6 @@ position: relative;
         top: 0;
         right: -53px;
 }
-.note-container{
-   
-}
 
 .curr{
     display: flex !important;
@@ -41,4 +38,9 @@ position: relative;
   flex-shrink: 0;
   object-fit: cover;
  
+}
+.colorDiv:hover{
+  width: 18px;
+  height: 18px;
+  margin: 2px;
 }

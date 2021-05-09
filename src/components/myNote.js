@@ -32,15 +32,18 @@ export default function Notes() {
         '#44D7B6', '#40D9ED', '#3598F4', '#8580FD', '#6236FC', '#B620E0', '#FD80E5', '#6DD41F', '#BFD41F', '#F0D923', '#F8B520'
         , '#F88C20', '#F84A20', '#F13B7F'
     ];
-    function openEditor(index, item) {
+    function openCloseEditor(index, item) {
         debugger
         let newArr = [...arr]
         newArr[index].flagColor = !item.flagColor
         setarr(newArr)
     }
     function changeColor(item, index) {
-        debugger;
-        $(`note ${index}`).css('backgroundColor', item)
+        debugger
+        let color = item
+        let currentclass = `note ${index}`
+        let note = document.getElementsByClassName(currentclass)[0]
+        note.style.backgroundColor = color
     }
 
     useEffect(() => {
@@ -48,8 +51,11 @@ export default function Notes() {
         $('.note').draggable();
     }, [arr])
 
-    function close(index, item) {
+    function removeItem(index, item) {
         debugger
+        // let remove = `note ${index}`
+        // let note = document.getElementsByClassName(remove)[0]
+        // note.style.remove()
         console.log(arr);
         let list = [...arr]
         list.splice(index, 1);
@@ -63,12 +69,12 @@ export default function Notes() {
                 <div className="">
                     {arr.map((item, index) =>
                         <>
-                            <div key={index} className=`note ${index}` style={{
+                            <div key={index} className={`note ${index}`} style={{
                                 top: `${index * 30}px`,
                                 left: `${arrnums[index].x}px`
                             }}>
                                 <div className="header">
-                                    <BsPencil onClick={e => openEditor(index, item)} style={{
+                                    <BsPencil onClick={e => openCloseEditor(index, item)} style={{
                                         marginLeft: "121px",
                                         marginTop: " 8px"
                                     }}></BsPencil>
@@ -76,12 +82,12 @@ export default function Notes() {
                                     <BsX style={{
                                         marginRight: "123px",
                                         marginTop: "-15px"
-                                    }} onClick={e => close(index, item)}></BsX>
+                                    }} onClick={e => removeItem(index, item)}></BsX>
                                 </div>
                                 <div className="curr-container">
                                     {item.flagColor ?
                                         <div className="curr" >
-                                            {mycolors.map((color, index) => {
+                                            {mycolors.map((color, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
                                                     style={{ backgroundColor: color }} onClick={e => changeColor(color, index)}>
                                                 </div>
