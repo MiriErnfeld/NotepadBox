@@ -20,6 +20,8 @@ export default function Notes() {
     }, [])
 
     const [isClicked, setisClicked] = useState(false)
+    const [indexNote, setindexNote] = useState("")
+    const [currentIndex, setcurrentIndex] = useState("")
     const [btn, setbtn] = useState(false)
     const [arr, setarr] = useState([])
     const [countNote, setcountNote] = useState(0)
@@ -39,7 +41,7 @@ export default function Notes() {
         setcountNote(countNote + 1)
         setbtn(!btn)
         console.log(countNote);
-        setarr([...arr, { text: "", color: "" }])
+        setarr([...arr, { text: "", color: "",cnt:"0" }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         // dispatch(actions.addNote({}))
         debugger
@@ -49,8 +51,13 @@ export default function Notes() {
         '#44D7B6', '#40D9ED', '#3598F4', '#8580FD', '#6236FC', '#B620E0', '#FD80E5', '#6DD41F', '#BFD41F', '#F0D923', '#F8B520'
         , '#F88C20', '#F84A20', '#F13B7F'
     ];
-    function changeColor(index) {
-        setisClicked(!isClicked)
+    function changeColor(index, item) {
+        debugger
+        setindexNote(index)
+        if (currentIndex == indexNote) { setisClicked(!isClicked) }
+
+
+
     }
     return (
         <>
@@ -59,14 +66,15 @@ export default function Notes() {
        <Notes></Notes> : " "} */}
             <div className="container">
                 <div className="">
-
                     {arr.map((item, index) =>
+                    <>
                         <div className="note note-container" style={{
                             top: `${index * 30}px`,
                             left: `${arrnums[index].x}px`
                         }}>
+
                             <div className="header">
-                                <BsPencil onClick={changeColor(index)} style={{
+                                <BsPencil onClick={e => changeColor(index, item)} style={{
                                     marginLeft: "121px",
                                     marginTop: " 8px"
                                 }}></BsPencil>
@@ -91,7 +99,8 @@ export default function Notes() {
                             </div>
                         </div>
 
-                    )}
+                  </>  )
+                    }
 
 
                 </div>
