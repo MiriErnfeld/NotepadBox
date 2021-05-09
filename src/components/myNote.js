@@ -54,14 +54,20 @@ export default function Notes() {
     function changeColor(index, item) {
         debugger
         // setarr([...arr, { text: "", color: "", count: countNote,flagColor:false }])
-        arr[index].flagColor = true
+        // arr[index].flagColor = true
+        let aa = [...arr]
+        aa[index].flagColor = !item.flagColor
+        // item.flagColor = !item.flagColor
+        setarr(aa)
 
         console.log("arr[index].flagcoloer" + arr[index].flagColor);
         console.log("isClicked" + isClicked);
         // setcurrentIndex(arr[index].count)
-        setindexNote(index)
-        setisClicked(true)
+        // setindexNote(index)
+        // setisClicked(true)
     }
+
+    useEffect(() => { console.log('on use'); debugger; }, [arr])
     function close(index) {
         debugger
         let list = [...arr]
@@ -106,7 +112,7 @@ export default function Notes() {
                                                 </div>
                                             })}
                                         </div>
-                                        : ""}
+                                        : "wwwww"}
                                 </div>
                             </div>
 
