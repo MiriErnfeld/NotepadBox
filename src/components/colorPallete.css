@@ -4,12 +4,12 @@
     justify-content: center !important;
     align-items: center !important;
     flex-wrap: wrap !important;
-    width: 4rem !important;
-    margin-left: 148px;
+    width: 3rem !important;
+    /* margin-left: 148px; */
   }
   .colorDiv{
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   margin: 3px;
   border-radius: 50%;
   flex-shrink: 0;

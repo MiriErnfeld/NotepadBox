@@ -1,3 +1,5 @@
+
+
 .note33333{
 height: 150px;
 width: 150px;
@@ -7,11 +9,14 @@ position: fixed;
 cursor: -webkit-grab;
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%);
 }
+.header{
+   color:blue -50%;
+}
 .curr-container{
         /* width: 4rem; */
         position: absolute;
         top: 0;
-        right: -11px;
+        right: -59px;
 }
 .note-container{
     position: relative;
