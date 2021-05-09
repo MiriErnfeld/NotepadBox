@@ -57,7 +57,6 @@ export default function Notes() {
         <>
             <button onClick={insertNote} >add note</button>
             {/* {btn ?
-      
        <Notes></Notes> : " "} */}
             <div className="container">
                 <div className="">
