@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import './colorPallete.css'
+import './myNote.css'
 import $ from 'jquery'
 import { Stage, Layer, Rect, Group, Text } from 'react-konva';
 import Portal from './portal'

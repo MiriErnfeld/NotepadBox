@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { BsPencil } from "react-icons/bs";
+import { BsPencil, BsX, BsThreeDots } from "react-icons/bs";
 import { actions } from './redux/actions/action'
 import './myNote.css'
 import Color from './colorPallete'
-import './colorPallete.css'
 import $ from 'jquery'
 
 export default function Notes() {
@@ -17,7 +16,7 @@ export default function Notes() {
         //     transform: 'rotate( ' + randomBetween(-15, 15) + 'deg)'
         // });
         // console.log("dtyle---" + styleNote)
-        $('.note33333').draggable();
+        $('.note').draggable();
     }, [])
 
     const [isClicked, setisClicked] = useState(false)
@@ -50,10 +49,8 @@ export default function Notes() {
         '#44D7B6', '#40D9ED', '#3598F4', '#8580FD', '#6236FC', '#B620E0', '#FD80E5', '#6DD41F', '#BFD41F', '#F0D923', '#F8B520'
         , '#F88C20', '#F84A20', '#F13B7F'
     ];
-    function changeColor(e) {
-        
+    function changeColor(index) {
         setisClicked(!isClicked)
-
     }
     return (
         <>
@@ -64,20 +61,21 @@ export default function Notes() {
                 <div className="">
 
                     {arr.map((item, index) =>
-                        <div className="note33333 note-container" style={{
-                            top: `${index * 100}px`,
+                        <div className="note note-container" style={{
+                            top: `${index * 30}px`,
                             left: `${arrnums[index].x}px`
                         }}>
-                            <div className=""
-                            >
-                                <div className="header">
-
-                                    <BsPencil onClick={e=>changeColor(e)} style={{
-                                        marginLeft: "121px",
-                                        marginTop: " 8px"
-                                    }}></BsPencil>
-
-                                </div></div>
+                            <div className="header">
+                                <BsPencil onClick={changeColor(index)} style={{
+                                    marginLeft: "121px",
+                                    marginTop: " 8px"
+                                }}></BsPencil>
+                                <BsThreeDots style={{ marginTop: "-16px" }}></BsThreeDots>
+                                <BsX style={{
+                                    marginRight: "123px",
+                                    marginTop: "-15px"
+                                }}></BsX>
+                            </div>
                             <div className="curr-container">
                                 {isClicked ?
                                     <div className="curr" >
