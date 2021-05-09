@@ -34,14 +34,14 @@ export default function Notes() {
         return (min + Math.ceil(Math.random() * max));
     }
 
-    function insertNote() {
+    function insertNote(index) {
         debugger
 
         let count = (countNote + 1)
         setcountNote(countNote + 1)
         setbtn(!btn)
         console.log(countNote);
-        setarr([...arr, { text: "", color: "",cnt:"0" }])
+        setarr([...arr, { text: "", color: "", count: countNote }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         // dispatch(actions.addNote({}))
         debugger
@@ -53,11 +53,18 @@ export default function Notes() {
     ];
     function changeColor(index, item) {
         debugger
+        // console.log(arr[index].count);
+        // console.log(index);
+        setcurrentIndex(arr[index].count)
         setindexNote(index)
-        if (currentIndex == indexNote) { setisClicked(!isClicked) }
-
-
-
+        setisClicked(!isClicked)
+    }
+    function close(index) {
+        debugger
+        let list = [...arr]
+        var elm = list[index];
+        list.splice(index, 1);
+        setarr([...list])
     }
     return (
         <>
@@ -67,39 +74,40 @@ export default function Notes() {
             <div className="container">
                 <div className="">
                     {arr.map((item, index) =>
-                    <>
-                        <div className="note note-container" style={{
-                            top: `${index * 30}px`,
-                            left: `${arrnums[index].x}px`
-                        }}>
+                        <>
+                            <div key={index} className="note note-container" style={{
+                                top: `${index * 30}px`,
+                                left: `${arrnums[index].x}px`
+                            }}>
 
-                            <div className="header">
-                                <BsPencil onClick={e => changeColor(index, item)} style={{
-                                    marginLeft: "121px",
-                                    marginTop: " 8px"
-                                }}></BsPencil>
-                                <BsThreeDots style={{ marginTop: "-16px" }}></BsThreeDots>
-                                <BsX style={{
-                                    marginRight: "123px",
-                                    marginTop: "-15px"
-                                }}></BsX>
-                            </div>
-                            <div className="curr-container">
-                                {isClicked ?
-                                    <div className="curr" >
-                                        {mycolors.map((c, i) => {
-                                            return <div className="divColors " className="colorDiv handPointer"
-                                                // style={{ backgroundColor: c }}
-                                                style={{ backgroundColor: c }}
-                                            >
-                                            </div>
-                                        })}
-                                    </div>
-                                    : ""}
-                            </div>
-                        </div>
+                                <div className="header">
+                                    <BsPencil onClick={e => changeColor(index, item)} style={{
+                                        marginLeft: "121px",
+                                        marginTop: " 8px"
+                                    }}></BsPencil>
+                                    <BsThreeDots style={{ marginTop: "-16px" }}></BsThreeDots>
+                                    <BsX style={{
+                                        marginRight: "123px",
+                                        marginTop: "-15px"
+                                    }} onClick={e => close(index)}></BsX>
+                                </div>
+                                <div className="curr-container">
 
-                  </>  )
+                                    {isClicked ?
+                                        <div className="curr" >
+                                            {mycolors.map((c, i) => {
+                                                return <div className="divColors " className="colorDiv handPointer"
+                                                    // style={{ backgroundColor: c }}
+                                                    style={{ backgroundColor: c }}
+                                                >
+                                                </div>
+                                            })}
+                                        </div>
+                                        : ""}
+                                </div>
+                            </div>
+
+                        </>)
                     }
 
 
