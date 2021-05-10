@@ -9,24 +9,29 @@ import $ from 'jquery'
 export default function Notes() {
 
     let [arr, setarr] = useState([])
+    let [countNote, setcountNote] = useState(-1)
     const [arrnums, setarrnums] = useState([{}])
     const dispatch = useDispatch()
     const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
-    useEffect(() => {
-        debugger
-        $('.note').draggable();
-    }, [])
+    // useEffect(() => {
+    //     debugger
+    //     $('.note').draggable();
+    // }, [])
 
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
     }
 
     function insertNote(index) {
+
+        let count = (countNote + 1)
+        setcountNote(count)
         debugger
-        setarr([...arr, { text: "", color: "", flagColor: false }])
+        setarr([...arr, { text: "", color: "", flagColor: false, cnt: count }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
+
     }
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
@@ -52,20 +57,29 @@ export default function Notes() {
         $('.note').draggable();
     }, [arr])
 
-    function removeItem(index, item) {
+
+    function removeNote(index) {
         debugger
-        // let remove = `note ${index}`
-        // let note = document.getElementsByClassName(remove)[0]
-        // note.style.remove()
+        console.log(arr, index);
+        let newArr = [...arr]
+        newArr.filter(note => note.cnt != note.index)
+        console.log(newArr);
+        setarr([...newArr])
         console.log(arr);
-        let list = [...arr]
-        list.splice(index, 1);
-        console.log(list);
-        setarr([...list])
-        console.log(arr);
-        
-        
     }
+    // let remove = `note ${index}`
+    // let note = document.getElementsByClassName(remove)[0]
+    // note.style.remove()
+    // console.log(arr);
+    // let list = [...arr]
+    // list.splice(index, 1);
+    // console.log(list);
+
+    // setarr([...list])
+    // console.log("arr:::" + arr);
+
+
+
     return (
         <>
             <div className="create-note" onClick={insertNote}>Create Note +</div>
@@ -87,7 +101,7 @@ export default function Notes() {
                                     <BsX style={{
                                         marginRight: "123px",
                                         marginTop: "-15px"
-                                    }} onClick={e => removeItem(index, item)}></BsX>
+                                    }} onClick={e => removeNote(index, item)}></BsX>
                                 </div>
                                 <div className="curr-container">
                                     {item.flagColor ?
