@@ -11,6 +11,7 @@ export default function Notes() {
     const [arrnums, setarrnums] = useState([{}])
     const [editing, setEditing] = useState(false)
     const [color, setColor] = useState("")
+    const [colorText, setColorText] = useState("")
     const refText = useRef(" ")
     const dispatch = useDispatch()
     const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
@@ -24,9 +25,9 @@ export default function Notes() {
         return (min + Math.ceil(Math.random() * max));
     }
 
-    function insertNote(index) {
+    function insertNote() {
         debugger
-        setarr([...arr, { text: "", flagColor: false, colors: " " }])
+        setarr([...arr, { text: "", flagColor: false, colors: " ", id: arr.length }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
     }
@@ -35,21 +36,28 @@ export default function Notes() {
         '#BFD41F', '#8580FD', '#6DD41F', '#3598F4', '#44D7B6'
         , '#40D9ED', '#F84A20', '#F13B7F'
     ];
-    function openCloseEditor(index, item) {
+    function openCloseEditor(item) {
         debugger
         let newArr = [...arr]
-        newArr[index].flagColor = !item.flagColor
+        let i = item.id
+        newArr[i].flagColor = !item.flagColor
         setarr(newArr)
     }
-    function changeColor(item, index, i) {
+    function changeColor(item, c) {
         debugger
-        setColor(item)
+        setColor(c)
         let newArr = [...arr]
-        newArr[index].colors = color
+        let i = item.id
+        newArr[i].colors = color
         setarr(newArr)
-        let currentclass = `note ${index}`
+        let currentclass = `note ${i}`
         let note = document.getElementsByClassName(currentclass)[0]
         note.style.backgroundColor = color
+        let textArea = `textArea ${i}`
+        let text = document.getElementsByClassName(textArea)[0]
+        text.style.backgroundColor = color
+
+
     }
 
     useEffect(() => {
@@ -57,14 +65,15 @@ export default function Notes() {
         $('.note').draggable();
     }, [arr])
 
-    function removeItem(index, item) {
+    function removeItem(item) {
         debugger
-        
+        console.log(item)
+        setarr(arr.filter((x) => item.id !== x.id))
     }
     function saveText(item, newText) {
         debugger
         if (newText !== " ") {
-            const i=item.id
+            const i = item.id
             let list = [...arr];
             list[i].text = newText;
             console.log(list);
@@ -85,13 +94,13 @@ export default function Notes() {
                 <div className="">
                     {arr.map((item, index) =>
                         <>
-                            <div key={index} className={`note ${index}`} style={{
+                            <div key={index} className={`note ${item.id}`} style={{
                                 top: `${index * 30 + 50}px`,
                                 left: `${arrnums[index].x}px`
                             }}>
 
                                 <div className="header">
-                                    <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(index, item)} style={{
+                                    <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(item)} style={{
                                         marginLeft: "121px",
                                         marginTop: " 8px"
                                     }}></BsPencil>
@@ -99,12 +108,13 @@ export default function Notes() {
                                     <BsX style={{
                                         marginRight: "123px",
                                         marginTop: "-15px"
-                                    }} onClick={e => removeItem(index, item)}></BsX>
+                                    }} onClick={e => removeItem(item)}></BsX>
                                     <textarea
+
                                         // ref={refText}
                                         type="string"
                                         onBlur={e => saveText(item, e.target.value)}
-                                        className="textArea" ></textarea>
+                                        className={`textArea ${item.id}`} ></textarea>
                                     {/* <button onClick={e => saveText(index, refText.current.value)}>save</button> */}
                                 </div>
                                 <div className="curr-container">
@@ -112,7 +122,7 @@ export default function Notes() {
                                         <div className="curr" >
                                             {mycolors.map((c, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
-                                                    style={{ backgroundColor: c }} onClick={e => changeColor(c, index, i)}>
+                                                    style={{ backgroundColor: c }} onClick={e => changeColor(item, c)}>
                                                 </div>
 
                                             })}
