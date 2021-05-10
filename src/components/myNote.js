@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDots, BsCheck } from "react-icons/bs";
 import './myNote.css'
-import Color from './colorPallete'
 import $ from 'jquery'
 
 export default function Notes() {
 
     let [arr, setarr] = useState([])
     const [arrnums, setarrnums] = useState([{}])
+    const [editing, setEditing] = useState(false)
     const [color, setColor] = useState("")
+    const refText = useRef(" ")
     const dispatch = useDispatch()
     const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
@@ -58,9 +59,20 @@ export default function Notes() {
     function removeItem(index, item) {
         debugger
         const a = [...arr];
-            a.splice(index, 1)
-            setarr(a)
+        a.splice(index, 1)
+        setarr(a)
 
+    }
+    function saveText(index, newText) {
+        debugger
+        let list = [...arr];
+        list[index].text = newText;
+        setEditing(false);
+        setarr([...list]);
+    }
+    function editText(index, item) {
+        debugger
+        setEditing(true)
     }
     return (
         <>
@@ -69,10 +81,11 @@ export default function Notes() {
                 <div className="">
                     {arr.map((item, index) =>
                         <>
-                            <div key={index} className={`note ${index}`} style={{
+                            <textarea className={`note ${index}`} style={{
                                 top: `${index * 30 + 50}px`,
                                 left: `${arrnums[index].x}px`
                             }}>
+
                                 <div className="header">{index}
                                     <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(index, item)} style={{
                                         marginLeft: "121px",
@@ -83,6 +96,8 @@ export default function Notes() {
                                         marginRight: "123px",
                                         marginTop: "-15px"
                                     }} onClick={e => removeItem(index, item)}></BsX>
+                                    {/* <textarea ref={refText} type="string" style={{ backgroundColor: "red", height: "24px" }} ></textarea>
+                                    <button onClick={e => saveText(index, refText.current.value)}>save</button> */}
                                 </div>
                                 <div className="curr-container">
                                     {item.flagColor ?
@@ -100,7 +115,7 @@ export default function Notes() {
                                         </div>
                                         : ""}
                                 </div>
-                            </div>
+                            </textarea>
                         </>)
                     }
                 </div>
