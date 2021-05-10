@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDots, BsCheck } from "react-icons/bs";
 import './myNote.css'
+import Color from './colorPallete'
 import $ from 'jquery'
 
 export default function Notes() {
@@ -63,7 +64,7 @@ export default function Notes() {
         setarr(a)
 
     }
-    function saveText(index, newText) {
+    function saveText(newText, index) {
         debugger
         let list = [...arr];
         list[index].text = newText;
@@ -81,7 +82,7 @@ export default function Notes() {
                 <div className="">
                     {arr.map((item, index) =>
                         <>
-                            <textarea className={`note ${index}`} style={{
+                            <div onChange={e => { saveText(e.target.value, index) }} key={index} className={`note ${index}`} style={{
                                 top: `${index * 30 + 50}px`,
                                 left: `${arrnums[index].x}px`
                             }}>
@@ -115,7 +116,7 @@ export default function Notes() {
                                         </div>
                                         : ""}
                                 </div>
-                            </textarea>
+                            </div>
                         </>)
                     }
                 </div>

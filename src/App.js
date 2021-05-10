@@ -16,6 +16,7 @@ import store from './components/redux/store'
 function App() {
 
   return (
+
     <Provider store={store}>
       <div className="App">
 
@@ -31,7 +32,8 @@ function App() {
         {/* <NotePad></NotePad> */}
         {/* <Conva></Conva> */}
       </div>
-    </Provider>
+      </Provider>
+
   );
 }
 
