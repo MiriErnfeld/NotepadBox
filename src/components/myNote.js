@@ -59,18 +59,18 @@ export default function Notes() {
 
     function removeItem(index, item) {
         debugger
-        const a = [...arr];
-        a.splice(index, 1)
-        setarr(a)
-
+        
     }
-    function saveText(index, newText) {
+    function saveText(item, newText) {
         debugger
         if (newText !== " ") {
+            const i=item.id
             let list = [...arr];
-            list[index].text = newText;
+            list[i].text = newText;
+            console.log(list);
             setEditing(false);
             setarr([...list]);
+
         }
 
     }
@@ -101,9 +101,9 @@ export default function Notes() {
                                         marginTop: "-15px"
                                     }} onClick={e => removeItem(index, item)}></BsX>
                                     <textarea
-                                        ref={refText}
+                                        // ref={refText}
                                         type="string"
-                                        onMouseLeave={e => saveText(index, refText.current.value)}
+                                        onBlur={e => saveText(item, e.target.value)}
                                         className="textArea" ></textarea>
                                     {/* <button onClick={e => saveText(index, refText.current.value)}>save</button> */}
                                 </div>
