@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { BsPencil, BsX, BsThreeDots } from "react-icons/bs";
-import { actions } from './redux/actions/action'
+import { BsPencil, BsX, BsThreeDots, BsCheck } from "react-icons/bs";
 import './myNote.css'
 import Color from './colorPallete'
 import $ from 'jquery'
@@ -9,29 +8,25 @@ import $ from 'jquery'
 export default function Notes() {
 
     let [arr, setarr] = useState([])
-    let [countNote, setcountNote] = useState(-1)
     const [arrnums, setarrnums] = useState([{}])
+    const [color, setColor] = useState("")
     const dispatch = useDispatch()
     const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
-    // useEffect(() => {
-    //     debugger
-    //     $('.note').draggable();
-    // }, [])
+    useEffect(() => {
+        debugger
+        $('.note').draggable();
+    }, [])
 
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
     }
 
     function insertNote(index) {
-
-        let count = (countNote + 1)
-        setcountNote(count)
         debugger
-        setarr([...arr, { text: "", color: "", flagColor: false, cnt: count }])
+        setarr([...arr, { text: "", color: "", flagColor: false }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
-
     }
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
@@ -44,9 +39,10 @@ export default function Notes() {
         newArr[index].flagColor = !item.flagColor
         setarr(newArr)
     }
-    function changeColor(item, index) {
+    function changeColor(item, index,i) {
         debugger
-        let color = item
+
+        setColor(item)
         let currentclass = `note ${index}`
         let note = document.getElementsByClassName(currentclass)[0]
         note.style.backgroundColor = color
@@ -57,33 +53,23 @@ export default function Notes() {
         $('.note').draggable();
     }, [arr])
 
-
-    function removeNote(index) {
+    function removeItem(index, item) {
         debugger
-        console.log(arr, index);
-        let newArr = [...arr]
-        newArr.filter(note => note.cnt != note.index)
-        console.log(newArr);
-        setarr([...newArr])
+        // let remove = `note ${index}`
+        // let note = document.getElementsByClassName(remove)[0]
+        // note.style.remove()
         console.log(arr);
+        let list = [...arr]
+        list.splice(index, 1);
+        console.log(list);
+        setarr([...list])
+        console.log(arr);
+
+
     }
-    // let remove = `note ${index}`
-    // let note = document.getElementsByClassName(remove)[0]
-    // note.style.remove()
-    // console.log(arr);
-    // let list = [...arr]
-    // list.splice(index, 1);
-    // console.log(list);
-
-    // setarr([...list])
-    // console.log("arr:::" + arr);
-
-
-
     return (
         <>
             <div className="create-note" onClick={insertNote}>Create Note +</div>
-
             <div className="container">
                 <div className="">
                     {arr.map((item, index) =>
@@ -101,15 +87,17 @@ export default function Notes() {
                                     <BsX style={{
                                         marginRight: "123px",
                                         marginTop: "-15px"
-                                    }} onClick={e => removeNote(index, item)}></BsX>
+                                    }} onClick={e => removeItem(index, item)}></BsX>
                                 </div>
                                 <div className="curr-container">
                                     {item.flagColor ?
                                         <div className="curr" >
                                             {mycolors.map((color, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
-                                                    style={{ backgroundColor: color }} onClick={e => changeColor(color, index)}>
+                                                    style={{ backgroundColor: color }} onClick={e => changeColor(color, index,i)}>
                                                 </div>
+
+                                                {color==}
                                             })}
                                         </div>
                                         : ""}
@@ -124,3 +112,16 @@ export default function Notes() {
 }
 
 
+
+{colors.map((c, i) => {
+    return <div className="divColors" className="colorDiv handPointer"
+
+        style={{ backgroundColor: c }}
+    >
+        {i > 14 && <label htmlFor="myInput">
+            <FontAwesomeIcon id="iconi" icon={['fas', 'plus']} ></FontAwesomeIcon>
+            </label>}
+        {props.editFolder ? props.editFolder.color === c ? 
+        <img src={iconv} id="imgI" /> : " " : " "}
+    </div>
+})}
