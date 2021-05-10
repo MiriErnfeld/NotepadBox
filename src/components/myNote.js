@@ -24,7 +24,7 @@ export default function Notes() {
 
     function insertNote(index) {
         debugger
-        setarr([...arr, { text: "", color: "", flagColor: false }])
+        setarr([...arr, { text: "", flagColor: false, colors: " " }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
     }
@@ -39,10 +39,12 @@ export default function Notes() {
         newArr[index].flagColor = !item.flagColor
         setarr(newArr)
     }
-    function changeColor(item, index,i) {
+    function changeColor(item, index, i) {
         debugger
-
         setColor(item)
+        let newArr = [...arr]
+        newArr[index].colors = color
+        setarr(newArr)
         let currentclass = `note ${index}`
         let note = document.getElementsByClassName(currentclass)[0]
         note.style.backgroundColor = color
@@ -55,15 +57,21 @@ export default function Notes() {
 
     function removeItem(index, item) {
         debugger
+
+        const i = index
+        if (i === -1) {
+            return arr;
+        }
+        return arr.slice(0, index).concat(arr.slice(index + 1));
         // let remove = `note ${index}`
         // let note = document.getElementsByClassName(remove)[0]
         // note.style.remove()
-        console.log(arr);
-        let list = [...arr]
-        list.splice(index, 1);
-        console.log(list);
-        setarr([...list])
-        console.log(arr);
+        // console.log(arr);
+        // let list = [...arr]
+        // list.splice(index, 1);
+        // console.log(list);
+        // setarr([...list])
+        // console.log(arr);
 
 
     }
@@ -78,7 +86,7 @@ export default function Notes() {
                                 top: `${index * 30 + 50}px`,
                                 left: `${arrnums[index].x}px`
                             }}>
-                                <div className="header">
+                                <div className="header">{index}
                                     <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(index, item)} style={{
                                         marginLeft: "121px",
                                         marginTop: " 8px"
@@ -92,13 +100,16 @@ export default function Notes() {
                                 <div className="curr-container">
                                     {item.flagColor ?
                                         <div className="curr" >
-                                            {mycolors.map((color, i) => {
+                                            {mycolors.map((c, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
-                                                    style={{ backgroundColor: color }} onClick={e => changeColor(color, index,i)}>
+                                                    style={{ backgroundColor: c }} onClick={e => changeColor(c, index, i)}>
                                                 </div>
 
-                                                {color==}
                                             })}
+                                            {/* {
+                                                item[index].colors === c ?
+                                                    <BsCheck></BsCheck> : ""
+                                            } */}
                                         </div>
                                         : ""}
                                 </div>
@@ -113,15 +124,14 @@ export default function Notes() {
 
 
 
-{colors.map((c, i) => {
-    return <div className="divColors" className="colorDiv handPointer"
+// {
+//     colors.map((c, i) => {
+//         return <div className="divColors" className="colorDiv handPointer"
 
-        style={{ backgroundColor: c }}
-    >
-        {i > 14 && <label htmlFor="myInput">
-            <FontAwesomeIcon id="iconi" icon={['fas', 'plus']} ></FontAwesomeIcon>
-            </label>}
-        {props.editFolder ? props.editFolder.color === c ? 
-        <img src={iconv} id="imgI" /> : " " : " "}
-    </div>
-})}
+//             style={{ backgroundColor: c }}
+//         >
+//             {props.editFolder ? props.editFolder.color === c ?
+//                 <img src={iconv} id="imgI" /> : " " : " "}
+//         </div>
+//     })
+// }
