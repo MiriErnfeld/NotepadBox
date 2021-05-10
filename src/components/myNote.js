@@ -53,18 +53,18 @@ export default function Notes() {
     }
 
     useEffect(() => {
-        console.log('on use'); debugger;
+        console.log('on use', arr); debugger;
         $('.note').draggable();
     }, [arr])
 
     function removeItem(index, item) {
         debugger
-        
+
     }
-    function saveText(item, newText) {
+    function saveText(item, newText)  {
         debugger
         if (newText !== " ") {
-            const i=item.id
+            const i = item.id
             let list = [...arr];
             list[i].text = newText;
             console.log(list);
