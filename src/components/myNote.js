@@ -29,8 +29,9 @@ export default function Notes() {
         debugger
     }
     const mycolors = [
-        '#44D7B6', '#40D9ED', '#3598F4', '#8580FD', '#6236FC', '#B620E0', '#FD80E5', '#6DD41F', '#BFD41F', '#F0D923', '#F8B520'
-        , '#F88C20', '#F84A20', '#F13B7F'
+        '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
+        '#BFD41F', '#8580FD', '#6DD41F', '#3598F4', '#44D7B6'
+        , '#40D9ED', '#F84A20', '#F13B7F'
     ];
     function openCloseEditor(index, item) {
         debugger
@@ -61,6 +62,9 @@ export default function Notes() {
         list.splice(index, 1);
         console.log(list);
         setarr([...list])
+        console.log(arr);
+        
+        
     }
     return (
         <>
