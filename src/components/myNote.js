@@ -57,22 +57,9 @@ export default function Notes() {
 
     function removeItem(index, item) {
         debugger
-
-        const i = index
-        if (i === -1) {
-            return arr;
-        }
-        return arr.slice(0, index).concat(arr.slice(index + 1));
-        // let remove = `note ${index}`
-        // let note = document.getElementsByClassName(remove)[0]
-        // note.style.remove()
-        // console.log(arr);
-        // let list = [...arr]
-        // list.splice(index, 1);
-        // console.log(list);
-        // setarr([...list])
-        // console.log(arr);
-
+        const a = [...arr];
+            a.splice(index, 1)
+            setarr(a)
 
     }
     return (
@@ -107,7 +94,7 @@ export default function Notes() {
 
                                             })}
                                             {/* {
-                                                item[index].colors === c ?
+                                                item[index].colors===item.c ?
                                                     <BsCheck></BsCheck> : ""
                                             } */}
                                         </div>
