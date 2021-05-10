@@ -64,12 +64,15 @@ export default function Notes() {
         setarr(a)
 
     }
-    function saveText(newText, index) {
+    function saveText(index, newText) {
         debugger
-        let list = [...arr];
-        list[index].text = newText;
-        setEditing(false);
-        setarr([...list]);
+        if (newText !== " ") {
+            let list = [...arr];
+            list[index].text = newText;
+            setEditing(false);
+            setarr([...list]);
+        }
+
     }
     function editText(index, item) {
         debugger
@@ -82,12 +85,12 @@ export default function Notes() {
                 <div className="">
                     {arr.map((item, index) =>
                         <>
-                            <div onChange={e => { saveText(e.target.value, index) }} key={index} className={`note ${index}`} style={{
+                            <div key={index} className={`note ${index}`} style={{
                                 top: `${index * 30 + 50}px`,
                                 left: `${arrnums[index].x}px`
                             }}>
 
-                                <div className="header">{index}
+                                <div className="header">
                                     <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(index, item)} style={{
                                         marginLeft: "121px",
                                         marginTop: " 8px"
@@ -97,8 +100,12 @@ export default function Notes() {
                                         marginRight: "123px",
                                         marginTop: "-15px"
                                     }} onClick={e => removeItem(index, item)}></BsX>
-                                    {/* <textarea ref={refText} type="string" style={{ backgroundColor: "red", height: "24px" }} ></textarea>
-                                    <button onClick={e => saveText(index, refText.current.value)}>save</button> */}
+                                    <textarea
+                                        ref={refText}
+                                        type="string"
+                                        onMouseLeave={e => saveText(index, refText.current.value)}
+                                        className="textArea" ></textarea>
+                                    {/* <button onClick={e => saveText(index, refText.current.value)}>save</button> */}
                                 </div>
                                 <div className="curr-container">
                                     {item.flagColor ?

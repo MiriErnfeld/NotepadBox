@@ -32,7 +32,7 @@ function App() {
         {/* <NotePad></NotePad> */}
         {/* <Conva></Conva> */}
       </div>
-      </Provider>
+    </Provider>
 
   );
 }
