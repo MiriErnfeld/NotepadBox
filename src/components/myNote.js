@@ -9,6 +9,7 @@ export default function Notes() {
 
     let [arr, setarr] = useState([])
     const [arrnums, setarrnums] = useState([{}])
+    const [count, setCount] = useState(0)
     const dispatch = useDispatch()
     const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
@@ -22,8 +23,10 @@ export default function Notes() {
     }
 
     function insertNote() {
+        let cnt = count + 1
+        setCount(cnt)
         debugger
-        setarr([...arr, { text: "", flagColor: false, colors: "" }])
+        setarr([...arr, { text: "", flagColor: false, colors: "", id: count }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
         console.log(arr);
@@ -33,23 +36,23 @@ export default function Notes() {
         '#BFD41F', '#8580FD', '#6DD41F', '#3598F4', '#44D7B6'
         , '#40D9ED', '#F84A20', '#F13B7F'
     ];
-    function openCloseEditor(item, index) {
+    function openCloseEditor(item) {
         debugger
-        // let i = item.id
+        let i = item.id
         let newArr = [...arr]
-        newArr[index].flagColor = !item.flagColor
-        setarr(newArr)
+        newArr[i].flagColor = !item.flagColor
+        setarr([...newArr])
     }
-    function changeColor(c, item, index) {
+    function changeColor(c, item) {
         debugger
 
-        // let i = item.id
+        let i = item.id
         let newArr = [...arr]
-        newArr[index].colors = c
+        newArr[i].colors = c
         setarr(newArr)
-        let currentclass = `note ${index}`
-        let currentclassText = `textarea ${index}`
-        let headerColor = `header ${index}`
+        let currentclass = `note ${i}`
+        let currentclassText = `textarea ${i}`
+        let headerColor = `header ${item.id}`
         let note = document.getElementsByClassName(currentclass)[0]
         let text = document.getElementsByClassName(currentclassText)[0]
         let header = document.getElementsByClassName(headerColor)[0]
@@ -63,36 +66,21 @@ export default function Notes() {
         $('.note').draggable();
     }, [arr])
 
-    function removeItem(item, index) {
+    function removeItem(item) {
         debugger
-        // setarr(arr.filter((x, y) => item.id !== x.id))
-        // let arr2 = [...arr]
-        // let tempArr = arr2.slice(0, index)
-        // console.log(tempArr)
-        // // if (tempArr.length > 1) {
-        // const end = (arr2.length - 1)
-        // for (let i = index; i < end; i++) {
-        //     tempArr = tempArr.concat({
-        //         text: arr2[index + 1].text,
-        //         flagColor: arr2[index + 1].flagColor,
-        //         colors: arr2[index + 1].colors,
-        //         id: arr2[index + 1].id,
-        //     })
-        // }
-        // setarr([...tempArr])
-
         const a = [...arr];
-            a.splice(index, 1)
-            setarr(a)
+        a.splice(item.id, 1)
+        setarr([...a])
+        // setarr(arr.filter((x, y) => item.id !== x.id))
     }
 
 
-    function saveText(item, newText, index) {
+    function saveText(item, newText) {
         debugger
         if (newText !== " ") {
-            // const i = item.id
+            const i = item.id
             let list = [...arr];
-            list[index].text = newText;
+            list[i].text = newText;
             console.log(list);
             setarr([...list]);
         }
@@ -106,13 +94,13 @@ export default function Notes() {
                 <div className="">
                     {arr.map((item, index) =>
                         <>
-                            <div key={index} className={`note ${index}`} style={{
+                            <div key={index} className={`note ${item.id}`} style={{
                                 top: `${index * 30 + 50}px`,
                                 left: `${arrnums[index].x}px`
                             }}>
 
-                                <div className={`header ${index}`}>
-                                    <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(item, index)} style={{
+                                <div className={`header ${item.id}`}>
+                                    <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(item)} style={{
                                         marginLeft: "121px",
                                         marginTop: " 8px",
                                         cursor: "auto",
@@ -122,13 +110,13 @@ export default function Notes() {
                                         marginRight: "123px",
                                         cursor: "auto",
                                         marginTop: "-15px"
-                                    }} onClick={e => removeItem(item, index)}></BsX>
+                                    }} onClick={e => removeItem(item)}></BsX>
                                     <textarea
-                                        className={`textarea ${index}`}
+                                        className={`textarea ${item.id}`}
                                         id="areaText"
                                         // ref={refText}
                                         type="string"
-                                        onBlur={e => saveText(item, e.target.value, index)}
+                                        onBlur={e => saveText(item, e.target.value)}
                                     ></textarea>
                                     {/* <button onClick={e => saveText(index, refText.current.value)}>save</button> */}
                                 </div>
@@ -137,7 +125,7 @@ export default function Notes() {
                                         <div className="curr" >
                                             {mycolors.map((c, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
-                                                    style={{ backgroundColor: c }} onClick={e => changeColor(c, item, index)}>
+                                                    style={{ backgroundColor: c }} onClick={e => changeColor(c, item)}>
                                                 </div>
 
                                             })}
