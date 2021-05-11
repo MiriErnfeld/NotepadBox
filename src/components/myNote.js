@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDots, BsCheck } from "react-icons/bs";
 import './myNote.css'
-import Color from './colorPallete'
 import $ from 'jquery'
 
 export default function Notes() {
@@ -47,13 +46,13 @@ export default function Notes() {
         debugger
         let i = item.id
         setColor(c)
-        setcolorText(c)
+        // setcolorText(c)
         let newArr = [...arr]
         newArr[i].colors = color
-        newArr[i].colorText = colorText
+        // newArr[i].colorText = colorText
         setarr(newArr)
         let currentclass = `note ${i}`
-        let currentclassText = `textArea ${i}`
+        let currentclassText = `textArea${i}`
         let note = document.getElementsByClassName(currentclass)[0]
         let t = document.getElementsByClassName(currentclassText)[0]
         note.style.backgroundColor = color
