@@ -67,8 +67,9 @@ export default function Notes() {
     }, [arr])
 
     function removeItem(item) {
-        debugger
+
         const a = [...arr];
+ 
         a.splice(item.id, 1)
         setarr([...a])
         // setarr(arr.filter((x, y) => item.id !== x.id))
