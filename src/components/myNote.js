@@ -55,7 +55,7 @@ export default function Notes() {
         let currentclass = `note ${i}`
         let currentclassText = `textArea${i}`
         let note = document.getElementsByClassName(currentclass)[0]
-        let text = document.getElementById("#areaText")
+        let text = document.getElementsByClassName(currentclassText)[0]
         note.style.backgroundColor = color
         text.style.backgroundColor = color
     }
@@ -84,7 +84,7 @@ export default function Notes() {
     }
     return (
         <>
-            {/* <Configurator></Configurator> */}
+            <Configurator></Configurator>
             <div className="create-note" onClick={insertNote}>Create Note +</div>
             <div className="container">
                 <div className="">
