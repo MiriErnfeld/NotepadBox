@@ -9,10 +9,6 @@ export default function Notes() {
 
     let [arr, setarr] = useState([])
     const [arrnums, setarrnums] = useState([{}])
-    const [editing, setEditing] = useState(false)
-    const [colorText, setcolorText] = useState("")
-    const [color, setColor] = useState("")
-    const refText = useRef(" ")
     const dispatch = useDispatch()
     const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
@@ -48,10 +44,8 @@ export default function Notes() {
         debugger
 
         let i = item.id
-        // setColor("")
-        // setColor(c)
         let newArr = [...arr]
-        newArr[i].colors = ""
+        newArr[i].colors = c
         setarr(newArr)
         let currentclass = `note ${i}`
         let currentclassText = `textarea ${i}`
@@ -60,8 +54,8 @@ export default function Notes() {
         let text = document.getElementsByClassName(currentclassText)[0]
         let header = document.getElementsByClassName(headerColor)[0]
         note.style.backgroundColor = item.colors
-        text.style.backgroundColor = color
-        header.style.backgroundColor = color
+        text.style.backgroundColor = item.colors
+        header.style.backgroundColor = item.colors
     }
 
     useEffect(() => {
@@ -125,7 +119,7 @@ export default function Notes() {
                                         <div className="curr" >
                                             {mycolors.map((c, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
-                                                    style={{ backgroundColor: c }} onClick={e => { setColor(" "); changeColor(c, item) }}>
+                                                    style={{ backgroundColor: c }} onClick={e => changeColor(c, item) }>
                                                 </div>
 
                                             })}
