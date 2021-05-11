@@ -66,22 +66,24 @@ export default function Notes() {
     function removeItem(item, index) {
         debugger
         // setarr(arr.filter((x, y) => item.id !== x.id))
+        // let arr2 = [...arr]
+        // let tempArr = arr2.slice(0, index)
+        // console.log(tempArr)
+        // // if (tempArr.length > 1) {
+        // const end = (arr2.length - 1)
+        // for (let i = index; i < end; i++) {
+        //     tempArr = tempArr.concat({
+        //         text: arr2[index + 1].text,
+        //         flagColor: arr2[index + 1].flagColor,
+        //         colors: arr2[index + 1].colors,
+        //         id: arr2[index + 1].id,
+        //     })
+        // }
+        // setarr([...tempArr])
 
-        debugger
-        let arr2 = [...arr]
-        let tempArr = arr2.slice(0, index)
-        console.log(tempArr)
-        // if (tempArr.length > 1) {
-        const end = (arr2.length - 1)
-        for (let i = index; i < end; i++) {
-            tempArr = tempArr.concat({
-                text: arr2[index + 1].text,
-                flagColor: arr2[index + 1].flagColor,
-                colors: arr2[index + 1].colors,
-                id: arr2[index + 1].id,
-            })
-        }
-        setarr([...tempArr])
+        const a = [...arr];
+            a.splice(index, 1)
+            setarr(a)
     }
 
 
@@ -126,7 +128,7 @@ export default function Notes() {
                                         id="areaText"
                                         // ref={refText}
                                         type="string"
-                                        onMouseEnter={e => saveText(item, e.target.value, index)}
+                                        onBlur={e => saveText(item, e.target.value, index)}
                                     ></textarea>
                                     {/* <button onClick={e => saveText(index, refText.current.value)}>save</button> */}
                                 </div>
