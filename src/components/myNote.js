@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDots, BsCheck } from "react-icons/bs";
+import Configurator from './configurator'
 import './myNote.css'
 import $ from 'jquery'
 
@@ -54,9 +55,9 @@ export default function Notes() {
         let currentclass = `note ${i}`
         let currentclassText = `textArea${i}`
         let note = document.getElementsByClassName(currentclass)[0]
-        let t = document.getElementsByClassName(currentclassText)[0]
+        let text = document.getElementById("#areaText")
         note.style.backgroundColor = color
-        // t.style.backgroundColor = color
+        text.style.backgroundColor = color
     }
 
     useEffect(() => {
@@ -66,8 +67,10 @@ export default function Notes() {
 
     function removeItem(item) {
         debugger
-
+        setarr(arr.filter((x, y) => item.id !== x.id))
     }
+
+
     function saveText(item, newText) {
         debugger
         if (newText !== " ") {
@@ -81,6 +84,7 @@ export default function Notes() {
     }
     return (
         <>
+            {/* <Configurator></Configurator> */}
             <div className="create-note" onClick={insertNote}>Create Note +</div>
             <div className="container">
                 <div className="">
@@ -103,6 +107,7 @@ export default function Notes() {
                                     }} onClick={e => removeItem(item)}></BsX>
                                     <textarea
                                         className={`textArea ${item.id}`}
+                                        id="areaText"
                                         // ref={refText}
                                         type="string"
                                         onBlur={e => saveText(item, e.target.value)}
