@@ -30,6 +30,7 @@ export default function Notes() {
         setarr([...arr, { text: "", flagColor: false, colors: "", id: arr.length }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
+        console.log(arr);
     }
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
@@ -45,17 +46,22 @@ export default function Notes() {
     }
     function changeColor(c, item) {
         debugger
+
         let i = item.id
-        setColor(c)
+        // setColor("")
+        // setColor(c)
         let newArr = [...arr]
-        newArr[i].colors = color
+        newArr[i].colors = ""
         setarr(newArr)
         let currentclass = `note ${i}`
         let currentclassText = `textarea ${i}`
+        let headerColor = `header ${item.id}`
         let note = document.getElementsByClassName(currentclass)[0]
         let text = document.getElementsByClassName(currentclassText)[0]
-        note.style.backgroundColor = color
+        let header = document.getElementsByClassName(headerColor)[0]
+        note.style.backgroundColor = item.colors
         text.style.backgroundColor = color
+        header.style.backgroundColor = color
     }
 
     useEffect(() => {
@@ -93,14 +99,16 @@ export default function Notes() {
                                 left: `${arrnums[index].x}px`
                             }}>
 
-                                <div className="header">
+                                <div className={`header ${item.id}`}>
                                     <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(item)} style={{
                                         marginLeft: "121px",
-                                        marginTop: " 8px"
+                                        marginTop: " 8px",
+                                        cursor: "auto",
                                     }}></BsPencil>
                                     <BsThreeDots style={{ marginTop: "-16px" }}></BsThreeDots>
                                     <BsX style={{
                                         marginRight: "123px",
+                                        cursor: "auto",
                                         marginTop: "-15px"
                                     }} onClick={e => removeItem(item)}></BsX>
                                     <textarea
@@ -117,7 +125,7 @@ export default function Notes() {
                                         <div className="curr" >
                                             {mycolors.map((c, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
-                                                    style={{ backgroundColor: c }} onClick={e => changeColor(c, item)}>
+                                                    style={{ backgroundColor: c }} onClick={e => { setColor(" "); changeColor(c, item) }}>
                                                 </div>
 
                                             })}

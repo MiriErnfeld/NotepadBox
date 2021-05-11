@@ -5,6 +5,7 @@
     margin: 0px;
     width: 148px;
     border: none;
+    resize: none ;
 }
 textarea.textarea:focus {
   outline-width: 0;
@@ -78,4 +79,7 @@ opacity: 1;
   width: 18px;
   height: 18px;
   margin: 2px;
+}
+.header{
+  background-color: yellow
 }
