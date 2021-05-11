@@ -1,12 +1,12 @@
 
-.textArea{
+.textarea{
   background-color: yellow;
     height: 125px;
     margin: 0px;
     width: 148px;
     border: none;
 }
-textarea.textArea:focus {
+textarea.textarea:focus {
   outline-width: 0;
 }
 .note{

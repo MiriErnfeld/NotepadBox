@@ -27,7 +27,7 @@ export default function Notes() {
 
     function insertNote() {
         debugger
-        setarr([...arr, { text: "", flagColor: false, colors: " ", colorText: " ", id: arr.length }])
+        setarr([...arr, { text: "", flagColor: false, colors: "", id: arr.length }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
     }
@@ -47,13 +47,11 @@ export default function Notes() {
         debugger
         let i = item.id
         setColor(c)
-        // setcolorText(c)
         let newArr = [...arr]
         newArr[i].colors = color
-        // newArr[i].colorText = colorText
         setarr(newArr)
         let currentclass = `note ${i}`
-        let currentclassText = `textArea${i}`
+        let currentclassText = `textarea ${i}`
         let note = document.getElementsByClassName(currentclass)[0]
         let text = document.getElementsByClassName(currentclassText)[0]
         note.style.backgroundColor = color
@@ -106,12 +104,12 @@ export default function Notes() {
                                         marginTop: "-15px"
                                     }} onClick={e => removeItem(item)}></BsX>
                                     <textarea
-                                        className={`textArea ${item.id}`}
+                                        className={`textarea ${item.id}`}
                                         id="areaText"
                                         // ref={refText}
                                         type="string"
                                         onBlur={e => saveText(item, e.target.value)}
-                                        className="textArea" ></textarea>
+                                    ></textarea>
                                     {/* <button onClick={e => saveText(index, refText.current.value)}>save</button> */}
                                 </div>
                                 <div className="curr-container">
