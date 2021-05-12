@@ -1,11 +1,12 @@
 .headerConfig{
+    background-color: aqua;
     /* top: 91px;
 left: 1607px;
 width: 300px;
 height: 976px; */
-background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+/* background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
 background: #FFFFFF 0% 0% no-repeat padding-box;
 border-radius: 10px;
-opacity: 1;
+opacity: 1; */
 
 }
