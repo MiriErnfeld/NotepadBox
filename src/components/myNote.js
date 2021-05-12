@@ -100,11 +100,13 @@ export default function Notes(props) {
                                     <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(item)} style={{
                                         marginLeft: "121px",
                                         marginTop: " 8px",
+                                        paddingBottom: "3px",
                                         cursor: "auto",
                                     }}></BsPencil>
                                     <BsThreeDots style={{ marginTop: "-16px" }}></BsThreeDots>
                                     <BsX style={{
                                         marginRight: "123px",
+                                        paddingBottom: "3px",
                                         cursor: "auto",
                                         marginTop: "-15px"
                                     }} onClick={e => removeItem(item)}></BsX>
