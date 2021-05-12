@@ -6,7 +6,7 @@
   background-color: yellow;
     height: 125px;
     margin: 0px;
-    width: 148px;
+    width: 150px;
     border: none;
     resize: none ;
 }
@@ -49,6 +49,8 @@ position: relative;
     margin-top: " 12px";
   }
   .create-note{
+    margin-bottom: 30px;
+    margin-top: 50px;
     top: 127px;
 left: 1700px;
 width: 114px;
@@ -76,7 +78,7 @@ opacity: 1;
   border-radius: 50%;
   flex-shrink: 0;
   object-fit: cover;
- 
+ cursor:auto;
 }
 .colorDiv:hover{
   width: 18px;
@@ -86,3 +88,14 @@ opacity: 1;
 .header{
   background-color: yellow
 }
+/* .container{
+  position: absolute;
+  background-color: antiquewhite;
+
+}
+.all-notes{
+  position: relative;
+  background-color:royalblue;
+  right: 50;
+  top: 0;
+} */

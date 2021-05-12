@@ -87,12 +87,12 @@ export default function Notes(props) {
     return (
         <>
             <div className="container">
-                <div className="">
+                <div className="all-notes">
                     {arr.map((item, index) =>
                         <>
                             <div key={index} className={`note ${item.id}`} style={{
                                 top: `${index * 30 + 50}px`,
-                                left: `${props.arrnums[index].x}px`
+                                right: `${props.arrnums[index].x + 300}px`
                             }}>
 
                                 <div className={`header ${item.id}`}

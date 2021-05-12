@@ -31,10 +31,10 @@ export default function Configurator() {
     }
 
     return (
-        <div >
+        <div className="container-configurator">
             <div className="create-note" onClick={insertNote}>Create Note +</div>
             <div className="dragfolser">
-                <FiFolderPlus className="folderplus"></FiFolderPlus>
+                <FiFolderPlus className="folderplus" style={{ zoom: 2 }}></FiFolderPlus>
                 <p className="folder">drag notes to create folder</p>
             </div>
             <div className="folder">
