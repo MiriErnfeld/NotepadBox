@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDots, BsCheck } from "react-icons/bs";
+import { LightenDarkenColor } from 'lighten-darken-color'; 
+ 
 import Configurator from './configurator'
 import './myNote.css'
 import $ from 'jquery'
@@ -10,7 +12,7 @@ export default function Notes(props) {
 
 
     const { arr, arrnums, count, setarr, setCount, setarrnums, } = props
-    
+
     const dispatch = useDispatch()
     const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
@@ -46,9 +48,9 @@ export default function Notes(props) {
         let note = document.getElementsByClassName(currentclass)[0]
         let text = document.getElementsByClassName(currentclassText)[0]
         let header = document.getElementsByClassName(headerColor)[0]
-        note.style.backgroundColor = item.colors
-        text.style.backgroundColor = item.colors
-        header.style.backgroundColor = item.colors
+        note.style.backgroundColor = item.colors;
+        text.style.backgroundColor = item.colors;
+        header.style.backgroundColor = item.colorsHeader
     }
 
     useEffect(() => {
@@ -75,6 +77,7 @@ export default function Notes(props) {
             (list[i].text) = newText;
             console.log(list);
             setarr([...list]);
+            // nvnvnvvvvvvvvv
         }
 
     }
