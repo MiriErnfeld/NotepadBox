@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './configurator.css'
 import { FiFolderPlus, FiFolder } from "react-icons/fi";
 import MyNote from './myNote'
+var Color = require('color');
+
 
 export default function Configurator() {
     const [arr, setarr] = useState([])
@@ -12,14 +14,16 @@ export default function Configurator() {
         return (min + Math.ceil(Math.random() * max));
     }
     function insertNote() {
-        let firstColor = rgb(255, 255, 0)
+        debugger
+        var firstColor = Color('rgb(255, 255, 0)')
         let cnt = count + 1
         setCount(cnt)
         debugger
-        setarr([...arr, { text: "", flagColor: false, colors: firstColor, id: count }])
+        setarr([...arr, { text: "", flagColor: false, colors: "#efea0c;", id: count }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
         console.log(arr);
+        dispatchEvent(act)
     }
 
     return (
