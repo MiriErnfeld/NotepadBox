@@ -12,10 +12,11 @@ export default function Configurator() {
         return (min + Math.ceil(Math.random() * max));
     }
     function insertNote() {
+        let firstColor = rgb(255, 255, 0)
         let cnt = count + 1
         setCount(cnt)
         debugger
-        setarr([...arr, { text: "", flagColor: false, colors: "",colorsHeader:"", id: count }])
+        setarr([...arr, { text: "", flagColor: false, colors: firstColor, id: count }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
         console.log(arr);
@@ -33,14 +34,14 @@ export default function Configurator() {
                     folder name
                 </div>
             <div className="folder"><FiFolder></FiFolder></div>
-            <MyNote 
-            arr={arr}
-             arrnums={arrnums} 
-             count={count} 
-             setarr={setarr}
-             setCount={setCount}
-             setarrnums={setarrnums}
-             ></MyNote>
+            <MyNote
+                arr={arr}
+                arrnums={arrnums}
+                count={count}
+                setarr={setarr}
+                setCount={setCount}
+                setarrnums={setarrnums}
+            ></MyNote>
         </div>
     )
 

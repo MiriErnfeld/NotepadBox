@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDots, BsCheck } from "react-icons/bs";
-import { LightenDarkenColor } from 'lighten-darken-color'; 
- 
+import { LightenDarkenColor } from 'lighten-darken-color';
+
 import Configurator from './configurator'
 import './myNote.css'
 import $ from 'jquery'
@@ -50,7 +50,8 @@ export default function Notes(props) {
         let header = document.getElementsByClassName(headerColor)[0]
         note.style.backgroundColor = item.colors;
         text.style.backgroundColor = item.colors;
-        header.style.backgroundColor = item.colorsHeader
+        // style={{color:LightenDarkenColor('#3F6D2A', 10)}}> 
+        // header.style={{backgroundColor:LightenDarkenColor(item.colors,20)}}
     }
 
     useEffect(() => {
@@ -77,7 +78,7 @@ export default function Notes(props) {
             (list[i].text) = newText;
             console.log(list);
             setarr([...list]);
-            // nvnvnvvvvvvvvv
+
         }
 
     }
@@ -92,7 +93,8 @@ export default function Notes(props) {
                                 left: `${props.arrnums[index].x}px`
                             }}>
 
-                                <div className={`header ${item.id}`}>
+                                <div className={`header ${item.id}`}
+                                    style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}>
                                     <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(item)} style={{
                                         marginLeft: "121px",
                                         marginTop: " 8px",
