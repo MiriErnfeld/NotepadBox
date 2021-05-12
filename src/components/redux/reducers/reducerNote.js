@@ -8,10 +8,13 @@ const initialState = {
 };
 
 const noteData = {
-    // createNote(state, action) {
-    //     debugger
-    //     state.noteList.push = (action.payload);
-    // }
+    createNote(state, action) {
+        debugger;
+        let arr = [...state.noteList];
+        arr.push = (action.payload);
+        state.noteList = [...arr]
+        console.log(state.noteList);
+    }
 };
 
 export default produce((state, action) => createReducer(state, action, noteData), initialState);

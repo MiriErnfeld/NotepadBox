@@ -25,7 +25,8 @@ export default function Configurator() {
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
         console.log(arr);
-        dispatch(actions.createNote(arr[cnt - 2]))
+        if (arr.text)
+            dispatch(actions.createNote(arr.text))
         debugger
     }
 

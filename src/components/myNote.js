@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { actions } from './redux/actions/action'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDots, BsCheck } from "react-icons/bs";
 import { LightenDarkenColor } from 'lighten-darken-color';
@@ -78,6 +79,7 @@ export default function Notes(props) {
             (list[i].text) = newText;
             console.log(list);
             setarr([...list]);
+            dispatch(actions.createNote(arr[i].text))
 
         }
 

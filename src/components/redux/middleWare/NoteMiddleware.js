@@ -16,6 +16,8 @@ export const getData = ({ dispatch, getState }) => next => action => {
             })
     }
     if (action.type == "CREATE-NOTE") {
+        let url = window.location;
+        let userName = (url.pathname.split('/')[1]);
         debugger
         return fetch(`https://createNote/${userName}`),
             {
