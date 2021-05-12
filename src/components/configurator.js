@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import './configurator.css'
+import { actions } from '../components/redux/actions/action';
+import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder } from "react-icons/fi";
 import MyNote from './myNote'
 var Color = require('color');
@@ -9,7 +11,7 @@ export default function Configurator() {
     const [arr, setarr] = useState([])
     const [arrnums, setarrnums] = useState([{}])
     const [count, setCount] = useState(0)
-
+    const dispatch = useDispatch()
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
     }
@@ -23,7 +25,8 @@ export default function Configurator() {
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
         console.log(arr);
-        dispatchEvent(act)
+        dispatch(actions.createNote(arr[cnt - 2]))
+        debugger
     }
 
     return (

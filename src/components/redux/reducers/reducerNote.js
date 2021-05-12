@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const noteData = {
-    // addNote(state, action) {
+    // createNote(state, action) {
     //     debugger
     //     state.noteList.push = (action.payload);
     // }
