@@ -7,9 +7,10 @@ import $ from 'jquery'
 
 export default function Notes(props) {
 
-    let [arr, setarr] = useState(props.arr)
-    const [arrnums, setarrnums] = useState(props.arrnums)
-    const [count, setCount] = useState(props.count)
+
+
+    const { arr, arrnums, count, setarr, setCount, setarrnums, } = props
+    
     const dispatch = useDispatch()
     const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
@@ -19,7 +20,7 @@ export default function Notes(props) {
     }, [])
 
 
-  
+
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
         '#BFD41F', '#8580FD', '#6DD41F', '#3598F4', '#44D7B6'
@@ -58,7 +59,7 @@ export default function Notes(props) {
     function removeItem(item) {
 
         const a = [...arr];
- 
+
         a.splice(item.id, 1)
         setarr([...a])
         // setarr(arr.filter((x, y) => item.id !== x.id))
@@ -70,7 +71,8 @@ export default function Notes(props) {
         if (newText !== " ") {
             const i = item.id
             let list = [...arr];
-            list[i].text = newText;
+            console.log(list[i].text);
+            (list[i].text) = newText;
             console.log(list);
             setarr([...list]);
         }
@@ -84,7 +86,7 @@ export default function Notes(props) {
                         <>
                             <div key={index} className={`note ${item.id}`} style={{
                                 top: `${index * 30 + 50}px`,
-                                left: `${arrnums[index].x}px`
+                                left: `${props.arrnums[index].x}px`
                             }}>
 
                                 <div className={`header ${item.id}`}>

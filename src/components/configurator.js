@@ -33,7 +33,14 @@ export default function Configurator() {
                     folder name
                 </div>
             <div className="folder"><FiFolder></FiFolder></div>
-            <MyNote arr={arr} arrnums={arrnums} count={count}></MyNote>
+            <MyNote 
+            arr={arr}
+             arrnums={arrnums} 
+             count={count} 
+             setarr={setarr}
+             setCount={setCount}
+             setarrnums={setarrnums}
+             ></MyNote>
         </div>
     )
 
