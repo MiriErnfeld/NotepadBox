@@ -1,0 +1,20 @@
+-------------------- Auto-Git Log --------------------
+		Wed May 12 2021 13:34:06 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/components/configurator.js
+* src/components/myNote.js
+* src/components/redux/middleWare/NoteMiddleware.js
+* src/components/redux/reducers/reducerNote.js
+* src/components/redux/store.js
+
+
+Created files:
+* .autogit/logs/log-12-4-2021-13-3-46.txt
+
+
+Deleted files:
+
+
+Renamed files:

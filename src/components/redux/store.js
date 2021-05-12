@@ -10,4 +10,4 @@ const reducer = combineReducers({ reducerNote});
 const store = createStore(reducer,applyMiddleware(getData));
 window.store = store;
 export default store;
-store.dispatch({ type: 'INIT-DATA' });
+// store.dispatch({ type: 'INIT-DATA' });
