@@ -10,6 +10,43 @@ border-radius: 10px;
 opacity: 1; */
 
 }
+.folder{
+    top: 299px;
+left: 1628px;
+width: 258px;
+height: 50px;
+background: var(--unnamed-color-f1f1f3) 0% 0% no-repeat padding-box;
+background: #F1F1F3 0% 0% no-repeat padding-box;
+border-radius: 4px;
+opacity: 1;
+}
+.foldrplus{
+    top: 205px;
+left: 1739px;
+width: 35px;
+height: 29px;
+}
+.folder{
+    top: 244px;
+left: 1659px;
+width: 196px;
+height: 21px;
+color: var(--unnamed-color-7b7d86);
+text-align: left;
+font: normal normal normal 16px/21px Roboto;
+letter-spacing: -0.16px;
+color: #7B7D86;
+text-transform: capitalize;
+opacity: 1;
+}
 .col3{
     background-color:red
+}
+.dragfolser{
+    top: 184px;
+left: 1628px;
+width: 258px;
+height: 100px;
+border: 2px dashed #707070;
+opacity: 1;
 }

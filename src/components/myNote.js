@@ -5,11 +5,11 @@ import Configurator from './configurator'
 import './myNote.css'
 import $ from 'jquery'
 
-export default function Notes() {
+export default function Notes(props) {
 
-    let [arr, setarr] = useState([])
-    const [arrnums, setarrnums] = useState([{}])
-    const [count, setCount] = useState(0)
+    let [arr, setarr] = useState(props.arr)
+    const [arrnums, setarrnums] = useState(props.arrnums)
+    const [count, setCount] = useState(props.count)
     const dispatch = useDispatch()
     const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
@@ -18,19 +18,8 @@ export default function Notes() {
         $('.note').draggable();
     }, [])
 
-    const randomBetween = (min = 1, max = 900) => {
-        return (min + Math.ceil(Math.random() * max));
-    }
 
-    function insertNote() {
-        let cnt = count + 1
-        setCount(cnt)
-        debugger
-        setarr([...arr, { text: "", flagColor: false, colors: "", id: count }])
-        setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
-        debugger
-        console.log(arr);
-    }
+  
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
         '#BFD41F', '#8580FD', '#6DD41F', '#3598F4', '#44D7B6'
@@ -89,8 +78,6 @@ export default function Notes() {
     }
     return (
         <>
-            <Configurator></Configurator>
-            <div className="create-note" onClick={insertNote}>Create Note +</div>
             <div className="container">
                 <div className="">
                     {arr.map((item, index) =>

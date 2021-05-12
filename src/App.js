@@ -10,6 +10,7 @@ import Board from './components/notes3'
 import Conva from './components/conva'
 import Colors from './components/colorPallete'
 import Notes from './components/myNote'
+import Configurator from './components/configurator'
 import store from './components/redux/store'
 
 
@@ -19,9 +20,9 @@ function App() {
 
     <Provider store={store}>
       <div className="App">
-
+        <Configurator></Configurator>
         {/* <Colors></Colors> */}
-        <Notes></Notes>
+
         {/* <MyFirstStickyNotes></MyFirstStickyNotes> */}
         {/* <ReactStickyNotes
         noteWidth={"140px"}
