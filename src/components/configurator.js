@@ -30,6 +30,7 @@ export default function Configurator() {
     }
 
     return (
+        <div className="container-notes">
         <div className="container-configurator">
             <div className="create-note" onClick={insertNote}>Create Note +</div>
             <div className="dragfolser">
@@ -40,7 +41,9 @@ export default function Configurator() {
                 <FiFolder></FiFolder>
                     folder name
                 </div>
-            <MyNote
+          
+        </div>
+        <MyNote
                 arr={arr}
                 setarr={setarr}
                 arrnums={arrnums}

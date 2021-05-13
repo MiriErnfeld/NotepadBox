@@ -48,4 +48,16 @@ opacity: 1;
     top: 15px;
     right: 15px;
     height: 95%;
+    /* width: 20vw; */
+
+}
+.container-notes{
+    width: 79vw;
+    margin-left: 8px;
+    height: 100vh;
+    border-radius: 10px;
+    background-color:white;
+    margin-top: 15px;
+    right: 25px;
+    height: 95%;
 }
