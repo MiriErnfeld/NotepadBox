@@ -110,7 +110,8 @@ text-transform: capitalize;
 opacity: 1;
 }
 .add-coloumn{
-    top: 116px;
+    border-radius: 10px;
+    top: 8px;
 left: 658px;
 width: 10px;
 height: 10px;

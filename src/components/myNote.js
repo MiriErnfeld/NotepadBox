@@ -12,9 +12,8 @@ import $ from 'jquery'
 
 export default function Notes(props) {
 
-
-
-    const { arr, setarr, arrnums, count, setCount, setarrnums } = props
+    const { arr, setarr, arrnums, count, setCount, setarrnums ,topNote,setTopNote
+    ,rightNote,setRightNote} = props
 
     const dispatch = useDispatch()
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
@@ -88,10 +87,11 @@ export default function Notes(props) {
                     {arr.map((item, index) =>
                         <>
                             <div key={index} className={`note ${item.id}`} style={{
-                                transform: 'rotate',
                                 top: `${index * 30 + 50}px`,
                                 right: `${props.arrnums[index].x + 300}px`
                             }}>
+                                {setTopNote(`${index * 30 + 50}px`,debugger)}
+                                {setRightNote( `${props.arrnums[index].x + 300}px`)}
 
                                 <div className={`header ${item.id}`}
                                     style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}>
