@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import './configurator.css'
 import { actions } from '../components/redux/actions/action';
+import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder } from "react-icons/fi";
+import Dropdown from 'react-bootstrap/Dropdown'
 import MyNote from './myNote'
 var Color = require('color');
 
@@ -33,10 +35,23 @@ export default function Configurator() {
         <div className="container-notes">
             <div className="configurator-line">
                 <p className="my-notes">My Notes</p>
+
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Dropdown Button
+  </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
             <div className="container-configurator">
                 <div className="create-note" onClick={insertNote}>Create Note +</div>
                 <div className="dragfolder">
+                    {/* <img src="folserPlus" at="img"></img> */}
                     <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus>
                     <p className="folder">drag notes to create folder</p>
                 </div>
