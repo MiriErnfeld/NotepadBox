@@ -26,7 +26,7 @@ export default function Configurator() {
         let cnt = count + 1
         setCount(cnt)
         debugger
-        setarr([...arr, { text: "", flagColor: false, colors: "#FFEB3B", id: count, placeNote: { top: "", right: "" } }])
+        setarr([...arr, { text: "", flagColor: false, colors: "#FFEB3B", id: count, top: topNote, right: rightNote }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
         debugger
         console.log(arr);

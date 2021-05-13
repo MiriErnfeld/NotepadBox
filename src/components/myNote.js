@@ -12,8 +12,8 @@ import $ from 'jquery'
 
 export default function Notes(props) {
 
-    const { arr, setarr, arrnums, count, setCount, setarrnums ,topNote,setTopNote
-    ,rightNote,setRightNote} = props
+    const { arr, setarr, arrnums, count, setCount, setarrnums, topNote, setTopNote
+        , rightNote, setRightNote } = props
 
     const dispatch = useDispatch()
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
@@ -57,6 +57,7 @@ export default function Notes(props) {
     useEffect(() => {
         console.log('on use', arr); debugger;
         $('.note').draggable();
+
     }, [arr])
 
     function removeItem(item) {
@@ -64,6 +65,10 @@ export default function Notes(props) {
         const a = [...arr];
         a.splice(item.id, 1)
         setarr([...a])
+    }
+    function changeNotePlace(e, index) {
+        debugger
+        console.log("item.id::::" + index + "top::::::" + e.target.style.top, "right::::" + e.target.style.right);
     }
 
 
@@ -86,12 +91,14 @@ export default function Notes(props) {
                 <div className="all-notes">
                     {arr.map((item, index) =>
                         <>
-                            <div key={index} className={`note ${item.id}`} style={{
-                                top: `${index * 30 + 50}px`,
-                                right: `${props.arrnums[index].x + 300}px`
-                            }}>
-                                {setTopNote(`${index * 30 + 50}px`,debugger)}
-                                {setRightNote( `${props.arrnums[index].x + 300}px`)}
+                            <div key={index} className={`note ${item.id}`}
+                                onClick={e => changeNotePlace(e, item.id)}
+                                style={{
+                                    top: `${index * 30 + 50}px`,
+                                    right: `${props.arrnums[index].x + 300}px`
+                                }}>
+                                {setTopNote(`${index * 30 + 50}px`)}
+                                {setRightNote(`${props.arrnums[index].x + 300}px`)}
 
                                 <div className={`header ${item.id}`}
                                     style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}>
