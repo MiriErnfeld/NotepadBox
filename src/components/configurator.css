@@ -61,3 +61,17 @@ opacity: 1;
     right: 25px;
     height: 95%;
 }
+.configurator-line{
+    /* height: 20px;background-color:#F1F1F3;
+    border-radius: 10px;*/
+    border: 1px solid white; 
+    top: 91px;
+left: 269px;
+width: 1108px;
+height: 43px;
+background: var(--unnamed-color-f1f1f3) 0% 0% no-repeat padding-box;
+background: #F1F1F3 0% 0% no-repeat padding-box;
+border-radius: 10px 10px 0px 0px;
+opacity: 1;
+box-shadow: #707070;
+}

@@ -31,22 +31,27 @@ export default function Configurator() {
 
     return (
         <div className="container-notes">
-        <div className="container-configurator">
-            <div className="create-note" onClick={insertNote}>Create Note +</div>
-            <div className="dragfolser">
-                <FiFolderPlus className="folderplus" style={{ zoom: 1.8, marginTop: "3px" }}></FiFolderPlus>
-                <p className="folder">drag notes to create folder</p>
-            </div>
-            <div className="folder">
-                <FiFolder></FiFolder>
+            <div className="configurator-line"></div>
+            <div className="container-configurator">
+                <div className="create-note" onClick={insertNote}>Create Note +</div>
+                <div className="dragfolser">
+                    <FiFolderPlus className="folderplus" style={{ zoom: 1.8, marginTop: "3px" }}></FiFolderPlus>
+                    <p className="folder">drag notes to create folder</p>
+                </div>
+                <div className="folder">
+                    <FiFolder></FiFolder>
                     folder name
                 </div>
-          
-        </div>
-        <MyNote
+
+            </div>
+            <MyNote
                 arr={arr}
                 setarr={setarr}
                 arrnums={arrnums}
+                setarrnums={setarrnums}
+                count={count}
+                setCount={setCount}
+
             ></MyNote>
         </div>
     )

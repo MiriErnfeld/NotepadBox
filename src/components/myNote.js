@@ -12,7 +12,7 @@ export default function Notes(props) {
 
 
 
-    const { arr, setarr, arrnums } = props
+    const { arr, setarr, arrnums,count,setCount,setarrnums } = props
 
     const dispatch = useDispatch()
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
