@@ -3,6 +3,8 @@ import { actions } from './redux/actions/action'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDots, BsCheck } from "react-icons/bs";
 import { LightenDarkenColor } from 'lighten-darken-color';
+import Drag from '../images/Group 21702.png'
+
 
 import Configurator from './configurator'
 import './myNote.css'
@@ -12,7 +14,7 @@ export default function Notes(props) {
 
 
 
-    const { arr, setarr, arrnums,count,setCount,setarrnums } = props
+    const { arr, setarr, arrnums, count, setCount, setarrnums } = props
 
     const dispatch = useDispatch()
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
@@ -99,6 +101,7 @@ export default function Notes(props) {
                                         paddingBottom: "3px",
                                         cursor: "auto",
                                     }}></BsPencil>
+                                    {/* <img src="Drag"></img> */}
                                     <BsThreeDots style={{ marginTop: "-16px" }}></BsThreeDots>
                                     <BsX style={{
                                         marginRight: "123px",
