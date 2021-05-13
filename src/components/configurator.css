@@ -1,5 +1,6 @@
 body{
     position:relative;
+    background-color: #F1F1F3;
 }
 .headerConfig{
     background-color: aqua;
@@ -10,7 +11,7 @@ left: 1628px;
 width: 258px;
 height: 50px;
 background: var(--unnamed-color-f1f1f3) 0% 0% no-repeat padding-box;
-background: #F1F1F3 0% 0% no-repeat padding-box;
+background: 0% 0% no-repeat padding-box;
 border-radius: 4px;
 opacity: 1;
 }
@@ -42,7 +43,7 @@ opacity: 1;
 }
 .container-configurator{
     position: absolute;
-    background-color:#F1F1F3;
+    background-color:white;
     border-radius: 10px;
     top: 15px;
     right: 15px;

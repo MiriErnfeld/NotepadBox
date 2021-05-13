@@ -49,9 +49,10 @@ position: relative;
     margin-top: " 12px";
   }
   .create-note{
+    padding-top: 21px;
     cursor: copy;
     margin-bottom: 30px;
-    margin-top: 50px;
+    margin-top: 40px;
     top: 127px;
 color: var(--unnamed-color-ffffff);
 text-align: center;
@@ -69,8 +70,8 @@ border-radius: 4px;
 opacity: 1;
   }
   .colorDiv{
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   margin: 3px;
   border-radius: 50%;
   flex-shrink: 0;

@@ -12,10 +12,10 @@ export default function Notes(props) {
 
 
 
-    const { arr, arrnums, count, setarr, setCount, setarrnums, } = props
+    const { arr, setarr, arrnums } = props
 
     const dispatch = useDispatch()
-    const nums = [30, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
+    const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
     useEffect(() => {
         debugger
@@ -51,8 +51,6 @@ export default function Notes(props) {
         let header = document.getElementsByClassName(headerColor)[0]
         note.style.backgroundColor = item.colors;
         text.style.backgroundColor = item.colors;
-        // style={{color:LightenDarkenColor('#3F6D2A', 10)}}> 
-        // header.style={{backgroundColor:LightenDarkenColor(item.colors,20)}}
     }
 
     useEffect(() => {
@@ -63,10 +61,8 @@ export default function Notes(props) {
     function removeItem(item) {
 
         const a = [...arr];
-
         a.splice(item.id, 1)
         setarr([...a])
-        // setarr(arr.filter((x, y) => item.id !== x.id))
     }
 
 
@@ -80,17 +76,12 @@ export default function Notes(props) {
             console.log(list);
             setarr([...list]);
             dispatch(actions.createNote(arr[i].text))
-
         }
 
     }
     return (
         <>
             <div className="container">
-
-
-                {/* defaultStyle={{ rotate: 0, scale: 1 }}
-  style={{}} */}
                 <div className="all-notes">
                     {arr.map((item, index) =>
                         <>
