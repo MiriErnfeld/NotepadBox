@@ -15,7 +15,7 @@ export default function Notes(props) {
     const { arr, arrnums, count, setarr, setCount, setarrnums, } = props
 
     const dispatch = useDispatch()
-    const nums = [3, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
+    const nums = [30, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
     useEffect(() => {
         debugger
@@ -87,10 +87,15 @@ export default function Notes(props) {
     return (
         <>
             <div className="container">
+
+
+                {/* defaultStyle={{ rotate: 0, scale: 1 }}
+  style={{}} */}
                 <div className="all-notes">
                     {arr.map((item, index) =>
                         <>
                             <div key={index} className={`note ${item.id}`} style={{
+                                transform: 'rotate',
                                 top: `${index * 30 + 50}px`,
                                 right: `${props.arrnums[index].x + 300}px`
                             }}>

@@ -1,21 +1,8 @@
 body{
-    /* background-color:darkgray; */
     position:relative;
-   
 }
-
-
 .headerConfig{
     background-color: aqua;
-    /* top: 91px;
-left: 1607px;
-width: 300px;
-height: 976px; */
-/* background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
-background: #FFFFFF 0% 0% no-repeat padding-box;
-border-radius: 10px;
-opacity: 1; */
-
 }
 .folder{
     top: 299px;
@@ -34,13 +21,7 @@ width: 35px;
 height: 29px;
 }
 .folder{
-    padding:0px;margin: 0px;
-    top: 244px;
-left: 1659px;
-width: 196px;
-height: 21px;
-color: var(--unnamed-color-7b7d86);
-text-align: right;
+    margin-top: 14px;
 font: normal normal normal 16px/21px Roboto;
 letter-spacing: -0.16px;
 color: #7B7D86;
