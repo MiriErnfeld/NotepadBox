@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { actions } from './redux/actions/action'
 import { useSelector, useDispatch } from 'react-redux'
-import { BsPencil, BsX, BsThreeDots, BsCheck } from "react-icons/bs";
+import { BsPencil, BsX, BsThreeDots } from "react-icons/bs";
+import { FaGripHorizontal } from "react-icons/fa";
 import { LightenDarkenColor } from 'lighten-darken-color';
 import Drag from '../images/Group 21702.png'
 
@@ -109,7 +110,8 @@ export default function Notes(props) {
                                         cursor: "auto",
                                     }}></BsPencil>
                                     {/* <img src="Drag"></img> */}
-                                    <BsThreeDots style={{ marginTop: "-16px" }}></BsThreeDots>
+                                    <FaGripHorizontal style={{ marginTop: "-16px", fontWeight: "none" }}></FaGripHorizontal>
+                                    {/* <BsThreeDots ></BsThreeDots> */}
                                     <BsX style={{
                                         marginRight: "123px",
                                         paddingBottom: "3px",
