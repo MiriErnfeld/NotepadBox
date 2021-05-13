@@ -62,6 +62,7 @@ opacity: 1;
     height: 95%;
 }
 .configurator-line{
+    background-color: #F1F1F3;
     /* height: 20px;background-color:#F1F1F3;
     border-radius: 10px;*/
     border: 1px solid white; 

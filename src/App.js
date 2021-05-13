@@ -8,6 +8,7 @@ import ReactStickyNotes from '@react-latest-ui/react-sticky-notes';
 import MyFirstStickyNotes from './components/StickyNote'
 import Board from './components/notes3'
 import Conva from './components/conva'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Colors from './components/colorPallete'
 import Notes from './components/myNote'
 import Configurator from './components/configurator'
