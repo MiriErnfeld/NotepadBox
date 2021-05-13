@@ -50,6 +50,7 @@ position: relative;
   }
   .create-note{
     padding-top: 21px;
+    margin-left: 10px;
     cursor: copy;
     margin-bottom: 30px;
     margin-top: 40px;
@@ -61,8 +62,8 @@ letter-spacing: 0.32px;
 color: #FFFFFF;
 text-transform: capitalize;
     top: 114px;
-left: 1628px;
-width: 258px;
+
+width: 238px;
 height: 50px;
 background: var(--unnamed-color-3598f4) 0% 0% no-repeat padding-box;
 background: #3598F4 0% 0% no-repeat padding-box;
