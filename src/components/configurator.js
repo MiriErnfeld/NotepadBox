@@ -4,6 +4,7 @@ import { actions } from '../components/redux/actions/action';
 import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
+import { FcPlus } from "react-icons/fc";
 import Dropdown from 'react-bootstrap/Dropdown'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -42,8 +43,9 @@ export default function Configurator() {
                 <p className="my-notes ">My Notes</p>
                 <p className="p-cloumn">
                     new coloumn
+                    <FcPlus></FcPlus>
                 </p>
-                <p className="add-coloumn">+</p>
+                {/* <p className="add-coloumn">+</p> */}
                 {/* <p className="p-icon"><FiMoreVertical>
                 </FiMoreVertical></p> */}
             </div>

@@ -28,8 +28,8 @@ export default function Notes(props) {
 
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
-        '#BFD41F', '#8580FD', '#6DD41F', '#3598F4', '#44D7B6'
-        , '#40D9ED', '#F84A20', '#F13B7F'
+        '#BFD41F', '#8580FD', '#6DD41F', '#7bdcb5', '#44D7B6'
+        , '#40D9ED', '#ff8a65', '#d9e3f0'
     ];
     function openCloseEditor(item) {
         debugger
@@ -90,6 +90,7 @@ export default function Notes(props) {
         <>
             <div className="container">
                 <div className="all-notes">
+                    <div className="first-column"></div>
                     {arr.map((item, index) =>
                         <>
                             <div key={index} className={`note ${item.id}`}

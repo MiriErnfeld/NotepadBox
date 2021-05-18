@@ -13,6 +13,15 @@
 textarea.textarea:focus {
   outline-width: 0;
 }
+.first-column{
+  /* width: 20px; */
+  border-right:#3598F4 4px solid;
+  background-color: #3598F4;
+  /* height:50px */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .note{
 height: 150px;
 width: 150px;
@@ -54,7 +63,7 @@ position: relative;
     width: 231px;
     margin-left: 12px;
     margin-right: 9px;
-    cursor: copy;
+    cursor: "pointer";
     margin-bottom: 18px;
     margin-top: 17px;
     /* top: 127px; */
