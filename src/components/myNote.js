@@ -12,7 +12,7 @@ import './myNote.css'
 import $ from 'jquery'
 
 export default function Notes(props) {
-
+    const [check, setCheck] = useState("")
     const { arr, setarr, arrnums, count, setCount, setarrnums, topNote, setTopNote
         , rightNote, setRightNote } = props
 
@@ -38,9 +38,9 @@ export default function Notes(props) {
         newArr[i].flagColor = !item.flagColor
         setarr([...newArr])
     }
-    function changeColor(c, item) {
+    function changeColor(c, item, index) {
         debugger
-
+        setCheck(index)
         let i = item.id
         let newArr = [...arr]
         newArr[i].colors = c
@@ -133,8 +133,13 @@ export default function Notes(props) {
                                         <div className="curr" >
                                             {mycolors.map((c, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
-                                                    style={{ backgroundColor: c }} onClick={e => changeColor(c, item)} 
-                                                      {  <BsCheck></BsCheck> }>
+                                                    style={{ backgroundColor: c }} onClick={e => changeColor(c, item, i)}
+                                                > {check == i ? <BsCheck style={{
+                                                    fontSize: "13px",
+                                                    marginTop: " 2px",
+                                                    color: "white",
+                                                    fontWeight: "bold"
+                                                }}></BsCheck> : " "}
                                                 </div>
 
                                             })}
