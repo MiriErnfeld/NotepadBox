@@ -56,12 +56,18 @@ export default function Notes(props) {
     }, [arr])
 
     function removeItem(item) {
-        debugger
         const a = [...arr];
-        const r = item.id - 1
-        console.log(r);
-        a.splice(r, 1)
+        debugger
+        const index = a.indexOf(a.find(x => x.id == item.id))
+        if (index !== -1)
+            a.splice(index, 1)
         setarr([...a])
+
+        // const a = [...arr];
+        // const r = item.id - 1
+        // console.log(r);
+        // a.splice(r, 1)
+        // setarr([...a])
     }
     // function changeNotePlace(e, index) {
     //     debugger
