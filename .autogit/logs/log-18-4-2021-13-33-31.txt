@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Tue May 18 2021 13:33:31 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/components/configurator.css
+* src/components/myNote.js
+
+
+Created files:
+* .autogit/logs/log-18-4-2021-13-3-9.txt
+
+
+Deleted files:
+
+
+Renamed files:
