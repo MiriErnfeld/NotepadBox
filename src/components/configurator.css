@@ -63,11 +63,10 @@ opacity: 1;
     height: 95%;
 }
 .configurator-line{
+z-index: 9999;
     width: 1124px;
     margin-left:1px;
     background-color: #F1F1F3;
-    /* height: 20px;background-color:#F1F1F3;
-    border-radius: 10px;*/
     border: 1px solid white; 
     top: 91px;
 left: 269px;

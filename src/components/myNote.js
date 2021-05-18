@@ -4,15 +4,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
 import { FaGripHorizontal } from "react-icons/fa";
 import { LightenDarkenColor } from 'lighten-darken-color';
-import Drag from '../images/Group 21702.png'
-
-
-import Configurator from './configurator'
 import './myNote.css'
 import $ from 'jquery'
 
 export default function Notes(props) {
     const [check, setCheck] = useState("")
+    const [currentItem, setCurrentItem] = useState("")
     const { arr, setarr, arrnums, count, setCount, setarrnums, topNote, setTopNote
         , rightNote, setRightNote } = props
 
@@ -23,8 +20,6 @@ export default function Notes(props) {
         debugger
         $('.note').draggable();
     }, [])
-
-
 
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
@@ -41,16 +36,15 @@ export default function Notes(props) {
     function changeColor(c, item, index) {
         debugger
         setCheck(index)
+        setCurrentItem(item)
         let i = item.id
         let newArr = [...arr]
         newArr[i].colors = c
         setarr(newArr)
         let currentclass = `note ${i}`
         let currentclassText = `textarea ${i}`
-        let headerColor = `header ${item.id}`
         let note = document.getElementsByClassName(currentclass)[0]
         let text = document.getElementsByClassName(currentclassText)[0]
-        let header = document.getElementsByClassName(headerColor)[0]
         note.style.backgroundColor = item.colors;
         text.style.backgroundColor = item.colors;
     }
@@ -62,16 +56,17 @@ export default function Notes(props) {
     }, [arr])
 
     function removeItem(item) {
-
+        debugger
         const a = [...arr];
-        a.splice(item.id, 1)
+        const r = item.id - 1
+        console.log(r);
+        a.splice(r, 1)
         setarr([...a])
     }
-    function changeNotePlace(e, index) {
-        debugger
-        console.log("item.id::::" + index + "top::::::" + e.target.style.top, "right::::" + e.target.style.right);
-    }
-
+    // function changeNotePlace(e, index) {
+    //     debugger
+    //     console.log("item.id::::" + index + "top::::::" + e.target.style.top, "right::::" + e.target.style.right);
+    // }
 
     function saveText(item, newText) {
         debugger
@@ -90,18 +85,15 @@ export default function Notes(props) {
         <>
             <div className="container">
                 <div className="all-notes">
-                    {/* <div className="first-column"></div> */}
                     {arr.map((item, index) =>
                         <>
                             <div key={index} className={`note ${item.id}`}
-                                onClick={e => changeNotePlace(e, item.id)}
                                 style={{
                                     top: `${index * 30 + 50}px`,
                                     right: `${props.arrnums[index].x + 300}px`
                                 }}>
                                 {setTopNote(`${index * 30 + 50}px`)}
                                 {setRightNote(`${props.arrnums[index].x + 300}px`)}
-
                                 <div className={`header ${item.id}`}
                                     style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}>
                                     <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(item)} style={{
@@ -110,10 +102,9 @@ export default function Notes(props) {
                                         paddingBottom: "3px",
                                         cursor: "auto",
                                     }}></BsPencil>
-                                    {/* <img src="Drag"></img> */}
                                     <FaGripHorizontal style={{ marginTop: "-16px", fontWeight: "none" }}></FaGripHorizontal>
-                                    {/* <BsThreeDots ></BsThreeDots> */}
                                     <BsX style={{
+                                        hoverBackground: "black",
                                         marginRight: "123px",
                                         paddingBottom: "3px",
                                         cursor: "auto",
@@ -122,11 +113,9 @@ export default function Notes(props) {
                                     <textarea
                                         className={`textarea ${item.id}`}
                                         id="areaText"
-                                        // ref={refText}
                                         type="string"
                                         onBlur={e => saveText(item, e.target.value)}
                                     ></textarea>
-                                    {/* <button onClick={e => saveText(index, refText.current.value)}>save</button> */}
                                 </div>
                                 <div className="curr-container">
                                     {item.flagColor ?
@@ -134,7 +123,7 @@ export default function Notes(props) {
                                             {mycolors.map((c, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
                                                     style={{ backgroundColor: c }} onClick={e => changeColor(c, item, i)}
-                                                > {check == i ?
+                                                > {check == i && currentItem == item ?
                                                     <BsCheck
                                                         style={{
                                                             fontSize: "13px",
