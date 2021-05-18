@@ -60,7 +60,7 @@ export default function Notes(props) {
         debugger
         const index = a.indexOf(a.find(x => x.id == item.id))
         if (index !== -1)
-            a.splice(index, 1)
+            a.splice(index - 1, 1)
         setarr([...a])
 
         // const a = [...arr];
