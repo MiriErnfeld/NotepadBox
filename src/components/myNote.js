@@ -90,7 +90,7 @@ export default function Notes(props) {
         <>
             <div className="container">
                 <div className="all-notes">
-                    <div className="first-column"></div>
+                    {/* <div className="first-column"></div> */}
                     {arr.map((item, index) =>
                         <>
                             <div key={index} className={`note ${item.id}`}

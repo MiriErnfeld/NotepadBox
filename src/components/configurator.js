@@ -15,6 +15,7 @@ var Color = require('color');
 
 export default function Configurator() {
     const [arr, setarr] = useState([])
+    const [countCol, setCountCol] = useState(0)
     const [arrnums, setarrnums] = useState([{}])
     const [count, setCount] = useState(0)
     const [topNote, setTopNote] = useState("")
@@ -23,6 +24,16 @@ export default function Configurator() {
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
     }
+    function addCol() {
+        debugger
+        let cnt = countCol + 1
+        if (countCol < 5) {
+            setCountCol(cnt)
+            console.log(countCol);
+        }
+        setCountCol(0)
+    }
+
     function insertNote() {
         debugger
         let cnt = count + 1
@@ -41,15 +52,35 @@ export default function Configurator() {
         <div className="container-notes">
 
             <div className="configurator-line row">
-                <div className="div-notes">
-                    <p className="my-notes ">My Notes</p>
-                </div>
-                <p className="p-cloumn">
+                {/* <div className="div-notes"> */}
+                <p className="my-notes ">My Notes</p>
+                {/* </div> */}
+                <p className="p-cloumn" onClick={addCol}>
                     new coloumn
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
                 </p>
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+
+                    </div>
+                    <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+
+                    </div>
+                    <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+
+                    </div>
+                    <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+
+                    </div>
+                    <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+
+                    </div>
+                </div>
+            </div>
             <div className="container-configurator">
+
                 <div className="create-note" onClick={insertNote}>Create Note +</div>
                 {/* -----------------TO NEXT VERSION----------- */}
                 {/* <div className="dragfolder"> */}
