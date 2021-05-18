@@ -98,6 +98,7 @@ color: #0A102E;
 opacity: 1;
 }
 .p-cloumn{
+    cursor: pointer;
     margin-top: 7px;
     margin-left: 55px;
 width: 103px;

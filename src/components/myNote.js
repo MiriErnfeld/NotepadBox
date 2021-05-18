@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { actions } from './redux/actions/action'
 import { useSelector, useDispatch } from 'react-redux'
-import { BsPencil, BsX, BsThreeDots } from "react-icons/bs";
+import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
 import { FaGripHorizontal } from "react-icons/fa";
 import { LightenDarkenColor } from 'lighten-darken-color';
 import Drag from '../images/Group 21702.png'
@@ -133,14 +133,11 @@ export default function Notes(props) {
                                         <div className="curr" >
                                             {mycolors.map((c, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
-                                                    style={{ backgroundColor: c }} onClick={e => changeColor(c, item)}>
+                                                    style={{ backgroundColor: c }} onClick={e => changeColor(c, item)} 
+                                                      {  <BsCheck></BsCheck> }>
                                                 </div>
 
                                             })}
-                                            {/* {
-                                                item[index].colors===item.c ?
-                                                    <BsCheck></BsCheck> : ""
-                                            } */}
                                         </div>
                                         : ""}
                                 </div>
@@ -152,17 +149,3 @@ export default function Notes(props) {
         </>
     )
 }
-
-
-
-// {
-//     colors.map((c, i) => {
-//         return <div className="divColors" className="colorDiv handPointer"
-
-//             style={{ backgroundColor: c }}
-//         >
-//             {props.editFolder ? props.editFolder.color === c ?
-//                 <img src={iconv} id="imgI" /> : " " : " "}
-//         </div>
-//     })
-// }

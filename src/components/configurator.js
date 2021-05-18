@@ -31,7 +31,9 @@ export default function Configurator() {
             setCountCol(cnt)
             console.log(countCol);
         }
-        setCountCol(0)
+        // else { setCountCol(0) }
+        console.log(countCol);
+
     }
 
     function insertNote() {
@@ -63,20 +65,15 @@ export default function Configurator() {
             <div class="container">
                 <div class="row">
                     <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
-
                     </div>
-                    <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
-
-                    </div>
-                    <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
-
-                    </div>
-                    <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
-
-                    </div>
-                    <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
-
-                    </div>
+                    {countCol > 0 ? <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                    </div> : " "}
+                    {countCol > 1 ? <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                    </div> : ""}
+                    {countCol > 2 ? <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                    </div> : ""}
+                    {countCol > 3 ? <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                    </div> : ""}
                 </div>
             </div>
             <div className="container-configurator">

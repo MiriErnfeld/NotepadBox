@@ -59,11 +59,11 @@ position: relative;
   }
   .create-note{
     padding-top: 13px;
-  
+  cursor: pointer;
     width: 231px;
     margin-left: 12px;
     margin-right: 9px;
-    cursor: "pointer";
+
     margin-bottom: 18px;
     margin-top: 17px;
     /* top: 127px; */
