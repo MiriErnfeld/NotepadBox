@@ -134,12 +134,14 @@ export default function Notes(props) {
                                             {mycolors.map((c, i) => {
                                                 return <div className="divColors " className="colorDiv handPointer"
                                                     style={{ backgroundColor: c }} onClick={e => changeColor(c, item, i)}
-                                                > {check == i ? <BsCheck style={{
-                                                    fontSize: "13px",
-                                                    marginTop: " 2px",
-                                                    color: "white",
-                                                    fontWeight: "bold"
-                                                }}></BsCheck> : " "}
+                                                > {check == i ?
+                                                    <BsCheck
+                                                        style={{
+                                                            fontSize: "13px",
+                                                            marginTop: " 2px",
+                                                            color: "white",
+                                                            fontWeight: "bold"
+                                                        }}></BsCheck> : " "}
                                                 </div>
 
                                             })}
