@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
 import { FcPlus } from "react-icons/fc";
 import Dropdown from 'react-bootstrap/Dropdown'
+import { BsFillPlusCircleFill } from "react-icons/bs";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 import MyNote from './myNote'
@@ -40,14 +41,13 @@ export default function Configurator() {
         <div className="container-notes">
 
             <div className="configurator-line row">
-                <p className="my-notes ">My Notes</p>
+                <div className="div-notes">
+                    <p className="my-notes ">My Notes</p>
+                </div>
                 <p className="p-cloumn">
                     new coloumn
-                    <FcPlus></FcPlus>
+                    <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
                 </p>
-                {/* <p className="add-coloumn">+</p> */}
-                {/* <p className="p-icon"><FiMoreVertical>
-                </FiMoreVertical></p> */}
             </div>
             <div className="container-configurator">
                 <div className="create-note" onClick={insertNote}>Create Note +</div>
@@ -75,7 +75,7 @@ export default function Configurator() {
                 rightNote={rightNote}
                 setRightNote={setRightNote}
             ></MyNote>
-        </div>
+        </div >
     )
 
 }

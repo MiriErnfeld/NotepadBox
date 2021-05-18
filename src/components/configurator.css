@@ -83,6 +83,7 @@ box-shadow: #707070;
     margin-top: 12px !important;
 }
 .my-notes{
+    /* border-right: 1px solid gray; */
     margin-top: 8px;
     margin-left: 16px;
 left: 342px;
@@ -98,7 +99,7 @@ opacity: 1;
 }
 .p-cloumn{
     margin-top: 7px;
-    margin-left: 24px;
+    margin-left: 100px;
 width: 103px;
 height: 24px;
 color: var(--unnamed-color-3598f4);
@@ -109,11 +110,13 @@ color: #3598F4;
 text-transform: capitalize;
 opacity: 1;
 }
-.add-coloumn{
-    border-radius: 10px;
-    top: 8px;
-left: 658px;
-width: 10px;
-height: 10px;
-opacity: 1;
+
+.plus-icon{
+    margin-left: 105px;
+    margin-top: -19px;
+}
+
+.div-notes{
+    border-right: 4px solid #dee2e6;
+    height: 700px;
 }
