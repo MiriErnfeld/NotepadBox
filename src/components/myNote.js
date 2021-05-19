@@ -10,8 +10,17 @@ import $ from 'jquery'
 export default function Notes(props) {
     const [check, setCheck] = useState("")
     const [currentItem, setCurrentItem] = useState("")
-    const { arr, setarr, arrnums, count, setCount, setarrnums, topNote, setTopNote
-        , rightNote, setRightNote } = props
+    const [currentFlag, setCurrentFlag] = useState("")
+    const { arr,
+        setarr,
+        arrnums,
+        count,
+        setCount,
+        setarrnums,
+        topNote,
+        setTopNote,
+        rightNote,
+        setRightNote } = props
 
     const dispatch = useDispatch()
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
@@ -32,6 +41,13 @@ export default function Notes(props) {
         let newArr = [...arr]
         newArr[i].flagColor = !item.flagColor
         setarr([...newArr])
+    }
+    function closeEditor(item) {
+        debugger
+        // let i = item.id
+        // let newArr = [...arr]
+        // newArr[i].flagColor = false
+        // setarr([...newArr])
     }
     function changeColor(c, item, index) {
         debugger
@@ -102,12 +118,15 @@ export default function Notes(props) {
                                 {setRightNote(`${props.arrnums[index].x + 300}px`)}
                                 <div className={`header ${item.id}`}
                                     style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}>
-                                    <BsPencil className="openCloseEditor" onClick={e => openCloseEditor(item)} style={{
-                                        marginLeft: "121px",
-                                        marginTop: " 8px",
-                                        paddingBottom: "3px",
-                                        cursor: "auto",
-                                    }}></BsPencil>
+                                    <BsPencil className="openCloseEditor"
+                                        onMouseEnter={e => closeEditor(item)}
+                                        onClick={e => openCloseEditor(item)}
+                                        style={{
+                                            marginLeft: "121px",
+                                            marginTop: " 8px",
+                                            paddingBottom: "3px",
+                                            cursor: "auto",
+                                        }}></BsPencil>
                                     <FaGripHorizontal style={{ marginTop: "-16px", fontWeight: "none" }}></FaGripHorizontal>
                                     <BsX style={{
                                         hoverBackground: "black",
