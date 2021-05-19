@@ -25,6 +25,8 @@ export default function Configurator() {
         return (min + Math.ceil(Math.random() * max));
     }
     function addCol() {
+        $('.inputTitle').css("display", "block");
+
         debugger
         let cnt = countCol + 1
         if (countCol < 5) {
@@ -54,26 +56,8 @@ export default function Configurator() {
         <div className="container-notes">
 
             <div className="configurator-line row">
-
-
-                
-                {/* <div className="div-notes"> */}
                 <p className="my-notes ">My Notes</p>
-                <div>
-                    <input
-                        // onFocus={(e) => buttonCheck1(e)}
-                        // onBlur={(e) => e.currentTarget.placeholder = 'Set Goal'}
-                        placeholder="New Coloumn"
-                        // onChange={(e) => {
-                        //     setValueGoal1(e.target.value);
-                        //     setflag1(true); setflag2(false); setflag3(false); setflag4(false)
-                        // }}
-                        // className="myInput1 hover1" type="text" value={valueGoal1}
-                    ></input>
-                    <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
-
-                </div>
-                {/* </div> */}
+                <input type="text" className="inputTitle" />
                 <p className="p-cloumn" onClick={addCol}>
                     new coloumn
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
