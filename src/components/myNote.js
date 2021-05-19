@@ -10,7 +10,7 @@ import $ from 'jquery'
 export default function Notes(props) {
     const [check, setCheck] = useState("")
     const [currentItem, setCurrentItem] = useState("")
-    const [currentFlag, setCurrentFlag] = useState("")
+    const [currentFlag, setCurrentFlag] = useState(0)
     const { arr,
         setarr,
         arrnums,
@@ -39,7 +39,13 @@ export default function Notes(props) {
         debugger
         let i = item.id
         let newArr = [...arr]
+        for (let index = 0; index < arr.length; index++) { ///find the preview open editor
+            if (arr[index].flagColor == true && index !== i)
+                arr[index].flagColor = false
+        }
         newArr[i].flagColor = !item.flagColor
+        // newArr[currentFlag].flagColor = !item.flagColor
+        // setCurrentFlag(i+1)
         setarr([...newArr])
     }
     function closeEditor(item) {
@@ -118,17 +124,19 @@ export default function Notes(props) {
                                 {setRightNote(`${props.arrnums[index].x + 300}px`)}
                                 <div className={`header ${item.id}`}
                                     style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}>
-                                    <BsPencil className="openCloseEditor"
-                                        onMouseEnter={e => closeEditor(item)}
+                                    <BsPencil
+                                        // onMouseEnter={e => closeEditor(item)}
                                         onClick={e => openCloseEditor(item)}
                                         style={{
+                                            color: "#0A102E",
                                             marginLeft: "121px",
                                             marginTop: " 8px",
                                             paddingBottom: "3px",
                                             cursor: "auto",
                                         }}></BsPencil>
-                                    <FaGripHorizontal style={{ marginTop: "-16px", fontWeight: "none" }}></FaGripHorizontal>
+                                    <FaGripHorizontal style={{ marginTop: "-16px", fontWeight: "none", color: "#0A102E" }}></FaGripHorizontal>
                                     <BsX style={{
+                                        color: "#0A102E",
                                         hoverBackground: "black",
                                         marginRight: "123px",
                                         paddingBottom: "3px",
