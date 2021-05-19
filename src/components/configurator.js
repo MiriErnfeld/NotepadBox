@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import $ from 'jquery'
 import './configurator.css'
+
 import { actions } from '../components/redux/actions/action';
 import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,6 +9,7 @@ import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
 import { FcPlus } from "react-icons/fc";
 import Dropdown from 'react-bootstrap/Dropdown'
 import { BsFillPlusCircleFill } from "react-icons/bs";
+
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 import MyNote from './myNote'
@@ -25,17 +28,15 @@ export default function Configurator() {
         return (min + Math.ceil(Math.random() * max));
     }
     function addCol() {
-        $('.inputTitle').css("display", "block");
-
+        // $('.inputTitle').css("display", "block");
+        // $('.inputTitle2').css("display", "block");
+        // $('.inputTitle3').css("display", "block");
+        // $('.inputTitle4').css("display", "block");
         debugger
         let cnt = countCol + 1
         if (countCol < 5) {
             setCountCol(cnt)
-            console.log(countCol);
         }
-        // else { setCountCol(0) }
-        console.log(countCol);
-
     }
 
     function insertNote() {
@@ -57,7 +58,10 @@ export default function Configurator() {
 
             <div className="configurator-line row">
                 <p className="my-notes ">My Notes</p>
-                <input type="text" className="inputTitle" />
+                {countCol > 0 ?<input type="text" className="inputTitle" />:""}
+                {countCol > 1?<input type="text" className="inputTitle2" />:""}
+               {countCol > 2 ? <input type="text" className="inputTitle3" />:""}
+              {  countCol > 3 ?<input type="text" className="inputTitle4" />:" "}
                 <p className="p-cloumn" onClick={addCol}>
                     new coloumn
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>

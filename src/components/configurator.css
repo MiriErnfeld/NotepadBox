@@ -82,7 +82,39 @@ box-shadow: #707070;
     margin-top: 6px;
     width: 153px;
     border: none;
-    display:none
+    /* display:none */
+}
+.inputTitle2{
+    height: 28px;
+    margin-top: 6px;
+    width: 153px;
+    margin-left: 31px;
+    border: none;
+    /* display:none */
+}
+.inputTitle3{
+    margin-left: 25px;
+    height: 28px;
+    margin-top: 6px;
+    width: 153px;
+    border: none;
+    /* display:none */
+}
+.inputTitle4{
+    margin-left: 35px;
+    height: 28px;
+    margin-top: 6px;
+    width: 153px;
+    border: none;
+    /* display:none */
+}
+.inputTitle{
+    height: 28px;
+    margin-left: 45px;
+    margin-top: 6px;
+    width: 153px;
+    border: none;
+    /* display:none */
 }
 .p-icon{
     margin-left: 998px;
