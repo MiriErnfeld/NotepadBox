@@ -66,13 +66,13 @@ export default function Configurator() {
                 <div class="row">
                     <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
                     </div>
-                    {countCol > 0 ? <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                    {countCol > 0 ? <div class="col-sm-2   " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
                     </div> : " "}
-                    {countCol > 1 ? <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                    {countCol > 1 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
                     </div> : ""}
-                    {countCol > 2 ? <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                    {countCol > 2 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
                     </div> : ""}
-                    {countCol > 3 ? <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                    {countCol > 3 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
                     </div> : ""}
                 </div>
             </div>
