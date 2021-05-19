@@ -29,7 +29,6 @@ export default function Configurator() {
     }
     function addCol() {
         // $('.inputTitle').css("display", "block");
-        // $('.inputTitle2').css("display", "block");
         // $('.inputTitle3').css("display", "block");
         // $('.inputTitle4').css("display", "block");
         debugger
@@ -37,6 +36,14 @@ export default function Configurator() {
         if (countCol < 5) {
             setCountCol(cnt)
         }
+    }
+    function changeStyle(index) {
+        debugger
+
+        $('.inputTitle' + index).css("backgroundColor", "#F1F1F3");
+        $('.inputTitle' + index).css("font-weight", "bold");
+        $('.inputTitle' + index).css("text-align", "center");
+
     }
 
     function insertNote() {
@@ -58,10 +65,10 @@ export default function Configurator() {
 
             <div className="configurator-line row">
                 <p className="my-notes ">My Notes</p>
-                {countCol > 0 ?<input type="text" className="inputTitle" />:""}
-                {countCol > 1?<input type="text" className="inputTitle2" />:""}
-               {countCol > 2 ? <input type="text" className="inputTitle3" />:""}
-              {  countCol > 3 ?<input type="text" className="inputTitle4" />:" "}
+                {countCol > 0 ? <input type="text" className="inputTitle1" onFocus={"border", "none"} onChange={e => changeStyle(1)} /> : ""}
+                {countCol > 1 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : ""}
+                {countCol > 2 ? <input type="text" className="inputTitle3" onChange={e => changeStyle(3)} /> : ""}
+                {countCol > 3 ? <input type="text" className="inputTitle4" onChange={e => changeStyle(4)} /> : " "}
                 <p className="p-cloumn" onClick={addCol}>
                     new coloumn
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
