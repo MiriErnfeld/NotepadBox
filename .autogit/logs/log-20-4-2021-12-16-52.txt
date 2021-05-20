@@ -1,0 +1,30 @@
+-------------------- Auto-Git Log --------------------
+		Thu May 20 2021 12:16:52 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/App.js
+* src/components/configurator.css
+* src/components/configurator.js
+* src/components/myNote.css
+* src/components/myNote.js
+* src/components/redux/middleWare/NoteMiddleware.js
+
+
+Created files:
+* .autogit/logs/log-20-4-2021-11-16-13.txt
+
+
+Deleted files:
+* src/components/NotePad.js
+* src/components/StickyNote.js
+* src/components/colorPallete.js
+* src/components/conva.js
+* src/components/note3.css
+* src/components/notes3.js
+* src/components/portal.js
+* src/components/styles.css
+* src/components/text.js
+
+
+Renamed files:
