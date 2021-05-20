@@ -11,12 +11,12 @@ export const getData = ({ dispatch, getState }) => next => action => {
                 // headers: { 'authorization': jwt }
             })
             .then((result) => {
-                debugger
+
                 dispatch(actions.setUser(result));
             })
     }
     if (action.type == "CREATE_NOTE") {
-        debugger
+
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -49,7 +49,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
 
         //     let url = window.location;
         //     let userName = (url.pathname.split('/')[1]);
-        //     debugger
+        //       
         //      fetch(`http://localhost:3000/createNote/miri`),
         //         {
         //             method: 'POST',

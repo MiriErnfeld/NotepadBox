@@ -26,7 +26,7 @@
 // }
 // // componentDidMount() {
 // //     var mine = this._input;
-// //     debugger
+// //       
 // //     $(mine).draggable( "option", "addClasses", false );
 // // }
 // function randomBetween(min, max) {
@@ -41,7 +41,7 @@
 
 // }
 // function remove() {
-//     debugger;
+//       ;
 //     this.props.onRemove(this.props.index);
 // }
 // function handleClick() {
@@ -201,7 +201,7 @@ import { FaBeer } from 'react-icons/fa';
 class Note extends React.Component {
 
     constructor(props) {
-        debugger;
+        ;
         super(props);
         this.edit = this.edit.bind(this);
         this.remove = this.remove.bind(this);
@@ -231,16 +231,16 @@ class Note extends React.Component {
         return (min + Math.ceil(Math.random() * max));
     }
     edit() {
-        debugger
+
         this.setState({ editing: true });
-        
+
     }
     save() {
         this.props.onChange(this.refs.newText.value, this.props.index);
         this.setState({ editing: false });
     }
     remove() {
-        debugger;
+        ;
         this.props.onRemove(this.props.index);
     }
     handleClick() {
@@ -291,7 +291,7 @@ export default class Board extends React.Component {
 
     constructor() {
         super();
-        debugger;
+        ;
 
         this.update = this.update.bind(this);
         this.eachNote = this.eachNote.bind(this);

@@ -9,13 +9,13 @@ export default function MyFirstStickyNotes() {
     // const [replace, setreplace] = useState(true)
 
     function showColors() {
-        debugger
+
         // alert("clicked button")
         setclick(!click)
     }
     let r = $('<button >...</button>')
     $(".title div").remove()
-    debugger
+
     $(".note-body").add(r)
     // $(r).on('click', r, showColors);
     // document.getElementsByClassName('btn-colors').addEventListener('click', function (event) {
@@ -23,7 +23,7 @@ export default function MyFirstStickyNotes() {
     // }, false);
     // $(".btn-colors").onClick(showColors)
     // r.onClick = function () {
-    //     debugger
+    //       
     //     alert("clicked button")
     //     setclick(!click)
     // }
@@ -38,10 +38,10 @@ export default function MyFirstStickyNotes() {
         // Code goes here...
     }
     function onChange(notes) {
-        debugger
+
         console.log(myNote)
         console.log(notes)
-        debugger
+
         setMyNote(notes)
     }
     return (<>

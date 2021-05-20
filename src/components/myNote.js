@@ -26,7 +26,7 @@ export default function Notes(props) {
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
     useEffect(() => {
-        debugger
+
         $('.note').draggable();
     }, [])
 
@@ -36,7 +36,7 @@ export default function Notes(props) {
         , '#40D9ED', '#ff8a65', '#d9e3f0'
     ];
     function openCloseEditor(item) {
-        debugger
+
         let i = item.id
         let newArr = [...arr]
         for (let index = 0; index < arr.length; index++) { ///find the preview open editor
@@ -49,14 +49,14 @@ export default function Notes(props) {
         setarr([...newArr])
     }
     function closeEditor(item) {
-        debugger
+
         // let i = item.id
         // let newArr = [...arr]
         // newArr[i].flagColor = false
         // setarr([...newArr])
     }
     function changeColor(c, item, index) {
-        debugger
+
         setCheck(index)
         setCurrentItem(item)
         let i = item.id
@@ -72,14 +72,14 @@ export default function Notes(props) {
     }
 
     useEffect(() => {
-        console.log('on use', arr); debugger;
+        console.log('on use', arr);;
         $('.note').draggable();
 
     }, [arr])
 
     function removeItem(item) {
         const a = [...arr];
-        debugger
+
         const index = a.indexOf(a.find(x => x.id == item.id))
         if (index !== -1)
             a.splice(index - 1, 1)
@@ -92,12 +92,12 @@ export default function Notes(props) {
         // setarr([...a])
     }
     // function changeNotePlace(e, index) {
-    //     debugger
+    //       
     //     console.log("item.id::::" + index + "top::::::" + e.target.style.top, "right::::" + e.target.style.right);
     // }
 
     function saveText(item, newText) {
-        debugger
+
         if (newText !== " ") {
             const i = item.id
             let list = [...arr];

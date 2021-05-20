@@ -27,34 +27,43 @@ export default function Configurator() {
         return (min + Math.ceil(Math.random() * max));
     }
     function addCol() {
-        debugger
+        if (countCol==5) {
+            alert("5555555555555")
+            $('.p-cloumn').css("display", "none")
+            
+        }
         let cnt = countCol + 1
+
         if (countCol < 5) {
             setCountCol(cnt)
         }
+      
     }
     function changeStyle(index) {
+        alert(index + "current index:::::::")
+        console.log("indexxxxxxxx::::::::" + index);
         debugger
         $('.inputTitle' + index).css("backgroundColor", "#F1F1F3");
         $('.inputTitle' + index).css("font-weight", "bold");
         $('.inputTitle' + index).css("text-align", "center");
         if (index == 5) {
-            $('.p-cloumn').css("display","none")
+            alert("55555555")
+            $('.p-cloumn').css("display", "none")
         }
     }
 
     function insertNote() {
-        debugger
+
         let cnt = count + 1
         setCount(cnt)
-        debugger
+
         setarr([...arr, { text: "", check: false, flagColor: false, colors: "#FFEB3B", id: count, top: topNote, right: rightNote }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
-        debugger
+
         console.log(arr);
         if (arr.text)
             dispatch(actions.createNote(arr.text))
-        debugger
+
     }
 
     return (
@@ -63,9 +72,9 @@ export default function Configurator() {
                 <p className="my-notes ">My Notes</p>
                 {countCol > 0 ? <input type="text" className="inputTitle1" onFocus={"border", "none"} onChange={e => changeStyle(1)} /> : ""}
                 {countCol > 1 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : ""}
-                {countCol > 2 ? <input type="text" className="inputTitle3" onChange={e => changeStyle(3)} /> : ""}
-                {countCol > 3 ? <input type="text" className="inputTitle4" onChange={e => changeStyle(4)} /> : " "}
-                {countCol > 4 ? <input type="text" className="inputTitle5" onChange={e => changeStyle(5)} /> : " "}
+                {countCol > 2 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : ""}
+                {countCol > 3 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : " "}
+                {countCol > 4 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(5)} /> : " "}
                 <p className="p-cloumn" onClick={addCol}>
                     new coloumn
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>

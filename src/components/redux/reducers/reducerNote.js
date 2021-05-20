@@ -9,7 +9,7 @@ const initialState = {
 
 const noteData = {
     createNote(state, action) {
-        debugger;
+        ;
         let arr = [...state.noteList];
         arr.push(action.payload);
         state.noteList = [...arr]

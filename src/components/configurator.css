@@ -86,7 +86,7 @@ box-shadow: #707070;
     /* display:none */
 }
 
-.inputTitle2 .inputTitle3 .inputTitle4 .inputTitle5{
+.inputTitle2 {
     margin-left: 33px;
     height: 28px;
     margin-top: 6px;

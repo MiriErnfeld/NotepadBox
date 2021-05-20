@@ -10,7 +10,7 @@
 //     const [styleColor, setstyleColor] = useState('')
 
 //     function onSaveNotes() {
-//         debugger
+//           
 //         const notes = notesText
 //         // document.getElementById("notes-value").value;
 //         const obj = { notes };
@@ -20,14 +20,14 @@
 //     }
 
 //     function onChangeValue(e) {
-//         debugger
+//           
 //         const notes = e
 //         setNotesText(notes)
 //     }
 
 //     function onDeleteNote(index) {
-        
-//         debugger
+
+//           
 //         const indexNote = noteList[index]
 //         const deleteNotes = noteList.filter(noteList => noteList != indexNote);
 //         console.log(deleteNotes)
@@ -35,7 +35,7 @@
 //     }
 
 //     function setColor(e, index) {
-//         debugger
+//           
 //         let color = e
 //         let currentclass = `notes-item ${index}`
 //         let note = document.getElementsByClassName(currentclass)[0]
