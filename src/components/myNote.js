@@ -40,19 +40,9 @@ export default function Notes(props) {
                 arr[index].flagColor = false
         }
         newArr[i].flagColor = !item.flagColor
-        // newArr[currentFlag].flagColor = !item.flagColor
-        // setCurrentFlag(i+1)
         setarr([...newArr])
     }
-    function closeEditor(item) {
-
-        // let i = item.id
-        // let newArr = [...arr]
-        // newArr[i].flagColor = false
-        // setarr([...newArr])
-    }
     function changeColor(c, item, index) {
-
         setCheck(index)
         setCurrentItem(item)
         let i = item.id

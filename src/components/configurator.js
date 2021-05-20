@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import $ from 'jquery'
 import './configurator.css'
-
 import { actions } from '../components/redux/actions/action';
 import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,11 +8,8 @@ import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
 import { FcPlus } from "react-icons/fc";
 import Dropdown from 'react-bootstrap/Dropdown'
 import { BsFillPlusCircleFill } from "react-icons/bs";
-
 // import 'bootstrap/dist/css/bootstrap.min.css';
-
 import MyNote from './myNote'
-var Color = require('color');
 
 export default function Configurator() {
     const [arr, setarr] = useState([])
@@ -29,58 +25,40 @@ export default function Configurator() {
     function addCol() {
         debugger
         if (countCol == 4) {
-
             $('.p-cloumn').css("display", "none")
         }
         let cnt = countCol + 1
-
         if (countCol < 5) {
             setCountCol(cnt)
         }
 
     }
     function changeStyle(index) {
-        console.log("indexxxxxxxx::::::::" + index);
         debugger
         $('.inputTitle' + index).css("backgroundColor", "#F1F1F3");
         $('.inputTitle' + index).css("font-weight", "bold");
         $('.inputTitle' + index).css("text-align", "center");
-        if (index == 5) {
-            alert("55555555")
-            $('.p-cloumn').css("display", "none")
-        }
     }
-
     function insertNote() {
-
+        debugger
         let cnt = count + 1
         setCount(cnt)
-
         setarr([...arr, { text: "", check: false, flagColor: false, colors: "#FFEB3B", id: count, top: topNote, right: rightNote }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
-
         console.log(arr);
-
-
     }
-
     return (
         <>
             <div className="container-notes">
                 <div className="configurator-line row justify-content-start d-flex ">
                     <p className="my-notes col-2 ">My Notes</p>
-
                     {countCol > 0 ? <div class="col-2" style={{ left: "-1%" }}> <input type="text" className="inputTitle1" onChange={e => changeStyle(1)} /> </div> : ""}
-
                     {countCol > 1 ? <div className="col-2">
                         <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} />    </div> : ""}
-
                     {countCol > 2 ? <div className="col-2">
                         <input type="text" className="inputTitle3" onChange={e => changeStyle(3)} />        </div> : ""}
-
                     {countCol > 3 ? <div className="col-2">
                         <input type="text" className="inputTitle4" onChange={e => changeStyle(4)} />    </div> : " "}
-
                     {countCol > 4 ? <div className="col-2">
                         <input type="text" className="inputTitle5" onChange={e => changeStyle(5)} /> </div> : " "}
                     <p className="p-cloumn col-2" onClick={addCol}>
@@ -92,9 +70,9 @@ export default function Configurator() {
                     <div class="row">
                         <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
                         </div>
-                        {countCol > 0 ? <div class="col-sm-2   " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        {countCol > 0 ? <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
                         </div> : " "}
-                        {countCol > 1 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        {countCol > 1 ? <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
                         </div> : ""}
                         {countCol > 2 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
                         </div> : ""}
@@ -115,9 +93,8 @@ export default function Configurator() {
                     folder name */}
                     </div>
                 </div>
-
             </div >
-            <MyNote
+            <div> <MyNote
                 arr={arr}
                 setarr={setarr}
                 arrnums={arrnums}
@@ -129,7 +106,7 @@ export default function Configurator() {
                 rightNote={rightNote}
                 setRightNote={setRightNote}
             ></MyNote>
+            </div>
         </>
     )
-
 }
