@@ -76,7 +76,7 @@ export default function Configurator() {
                     {countCol > 3 ? <div className="col-2">
                         <input type="text" className="inputTitle4" onChange={e => changeStyle(4)} />    </div> : " "}
 
-                    {countCol > 4 ? <div className="col-s">
+                    {countCol > 4 ? <div className="col-2">
                         <input type="text" className="inputTitle5" onChange={e => changeStyle(5)} /> </div> : " "}
                     <p className="p-cloumn col-2" onClick={addCol}>
                         new coloumn
