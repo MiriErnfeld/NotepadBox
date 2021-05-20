@@ -30,7 +30,6 @@ export default function Configurator() {
         if (countCol==5) {
             alert("5555555555555")
             $('.p-cloumn').css("display", "none")
-            
         }
         let cnt = countCol + 1
 
