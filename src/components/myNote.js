@@ -97,7 +97,7 @@ export default function Notes(props) {
     // }
 
     function saveText(item, newText) {
-
+debugger
         if (newText !== " ") {
             const i = item.id
             let list = [...arr];

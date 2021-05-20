@@ -27,7 +27,7 @@ export default function Configurator() {
         return (min + Math.ceil(Math.random() * max));
     }
     function addCol() {
-        if (countCol==5) {
+        if (countCol == 5) {
             alert("5555555555555")
             $('.p-cloumn').css("display", "none")
         }
@@ -36,7 +36,7 @@ export default function Configurator() {
         if (countCol < 5) {
             setCountCol(cnt)
         }
-      
+
     }
     function changeStyle(index) {
         alert(index + "current index:::::::")
@@ -60,8 +60,7 @@ export default function Configurator() {
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
 
         console.log(arr);
-        if (arr.text)
-            dispatch(actions.createNote(arr.text))
+
 
     }
 
@@ -94,7 +93,7 @@ export default function Configurator() {
                 </div>
             </div>
             <div className="container-configurator">
-                <div className="create-note" onClick={insertNote}>Create Note +</div>
+                <div className="create-note" onClick={ insertNote}>Create Note +</div>
                 {/* -----------------TO NEXT VERSION----------- */}
                 {/* <div className="dragfolder"> */}
                 {/* <img src="folserPlus" at="img"></img> */}
