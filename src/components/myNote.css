@@ -59,6 +59,7 @@ position: relative;
     margin-top: " 12px";
   }
   .create-note{
+    z-index:9999; 
     padding-top: 13px;
     width: 94%;
   cursor: pointer;
@@ -97,6 +98,7 @@ position: relative;
 
 .all-notes{
   position: absolute;
+  z-index: -1;
   top: 0px;
   left: 10%;
   width: 100%;
