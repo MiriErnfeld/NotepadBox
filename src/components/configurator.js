@@ -94,7 +94,7 @@ export default function Configurator() {
                     </div>
                 </div>
             </div >
-            <div> <MyNote
+            <MyNote
                 arr={arr}
                 setarr={setarr}
                 arrnums={arrnums}
@@ -106,7 +106,7 @@ export default function Configurator() {
                 rightNote={rightNote}
                 setRightNote={setRightNote}
             ></MyNote>
-            </div>
+
         </>
     )
 }

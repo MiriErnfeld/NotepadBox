@@ -1,6 +1,7 @@
 body{
     position:relative;
     background-color: #F1F1F3;
+    overflow:hidden;
 }
 .headerConfig{
     background-color: aqua;

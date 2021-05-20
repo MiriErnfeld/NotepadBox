@@ -91,7 +91,7 @@ export default function Notes(props) {
     }
     return (
         <>
-            <div className="container">
+            {/* <div className="container"> */}
                 <div className="all-notes">
                     {arr.map((item, index) =>
                         <>
@@ -154,7 +154,7 @@ export default function Notes(props) {
                         </>)
                     }
                 </div>
-            </div>
+            {/* </div> */}
         </>
     )
 }
