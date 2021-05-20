@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Thu May 20 2021 16:44:22 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/components/configurator.css
+* src/components/configurator.js
+
+
+Created files:
+* .autogit/logs/log-20-4-2021-16-14-1.txt
+
+
+Deleted files:
+
+
+Renamed files:
