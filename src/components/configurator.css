@@ -77,47 +77,24 @@ border-radius: 10px 10px 0px 0px;
 opacity: 1;
 box-shadow: #707070;
 }
-.inputTitle1{
+.inputTitle1 {
     height: 28px;
-    margin-top: 6px;
-    width: 153px;
-    border: none;
-    margin-left: 28px;
-    /* display:none */
-}
-.inputTitle2{
-    
-    height: 28px;
-    margin-top: 6px;
-    width: 153px;
-    margin-left: 31px;
-    border: none;
-    /* display:none */
-}
-.inputTitle3{
-    margin-left: 25px;
-    height: 28px;
-    margin-top: 6px;
-    width: 153px;
-    border: none;
-    /* display:none */
-}
-.inputTitle4{
     margin-left: 35px;
+    margin-top: 6px;
+    width: 153px;
+    border: none;
+    /* display:none */
+}
+
+.inputTitle2 .inputTitle3 .inputTitle4 .inputTitle5{
+    margin-left: 33px;
     height: 28px;
     margin-top: 6px;
     width: 153px;
     border: none;
     /* display:none */
 }
-.inputTitle{
-    height: 28px;
-    margin-left: 45px;
-    margin-top: 6px;
-    width: 153px;
-    border: none;
-    /* display:none */
-}
+
 .p-icon{
     margin-left: 998px;
     margin-top: 12px !important;
@@ -150,6 +127,7 @@ letter-spacing: 0px;
 color: #3598F4;
 text-transform: capitalize;
 opacity: 1;
+display:block;
 }
 
 .plus-icon{

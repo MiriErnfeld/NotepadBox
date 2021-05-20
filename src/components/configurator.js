@@ -15,7 +15,6 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import MyNote from './myNote'
 var Color = require('color');
 
-
 export default function Configurator() {
     const [arr, setarr] = useState([])
     const [countCol, setCountCol] = useState(0)
@@ -28,9 +27,6 @@ export default function Configurator() {
         return (min + Math.ceil(Math.random() * max));
     }
     function addCol() {
-        // $('.inputTitle').css("display", "block");
-        // $('.inputTitle3').css("display", "block");
-        // $('.inputTitle4').css("display", "block");
         debugger
         let cnt = countCol + 1
         if (countCol < 5) {
@@ -39,11 +35,12 @@ export default function Configurator() {
     }
     function changeStyle(index) {
         debugger
-
         $('.inputTitle' + index).css("backgroundColor", "#F1F1F3");
         $('.inputTitle' + index).css("font-weight", "bold");
         $('.inputTitle' + index).css("text-align", "center");
-
+        if (index == 5) {
+            $('.p-cloumn').css("display","none")
+        }
     }
 
     function insertNote() {
@@ -62,13 +59,13 @@ export default function Configurator() {
 
     return (
         <div className="container-notes">
-
             <div className="configurator-line row">
                 <p className="my-notes ">My Notes</p>
                 {countCol > 0 ? <input type="text" className="inputTitle1" onFocus={"border", "none"} onChange={e => changeStyle(1)} /> : ""}
                 {countCol > 1 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : ""}
                 {countCol > 2 ? <input type="text" className="inputTitle3" onChange={e => changeStyle(3)} /> : ""}
                 {countCol > 3 ? <input type="text" className="inputTitle4" onChange={e => changeStyle(4)} /> : " "}
+                {countCol > 4 ? <input type="text" className="inputTitle5" onChange={e => changeStyle(5)} /> : " "}
                 <p className="p-cloumn" onClick={addCol}>
                     new coloumn
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
@@ -89,7 +86,6 @@ export default function Configurator() {
                 </div>
             </div>
             <div className="container-configurator">
-
                 <div className="create-note" onClick={insertNote}>Create Note +</div>
                 {/* -----------------TO NEXT VERSION----------- */}
                 {/* <div className="dragfolder"> */}
@@ -101,7 +97,6 @@ export default function Configurator() {
                     {/* <FiFolder></FiFolder>
                     folder name */}
                 </div>
-
             </div>
             <MyNote
                 arr={arr}
