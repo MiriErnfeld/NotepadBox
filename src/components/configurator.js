@@ -67,14 +67,23 @@ export default function Configurator() {
     return (
         <>
             <div className="container-notes">
-                <div className="configurator-line row">
-                    <p className="my-notes ">My Notes</p>
-                    {countCol > 0 ? <input type="text" className="inputTitle1" onChange={e => changeStyle(1)} /> : ""}
-                    {countCol > 1 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : ""}
-                    {countCol > 2 ? <input type="text" className="inputTitle3" onChange={e => changeStyle(3)} /> : ""}
-                    {countCol > 3 ? <input type="text" className="inputTitle4" onChange={e => changeStyle(4)} /> : " "}
-                    {countCol > 4 ? <input type="text" className="inputTitle5" onChange={e => changeStyle(5)} /> : " "}
-                    <p className="p-cloumn" onClick={addCol}>
+                <div className="configurator-line row justify-content-start d-flex ">
+                    <p className="my-notes">My Notes</p>
+                    <div class="col-2">
+                        {countCol > 0 ? <input type="text" className="inputTitle1" onChange={e => changeStyle(1)} /> : ""}
+                    </div>
+                    <div className="col-2">
+                        {countCol > 1 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : ""}
+                    </div>
+                    <div className="col-2">
+                        {countCol > 2 ? <input type="text" className="inputTitle3" onChange={e => changeStyle(3)} /> : ""}
+                    </div>
+                    <div className="col-2">
+                        {countCol > 3 ? <input type="text" className="inputTitle4" onChange={e => changeStyle(4)} /> : " "}
+                    </div>
+                    <div className="col-s">
+                        {countCol > 4 ? <input type="text" className="inputTitle5" onChange={e => changeStyle(5)} /> : " "}
+                    </div> <p className="p-cloumn col-2" onClick={addCol}>
                         new coloumn
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
                     </p>

@@ -43,6 +43,8 @@ border: 2px dashed #707070;
 opacity: 1;
 }
 .container-configurator{
+    justify-content: center;
+    display: flex;
     position: absolute;
     background-color:white;
     border-radius: 10px;
