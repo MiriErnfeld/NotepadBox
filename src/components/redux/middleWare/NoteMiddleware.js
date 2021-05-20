@@ -18,50 +18,37 @@ export const getData = ({ dispatch, getState }) => next => action => {
             })
     }
     if (action.type == "CREATE_NOTE") {
-        debugger
-
-
-
-        var settings = {
-            "url": "http://localhost:3008/createNote/miri",
-            "method": "POST",
-            "timeout": 0,
-            "headers": {
-              "Content-Type": "application/json"
-            },
-            "data": JSON.stringify({
-              "textNote": "6666666666666666",
-              "indexNote": "66"
-            }),
-          };
-          
-          $.ajax(settings).done(function (response) {
-            console.log(response);
-          });
-
-
-
-
-
-
-
-
-
-
-        // fetch("http://localhost:3008/createNote/miri", {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
+        // debugger
+        // var settings = {
+        //     "url": "http://localhost:3008/createNote/miri",
+        //     "method": "POST",
+        //     "timeout": 0,
+        //     "headers": {
+        //       "Content-Type": "application/json"
         //     },
-        // })
-        //     .then((data) => data.json())
-        //     .then((data) => {
-        //         console.log(data);
-        //     })
-        //     .catch((err) => console.log(err));
+        //     "data": JSON.stringify({
+        //       "textNote": "6666666666666666",
+        //       "indexNote": "66"
+        //     }),
+        //   };
+
+        //   $.ajax(settings).done(function (response) {
+        //     console.log(response);
+        //   });
+
+        fetch("http://localhost:3008/createNote/miri", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((data) => data.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => console.log(err));
 
 
-      
 
 
 
@@ -87,5 +74,6 @@ export const getData = ({ dispatch, getState }) => next => action => {
         //         .then(result => console.log(result))
         //         .catch(error => console.log('error', error));
         // }
-        return next(action)}
+        return next(action)
     }
+}

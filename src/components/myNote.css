@@ -36,7 +36,8 @@ position: relative;
    color:blue -50%;
 }
 .curr-container{
-        /* width: 4rem; */
+
+        width: 75%;
         position: absolute;
         top: 0;
         right: -53px;

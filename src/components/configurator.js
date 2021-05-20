@@ -27,8 +27,9 @@ export default function Configurator() {
         return (min + Math.ceil(Math.random() * max));
     }
     function addCol() {
-        if (countCol == 5) {
-            alert("5555555555555")
+        debugger
+        if (countCol == 4) {
+
             $('.p-cloumn').css("display", "none")
         }
         let cnt = countCol + 1
@@ -39,7 +40,6 @@ export default function Configurator() {
 
     }
     function changeStyle(index) {
-        alert(index + "current index:::::::")
         console.log("indexxxxxxxx::::::::" + index);
         debugger
         $('.inputTitle' + index).css("backgroundColor", "#F1F1F3");
@@ -65,46 +65,49 @@ export default function Configurator() {
     }
 
     return (
-        <div className="container-notes">
-            <div className="configurator-line row">
-                <p className="my-notes ">My Notes</p>
-                {countCol > 0 ? <input type="text" className="inputTitle1" onFocus={"border", "none"} onChange={e => changeStyle(1)} /> : ""}
-                {countCol > 1 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : ""}
-                {countCol > 2 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : ""}
-                {countCol > 3 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : " "}
-                {countCol > 4 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(5)} /> : " "}
-                <p className="p-cloumn" onClick={addCol}>
-                    new coloumn
+        <>
+            <div className="container-notes">
+                <div className="configurator-line row">
+                    <p className="my-notes ">My Notes</p>
+                    {countCol > 0 ? <input type="text" className="inputTitle1" onFocus={"border", "none"} onChange={e => changeStyle(1)} /> : ""}
+                    {countCol > 1 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : ""}
+                    {countCol > 2 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : ""}
+                    {countCol > 3 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} /> : " "}
+                    {countCol > 4 ? <input type="text" className="inputTitle2" onChange={e => changeStyle(5)} /> : " "}
+                    <p className="p-cloumn" onClick={addCol}>
+                        new coloumn
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
-                </p>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
-                    </div>
-                    {countCol > 0 ? <div class="col-sm-2   " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
-                    </div> : " "}
-                    {countCol > 1 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
-                    </div> : ""}
-                    {countCol > 2 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
-                    </div> : ""}
-                    {countCol > 3 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
-                    </div> : ""}
+                    </p>
                 </div>
-            </div>
-            <div className="container-configurator">
-                <div className="create-note" onClick={ insertNote}>Create Note +</div>
-                {/* -----------------TO NEXT VERSION----------- */}
-                {/* <div className="dragfolder"> */}
-                {/* <img src="folserPlus" at="img"></img> */}
-                {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        </div>
+                        {countCol > 0 ? <div class="col-sm-2   " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        </div> : " "}
+                        {countCol > 1 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        </div> : ""}
+                        {countCol > 2 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        </div> : ""}
+                        {countCol > 3 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        </div> : ""}
+                    </div>
+                </div>
+                <div className="container-configurator">
+                    <div className="create-note" onClick={insertNote}>Create Note +</div>
+                    {/* -----------------TO NEXT VERSION----------- */}
+                    {/* <div className="dragfolder"> */}
+                    {/* <img src="folserPlus" at="img"></img> */}
+                    {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus>
                     <p className="folder">drag notes to create folder</p>
                 </div> */}
-                <div className="folder">
-                    {/* <FiFolder></FiFolder>
+                    <div className="folder">
+                        {/* <FiFolder></FiFolder>
                     folder name */}
+                    </div>
                 </div>
-            </div>
+
+            </div >
             <MyNote
                 arr={arr}
                 setarr={setarr}
@@ -117,7 +120,7 @@ export default function Configurator() {
                 rightNote={rightNote}
                 setRightNote={setRightNote}
             ></MyNote>
-        </div >
+        </>
     )
 
 }

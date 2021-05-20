@@ -25,10 +25,6 @@ export default function Notes(props) {
     const dispatch = useDispatch()
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
-    useEffect(() => {
-
-        $('.note').draggable();
-    }, [])
 
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
@@ -71,12 +67,6 @@ export default function Notes(props) {
         text.style.backgroundColor = item.colors;
     }
 
-    useEffect(() => {
-        console.log('on use', arr);;
-        $('.note').draggable();
-
-    }, [arr])
-
     function removeItem(item) {
         const a = [...arr];
 
@@ -97,7 +87,7 @@ export default function Notes(props) {
     // }
 
     function saveText(item, newText) {
-debugger
+        debugger
         if (newText !== " ") {
             const i = item.id
             let list = [...arr];
@@ -126,7 +116,7 @@ debugger
                                     style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}>
                                     <BsPencil
                                         // onMouseEnter={e => closeEditor(item)}
-                                        onClick={e => openCloseEditor(item)}
+                                        onClick={() => openCloseEditor(item)}
                                         style={{
                                             color: "#0A102E",
                                             marginLeft: "121px",
@@ -142,7 +132,7 @@ debugger
                                         paddingBottom: "3px",
                                         cursor: "auto",
                                         marginTop: "-15px"
-                                    }} onClick={e => removeItem(item)}></BsX>
+                                    }} onClick={() => removeItem(item)}></BsX>
                                     <textarea
                                         className={`textarea ${item.id}`}
                                         id="areaText"
@@ -154,7 +144,7 @@ debugger
                                     {item.flagColor ?
                                         <div className="curr" >
                                             {mycolors.map((c, i) => {
-                                                return <div className="divColors " className="colorDiv handPointer"
+                                                return <div key={i} className="divColors " className="colorDiv handPointer"
                                                     style={{ backgroundColor: c }} onClick={e => changeColor(c, item, i)}
                                                 > {check == i && currentItem == item ?
                                                     <BsCheck
