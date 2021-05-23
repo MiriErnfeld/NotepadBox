@@ -18,6 +18,35 @@ export const getData = ({ dispatch, getState }) => next => action => {
             })
     }
     if (action.type == "CREATE_NOTE") {
+        debugger
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = action.payload
+
+        // var raw = JSON.stringify({
+        //   "notification": {
+        //     "textNote": "@@@@@@@@@@@@@@@",
+        //     "indexNote": "111111"
+        //   }
+        // });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("https://box.dev.leader.codes/api/miri/createNote", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+
+
+
         // debugger
         // var settings = {
         //     "url": "http://localhost:3008/createNote/miri",
@@ -36,17 +65,17 @@ export const getData = ({ dispatch, getState }) => next => action => {
         //     console.log(response);
         //   });
 
-        fetch("http://localhost:3008/createNote/miri", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then((data) => data.json())
-            .then((data) => {
-                console.log(data);
-            })
-            .catch((err) => console.log(err));
+        // fetch("http://localhost:3008/createNote/miri", {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        // })
+        //     .then((data) => data.json())
+        //     .then((data) => {
+        //         console.log(data);
+        //     })
+        //     .catch((err) => console.log(err));
 
 
 
