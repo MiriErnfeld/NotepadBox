@@ -88,17 +88,18 @@ export default function Configurator() {
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
                         </div>
-                        {countCol > 0 ? <div class="col-sm-2   " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        {countCol > 0 ? <div class="col-sm-2   " style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
                         </div> : " "}
-                        {countCol > 1 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        {countCol > 1 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
                         </div> : ""}
-                        {countCol > 2 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        {countCol > 2 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
                         </div> : ""}
-                        {countCol > 3 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
+                        {countCol > 3 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
                         </div> : ""}
                     </div>
+                    <div class="row">
                     <MyNote
                         arr={arr}
                         setarr={setarr}
@@ -111,6 +112,7 @@ export default function Configurator() {
                         rightNote={rightNote}
                         setRightNote={setRightNote}
                     ></MyNote>
+                    </div>
                 </div>
 
             </div >

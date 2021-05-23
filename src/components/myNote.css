@@ -98,7 +98,7 @@ position: relative;
 
 .all-notes{
   position: absolute;
-  /* z-index: -1; */
+  z-index: 9999;
   top: 0px;
   left: 10%;
   /* width: 100%; */

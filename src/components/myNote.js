@@ -99,8 +99,8 @@ export default function Notes(props) {
                     <>
                         <div key={index} className={`note ${item.id}`}
                             style={{
-                                top: `${index * 30 + 50}px`,
-                                left: `${arrnums[index].x + 300}px`
+                                top: `${index * 1 + 5}%`,
+                                left: `${arrnums[index].x + 3}%`
                             }}>
                             {setTopNote(`${index * 30 + 50}px`)}
                             {setRightNote(`${props.arrnums[index].x + 300}px`)}
