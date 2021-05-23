@@ -23,14 +23,12 @@ export const getData = ({ dispatch, getState }) => next => action => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        var raw = action.payload
-
-        // var raw = JSON.stringify({
-        //   "notification": {
-        //     "textNote": "@@@@@@@@@@@@@@@",
-        //     "indexNote": "111111"
-        //   }
-        // });
+        var raw = JSON.stringify({
+            "notification": {
+                "textNote": "@@@@@@@@@@@@@@@",
+                "indexNote": "111111"
+            }
+        });
 
         var requestOptions = {
             method: 'POST',
@@ -41,7 +39,9 @@ export const getData = ({ dispatch, getState }) => next => action => {
 
         fetch("https://box.dev.leader.codes/api/miri/createNote", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => 
+              {  debugger;
+                console.log(result)})
             .catch(error => console.log('error', error));
 
 
