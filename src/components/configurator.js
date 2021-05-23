@@ -83,20 +83,9 @@ export default function Configurator() {
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
                     </p>
                 </div>
-                <div className="all-my-notes">
-                    <MyNote
-                        arr={arr}
-                        setarr={setarr}
-                        arrnums={arrnums}
-                        setarrnums={setarrnums}
-                        count={count}
-                        setCount={setCount}
-                        topNote={topNote}
-                        setTopNote={setTopNote}
-                        rightNote={rightNote}
-                        setRightNote={setRightNote}
-                    ></MyNote>
-                </div>
+
+
+
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
@@ -110,6 +99,18 @@ export default function Configurator() {
                         {countCol > 3 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
                         </div> : ""}
                     </div>
+                    <MyNote
+                        arr={arr}
+                        setarr={setarr}
+                        arrnums={arrnums}
+                        setarrnums={setarrnums}
+                        count={count}
+                        setCount={setCount}
+                        topNote={topNote}
+                        setTopNote={setTopNote}
+                        rightNote={rightNote}
+                        setRightNote={setRightNote}
+                    ></MyNote>
                 </div>
 
             </div >
