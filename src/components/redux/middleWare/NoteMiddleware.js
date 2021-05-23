@@ -24,10 +24,10 @@ export const getData = ({ dispatch, getState }) => next => action => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "notification": {
-                "textNote": "@@@@@@@@@@@@@@@",
+           
+                "textNote": action.payload,
                 "indexNote": "111111"
-            }
+          
         });
 
         var requestOptions = {
