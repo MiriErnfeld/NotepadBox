@@ -7,15 +7,22 @@ export const getData = ({ dispatch, getState }) => next => action => {
 
         let url = window.location;
         let userName = (url.pathname.split('/')[1]);
-        return fetch("ttps://box.dev.leader.codes/api/miri/note/createNote",
-            {
-                method: 'GET',
-                // headers: { 'authorization': jwt }
-            })
-            .then((result) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Cookie", "cf_ob_info=502:653dc5431dd14c13:AMS; cf_use_ob=0");
 
-                dispatch(actions.setUser(result));
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch("https://box.dev.leader.codes/api/miri/note/getNotesByUserName", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                debugger;
+                console.log(result)
             })
+            .catch(error => console.log('error', error));
     }
     if (action.type == "CREATE_NOTE") {
         debugger
