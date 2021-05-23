@@ -7,7 +7,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
 
         let url = window.location;
         let userName = (url.pathname.split('/')[1]);
-        return fetch(`https://${userName}/getNoteByUserName`,
+        return fetch("ttps://box.dev.leader.codes/api/miri/note/createNote",
             {
                 method: 'GET',
                 // headers: { 'authorization': jwt }
@@ -24,10 +24,10 @@ export const getData = ({ dispatch, getState }) => next => action => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-           
-                "textNote": action.payload,
-                "indexNote": "111111"
-          
+
+            "textNote": action.payload,
+            "indexNote": "111111"
+
         });
 
         var requestOptions = {
@@ -37,11 +37,12 @@ export const getData = ({ dispatch, getState }) => next => action => {
             redirect: 'follow'
         };
 
-        fetch("https://box.dev.leader.codes/api/miri/createNote", requestOptions)
+        fetch("https://box.dev.leader.codes/api/miri/note/createNote", requestOptions)
             .then(response => response.text())
-            .then(result => 
-              {  debugger;
-                console.log(result)})
+            .then(result => {
+                debugger;
+                console.log(result)
+            })
             .catch(error => console.log('error', error));
 
 
