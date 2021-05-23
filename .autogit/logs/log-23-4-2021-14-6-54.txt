@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Sun May 23 2021 14:06:54 GMT+0300 (שעון ישראל (קיץ))
+------------------------------------------------------
+
+Modified files:
+* src/components/redux/middleWare/NoteMiddleware.js
+* src/components/redux/store.js
+
+
+Created files:
+* .autogit/logs/log-23-4-2021-13-36-35.txt
+
+
+Deleted files:
+
+
+Renamed files:
