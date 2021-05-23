@@ -83,6 +83,20 @@ export default function Configurator() {
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
                     </p>
                 </div>
+                <div className="all-my-notes">
+                    <MyNote
+                        arr={arr}
+                        setarr={setarr}
+                        arrnums={arrnums}
+                        setarrnums={setarrnums}
+                        count={count}
+                        setCount={setCount}
+                        topNote={topNote}
+                        setTopNote={setTopNote}
+                        rightNote={rightNote}
+                        setRightNote={setRightNote}
+                    ></MyNote>
+                </div>
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "550px" }}>
@@ -97,33 +111,23 @@ export default function Configurator() {
                         </div> : ""}
                     </div>
                 </div>
-                <div className="container-configurator">
-                    <div className="create-note" onClick={insertNote}>Create Note +</div>
-                    {/* -----------------TO NEXT VERSION----------- */}
-                    {/* <div className="dragfolder"> */}
-                    {/* <img src="folserPlus" at="img"></img> */}
-                    {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus>
-                    <p className="folder">drag notes to create folder</p>
-                </div> */}
-                    <div className="folder">
-                        {/* <FiFolder></FiFolder>
-                    folder name */}
-                    </div>
-                </div>
 
             </div >
-            <MyNote
-                arr={arr}
-                setarr={setarr}
-                arrnums={arrnums}
-                setarrnums={setarrnums}
-                count={count}
-                setCount={setCount}
-                topNote={topNote}
-                setTopNote={setTopNote}
-                rightNote={rightNote}
-                setRightNote={setRightNote}
-            ></MyNote>
+            <div className="container-configurator">
+                <div className="create-note" onClick={insertNote}>Create Note +</div>
+                {/* -----------------TO NEXT VERSION----------- */}
+                {/* <div className="dragfolder"> */}
+                {/* <img src="folserPlus" at="img"></img> */}
+                {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus>
+                    <p className="folder">drag notes to create folder</p>
+                </div> */}
+                <div className="folder">
+                    {/* <FiFolder></FiFolder>
+                    folder name */}
+                </div>
+            </div>
+
+
         </>
     )
 
