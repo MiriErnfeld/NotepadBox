@@ -16,7 +16,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
             redirect: 'follow'
         };
 
-        fetch("https://box.dev.leader.codes/api/miri/note/getNotesByUserName", requestOptions)
+        fetch("https://box.dev.leader.codes/api/tehilaSH/note/getNotesByUserName", requestOptions)
             .then(response => response.json())
             .then(result => {
                 debugger;
@@ -46,7 +46,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
             redirect: 'follow'
         };
 
-        fetch("https://box.dev.leader.codes/api/miri/note/createNote", requestOptions)
+        fetch("https://box.dev.leader.codes/api/tehilaSH/note/createNote", requestOptions)
             .then(response => response.text())
             .then(result => {
                 debugger;

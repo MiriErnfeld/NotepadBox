@@ -26,7 +26,16 @@ const noteData = {
     setNoteList(state, action) {
         debugger
         state.noteList = action.payload
+    },
+    setFlagColor(state, action) {
+        debugger
+        let x = action.payload.id
+        let currentFlag = state.noteList[x].flagColor
+        state.noteList[x].flagColor = !currentFlag
+        console.log(state.noteList);
+
     }
+
 };
 
 export default produce((state, action) => createReducer(state, action, noteData), initialState);

@@ -40,11 +40,9 @@ export default function Notes(props) {
                 noteList[index].flagColor = false
         }
         debugger
-        let x = i - 1
-        console.log(newArr[i - 1].flagColor);
-        item.flagColor = true
 
-        dispatch(actions.setNoteList(newArr[i]))
+
+        dispatch(actions.setFlagColor(newArr[i]))
     }
     function changeColor(c, item, index) {
         setCheck(index)
