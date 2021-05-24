@@ -31,6 +31,7 @@ export default function Notes(props) {
         , '#40D9ED', '#ff8a65', '#d9e3f0'
     ];
     function openCloseEditor(item) {
+        debugger
 
         let i = item.id
         let newArr = [...noteList]
@@ -38,8 +39,12 @@ export default function Notes(props) {
             if (noteList[index].flagColor == true && index !== i)
                 noteList[index].flagColor = false
         }
-        newArr[i].flagColor = !item.flagColor
-        noteList = [...newArr]
+        debugger
+        let x = i - 1
+        console.log(newArr[i - 1].flagColor);
+        item.flagColor = true
+
+        dispatch(actions.setNoteList(newArr[i]))
     }
     function changeColor(c, item, index) {
         setCheck(index)

@@ -22,6 +22,10 @@ const noteData = {
         debugger
         state.noteList = (action.payload.notes);
         console.log(state.noteList);
+    },
+    setNoteList(state, action) {
+        debugger
+        state.noteList = action.payload
     }
 };
 

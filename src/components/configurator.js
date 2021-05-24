@@ -23,7 +23,7 @@ export default function Configurator() {
     // const [count, setCount] = useState(0)
     // const [topNote, setTopNote] = useState("")
     // const [rightNote, setRightNote] = useState("")
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     const Notes = useSelector(state => state.reducerNote.noteList)
     const Data = useSelector(state => state.reducerNote)
@@ -54,10 +54,12 @@ export default function Configurator() {
 
     function insertNote() {
         debugger
-
-        let cnt = Notes.count + 1
-
-        Notes.push({ text: "", check: false, flagColor: false, colors: "#FFEB3B", id: cnt, top: Data.topNote, right: Data.rightNote })
+        let c = Notes.length;
+        let cnt = c + 1
+        console.log(Data.topNote, Data.rightNote);
+        let arr = [...Notes];
+        arr.push({ text: "", check: false, flagColor: false, colors: "#FFEB3B", id: cnt, top: Data.topNote, right: Data.rightNote })
+        dispatch(actions.setNoteList(arr));
         // setarr([...arr, { text: "", check: false, flagColor: false, colors: "#FFEB3B", id: count, top: topNote, right: rightNote }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
 
