@@ -9,7 +9,7 @@ const initialState = {
     count: 0,
     topNote: "",
     rightNote: " ",
-    noteList: [{ text: "", check: false, flagColor: false, colors: "#FFEB3B", id: 0, top: " ", right: " " }]
+    noteList: [{ text: "", check: false, flagColor: false, colors: "#FFEB3B", id: -1, top: " ", right: " " }]
 };
 
 const noteData = {
@@ -39,9 +39,10 @@ const noteData = {
     },
     changeColor(state, action) {
         debugger
-        
+        let currentColor = action.payload.c
         let x = action.payload.item.id
-        state.noteList[x].colors = action.payload.c
+        console.log(state.noteList[x].colors);
+        state.noteList[x].colors = currentColor
     },
     setCheck(state, action) {
         debugger

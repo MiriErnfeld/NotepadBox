@@ -57,24 +57,10 @@ export default function Notes(props) {
         let currentclassText = `textarea ${i}`
         let note = document.getElementsByClassName(currentclass)[0]
         let text = document.getElementsByClassName(currentclassText)[0]
-        note.style.backgroundColor = noteList[i - 1].colors;
-        text.style.backgroundColor = noteList[i - 1].colors;
+        note.style.backgroundColor = c
+        text.style.backgroundColor = c
     }
 
-    function removeItem(item) {
-        const a = [...noteList];
-
-        const index = a.indexOf(a.find(x => x.id == item.id))
-        if (index !== -1)
-            a.splice(index - 1, 1)
-        noteList = [...a]
-
-        // const a = [...arr];
-        // const r = item.id - 1
-        // console.log(r);
-        // a.splice(r, 1)
-        // setarr([...a])
-    }
     // function changeNotePlace(e, index) {
     //       
     //     console.log("item.id::::" + index + "top::::::" + e.target.style.top, "right::::" + e.target.style.right);
@@ -106,6 +92,7 @@ export default function Notes(props) {
                             }}>
                             {/* {data.topNote = "10%"}
                             {data.rightNote = "20%"} */}
+                            {/* {alert(item.id)} */}
                             <div className={`header ${item.id}`}
                             // style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
                             >
@@ -127,7 +114,7 @@ export default function Notes(props) {
                                     paddingBottom: "3px",
                                     cursor: "auto",
                                     marginTop: "-15px"
-                                }} onClick={() => removeItem(item)}></BsX>
+                                }} ></BsX>
                                 <textarea
                                     className={`textarea ${item.id}`}
                                     id="areaText"
