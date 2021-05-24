@@ -17,10 +17,12 @@ export const getData = ({ dispatch, getState }) => next => action => {
         };
 
         fetch("https://box.dev.leader.codes/api/miri/note/getNotesByUserName", requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(result => {
                 debugger;
                 console.log(result)
+                dispatch(actions.getAllNotesForUser(result))
+                debugger
             })
             .catch(error => console.log('error', error));
     }

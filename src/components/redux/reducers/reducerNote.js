@@ -14,6 +14,9 @@ const noteData = {
         arr.push(action.payload);
         state.noteList = [...arr]
         console.log(state.noteList);
+    },
+    getAllNotesForUser(state,action) {
+        debugger
     }
 };
 
