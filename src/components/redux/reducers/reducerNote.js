@@ -4,6 +4,8 @@ import { createReducer } from "./reducerUtils";
 
 
 const initialState = {
+   check:" ", 
+   currentItem:"",
     count: 0,
     topNote: "",
     rightNote: " ",

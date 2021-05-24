@@ -50,12 +50,13 @@ export default function Notes(props) {
         let i = item.id
         debugger
         dispatch(actions.changeColor({ c, item }))
+        debugger
         let currentclass = `note ${i}`
         let currentclassText = `textarea ${i}`
         let note = document.getElementsByClassName(currentclass)[0]
         let text = document.getElementsByClassName(currentclassText)[0]
-        note.style.backgroundColor = item.colors;
-        text.style.backgroundColor = item.colors;
+        note.style.backgroundColor = noteList[i - 1].colors;
+        text.style.backgroundColor = noteList[i - 1].colors;
     }
 
     function removeItem(item) {
