@@ -10,16 +10,16 @@ import $ from 'jquery'
 export default function Notes(props) {
 
 
-    const noteList = useSelector(state => state.Notes.noteList)
-    const data = useSelector(state => state.Notes)
+    const noteList = useSelector(state => state.reducerNote.noteList)
+    const data = useSelector(state => state.reducerNote)
 
     const [check, setCheck] = useState("")
     const [currentItem, setCurrentItem] = useState("")
     const [currentFlag, setCurrentFlag] = useState(0)
-    const { 
-     
+    const {
+
         arrnums,
-        } = props
+    } = props
 
     const dispatch = useDispatch()
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
@@ -39,7 +39,7 @@ export default function Notes(props) {
                 noteList[index].flagColor = false
         }
         newArr[i].flagColor = !item.flagColor
-        noteList=[...newArr]
+        noteList = [...newArr]
     }
     function changeColor(c, item, index) {
         setCheck(index)
@@ -47,7 +47,7 @@ export default function Notes(props) {
         let i = item.id
         let newArr = [...noteList]
         newArr[i].colors = c
-        noteList=[...newArr]
+        noteList = [...newArr]
         let currentclass = `note ${i}`
         let currentclassText = `textarea ${i}`
         let note = document.getElementsByClassName(currentclass)[0]
@@ -62,7 +62,7 @@ export default function Notes(props) {
         const index = a.indexOf(a.find(x => x.id == item.id))
         if (index !== -1)
             a.splice(index - 1, 1)
-            noteList=[...a]
+        noteList = [...a]
 
         // const a = [...arr];
         // const r = item.id - 1
@@ -83,7 +83,7 @@ export default function Notes(props) {
             console.log(list[i].text);
             (list[i].text) = newText;
             console.log(list);
-            noteList=[...list];
+            noteList = [...list];
             dispatch(actions.createNote(noteList[i].text))
         }
 
@@ -96,13 +96,14 @@ export default function Notes(props) {
                     <>
                         <div key={index} className={`note ${item.id}`}
                             style={{
-                                top: `${index * 1 + 5}%`,
-                                left: `${arrnums[index].x + 3}%`
+                                top: "10%",
+                                left: "20%"
                             }}>
-                            {setTopNote(`${index * 30 + 50}px`)}
-                            {setRightNote(`${props.arrnums[index].x + 300}px`)}
+                            {/* {data.topNote = "10%"}
+                            {data.rightNote = "20%"} */}
                             <div className={`header ${item.id}`}
-                                style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}>
+                            // style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
+                            >
                                 <BsPencil
                                     // onMouseEnter={e => closeEditor(item)}
                                     onClick={() => openCloseEditor(item)}
