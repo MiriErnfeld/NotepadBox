@@ -4,7 +4,10 @@ import { createReducer } from "./reducerUtils";
 
 
 const initialState = {
-    noteList: []
+   count :0,
+    topNote: "", 
+    rightNote:" ",
+    noteList: [ { text: "", check: false, flagColor: false, colors: "#FFEB3B", id: initialState.count, top: initialState.topNote, right: initialState.rightNote }]
 };
 
 const noteData = {
@@ -15,8 +18,10 @@ const noteData = {
         state.noteList = [...arr]
         console.log(state.noteList);
     },
-    getAllNotesForUser(state,action) {
+    getAllNotesForUser(state, action) {
         debugger
+        state.noteList.push(action.payload.notes);
+        console.log(state.noteList);
     }
 };
 

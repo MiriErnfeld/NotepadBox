@@ -8,26 +8,23 @@ import './myNote.css'
 import $ from 'jquery'
 
 export default function Notes(props) {
+
+
+    const noteList = useSelector(state => state.Notes.noteList)
+    const data = useSelector(state => state.Notes)
+
     const [check, setCheck] = useState("")
     const [currentItem, setCurrentItem] = useState("")
     const [currentFlag, setCurrentFlag] = useState(0)
-    const { arr,
-        setarr,
+    const { 
+     
         arrnums,
-        count,
-        setCount,
-        setarrnums,
-        topNote,
-        setTopNote,
-        rightNote,
-        setRightNote } = props
+        } = props
 
     const dispatch = useDispatch()
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
 
-    useEffect(() => {
-        console.log(arr);
-    }, [arr])
+
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
         '#BFD41F', '#8580FD', '#6DD41F', '#7bdcb5', '#44D7B6'
@@ -36,21 +33,21 @@ export default function Notes(props) {
     function openCloseEditor(item) {
 
         let i = item.id
-        let newArr = [...arr]
-        for (let index = 0; index < arr.length; index++) { ///find the preview open editor
-            if (arr[index].flagColor == true && index !== i)
-                arr[index].flagColor = false
+        let newArr = [...noteList]
+        for (let index = 0; index < noteList.length; index++) { ///find the preview open editor
+            if (noteList[index].flagColor == true && index !== i)
+                noteList[index].flagColor = false
         }
         newArr[i].flagColor = !item.flagColor
-        setarr([...newArr])
+        noteList=[...newArr]
     }
     function changeColor(c, item, index) {
         setCheck(index)
         setCurrentItem(item)
         let i = item.id
-        let newArr = [...arr]
+        let newArr = [...noteList]
         newArr[i].colors = c
-        setarr(newArr)
+        noteList=[...newArr]
         let currentclass = `note ${i}`
         let currentclassText = `textarea ${i}`
         let note = document.getElementsByClassName(currentclass)[0]
@@ -60,12 +57,12 @@ export default function Notes(props) {
     }
 
     function removeItem(item) {
-        const a = [...arr];
+        const a = [...noteList];
 
         const index = a.indexOf(a.find(x => x.id == item.id))
         if (index !== -1)
             a.splice(index - 1, 1)
-        setarr([...a])
+            noteList=[...a]
 
         // const a = [...arr];
         // const r = item.id - 1
@@ -82,12 +79,12 @@ export default function Notes(props) {
         debugger
         if (newText !== " ") {
             const i = item.id
-            let list = [...arr];
+            let list = [...noteList];
             console.log(list[i].text);
             (list[i].text) = newText;
             console.log(list);
-            setarr([...list]);
-            dispatch(actions.createNote(arr[i].text))
+            noteList=[...list];
+            dispatch(actions.createNote(noteList[i].text))
         }
 
     }
@@ -95,7 +92,7 @@ export default function Notes(props) {
         <>
             {/* <div className="container"> */}
             <div className="all-notes">
-                {arr.map((item, index) =>
+                {noteList.map((item, index) =>
                     <>
                         <div key={index} className={`note ${item.id}`}
                             style={{

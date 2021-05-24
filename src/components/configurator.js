@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import $ from 'jquery'
 import './configurator.css'
+import Notes from './redux/reducers/reducerNote'
 
 import { actions } from '../components/redux/actions/action';
 import folserPlus from '../images/folder-plus.png'
@@ -15,14 +16,20 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import MyNote from './myNote'
 var Color = require('color');
 
+
 export default function Configurator() {
-    const [arr, setarr] = useState([])
+    // const [arr, setarr] = useState([])
     const [countCol, setCountCol] = useState(0)
     const [arrnums, setarrnums] = useState([{}])
-    const [count, setCount] = useState(0)
-    const [topNote, setTopNote] = useState("")
-    const [rightNote, setRightNote] = useState("")
+    // const [count, setCount] = useState(0)
+    // const [topNote, setTopNote] = useState("")
+    // const [rightNote, setRightNote] = useState("")
     const dispatch = useDispatch()
+
+    const noteList = useSelector(state => state.Notes.noteList)
+    const data = useSelector(state => state.Notes)
+
+
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
     }
@@ -49,9 +56,9 @@ export default function Configurator() {
     function insertNote() {
 
         let cnt = count + 1
-        setCount(cnt)
-
-        setarr([...arr, { text: "", check: false, flagColor: false, colors: "#FFEB3B", id: count, top: topNote, right: rightNote }])
+        data.count=cnt;
+        noteList.push({ text: "", check: false, flagColor: false, colors: "#FFEB3B", id: data.count, top:data.topNote, right: data.rightNote })
+        // setarr([...arr, { text: "", check: false, flagColor: false, colors: "#FFEB3B", id: count, top: topNote, right: rightNote }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
 
         console.log(arr);
@@ -100,18 +107,18 @@ export default function Configurator() {
                         </div> : ""}
                     </div>
                     <div class="row">
-                    <MyNote
-                        arr={arr}
-                        setarr={setarr}
-                        arrnums={arrnums}
-                        setarrnums={setarrnums}
-                        count={count}
-                        setCount={setCount}
-                        topNote={topNote}
-                        setTopNote={setTopNote}
-                        rightNote={rightNote}
-                        setRightNote={setRightNote}
-                    ></MyNote>
+                        <MyNote
+                            // arr={noteList}
+                            // setarr={setarr}
+                            arrnums={arrnums}
+                            setarrnums={setarrnums}
+                            // count={data.count}
+                            // setCount={setCount}
+                            // topNote={topNote}
+                            // setTopNote={setTopNote}
+                            // rightNote={rightNote}
+                            // setRightNote={setRightNote}
+                        ></MyNote>
                     </div>
                 </div>
 
