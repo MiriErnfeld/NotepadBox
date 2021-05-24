@@ -16,15 +16,20 @@ export const getData = ({ dispatch, getState }) => next => action => {
             redirect: 'follow'
         };
 
+
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow'
+        };
+
         fetch("https://box.dev.leader.codes/api/miri/note/getNotesByUserName", requestOptions)
             .then(response => response.json())
             .then(result => {
-                debugger;
-                console.log(result)
-                dispatch(actions.getAllNotesForUser(result))
                 debugger
+                dispatch(actions.getAllNotesForUser(result))
             })
             .catch(error => console.log('error', error));
+
     }
     if (action.type == "CREATE_NOTE") {
         debugger
