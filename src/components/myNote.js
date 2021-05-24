@@ -13,11 +13,10 @@ export default function Notes(props) {
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
 
-    const [check, setCheck] = useState("")
-    const [currentItem, setCurrentItem] = useState("")
+    // const [check, setCheck] = useState("")
+    // const [currentItem, setCurrentItem] = useState("")
     const [currentFlag, setCurrentFlag] = useState(0)
     const {
-
         arrnums,
     } = props
 
@@ -45,8 +44,11 @@ export default function Notes(props) {
         dispatch(actions.setFlagColor(item))
     }
     function changeColor(c, item, index) {
-        setCheck(index)
-        setCurrentItem(item)
+        debugger
+        dispatch(actions.setCheck(index))
+        debugger
+        dispatch(actions.setCurrentItem(item))
+        debugger
         let i = item.id
         debugger
         dispatch(actions.changeColor({ c, item }))
@@ -138,8 +140,8 @@ export default function Notes(props) {
                                     <div className="curr" >
                                         {mycolors.map((c, i) => {
                                             return <div key={i} className="divColors " className="colorDiv handPointer"
-                                                style={{ backgroundColor: c }} onClick={e => changeColor(c, item, i)}
-                                            > {check == i && currentItem == item ?
+                                                style={{ backgroundColor: c }} onClick={() => changeColor(c, item, i)}
+                                            > {data.check == i && data.currentItem == item ?
                                                 <BsCheck
                                                     style={{
                                                         fontSize: "13px",

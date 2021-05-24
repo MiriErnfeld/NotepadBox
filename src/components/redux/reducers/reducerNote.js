@@ -4,8 +4,8 @@ import { createReducer } from "./reducerUtils";
 
 
 const initialState = {
-   check:" ", 
-   currentItem:"",
+    check: " ",
+    currentItem: "",
     count: 0,
     topNote: "",
     rightNote: " ",
@@ -39,8 +39,17 @@ const noteData = {
     },
     changeColor(state, action) {
         debugger
-        let x = action.payload.item.id - 1
+        
+        let x = action.payload.item.id
         state.noteList[x].colors = action.payload.c
+    },
+    setCheck(state, action) {
+        debugger
+        state.check = action.payload
+    },
+    setCurrentItem(state, action) {
+        debugger
+        state.currentItem = action.payload
     }
 
 };
