@@ -29,11 +29,16 @@ const noteData = {
     },
     setFlagColor(state, action) {
         debugger
-        let x = action.payload.id
+        let x = action.payload.id - 1
         let currentFlag = state.noteList[x].flagColor
         state.noteList[x].flagColor = !currentFlag
         console.log(state.noteList);
 
+    },
+    changeColor(state, action) {
+        debugger
+        let x = action.payload.item.id - 1
+        state.noteList[x].colors = action.payload.c
     }
 
 };

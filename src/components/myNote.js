@@ -42,15 +42,14 @@ export default function Notes(props) {
         debugger
 
 
-        dispatch(actions.setFlagColor(newArr[i]))
+        dispatch(actions.setFlagColor(item))
     }
     function changeColor(c, item, index) {
         setCheck(index)
         setCurrentItem(item)
         let i = item.id
-        let newArr = [...noteList]
-        newArr[i].colors = c
-        noteList = [...newArr]
+        debugger
+        dispatch(actions.changeColor({ c, item }))
         let currentclass = `note ${i}`
         let currentclassText = `textarea ${i}`
         let note = document.getElementsByClassName(currentclass)[0]
