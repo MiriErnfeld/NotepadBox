@@ -39,7 +39,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
 
         var raw = JSON.stringify({
 
-            "textNote": action.payload,
+            "textNote": action.payload.newText,
             "indexNote": "111111"
 
         });

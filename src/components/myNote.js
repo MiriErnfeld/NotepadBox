@@ -75,7 +75,7 @@ export default function Notes(props) {
             // (list[i].text) = newText;
             // console.log(list);
             // noteList = [...list];
-            dispatch(actions.createNote(i,newText));
+            dispatch(actions.createNote({ i, newText }));
         }
 
     }
