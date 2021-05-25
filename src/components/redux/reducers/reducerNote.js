@@ -16,7 +16,7 @@ const noteData = {
         debugger
         let arr = [...state.noteList];
         let i = action.payload.i
-        arr[i].text = action.payload.newTSext;
+        arr[i].textNote = action.payload.newText;
         state.noteList = [...arr]
         console.log(state.noteList);
     },
