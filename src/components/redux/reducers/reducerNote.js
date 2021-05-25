@@ -16,7 +16,8 @@ const noteData = {
     createNote(state, action) {
         debugger
         let arr = [...state.noteList];
-        arr.push(action.payload);
+        let i = action.payload.i
+        arr[i].text = action.payload.text;
         state.noteList = [...arr]
         console.log(state.noteList);
     },

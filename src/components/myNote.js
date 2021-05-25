@@ -70,12 +70,12 @@ export default function Notes(props) {
         debugger
         if (newText !== " ") {
             const i = item.id
-            let list = [...noteList];
-            console.log(list[i].text);
-            (list[i].text) = newText;
-            console.log(list);
-            noteList = [...list];
-            dispatch(actions.createNote(noteList[i].text))
+            // let list = [...noteList];
+            // console.log(list[i].text);
+            // (list[i].text) = newText;
+            // console.log(list);
+            // noteList = [...list];
+            dispatch(actions.createNote(i,newText));
         }
 
     }
