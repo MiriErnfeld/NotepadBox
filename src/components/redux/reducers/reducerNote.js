@@ -8,8 +8,8 @@ const initialState = {
     currentItem: "",
     count: 0,
     topNote: "",
-    rightNote: " ",
-    noteList: [{ text: "", check: false, flagColor: false, colors: "#FFEB3B", id: -1, top: " ", right: " " }]
+    noteList: [{ textNote: "", check: false, flagColor: false, color: "#FFEB3B",
+    indexNote: -1, top: " ", right: " " }]
 };
 
 const noteData = {
@@ -32,7 +32,7 @@ const noteData = {
     },
     setFlagColor(state, action) {
         debugger
-        let x = action.payload.id - 1
+        let x = action.payload.index - 1
         let currentFlag = state.noteList[x].flagColor
         state.noteList[x].flagColor = !currentFlag
         console.log(state.noteList);
@@ -42,8 +42,8 @@ const noteData = {
         debugger
         let currentColor = action.payload.c
         let x = action.payload.item.id
-        console.log(state.noteList[x].colors);
-        state.noteList[x].colors = currentColor
+        console.log(state.noteList[x].color);
+        state.noteList[x].color = currentColor
     },
     setCheck(state, action) {
         debugger

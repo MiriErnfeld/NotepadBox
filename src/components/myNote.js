@@ -32,7 +32,7 @@ export default function Notes(props) {
     function openCloseEditor(item) {
         debugger
 
-        let i = item.id
+        let i = item.index
         let newArr = [...noteList]
         for (let index = 0; index < noteList.length; index++) { ///find the preview open editor
             if (noteList[index].flagColor == true && index !== i)
@@ -94,7 +94,7 @@ export default function Notes(props) {
                             {data.rightNote = "20%"} */}
                             {/* {alert(item.id)} */}
                             <div className={`header ${item.id}`}
-                            // style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
+                            // style={{ backgroundColor: LightenDarkenColor(item.color, -45) }}
                             >
                                 <BsPencil
                                     // onMouseEnter={e => closeEditor(item)}

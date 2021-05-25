@@ -22,7 +22,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
             redirect: 'follow'
         };
 
-        fetch("https://box.dev.leader.codes/api/miri/note/getNotesByUserName", requestOptions)
+        fetch(`"https://box.dev.leader.codes/api/${userName}/note/getNotesByUserName"`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 debugger
@@ -33,7 +33,8 @@ export const getData = ({ dispatch, getState }) => next => action => {
     }
     if (action.type == "CREATE_NOTE") {
         debugger
-
+        let url = window.location;
+        let userName = (url.pathname.split('/')[1]);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -51,7 +52,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
             redirect: 'follow'
         };
 
-        fetch("https://box.dev.leader.codes/api/miri/note/createNote", requestOptions)
+        fetch(`"https://box.dev.leader.codes/api/${userName}/note/createNote"`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 debugger;
