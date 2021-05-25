@@ -8,15 +8,14 @@ const initialState = {
     currentItem: "",
     count: 0,
     topNote: "",
-    noteList: [{ textNote: "", check: false, flagColor: false, color: "#FFEB3B",
-    indexNote: -1, top: " ", right: " " }]
+    noteList: [{ textNote: "", check: false, flagColor: false, color: "#FFEB3B", indexNote: -1, top: " ", right: " " }]
 };
 
 const noteData = {
     createNote(state, action) {
         debugger
         let arr = [...state.noteList];
-        let i = action.payload.i - 1
+        let i = action.payload.i
         arr[i].text = action.payload.newTSext;
         state.noteList = [...arr]
         console.log(state.noteList);
@@ -41,7 +40,7 @@ const noteData = {
     changeColor(state, action) {
         debugger
         let currentColor = action.payload.c
-        let x = action.payload.item.id
+        let x = action.payload.item.indexNote
         console.log(state.noteList[x].color);
         state.noteList[x].color = currentColor
     },

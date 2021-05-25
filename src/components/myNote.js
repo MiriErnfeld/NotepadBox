@@ -32,7 +32,7 @@ export default function Notes(props) {
     function openCloseEditor(item) {
         debugger
 
-        let i = item.index
+        let i = item.indexNote
         let newArr = [...noteList]
         for (let index = 0; index < noteList.length; index++) { ///find the preview open editor
             if (noteList[index].flagColor == true && index !== i)
@@ -49,7 +49,7 @@ export default function Notes(props) {
         debugger
         dispatch(actions.setCurrentItem(item))
         debugger
-        let i = item.id
+        let i = item.indexNote
         debugger
         dispatch(actions.changeColor({ c, item }))
         debugger
@@ -63,13 +63,13 @@ export default function Notes(props) {
 
     // function changeNotePlace(e, index) {
     //       
-    //     console.log("item.id::::" + index + "top::::::" + e.target.style.top, "right::::" + e.target.style.right);
+    //     console.log("item.indexNote::::" + index + "top::::::" + e.target.style.top, "right::::" + e.target.style.right);
     // }
 
     function saveText(item, newText) {
         debugger
         if (newText !== " ") {
-            const i = item.id
+            const i = item.indexNote
             // let list = [...noteList];
             // console.log(list[i].text);
             // (list[i].text) = newText;
@@ -83,9 +83,9 @@ export default function Notes(props) {
         <>
             {/* <div className="container"> */}
             <div className="all-notes">
-                {noteList.map((item, index) =>
+                {noteList ? noteList.map((item, index) =>
                     <>
-                        <div key={index} className={`note ${item.id}`}
+                        <div key={index} className={`note ${item.indexNote}`}
                             style={{
                                 top: "10%",
                                 left: "20%"
@@ -93,7 +93,7 @@ export default function Notes(props) {
                             {/* {data.topNote = "10%"}
                             {data.rightNote = "20%"} */}
                             {/* {alert(item.id)} */}
-                            <div className={`header ${item.id}`}
+                            <div className={`header ${item.indexNote}`}
                             // style={{ backgroundColor: LightenDarkenColor(item.color, -45) }}
                             >
                                 <BsPencil
@@ -116,7 +116,7 @@ export default function Notes(props) {
                                     marginTop: "-15px"
                                 }} ></BsX>
                                 <textarea
-                                    className={`textarea ${item.id}`}
+                                    className={`textarea ${item.indexNote}`}
                                     id="areaText"
                                     type="string"
                                     onBlur={e => saveText(item, e.target.value)}
@@ -144,7 +144,7 @@ export default function Notes(props) {
                             </div>
                         </div>
                     </>)
-                }
+                    : <p>No Notes</p>}
             </div>
             {/* </div> */}
         </>
