@@ -39,10 +39,14 @@ export const getData = ({ dispatch, getState }) => next => action => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-
+            "indexNote": action.payload.item.indexNote,
+            // "userName": userName,
             "textNote": action.payload.newText,
-            "indexNote": "111111"
-
+            "colors": action.payload.item.colors,
+            "placeX": action.payload.item.placeX,
+            "placeY": action.payload.item.placeY,
+            "flagColor": action.payload.item.flagColor,
+            "check": action.payload.item.check
         });
 
         var requestOptions = {
@@ -57,10 +61,12 @@ export const getData = ({ dispatch, getState }) => next => action => {
             .then(result => {
                 debugger;
                 console.log(result)
+                dispatch(actions.setUser(userName))
+                debugger
             })
             .catch(error => console.log('error', error));
 
-        return next(action)
+
     }
     return next(action)
 }

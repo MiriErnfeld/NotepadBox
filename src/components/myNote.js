@@ -75,7 +75,7 @@ export default function Notes(props) {
             // (list[i].text) = newText;
             // console.log(list);
             // noteList = [...list];
-            dispatch(actions.createNote({ i, newText }));
+            dispatch(actions.createNote({ item, newText }));
         }
 
     }
@@ -87,6 +87,7 @@ export default function Notes(props) {
                     <>
                         <div key={index} className={`note ${item.indexNote}`}
                             style={{
+                                backgroundColor: item.colors,
                                 top: "10%",
                                 left: "20%"
                             }}>
@@ -117,10 +118,12 @@ export default function Notes(props) {
                                 }} ></BsX>
                                 <textarea
                                     className={`textarea ${item.indexNote}`}
+                                    // value={item.textNote}
+                                    style={{ backgroundColor: item.colors }}
                                     id="areaText"
                                     type="string"
                                     onBlur={e => saveText(item, e.target.value)}
-                                ></textarea>
+                                >{item.textNote}</textarea>
                             </div>
                             <div className="curr-container">
                                 {item.flagColor ?

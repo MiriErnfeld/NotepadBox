@@ -58,9 +58,8 @@ export default function Configurator() {
         // let cnt = c + 1
         console.log(Data.topNote, Data.rightNote);
         let arr = [...Notes];
-        arr.push({ textNote: "", check: false, flagColor: false, color: "#FFEB3B", indexNote: c, top: Data.topNote, right: Data.rightNote })
+        arr.push({ indexNote: c, userName: "", createNote: "", textNote: "", colors: "#FFEB3B", placeX: "", placeY: "", check: false, flagColor: false, })
         dispatch(actions.setNoteList(arr));
-        // setarr([...arr, { text: "", check: false, flagColor: false,color: "#FFEB3B", id: count, top: topNote, right: rightNote }])
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
 
         console.log(Notes);

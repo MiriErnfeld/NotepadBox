@@ -8,16 +8,21 @@ const initialState = {
     currentItem: "",
     count: 0,
     topNote: "",
-    noteList: [{ textNote: "", check: false, flagColor: false, color: "#FFEB3B", indexNote: -1, top: " ", right: " " }]
+
+    noteList: [{ indexNote: -1, userName: "", createNote: "", textNote: "", colors: "#FFEB3B", placeX: " ", placeY: " ", check: false, flagColor: false }]
 };
 
 const noteData = {
+    setUser(state, action) {
+        debugger
+        state.noteList.userName = action.payload
+    },
     createNote(state, action) {
         debugger
-        let arr = [...state.noteList];
-        let i = action.payload.i
-        arr[i].textNote = action.payload.newText;
-        state.noteList = [...arr]
+        // let arr = [...state.noteList];
+        let i = action.payload.item.indexNote
+        // arr[i].textNote = action.payload.newText;
+        state.noteList[i].textNote = action.payload.newText;
         console.log(state.noteList);
     },
     getAllNotesForUser(state, action) {
@@ -31,7 +36,7 @@ const noteData = {
     },
     setFlagColor(state, action) {
         debugger
-        let x = action.payload.index - 1
+        let x = action.payload.indexNote
         let currentFlag = state.noteList[x].flagColor
         state.noteList[x].flagColor = !currentFlag
         console.log(state.noteList);
@@ -41,8 +46,8 @@ const noteData = {
         debugger
         let currentColor = action.payload.c
         let x = action.payload.item.indexNote
-        console.log(state.noteList[x].color);
-        state.noteList[x].color = currentColor
+        console.log(state.noteList[x].colors);
+        state.noteList[x].colors = currentColor
     },
     setCheck(state, action) {
         debugger
