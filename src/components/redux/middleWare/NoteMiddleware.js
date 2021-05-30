@@ -26,26 +26,32 @@ export const getData = ({ dispatch, getState }) => next => action => {
             .then(response => response.json())
             .then(result => {
                 debugger
+                console.log(result);
                 dispatch(actions.getAllNotesForUser(result))
             })
             .catch(error => console.log('error', error));
 
     }
-    if (action.type == "CREATE_NOTE") {
+    if (action.type == "CREATE_NOTE1") {
         debugger
         let url = window.location;
-        let userName = (url.pathname.split('/')[1]);
+        let user = (url.pathname.split('/')[1]);
+        //    var myHeaders.append(): {
+        //         'Content-Type': 'application/json',
+        //        ' Authorization':' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmWEpmZzJSNnBrUzdvUFkydEtiNUlQTXdEU2IyIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM1NzQ4OX0.blk6OJdgrkzW1rIiKkmAPTiF7KHp1nA7Ojs9cMf2zrc',
+        //       },
         var myHeaders = new Headers();
+        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIU0tMa3lEQVV1ZmxJeXVQaWdwblowQ09aazMzIiwiZW1haWwiOiJ0ZWhpbGFzaGFwaXJhQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM2NjA5OH0.4j7QUvkXLS-FKqvurFR-VnP4FtfQdyBk9NlSzv_WbXQ");
         myHeaders.append("Content-Type", "application/json");
-
+        debugger
         var raw = JSON.stringify({
             "indexNote": action.payload.item.indexNote,
-            // "userName": userName,
+            "userName": "",
             "textNote": action.payload.newText,
             "colors": action.payload.item.colors,
             "placeX": action.payload.item.placeX,
             "placeY": action.payload.item.placeY,
-            "flagColor": action.payload.item.flagColor,
+            "flagColor": false,
             "check": action.payload.item.check
         });
 
@@ -56,16 +62,50 @@ export const getData = ({ dispatch, getState }) => next => action => {
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/${userName}/note/createNote`, requestOptions)
+        fetch(`https://box.dev.leader.codes/api/${user}/note/createNote`, requestOptions)
             .then(response => response.text())
             .then(result => {
                 debugger;
                 console.log(result)
-                dispatch(actions.setUser(userName))
+                dispatch(actions.setUser(user))
                 debugger
             })
             .catch(error => console.log('error', error));
 
+
+    }
+    if (action.type == "UPDATE_NOTE") {
+        debugger
+        var index = action.payload.item.indexNote
+        var myHeaders = new Headers();
+        // my:
+        // myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmWEpmZzJSNnBrUzdvUFkydEtiNUlQTXdEU2IyIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM1NzQ4OX0.blk6OJdgrkzW1rIiKkmAPTiF7KHp1nA7Ojs9cMf2zrc");
+        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIU0tMa3lEQVV1ZmxJeXVQaWdwblowQ09aazMzIiwiZW1haWwiOiJ0ZWhpbGFzaGFwaXJhQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM2NjA5OH0.4j7QUvkXLS-FKqvurFR-VnP4FtfQdyBk9NlSzv_WbXQ");
+        myHeaders.append("Content-Type", "application/json");
+        debugger
+        var raw = JSON.stringify({
+            "textNote": action.payload.newText,
+            // "placeX": action.payload.placeX,
+            // "placeY": action.payload.placeY,
+            "colors": action.payload.c
+        });
+        debugger
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+        debugger
+        fetch(`https://box.dev.leader.codes/api/tehilaSH/note/${index}/updateNote`, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result)
+                debugger
+                alert(result)
+                dispatch(actions.updateNote(result))
+            })
+            .catch(error => console.log('error', error));
 
     }
     return next(action)

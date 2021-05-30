@@ -9,7 +9,7 @@ const initialState = {
     count: 0,
     topNote: "",
 
-    noteList: [{ indexNote: -1, userName: "", createNote: "", textNote: "", colors: "#FFEB3B", placeX: " ", placeY: " ", check: false, flagColor: false }]
+    noteList: []
 };
 
 const noteData = {
@@ -28,17 +28,35 @@ const noteData = {
     getAllNotesForUser(state, action) {
         debugger
         state.noteList = (action.payload.notes);
+        debugger
+        console.log(state.noteList[0].flagColor);
+        console.log(state.noteList);
+    },
+    updateNote(state, action) {
+        debugger
+        let id = action.payload.item.indexNote
+        let text = action.payload.newText
+        state.noteList[id] = action.payload.item;
+        debugger
+        console.log(state.noteList[0].flagColor);
         console.log(state.noteList);
     },
     setNoteList(state, action) {
         debugger
-        state.noteList = action.payload
+        let c = state.noteList.length;
+        let allNote = [...state.noteList]
+        allNote.push({ indexNote: c, userName: "", createNote: "", textNote: "", colors: "#FFEB3B", placeX: "", placeY: "", check: false, flagColor: false, })
+        state.noteList = [...allNote]
     },
     setFlagColor(state, action) {
         debugger
         let x = action.payload.indexNote
         let currentFlag = state.noteList[x].flagColor
-        state.noteList[x].flagColor = !currentFlag
+        // state.noteList[x].push(flagColor = !currentFlag)
+        let arr = [...state.noteList]
+        arr[x].flagColor = !currentFlag
+        state.noteList = [...arr]
+        console.log(arr);
         console.log(state.noteList);
 
     },
@@ -47,7 +65,10 @@ const noteData = {
         let currentColor = action.payload.c
         let x = action.payload.item.indexNote
         console.log(state.noteList[x].colors);
-        state.noteList[x].colors = currentColor
+        let arr = [...state.noteList]
+
+        arr[x].colors = currentColor
+        state.noteList = [...arr]
     },
     setCheck(state, action) {
         debugger

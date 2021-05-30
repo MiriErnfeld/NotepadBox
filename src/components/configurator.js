@@ -54,16 +54,13 @@ export default function Configurator() {
 
     function insertNote() {
         debugger
-        let c = Notes.length;
+        // let c = Notes.length;
         // let cnt = c + 1
-        console.log(Data.topNote, Data.rightNote);
-        let arr = [...Notes];
-        arr.push({ indexNote: c, userName: "", createNote: "", textNote: "", colors: "#FFEB3B", placeX: "", placeY: "", check: false, flagColor: false, })
-        dispatch(actions.setNoteList(arr));
+        // console.log(Data.topNote, Data.rightNote);
+        // let arr = [...Notes];
+        // arr.push({ indexNote: c, userName: "", createNote: "", textNote: "", colors: "#FFEB3B", placeX: "", placeY: "", check: false, flagColor: false, })
+        dispatch(actions.setNoteList());
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
-
-        console.log(Notes);
-
     }
 
     return (
@@ -72,7 +69,7 @@ export default function Configurator() {
                 <div className="configurator-line row justify-content-start d-flex ">
                     <p className="my-notes col-2">My Notes:</p>
 
-                    {countCol > 0 ? <div class="col-2"> <input type="text" className="inputTitle1" onChange={e => changeStyle(1)} /> </div> : ""}
+                    {/* {countCol > 0 ? <div class="col-2"> <input type="text" className="inputTitle1" onChange={e => changeStyle(1)} /> </div> : ""}
 
                     {countCol > 1 ? <div className="col-2">
                         <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} />    </div> : ""}
@@ -84,18 +81,18 @@ export default function Configurator() {
                         <input type="text" className="inputTitle4" onChange={e => changeStyle(4)} />    </div> : " "}
 
                     {countCol > 4 ? <div className="col-2">
-                        <input type="text" className="inputTitle5" onChange={e => changeStyle(5)} /> </div> : " "}
-                    <p className="p-cloumn col-2" onClick={addCol}>
+                        <input type="text" className="inputTitle5" onChange={e => changeStyle(5)} /> </div> : " "} */}
+                    {/* <p className="p-cloumn col-2" onClick={addCol}>
                         new coloumn
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
-                    </p>
+                    </p> */}
                 </div>
 
 
 
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
+                    {/* <div class="row">
+                        <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "80%" }}>
                         </div>
                         {countCol > 0 ? <div class="col-sm-2   " style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
                         </div> : " "}
@@ -105,7 +102,7 @@ export default function Configurator() {
                         </div> : ""}
                         {countCol > 3 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
                         </div> : ""}
-                    </div>
+                    </div> */}
                     <div class="row">
                         <MyNote
                             // arr={noteList}

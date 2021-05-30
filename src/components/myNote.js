@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { actions } from './redux/actions/action'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
-import { FaGripHorizontal } from "react-icons/fa";
+import { FaGalacticSenate, FaGripHorizontal } from "react-icons/fa";
 import { LightenDarkenColor } from 'lighten-darken-color';
 import './myNote.css'
 import $ from 'jquery'
@@ -15,7 +15,7 @@ export default function Notes(props) {
 
     // const [check, setCheck] = useState("")
     // const [currentItem, setCurrentItem] = useState("")
-    const [currentFlag, setCurrentFlag] = useState(0)
+    const [currentFlag, setCurrentFlag] = useState(FaGalacticSenate)
     const {
         arrnums,
     } = props
@@ -32,15 +32,11 @@ export default function Notes(props) {
     function openCloseEditor(item) {
         debugger
 
-        let i = item.indexNote
-        let newArr = [...noteList]
-        for (let index = 0; index < noteList.length; index++) { ///find the preview open editor
-            if (noteList[index].flagColor == true && index !== i)
-                noteList[index].flagColor = false
-        }
+        // for (let index = 0; index < noteList.length; index++) { ///find the preview open editor
+        //     if (noteList[index].flagColor == true && index !== i)
+        //         noteList[index].flagColor = false
+        // }
         debugger
-
-
         dispatch(actions.setFlagColor(item))
     }
     function changeColor(c, item, index) {
@@ -51,6 +47,7 @@ export default function Notes(props) {
         debugger
         let i = item.indexNote
         debugger
+        dispatch(actions.updateNote({ item, c }));
         dispatch(actions.changeColor({ c, item }))
         debugger
         let currentclass = `note ${i}`
@@ -68,14 +65,21 @@ export default function Notes(props) {
 
     function saveText(item, newText) {
         debugger
-        if (newText !== " ") {
+        if (newText !== "") {
             const i = item.indexNote
+            if (noteList[i].textNote) {
+                dispatch(actions.updateNote({ item, newText }));
+            }
             // let list = [...noteList];
             // console.log(list[i].text);
             // (list[i].text) = newText;
             // console.log(list);
-            // noteList = [...list];
-            dispatch(actions.createNote({ item, newText }));
+            // noteList = [...list]
+            else {
+                dispatch(actions.createNote1({ item, newText }));
+                dispatch(actions.createNote({ item, newText }));
+            }
+
         }
 
     }
@@ -95,7 +99,7 @@ export default function Notes(props) {
                             {data.rightNote = "20%"} */}
                             {/* {alert(item.id)} */}
                             <div className={`header ${item.indexNote}`}
-                            // style={{ backgroundColor: LightenDarkenColor(item.color, -45) }}
+                            // style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
                             >
                                 <BsPencil
                                     // onMouseEnter={e => closeEditor(item)}
@@ -126,12 +130,14 @@ export default function Notes(props) {
                                 >{item.textNote}</textarea>
                             </div>
                             <div className="curr-container">
-                                {item.flagColor ?
+                                {(item.flagColor == true) ?
                                     <div className="curr" >
                                         {mycolors.map((c, i) => {
                                             return <div key={i} className="divColors " className="colorDiv handPointer"
                                                 style={{ backgroundColor: c }} onClick={() => changeColor(c, item, i)}
                                             > {data.check == i && data.currentItem == item ?
+
+
                                                 <BsCheck
                                                     style={{
                                                         fontSize: "13px",
@@ -139,6 +145,7 @@ export default function Notes(props) {
                                                         color: "white",
                                                         fontWeight: "bold"
                                                     }}></BsCheck> : " "}
+
                                             </div>
 
                                         })}
