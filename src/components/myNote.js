@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { actions } from './redux/actions/action'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
@@ -12,7 +12,17 @@ export default function Notes(props) {
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
 
-    const {arrnums,} = props
+    const [Ccheck, setCcheck] = useState()
+    const [CcurrentItem, setCcurrentItem] = useState()
+    const [CFlagColor, setCFlagColor] = useState()
+
+    // useEffect(() => {
+    //     effect
+    //     return () => {
+    //         cleanup
+    //     }
+    // }, [input])
+    const { arrnums, } = props
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
@@ -60,15 +70,15 @@ export default function Notes(props) {
         debugger
         if (newText !== "") {
             const i = item.indexNote
-            if (noteList[i].textNote) {
-                dispatch(actions.updateNote({ item, newText }));
+            let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
+            if (noteList[currentItem].textNote) {
+                dispatch(actions.updateNote({ item, newText }));//to update note in midllaware
             }
             else {
-                dispatch(actions.createNote1({ item, newText }));
-                dispatch(actions.createNote({ item, newText }));
+                dispatch(actions.createNote1({ item, newText }));//to update midlleWare
+                dispatch(actions.createNote({ item, newText }));//to update in store
             }
         }
-
     }
     return (
         <>
@@ -131,7 +141,7 @@ export default function Notes(props) {
                                                                 marginTop: " 2px",
                                                                 color: "white",
                                                                 fontWeight: "bold"
-                                                            }}></BsCheck> : " ":""}
+                                                            }}></BsCheck> : " " : ""}
                                             </div>
 
                                         })}
