@@ -3,6 +3,8 @@ import $ from 'jquery'
 
 
 export const getData = ({ dispatch, getState }) => next => action => {
+    let url = window.location;
+    let userName = (url.pathname.split('/')[1]);
     if (action.type == "INIT_DATA") {
 
         let url = window.location;
@@ -74,6 +76,28 @@ export const getData = ({ dispatch, getState }) => next => action => {
 
 
     }
+    if (action.type == "DELETE_NOTE") {
+        debugger
+        var index = action.payload.indexNote
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIU0tMa3lEQVV1ZmxJeXVQaWdwblowQ09aazMzIiwiZW1haWwiOiJ0ZWhpbGFzaGFwaXJhQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM2NjA5OH0.4j7QUvkXLS-FKqvurFR-VnP4FtfQdyBk9NlSzv_WbXQ");
+        myHeaders.append("Content-Type", "application/json");
+
+        var requestOptions = {
+            method: 'DELETE',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/deleteNote`, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result)
+                debugger
+                dispatch(actions.DeleteNoteAction(result))
+            })
+            .catch(error => console.log('error', error));
+    }
     if (action.type == "UPDATE_NOTE") {
         debugger
         var index = action.payload.item.indexNote
@@ -102,8 +126,8 @@ export const getData = ({ dispatch, getState }) => next => action => {
             .then(result => {
                 console.log(result)
                 debugger
-                alert(result)
-                dispatch(actions.updateNote(result))
+                dispatch(actions.updateNoteAction(result))
+                debugger
             })
             .catch(error => console.log('error', error));
 
