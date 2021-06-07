@@ -47,7 +47,7 @@ const noteData = {
             arr[updateIndex].textNote = action.payload.user.textNote
         } state.noteList = [...arr]
     },
-    DeleteNoteAction(state, action) { // from midlleWare delete note in state.noteList
+    deleteNoteAction(state, action) { // from midlleWare delete note in state.noteList
 
         let note = action.payload.note_to_delete
         let index = note.indexNote

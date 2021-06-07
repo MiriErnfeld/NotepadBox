@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from 'react'
+import Rotation from 'react-rotation'
 import { actions } from './redux/actions/action'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
@@ -25,7 +26,7 @@ export default function Notes(props) {
 
 
     const { arrnums, } = props
-    const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
+    const nums = [300, 7, 0, 9, 60, 4, 40, 14, 6, 70, 18, 29, 10, 2,]
     const mycolors = [
         '#F84A20', '#F13B7F', '#F88C20', '#FD808B', '#F8DB3D', '#B620E0',
         '#BFD41F', '#8580FD', '#6DD41F', '#7bdcb5', '#44D7B6'
@@ -53,6 +54,13 @@ export default function Notes(props) {
         }
 
         dispatch(actions.setFlagColor(item))
+    }
+    function rotateItem(item) {
+
+        let rotate = `note ${item.indexNote}`
+        let note = document.getElementsByClassName(rotate)[0]
+
+        note.style.transform = "rotate(90deg)";
     }
     function deleteItem(item) {
         dispatch(actions.deleteNote(item))
@@ -96,6 +104,7 @@ export default function Notes(props) {
         if (newText !== "") {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
+            debugger
             if (noteList[currentItem].textNote) {
                 dispatch(actions.updateNote({ item, newText }));//to update note in midllaware
             }
@@ -110,69 +119,71 @@ export default function Notes(props) {
             <div className="all-notes">
                 {noteList ? noteList.map((item, index) =>
                     <>
-                    <Draggable>
-                        <div type="draggable"
-                        key={index} className={`note ${item.indexNote}`}
-                            style={{
-                                backgroundColor: item.colors,
-                                top: "10%",
-                                left: "20%"
-                            }}>
-                            {/* {data.topNote = "10%"}
+                        <Draggable>
+                            <div type="draggable"
+                                key={index} className={`note ${item.indexNote}`}
+                                style={{
+                                    backgroundColor: item.colors,
+                                    top: nums[item.indexNote] + 'vh',
+                                    left: item.indexNote * 9 + 'vh'
+                                }}>
+                                {/* {data.topNote = "10%"}
                             {data.rightNote = "20%"} */}
-                            {/* {alert(item.id)} */}
-                            <div className={`header ${item.indexNote}`}
-                                style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
-                            >
-                                <BsPencil
-                                    // onMouseEnter={e => closeEditor(item)}
-                                    onClick={() => openCloseEditor(item)}
-                                    style={{
+                                <div className={`header ${item.indexNote}`}
+                                    style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
+                                >
+                                    <BsPencil
+                                        // onMouseEnter={e => closeEditor(item)}
+                                        onClick={() => openCloseEditor(item)}
+                                        style={{
+                                            color: "#0A102E",
+                                            marginLeft: "121px",
+                                            marginTop: " 8px",
+                                            paddingBottom: "3px",
+                                            cursor: "auto",
+                                        }}></BsPencil>
+                                    <BsPencil
+                                        // onMouseEnter={e => closeEditor(item)}
+                                        onClick={() => rotateItem(item)}></BsPencil>
+                                    <FaGripHorizontal style={{ marginTop: "-16px", fontWeight: "none", color: "#0A102E" }}></FaGripHorizontal>
+                                    <BsX style={{
                                         color: "#0A102E",
-                                        marginLeft: "121px",
-                                        marginTop: " 8px",
+                                        hoverBackground: "black",
+                                        marginRight: "123px",
                                         paddingBottom: "3px",
                                         cursor: "auto",
-                                    }}></BsPencil>
-                                <FaGripHorizontal style={{ marginTop: "-16px", fontWeight: "none", color: "#0A102E" }}></FaGripHorizontal>
-                                <BsX style={{
-                                    color: "#0A102E",
-                                    hoverBackground: "black",
-                                    marginRight: "123px",
-                                    paddingBottom: "3px",
-                                    cursor: "auto",
-                                    marginTop: "-15px"
-                                }} onClick={() => deleteItem(item)}></BsX>
-                                <textarea
-                                    className={`textarea ${item.indexNote}`}
-                                    // value={item.textNote}
-                                    style={{ backgroundColor: item.colors }}
-                                    id="areaText"
-                                    type="string"
-                                    onBlur={e => saveText(item, e.target.value)}
-                                >{item.textNote}</textarea>
+                                        marginTop: "-15px"
+                                    }} onClick={() => deleteItem(item)}></BsX>
+                                    <textarea
+                                        className={`textarea ${item.indexNote}`}
+                                        // value={item.textNote}
+                                        style={{ backgroundColor: item.colors }}
+                                        id="areaText"
+                                        type="string"
+                                        onBlur={e => saveText(item, e.target.value)}
+                                    >{item.textNote}</textarea>
+                                </div>
+                                <div className="curr-container">
+                                    {(item.flagColor === true) ?
+                                        <div className="curr" >
+                                            {mycolors.map((c, i) => {
+                                                return <div key={i} className="divColors " className="colorDiv handPointer"
+                                                    style={{ backgroundColor: c }} onClick={() => changeColor(c, item, i)}
+                                                >
+                                                    {yes ?
+                                                        <BsCheck
+                                                            style={{
+                                                                fontSize: "13px",
+                                                                marginTop: " 2px",
+                                                                color: "white",
+                                                                fontWeight: "bold"
+                                                            }}></BsCheck> : ""}
+                                                </div>
+                                            })}
+                                        </div>
+                                        : ""}
+                                </div>
                             </div>
-                            <div className="curr-container">
-                                {(item.flagColor === true) ?
-                                    <div className="curr" >
-                                        {mycolors.map((c, i) => {
-                                            return <div key={i} className="divColors " className="colorDiv handPointer"
-                                                style={{ backgroundColor: c }} onClick={() => changeColor(c, item, i)}
-                                            >
-                                                {yes ?
-                                                    <BsCheck
-                                                        style={{
-                                                            fontSize: "13px",
-                                                            marginTop: " 2px",
-                                                            color: "white",
-                                                            fontWeight: "bold"
-                                                        }}></BsCheck> : ""}
-                                            </div>
-                                        })}
-                                    </div>
-                                    : ""}
-                            </div>
-                        </div>
                         </Draggable>
                     </>)
                     : <p>No Notes</p>}
