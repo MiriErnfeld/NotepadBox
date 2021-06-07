@@ -18,17 +18,19 @@ var Color = require('color');
 
 export default function Configurator() {
 
-   const dispatch = useDispatch()
-       {/* //not use::::::: */}
+    const dispatch = useDispatch()
+    {/* //not use::::::: */ }
     // const [countCol, setCountCol] = useState(0)
     const [arrnums, setarrnums] = useState([{}])
- 
+    const [CcurrentItem, setCcurrentItem] = useState()
+
+
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
     }
-       {/* //not use::::::: */}
+    {/* //not use::::::: */ }
     // function addCol() {
-    //     debugger
+    //      
     //     if (countCol == 4) {
 
     //         $('.p-cloumn').css("display", "none")
@@ -40,16 +42,18 @@ export default function Configurator() {
     //     }
 
     // }
-       {/* //not use::::::: */}
+    {/* //not use::::::: */ }
     // function changeStyle(index) {
-    //     debugger
+    //      
     //     $('.inputTitle' + index).css("backgroundColor", "#F1F1F3");
     //     $('.inputTitle' + index).css("font-weight", "bold");
     //     $('.inputTitle' + index).css("text-align", "center");
     // }
     function insertNote() {
-        debugger
+
         dispatch(actions.setNoteList());
+
+
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
     }
     return (
@@ -80,7 +84,7 @@ export default function Configurator() {
                 </div>
                 <div class="container">
 
-                       {/* //not use::::::: */}
+                    {/* //not use::::::: */}
 
                     {/* <div class="row">
                         <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "80%" }}>

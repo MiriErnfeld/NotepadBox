@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react'
 import { actions } from './redux/actions/action'
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,17 +13,16 @@ export default function Notes(props) {
 
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
+    const reduxCheck = useSelector(state => state.reducerNote.check)
+    const reduxCurrentItem = useSelector(state => state.reducerNote.currentItem)
 
-    const [Ccheck, setCcheck] = useState()
     const [CcurrentItem, setCcurrentItem] = useState()
+    const [Ccheck, setCcheck] = useState()
+    const [yes, setYes] = useState()
     const [CFlagColor, setCFlagColor] = useState()
+    const [Cindex, setCindex] = useState()
 
-    // useEffect(() => {
-    //     effect
-    //     return () => {
-    //         cleanup
-    //     }
-    // }, [input])
+
     const { arrnums, } = props
     const nums = [300, 7, 0, 9, 7, 4, 2, 14, 6, 23, 18, 29, 10, 2,]
     const mycolors = [
@@ -31,34 +32,57 @@ export default function Notes(props) {
     ];
     const dispatch = useDispatch()
 
+    // useEffect(() => {
+    //     alert("dataCheck   !!!" + (JSON.stringify(reduxCheck)) + "in state   ::" + (JSON.stringify(Ccheck)))
+
+    //     setCcheck(reduxCheck)
+    // }, [reduxCheck])
+    // useEffect(() => {
+    //     alert("dataCurrentItem   !!!" + reduxCurrentItem + "in state   ::" + CcurrentItem)
+
+    //     setCcurrentItem(reduxCurrentItem)
+    // }, [reduxCurrentItem])
+
     function openCloseEditor(item) {
-        debugger
+
+        // --search item with editor open 
         for (let index = 0; index < noteList.length; index++) { ///find the preview open editor
             if (noteList[index].flagColor == true && index !== item.indexNote)
                 dispatch(actions.closePreview(index))
         }
-        debugger
+
         dispatch(actions.setFlagColor(item))
     }
     function deleteItem(item) {
         dispatch(actions.deleteNote(item))
     }
     function changeColor(c, item, index) {
-        debugger
+
+        if (Ccheck == index && CcurrentItem == item)
+            setYes(1)
+
         dispatch(actions.setCheck(index)) // index from the checked color
-        debugger
+
+        console.log(Ccheck);
+
         dispatch(actions.setCurrentItem(item))
-        debugger
-        dispatch(actions.updateNote({ item, c }));
+        // if (reduxCheck == index && reduxCurrentItem == item) {
+        //     setYes(1)
+
+        // }
+
+        dispatch(actions.updateNote({ item, c }));//a function use to update color & text ib midlleWare
         dispatch(actions.changeColorAction({ c, item }))
-        debugger
+
         let i = item.indexNote
-        let currentclass = `note ${i}`
-        let currentclassText = `textarea ${i}`
+        let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
+        let currentclass = `note ${currentItem}`
+        let currentclassText = `textarea ${currentItem}`
         let note = document.getElementsByClassName(currentclass)[0]
         let text = document.getElementsByClassName(currentclassText)[0]
         note.style.backgroundColor = c
         text.style.backgroundColor = c
+        alert(Ccheck + CcurrentItem);
     }
 
     // function changeNotePlace(e, index) {
@@ -67,7 +91,7 @@ export default function Notes(props) {
     // }
 
     function saveText(item, newText) {
-        debugger
+
         if (newText !== "") {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
@@ -75,14 +99,13 @@ export default function Notes(props) {
                 dispatch(actions.updateNote({ item, newText }));//to update note in midllaware
             }
             else {
-                dispatch(actions.createNote1({ item, newText }));//to update midlleWare
-                dispatch(actions.createNote({ item, newText }));//to update in store
+                dispatch(actions.createNote1({ item, newText }));//to update in midlleWare when there is the first change
+                dispatch(actions.createNote({ item, newText }));//to update in redux
             }
         }
     }
     return (
         <>
-            {/* <div className="container"> */}
             <div className="all-notes">
                 {noteList ? noteList.map((item, index) =>
                     <>
@@ -116,7 +139,7 @@ export default function Notes(props) {
                                     paddingBottom: "3px",
                                     cursor: "auto",
                                     marginTop: "-15px"
-                                }} onClick={() => deleteItem(item)} ></BsX>
+                                }} onClick={() => deleteItem(item)}></BsX>
                                 <textarea
                                     className={`textarea ${item.indexNote}`}
                                     // value={item.textNote}
@@ -127,23 +150,21 @@ export default function Notes(props) {
                                 >{item.textNote}</textarea>
                             </div>
                             <div className="curr-container">
-                                {(item.flagColor == true) ?
+                                {(item.flagColor === true) ?
                                     <div className="curr" >
                                         {mycolors.map((c, i) => {
                                             return <div key={i} className="divColors " className="colorDiv handPointer"
                                                 style={{ backgroundColor: c }} onClick={() => changeColor(c, item, i)}
                                             >
-                                                {data.check == i ?
-                                                    data.currentItem == item ?
-                                                        <BsCheck
-                                                            style={{
-                                                                fontSize: "13px",
-                                                                marginTop: " 2px",
-                                                                color: "white",
-                                                                fontWeight: "bold"
-                                                            }}></BsCheck> : " " : ""}
+                                                {yes ?
+                                                    <BsCheck
+                                                        style={{
+                                                            fontSize: "13px",
+                                                            marginTop: " 2px",
+                                                            color: "white",
+                                                            fontWeight: "bold"
+                                                        }}></BsCheck> : ""}
                                             </div>
-
                                         })}
                                     </div>
                                     : ""}
@@ -152,7 +173,6 @@ export default function Notes(props) {
                     </>)
                     : <p>No Notes</p>}
             </div>
-            {/* </div> */}
         </>
     )
 }

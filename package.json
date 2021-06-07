@@ -30,6 +30,7 @@
     "react-scripts": "4.0.3",
     "react-stickies": "0.0.16",
     "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
