@@ -22,6 +22,8 @@ export default function Notes(props) {
     const [yes, setYes] = useState()
     const [CFlagColor, setCFlagColor] = useState()
     const [Cindex, setCindex] = useState()
+    // const [Position_div_y, setPosition_div_y] = useState()
+    // const [Position_div_x, setPosition_div_x] = useState()
 
 
     const { arrnums, } = props
@@ -105,25 +107,45 @@ export default function Notes(props) {
             }
         }
     }
+    function setPlace(x,y,item){
+      debugger
+      dispatch(actions.setPlaceNote({x,y}))
+    //   noteList.placeX=x
+    //   noteList.placeX=y
+
+    // setPosition_div_x(document.getElementById(item.indexNote).getBoundingClientRect().x);
+    // setPosition_div_y(document.getElementById(item.indexNote).getBoundingClientRect().y);
+
+    }
     return (
         <>
             <div className="all-notes">
                 {noteList ? noteList.map((item, index) =>
+                    
                     <>
-                    <Draggable>
-                        <div type="draggable"
+                <Draggable>
+                        <div  draggable="true"
                         key={index} className={`note ${item.indexNote}`}
                             style={{
                                 backgroundColor: item.colors,
                                 top: "10%",
                                 left: "20%"
-                            }}>
+                                   }}
+                            // onClick={() => openCloseEditor(item)}
+                            // onDragLeave ={(e) => setPlace(item,index)}
+                            
+                            >
                             {/* {data.topNote = "10%"}
                             {data.rightNote = "20%"} */}
                             {/* {alert(item.id)} */}
-                            <div className={`header ${item.indexNote}`}
+                            <div draggable="true" className={`header ${item.indexNote}`}
                                 style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
+                                //  onDrop={(e)=>setPlace(e.clientX, e.clientY)}
+                            //    onClick={(e)=>setPlace(e.clientX, e.clientY)}
+                               onDragEnd={(e)=>setPlace(e.clientX, e.clientY,item)}
+                            //    onDragEnd={(e)=>setPlace(e.clientX, e.clientY)}
                             >
+                                {/* onDrop={(e)=>setPlace(e.clientX, e.clientY)} */}
                                 <BsPencil
                                     // onMouseEnter={e => closeEditor(item)}
                                     onClick={() => openCloseEditor(item)}
@@ -172,9 +194,10 @@ export default function Notes(props) {
                                     </div>
                                     : ""}
                             </div>
-                        </div>
-                        </Draggable>
-                    </>)
+                        </div></Draggable>
+                       
+                    </> )
+                  
                     : <p>No Notes</p>}
             </div>
         </>

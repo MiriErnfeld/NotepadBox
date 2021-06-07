@@ -94,6 +94,14 @@ const noteData = {
 
         state.currentItem = action.payload
     },
+    setPlaceNote(state, action){
+      let x = action.payload.item.indexNote
+      let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
+    state.noteList[correctIndex].placeX = action.payload.x
+    state.noteList[correctIndex].placeY = action.payload.y
+
+
+    }
 };
 
 export default produce((state, action) => createReducer(state, action, noteData), initialState);
