@@ -8,6 +8,7 @@ import { FaGalacticSenate, FaGripHorizontal } from "react-icons/fa";
 import { LightenDarkenColor } from 'lighten-darken-color';
 import './myNote.css'
 import $ from 'jquery'
+import Draggable from 'react-draggable';
 
 export default function Notes(props) {
 
@@ -109,7 +110,9 @@ export default function Notes(props) {
             <div className="all-notes">
                 {noteList ? noteList.map((item, index) =>
                     <>
-                        <div key={index} className={`note ${item.indexNote}`}
+                    <Draggable>
+                        <div type="draggable"
+                        key={index} className={`note ${item.indexNote}`}
                             style={{
                                 backgroundColor: item.colors,
                                 top: "10%",
@@ -170,6 +173,7 @@ export default function Notes(props) {
                                     : ""}
                             </div>
                         </div>
+                        </Draggable>
                     </>)
                     : <p>No Notes</p>}
             </div>
