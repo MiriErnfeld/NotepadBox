@@ -52,8 +52,6 @@ export default function Configurator() {
     function insertNote() {
 
         dispatch(actions.setNoteList());
-
-
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
     }
     return (

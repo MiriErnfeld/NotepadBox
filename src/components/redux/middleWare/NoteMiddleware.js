@@ -16,13 +16,6 @@ export const getData = ({ dispatch, getState }) => next => action => {
             headers: myHeaders,
             redirect: 'follow'
         };
-
-
-        // var requestOptions = {
-        //     method: 'GET',
-        //     redirect: 'follow'
-        // };
-
         fetch(`https://box.dev.leader.codes/api/${userName}/note/getNotesByUserName`, requestOptions)
             .then(response => response.json())
             .then(result => {
@@ -93,12 +86,12 @@ export const getData = ({ dispatch, getState }) => next => action => {
             .then(result => {
                 console.log(result)
 
-                dispatch(actions.deleteNoteAction(result))
+                dispatch(actions.deleteNoteAction(result))//reducer
             })
             .catch(error => console.log('error', error));
     }
     if (action.type == "UPDATE_NOTE") {
-
+        debugger
         var index = action.payload.item.indexNote
         var myHeaders = new Headers();
         // my:
@@ -124,9 +117,9 @@ export const getData = ({ dispatch, getState }) => next => action => {
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-
+                debugger
                 dispatch(actions.updateNoteAction(result))
-
+                debugger
             })
             .catch(error => console.log('error', error));
 

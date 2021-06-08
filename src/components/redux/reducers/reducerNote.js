@@ -36,36 +36,55 @@ const noteData = {
         console.log(state.noteList);
     },
     updateNoteAction(state, action) { // from midlleWare 
-
-        let id = action.payload.user.userName
-        const updateIndex = state.noteList.indexOf(state.noteList.find(x => x.userName == id))
+        debugger
+        let id = action.payload.user.indexNote
+        let updateIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === id))
+        // const updateIndex = state.noteList.indexOf(state.noteList.find(x => x.userName == id))
 
         let arr = [...state.noteList]
         if (updateIndex !== -1) {
-            if (action.payload.c)
-                arr[updateIndex].colors = action.payload.user.colors
+            // if (action.payload.c) {
+            //     arr[updateIndex].colors = action.payload.user.colors
+            // }
             arr[updateIndex].textNote = action.payload.user.textNote
+            arr[updateIndex].colors = action.payload.user.colors
+
+
         } state.noteList = [...arr]
     },
     deleteNoteAction(state, action) { // from midlleWare delete note in state.noteList
-
+        debugger
         let note = action.payload.note_to_delete
+        // state.noteList.
+        // console.log(state.noteList);
         let index = note.indexNote
+        let arr = [...state.noteList]
+
         const deleteItem = state.noteList.indexOf(state.noteList.find(x => x.indexNote == index))
         if (deleteItem !== -1)
-            state.noteList.splice(index, 1)
+            debugger
+        {
+            arr.splice(deleteItem, 1)
+        }
+        state.noteList = [...arr]
         console.log(state.noteList);
     },
     setNoteList(state, action) { //from component configurator.js onClick button insertNote
-
+        debugger
         let c = state.noteList.length;
+        let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === c))
+        if (correctIndex !== -1) {
+            debugger
+            c = state.noteList.length + 1
+        }
         let allNote = [...state.noteList]
         allNote.push({ _id: "", indexNote: c, userName: "", createNote: "", textNote: "", placeX: "", placeY: "", colors: "#FFEB3B", check: "", flagColor: false, })
         state.noteList = [...allNote]
+
     },
 
     setFlagColor(state, action) {  //set flagColor only to true from component myNote.js
-
+        debugger
         let i = action.payload.indexNote
         let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === i))
         let currentFlag = state.noteList[correctIndex].flagColor
@@ -78,7 +97,7 @@ const noteData = {
         state.noteList[index].flagColor = false
     },
     changeColorAction(state, action) { // set color in state.noteList from component myNote.js
-
+        debugger
         let currentColor = action.payload.c
         let x = action.payload.item.indexNote
         let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
@@ -94,6 +113,14 @@ const noteData = {
 
         state.currentItem = action.payload
     },
+    setPlaceNote(state, action) {
+        let x = action.payload.item.indexNote
+        let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
+        state.noteList[correctIndex].placeX = action.payload.x
+        state.noteList[correctIndex].placeY = action.payload.y
+
+
+    }
 };
 
 export default produce((state, action) => createReducer(state, action, noteData), initialState);

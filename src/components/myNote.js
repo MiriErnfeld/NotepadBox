@@ -55,18 +55,18 @@ export default function Notes(props) {
 
         dispatch(actions.setFlagColor(item))
     }
-    function rotateItem(item) {
+    // function rotateItem(item) {
 
-        let rotate = `note ${item.indexNote}`
-        let note = document.getElementsByClassName(rotate)[0]
+    //     let rotate = `note ${item.indexNote}`
+    //     let note = document.getElementsByClassName(rotate)[0]
 
-        note.style.transform = "rotate(90deg)";
-    }
+    //     note.style.transform = "rotate(90deg)";
+    // }
     function deleteItem(item) {
-        dispatch(actions.deleteNote(item))
+        dispatch(actions.deleteNote(item))//delete note in midlleWare
     }
     function changeColor(c, item, index) {
-
+        debugger
         if (Ccheck == index && CcurrentItem == item)
             setYes(1)
 
@@ -75,23 +75,25 @@ export default function Notes(props) {
         console.log(Ccheck);
 
         dispatch(actions.setCurrentItem(item))
+        setCcurrentItem(item)
         // if (reduxCheck == index && reduxCurrentItem == item) {
         //     setYes(1)
 
         // }
-
+        debugger
         dispatch(actions.updateNote({ item, c }));//a function use to update color & text ib midlleWare
+        debugger
         dispatch(actions.changeColorAction({ c, item }))
 
-        let i = item.indexNote
-        let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
-        let currentclass = `note ${currentItem}`
-        let currentclassText = `textarea ${currentItem}`
+        let i = item.indexNote//2//1
+        let correctIndex = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
+        let currentclass = `note ${i}`
+        let currentclassText = `textarea ${i}`
         let note = document.getElementsByClassName(currentclass)[0]
         let text = document.getElementsByClassName(currentclassText)[0]
         note.style.backgroundColor = c
         text.style.backgroundColor = c
-        alert(Ccheck + CcurrentItem);
+
     }
 
     // function changeNotePlace(e, index) {
@@ -142,10 +144,10 @@ export default function Notes(props) {
                                             paddingBottom: "3px",
                                             cursor: "auto",
                                         }}></BsPencil>
-                                    <BsPencil
-                                        // onMouseEnter={e => closeEditor(item)}
-                                        onClick={() => rotateItem(item)}></BsPencil>
+                                    {/* <BsPencil
+                                        onClick={() => rotateItem(item)}></BsPencil> */}
                                     <FaGripHorizontal style={{ marginTop: "-16px", fontWeight: "none", color: "#0A102E" }}></FaGripHorizontal>
+                                    {item.indexNote}
                                     <BsX style={{
                                         color: "#0A102E",
                                         hoverBackground: "black",
