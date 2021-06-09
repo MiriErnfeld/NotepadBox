@@ -27,7 +27,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
 
     }
     if (action.type == "CREATE_NOTE1") {
-
+        debugger
         let url = window.location;
         let user = (url.pathname.split('/')[1]);
         //    var myHeaders.append(): {
@@ -101,11 +101,11 @@ export const getData = ({ dispatch, getState }) => next => action => {
 
         var raw = JSON.stringify({
             "textNote": action.payload.newText,
-            // "placeX": action.payload.placeX,
-            // "placeY": action.payload.placeY,
+            "placeX": action.payload.x,
+            "placeY": action.payload.y,
             "colors": action.payload.c
         });
-
+        debugger
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,

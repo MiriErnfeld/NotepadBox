@@ -39,8 +39,6 @@ const noteData = {
         debugger
         let id = action.payload.user.indexNote
         let updateIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === id))
-        // const updateIndex = state.noteList.indexOf(state.noteList.find(x => x.userName == id))
-
         let arr = [...state.noteList]
         if (updateIndex !== -1) {
             // if (action.payload.c) {
@@ -78,11 +76,19 @@ const noteData = {
             c = state.noteList.length + 1
         }
         let allNote = [...state.noteList]
-        allNote.push({ _id: "", indexNote: c, userName: "", createNote: "", textNote: "", placeX: "", placeY: "", colors: "#FFEB3B", check: "", flagColor: false, })
+        let top = Math.floor(Math.random() * 52) + 'vh'
+        let left = Math.floor(Math.random() * 59) + '%'
+        allNote.push({ _id: "", indexNote: c, userName: "", createNote: "", textNote: "", placeX: top, placeY: left, colors: "#FFEB3B", check: "", flagColor: false, })
         state.noteList = [...allNote]
 
     },
-
+    placeNote(state, action) {
+        debugger
+        let x = action.payload.item.indexNote
+        let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
+        state.noteList[correctIndex].placeX = action.payload.x
+        state.noteList[correctIndex].placeY = action.payload.y
+    },
     setFlagColor(state, action) {  //set flagColor only to true from component myNote.js
         debugger
         let i = action.payload.indexNote
