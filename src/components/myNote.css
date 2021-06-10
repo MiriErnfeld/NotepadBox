@@ -1,6 +1,10 @@
 
 .textarea{
   font-size: 18px;
+  /* overflow: hidden;
+
+  resize: both; */
+
   padding: 5px;
   font-family: 'Shadows Into Light', 'Tangerine', Arial;
   background-color: yellow;
@@ -8,7 +12,8 @@
     margin: 0px;
     width: 150px;
     border: none;
-    resize: none ;
+    /* resize: none ; */
+    /* scroll-behavior: none; */
 }
 textarea.textarea:focus {
   outline-width: 0;
@@ -23,6 +28,7 @@ textarea.textarea:focus {
   left: 0;
 }
 .note{
+  /* overflow: hidden; */
 height: 150px;
 transform: rotate("");
 width: 150px;
@@ -30,6 +36,7 @@ background-color: yellow;
 margin: 30px 0;
 position: absolute;
 cursor: -webkit-grab;
+
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%); 
 /* position: relative; */
 }
@@ -60,24 +67,18 @@ box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%);
     margin-top: " 12px";
   }
   .create-note{
-    z-index:9999; 
+    position: relative;
     padding-top: 13px;
     width: 94%;
-  cursor: pointer;
-
-    margin-bottom: 18px;
-    margin-top: 17px;
-    text-align: center;
+    cursor: pointer;
+    top: -35%;
+    display: block;
     font: normal normal bold 18px/24px Roboto;
-    letter-spacing: 0.32px;
     color: #FFFFFF;
-    text-transform: capitalize;
-
     height: 9%;
     background: var(--unnamed-color-3598f4) 0% 0% no-repeat padding-box;
     background: #3598F4 0% 0% no-repeat padding-box;
     border-radius: 4px;
-    opacity: 1;
 }
   .colorDiv{
   width: 16px;

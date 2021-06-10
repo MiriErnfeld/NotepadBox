@@ -67,6 +67,20 @@ const noteData = {
         state.noteList = [...arr]
         console.log(state.noteList);
     },
+    deleteOnlyFromClient(state, action) {
+        debugger
+        let note = action.payload
+        let index = action.payload.indexNote
+        let arr = [...state.noteList]
+        const deleteItem = state.noteList.indexOf(state.noteList.find(x => x.indexNote == index))
+        if (deleteItem !== -1)
+            debugger
+        {
+            arr.splice(deleteItem, 1)
+        }
+        state.noteList = [...arr]
+        console.log(state.noteList);
+    },
     setNoteList(state, action) { //from component configurator.js onClick button insertNote
         debugger
         let c = state.noteList.length;

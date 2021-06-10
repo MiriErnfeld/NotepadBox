@@ -34,23 +34,34 @@ height: 29px;
     background-color:red
 }
 .dragfolder{
-    width: 231px;
-    margin-right: 10px;
+    display:block;
+    align-items:center;
+    justify-content:center;
+    /* width: 231px; */
+    /* margin-right: 10px;
     margin-bottom: 30px;
     top: 184px;
-    margin-left: 12px;
-height: 100px;
+    margin-left: 12px; */
+height: 15%;
 border: 2px dashed #707070;
 opacity: 1;
+position: relative;
+top:-32%;
+width:99%;
 }
 .container-configurator{
+    /* display: block; */
     justify-content: center;
     display: flex;
+    flex-direction: column;
+    /* display: flex; */
     position: absolute;
     background-color:white;
     border-radius: 10px;
     top: 0px;
     right: 15px;
+    align-items: center;
+
     bottom:0;
     height:97%;
     width: 18%;

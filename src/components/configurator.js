@@ -105,18 +105,19 @@ export default function Configurator() {
                 </div>
 
             </div >
-            <div className="container-configurator">
-                <div className="create-note" onClick={insertNote}>Create Note +</div>
-                {/* -----------------TO NEXT VERSION----------- */}
-                {/* <div className="dragfolder"> */}
-                {/* <img src="folserPlus" at="img"></img> */}
-                {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus>
-                    <p className="folder">drag notes to create folder</p>
-                </div> */}
-                <div className="folder">
-                    {/* <FiFolder></FiFolder>
-                    folder name */}
+            {/* <div className="container container-configurator"> */}
+            <div className="container container-configurator">
+                <div className="row create-note" onClick={insertNote}>Create Note +</div>
+                <div className="row dragfolder">
+                    {/* <div className="row "> */}
+                    <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
+                    {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
+                    <p className="folder" style={{ fontSize: '15' }}>drag notes to create folder</p>
                 </div>
+                {/* <div className="row ">
+                    <FiFolder></FiFolder>
+                    folder name
+                </div> */}
             </div>
         </>
     )

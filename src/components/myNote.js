@@ -2,11 +2,16 @@
 
 import React, { useState, useEffect } from 'react'
 import Rotation from 'react-rotation'
-import { actions } from './redux/actions/action'
+import { ResizeProvider, ResizeConsumer } from "react-resize-context";
+
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
 import { FaGalacticSenate, FaGripHorizontal } from "react-icons/fa";
+import icon from '../images/icon.png'
 import { LightenDarkenColor } from 'lighten-darken-color';
+import { actions } from './redux/actions/action'
+
 import './myNote.css'
 import $ from 'jquery'
 import Draggable from 'react-draggable';
@@ -125,15 +130,12 @@ export default function Notes(props) {
             <div className="all-notes">
 
                 {noteList ? noteList.map((item) => {
-                    // const top = nums[item.indexNote] + 'vh'
-                    // const left = item.indexNote * 9 + 'vh'
-                    // if (top > '80vh')
-                    //     top = "20vh"
-                    // if (left > '80vh')
-                    //     left = '2vh'
                     debugger;
                     return <Draggable>
-                        <div draggable="true"
+                        {/* <ResizeProvider>
+                            <ResizeConsumer> */}
+
+                        <div
                             key={item.indexNote} className={`note ${item.indexNote}`}
                             style={{
                                 backgroundColor: item.colors,
@@ -155,10 +157,11 @@ export default function Notes(props) {
                                         paddingBottom: "3px",
                                         cursor: "auto",
                                     }}></BsPencil>
+                                <img src={icon} alt="Icon" style={{ marginTop: "-16px", fontWeight: "none", color: "#0A102E" }}></img>
                                 {/* <BsPencil
                                         onClick={() => rotateItem(item)}></BsPencil> */}
-                                <FaGripHorizontal style={{ marginTop: "-16px", fontWeight: "none", color: "#0A102E" }}></FaGripHorizontal>
-                                {item.indexNote}
+                                {/* <FaGripHorizontal ></FaGripHorizontal> */}
+                                {/* {item.indexNote} */}
                                 <BsX style={{
                                     color: "#0A102E",
                                     hoverBackground: "black",
@@ -167,14 +170,20 @@ export default function Notes(props) {
                                     cursor: "auto",
                                     marginTop: "-15px"
                                 }} onClick={() => deleteItem(item)}></BsX>
-                                <textarea
-                                    className={`textarea ${item.indexNote}`}
-                                    // value={item.textNote}
-                                    style={{ backgroundColor: item.colors }}
-                                    id="areaText"
-                                    type="string"
-                                    onBlur={e => saveText(item, e.target.value)}
-                                >{item.textNote}</textarea>
+                                <TransformWrapper> <TransformComponent>
+
+                                    <textarea
+                                        className={`textarea ${item.indexNote}`}
+                                        // value={item.textNote}
+                                        style={{ backgroundColor: item.colors }}
+                                        id="areaText"
+                                        type="string"
+                                        onBlur={e => saveText(item, e.target.value)}
+                                    >{item.textNote}
+                                    </textarea>
+
+
+                                </TransformComponent>      </TransformWrapper>
                             </div>
                             <div className="curr-container">
                                 {(item.flagColor === true) ?
@@ -197,6 +206,9 @@ export default function Notes(props) {
                                     : ""}
                             </div>
                         </div>
+
+                        {/* </ResizeConsumer>
+                        </ResizeProvider> */}
                     </Draggable>
                 })
                     : <p>No Notes</p>}

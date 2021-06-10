@@ -80,12 +80,14 @@ export const getData = ({ dispatch, getState }) => next => action => {
             headers: myHeaders,
             redirect: 'follow'
         };
-
+        debugger
+        if (action.payload.textNote == "")
+            dispatch(actions.deleteOnlyFromClient(action.payload))//reducer
         fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/deleteNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-
+                debugger
                 dispatch(actions.deleteNoteAction(result))//reducer
             })
             .catch(error => console.log('error', error));
