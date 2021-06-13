@@ -3,10 +3,13 @@
 import React, { useState, useEffect } from 'react'
 import Rotation from 'react-rotation'
 import { ResizeProvider, ResizeConsumer } from "react-resize-context";
-
+import { zoomIn, zoomOut } from 'react-animations'
+import Radium, { StyleRoot } from 'radium';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { FiZoomOut, FiZoomIn } from "react-icons/fi";
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
+import { TiZoomOutline } from "react-icons/ti";
 import { FaGalacticSenate, FaGripHorizontal } from "react-icons/fa";
 import icon from '../images/icon.png'
 import { LightenDarkenColor } from 'lighten-darken-color';
@@ -15,6 +18,14 @@ import { actions } from './redux/actions/action'
 import './myNote.css'
 import $ from 'jquery'
 import Draggable from 'react-draggable';
+
+const styles = {
+    zoomIn: {
+        animation: 'x 50s',
+        animationName: Radium.keyframes(zoomIn, 'zoomIn')
+    }
+}
+
 export default function Notes(props) {
 
     const noteList = useSelector(state => state.reducerNote.noteList)
@@ -58,36 +69,18 @@ export default function Notes(props) {
 
         dispatch(actions.setFlagColor(item))
     }
-    // function rotateItem(item) {
-
-    //     let rotate = `note ${item.indexNote}`
-    //     let note = document.getElementsByClassName(rotate)[0]
-
-    //     note.style.transform = "rotate(90deg)";
-    // }
     function deleteItem(item) {
         dispatch(actions.deleteNote(item))//delete note in midlleWare
     }
     function changeColor(c, item, index) {
-        debugger
-        if (Ccheck == index && CcurrentItem == item)
-            setYes(1)
-
         dispatch(actions.setCheck(index)) // index from the checked color
-
         console.log(Ccheck);
-
         dispatch(actions.setCurrentItem(item))
         setCcurrentItem(item)
-        // if (reduxCheck == index && reduxCurrentItem == item) {
-        //     setYes(1)
-
-        // }
         debugger
         dispatch(actions.updateNote({ item, c }));//a function use to update color & text ib midlleWare
         debugger
         dispatch(actions.changeColorAction({ c, item }))
-
         let i = item.indexNote//2//1
         let correctIndex = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
         let currentclass = `note ${i}`
@@ -96,9 +89,7 @@ export default function Notes(props) {
         let text = document.getElementsByClassName(currentclassText)[0]
         note.style.backgroundColor = c
         text.style.backgroundColor = c
-
     }
-
     function setPlace(e, Cx, Cy, item) {
         debugger
         //   dispatch(actions.updateNote({ item, c }));
@@ -109,9 +100,7 @@ export default function Notes(props) {
         dispatch(actions.placeNote({ x, y, item }))
         debugger
     }
-
     function saveText(item, newText) {
-
         if (newText !== "") {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
@@ -125,6 +114,20 @@ export default function Notes(props) {
             }
         }
     }
+    function zoomIn(item) {
+        debugger
+        let i = item.indexNote//2//1
+        let currentclass = `note ${i}`
+        let note = document.getElementsByClassName(currentclass)[0]
+        note.style.zoom = "1.8"
+    } 
+    function zoomOut(item) {
+        debugger
+        let i = item.indexNote//2//1
+        let currentclass = `note ${i}`
+        let note = document.getElementsByClassName(currentclass)[0]
+        note.style.zoom = "1.0"
+    }
     return (
         <>
             <div className="all-notes">
@@ -134,7 +137,6 @@ export default function Notes(props) {
                     return <Draggable>
                         {/* <ResizeProvider>
                             <ResizeConsumer> */}
-
                         <div
                             key={item.indexNote} className={`note ${item.indexNote}`}
                             style={{
@@ -170,20 +172,28 @@ export default function Notes(props) {
                                     cursor: "auto",
                                     marginTop: "-15px"
                                 }} onClick={() => deleteItem(item)}></BsX>
-                                <TransformWrapper> <TransformComponent>
-
-                                    <textarea
-                                        className={`textarea ${item.indexNote}`}
-                                        // value={item.textNote}
-                                        style={{ backgroundColor: item.colors }}
-                                        id="areaText"
-                                        type="string"
-                                        onBlur={e => saveText(item, e.target.value)}
-                                    >{item.textNote}
-                                    </textarea>
-
-
-                                </TransformComponent>      </TransformWrapper>
+                                {/* <TransformWrapper> <TransformComponent> */}
+                                <textarea
+                                    className={`textarea ${item.indexNote}`}
+                                    // value={item.textNote}
+                                    style={{ backgroundColor: item.colors }}
+                                    id="areaText"
+                                    type="string"
+                                    onBlur={e => saveText(item, e.target.value)}
+                                >{item.textNote}
+                                </textarea>
+                                <div
+                                    style={{ backgroundColor: item.colors }}
+                                >
+                                    {/* <TiZoomOutline></TiZoomOutline> */}
+                                    <FiZoomOut
+                                        style={{ marginLeft: "72%" }}
+                                        onClick={() => zoomOut((item))}></FiZoomOut>
+                                    <FiZoomIn
+                                        style={styles.bounce}
+                                        className="zoonIn"
+                                        onClick={() => zoomIn((item))}></FiZoomIn>
+                                </div>  {/* </TransformComponent>      </TransformWrapper> */}
                             </div>
                             <div className="curr-container">
                                 {(item.flagColor === true) ?
@@ -209,9 +219,12 @@ export default function Notes(props) {
 
                         {/* </ResizeConsumer>
                         </ResizeProvider> */}
+                        {/* </textarea> */}
+
                     </Draggable>
                 })
                     : <p>No Notes</p>}
+
             </div>
         </>
     )

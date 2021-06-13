@@ -74,7 +74,6 @@ export const getData = ({ dispatch, getState }) => next => action => {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIU0tMa3lEQVV1ZmxJeXVQaWdwblowQ09aazMzIiwiZW1haWwiOiJ0ZWhpbGFzaGFwaXJhQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM2NjA5OH0.4j7QUvkXLS-FKqvurFR-VnP4FtfQdyBk9NlSzv_WbXQ");
         myHeaders.append("Content-Type", "application/json");
-
         var requestOptions = {
             method: 'DELETE',
             headers: myHeaders,
