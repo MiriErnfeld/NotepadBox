@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import Rotation from 'react-rotation'
 import { ResizeProvider, ResizeConsumer } from "react-resize-context";
-import { zoomIn, zoomOut } from 'react-animations'
+import { animations } from 'react-animation';
+
 import Radium, { StyleRoot } from 'radium';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { FiZoomOut, FiZoomIn } from "react-icons/fi";
@@ -19,12 +20,12 @@ import './myNote.css'
 import $ from 'jquery'
 import Draggable from 'react-draggable';
 
-const styles = {
-    zoomIn: {
-        animation: 'x 50s',
-        animationName: Radium.keyframes(zoomIn, 'zoomIn')
-    }
-}
+// const styles = {
+//     zoomIn: {
+//         animation: 'x 50s',
+//         animationName: Radium.keyframes(zoomIn, 'zoomIn')
+//     }
+// }
 
 export default function Notes(props) {
 
@@ -120,7 +121,7 @@ export default function Notes(props) {
         let currentclass = `note ${i}`
         let note = document.getElementsByClassName(currentclass)[0]
         note.style.zoom = "1.8"
-    } 
+    }
     function zoomOut(item) {
         debugger
         let i = item.indexNote//2//1
@@ -140,6 +141,7 @@ export default function Notes(props) {
                         <div
                             key={item.indexNote} className={`note ${item.indexNote}`}
                             style={{
+                                
                                 backgroundColor: item.colors,
                                 top: item.placeX,
                                 left: item.placeY
@@ -182,10 +184,8 @@ export default function Notes(props) {
                                     onBlur={e => saveText(item, e.target.value)}
                                 >{item.textNote}
                                 </textarea>
-                                <div
-                                    style={{ backgroundColor: item.colors }}
-                                >
-                                    {/* <TiZoomOutline></TiZoomOutline> */}
+                                {/* <div style={{ backgroundColor: item.colors }}>
+                                  
                                     <FiZoomOut
                                         style={{ marginLeft: "72%" }}
                                         onClick={() => zoomOut((item))}></FiZoomOut>
@@ -193,7 +193,8 @@ export default function Notes(props) {
                                         style={styles.bounce}
                                         className="zoonIn"
                                         onClick={() => zoomIn((item))}></FiZoomIn>
-                                </div>  {/* </TransformComponent>      </TransformWrapper> */}
+                                </div> */}
+                                {/* </TransformComponent>      </TransformWrapper> */}
                             </div>
                             <div className="curr-container">
                                 {(item.flagColor === true) ?

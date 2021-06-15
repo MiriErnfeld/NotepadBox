@@ -25,6 +25,7 @@ export default function Configurator() {
     const [CcurrentItem, setCcurrentItem] = useState()
 
 
+
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
     }

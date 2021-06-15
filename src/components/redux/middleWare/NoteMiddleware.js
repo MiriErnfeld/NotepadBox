@@ -1,7 +1,7 @@
 import { actions } from '../actions/action'
 
 
-export const getData = ({ dispatch, getState }) => next => action => {
+export const getData = ({ getState, dispatch }) => (next) => (action) => {
     let url = window.location;
     let userName = (url.pathname.split('/')[1]);
     if (action.type == "INIT_DATA") {
@@ -35,7 +35,8 @@ export const getData = ({ dispatch, getState }) => next => action => {
         //        ' Authorization':' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmWEpmZzJSNnBrUzdvUFkydEtiNUlQTXdEU2IyIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM1NzQ4OX0.blk6OJdgrkzW1rIiKkmAPTiF7KHp1nA7Ojs9cMf2zrc',
         //       },
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIU0tMa3lEQVV1ZmxJeXVQaWdwblowQ09aazMzIiwiZW1haWwiOiJ0ZWhpbGFzaGFwaXJhQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM2NjA5OH0.4j7QUvkXLS-FKqvurFR-VnP4FtfQdyBk9NlSzv_WbXQ");
+        //jwt from userName miri!!!!
+        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
@@ -59,7 +60,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
         fetch(`https://box.dev.leader.codes/api/${user}/note/createNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                ;
+
                 console.log(result)
                 dispatch(actions.setUser(user))
 
@@ -72,7 +73,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
         debugger
         var index = action.payload.indexNote
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIU0tMa3lEQVV1ZmxJeXVQaWdwblowQ09aazMzIiwiZW1haWwiOiJ0ZWhpbGFzaGFwaXJhQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM2NjA5OH0.4j7QUvkXLS-FKqvurFR-VnP4FtfQdyBk9NlSzv_WbXQ");
+        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
         myHeaders.append("Content-Type", "application/json");
         var requestOptions = {
             method: 'DELETE',
@@ -96,8 +97,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
         var index = action.payload.item.indexNote
         var myHeaders = new Headers();
         // my:
-        // myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmWEpmZzJSNnBrUzdvUFkydEtiNUlQTXdEU2IyIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM1NzQ4OX0.blk6OJdgrkzW1rIiKkmAPTiF7KHp1nA7Ojs9cMf2zrc");
-        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJIU0tMa3lEQVV1ZmxJeXVQaWdwblowQ09aazMzIiwiZW1haWwiOiJ0ZWhpbGFzaGFwaXJhQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM2NjA5OH0.4j7QUvkXLS-FKqvurFR-VnP4FtfQdyBk9NlSzv_WbXQ");
+        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
@@ -114,7 +114,7 @@ export const getData = ({ dispatch, getState }) => next => action => {
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/tehilaSH/note/${index}/updateNote`, requestOptions)
+        fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/updateNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result)
@@ -125,5 +125,6 @@ export const getData = ({ dispatch, getState }) => next => action => {
             .catch(error => console.log('error', error));
 
     }
+
     return next(action)
 }

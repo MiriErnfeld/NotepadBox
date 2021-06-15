@@ -1,8 +1,10 @@
 
 .textarea{
   font-size: 18px;
-  overflow: hidden;
+  /* overflow: hidden; */
   /* resize: both;  */
+
+     /* Show scrollbars */
 
   padding: 5px;
   font-family: 'Shadows Into Light', 'Tangerine', Arial;
@@ -13,6 +15,10 @@
     border: none;
     resize: none ;
     /* scroll-behavior: none; */
+}
+::-webkit-scrollbar-thumb {
+  background: red; 
+  border-radius: 10px;
 }
 textarea.textarea:focus {
   outline-width: 0;
@@ -113,4 +119,16 @@ box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%);
 
 .zoomIn:hover {
   transform: scale(1.5); /* (150% zoom)*/
+}
+.textarea::-webkit-scrollbar {
+  width: 2px;
+}
+/* Handle */
+.textarea::-webkit-scrollbar-thumb {
+  background: black; 
+  border-radius:0px;
+}
+/* Handle on hover */
+.textarea::-webkit-scrollbar-thumb:hover {
+  width:25px;
 }
