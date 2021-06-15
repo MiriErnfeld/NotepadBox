@@ -121,7 +121,7 @@ export default function Notes(props) {
         let currentclass = `note ${i}`
         let note = document.getElementsByClassName(currentclass)[0]
         note.style.zoom = "1.8"
-    }
+    } 
     function zoomOut(item) {
         debugger
         let i = item.indexNote//2//1
@@ -141,7 +141,6 @@ export default function Notes(props) {
                         <div
                             key={item.indexNote} className={`note ${item.indexNote}`}
                             style={{
-                                
                                 backgroundColor: item.colors,
                                 top: item.placeX,
                                 left: item.placeY
@@ -194,7 +193,7 @@ export default function Notes(props) {
                                         className="zoonIn"
                                         onClick={() => zoomIn((item))}></FiZoomIn>
                                 </div> */}
-                                {/* </TransformComponent>      </TransformWrapper> */}
+                                  {/* </TransformComponent>      </TransformWrapper> */}
                             </div>
                             <div className="curr-container">
                                 {(item.flagColor === true) ?

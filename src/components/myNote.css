@@ -16,10 +16,11 @@
     resize: none ;
     /* scroll-behavior: none; */
 }
-::-webkit-scrollbar-thumb {
-  background: red; 
-  border-radius: 10px;
-}
+/* .textarea:hover > ::-webkit-scrollbar-thumb {
+  overflow-y:scroll;
+  width: 10px;
+
+} */
 textarea.textarea:focus {
   outline-width: 0;
 }
@@ -103,7 +104,6 @@ box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%);
 .header{
   background-color: yellow
 }
-
 .all-notes{
   position: relative;
   z-index: 9999;
@@ -116,19 +116,23 @@ box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%);
 .zoomIn{
   transition: transform .2s; /* Animation */ 
 }
-
 .zoomIn:hover {
   transform: scale(1.5); /* (150% zoom)*/
 }
-.textarea::-webkit-scrollbar {
-  width: 2px;
+ .textarea::-webkit-scrollbar {
+  width: 1px;
+  background:black !important; 
+} 
+
+ .textarea::-webkit-scrollbar-thumb:hover {
+  background:black !important; 
 }
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
 /* Handle */
-.textarea::-webkit-scrollbar-thumb {
-  background: black; 
-  border-radius:0px;
-}
-/* Handle on hover */
-.textarea::-webkit-scrollbar-thumb:hover {
-  width:25px;
+::-webkit-scrollbar-thumb {
+  background: #888; 
 }
