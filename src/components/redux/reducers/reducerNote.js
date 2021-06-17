@@ -100,8 +100,8 @@ const noteData = {
         debugger
         let x = action.payload.item.indexNote
         let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
-        state.noteList[correctIndex].placeX = action.payload.x
-        state.noteList[correctIndex].placeY = action.payload.y
+        state.noteList[correctIndex].placeX = action.payload.left
+        state.noteList[correctIndex].placeY = action.payload.top
     },
     setFlagColor(state, action) {  //set flagColor only to true from component myNote.js
         debugger

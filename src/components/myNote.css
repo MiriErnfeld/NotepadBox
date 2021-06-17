@@ -1,11 +1,8 @@
-
+/* body{
+overflow:hidden;
+} */
 .textarea{
   font-size: 18px;
-  /* overflow: hidden; */
-  /* resize: both;  */
-
-     /* Show scrollbars */
-
   padding: 5px;
   font-family: 'Shadows Into Light', 'Tangerine', Arial;
   background-color: yellow;
@@ -14,15 +11,9 @@
     margin: 0px;
     width:100%;
     border: none;
-    resize: none ;
+    /* resize: none ; */
     min-height: fit-content;
-    /* scroll-behavior: none; */
 }
-/* .textarea:hover > ::-webkit-scrollbar-thumb {
-  overflow-y:scroll;
-  width: 10px;
-
-} */
 textarea.textarea:focus {
   outline-width: 0;
 }
@@ -35,14 +26,14 @@ textarea.textarea:focus {
   top: 0;
   left: 0;
 }
-.resize{
+/* .resize{
   resize: both;
-
-}
+  overflow: auto;
+} */
 .note{
-  /* overflow: hidden; */
   min-height: fit-content;
   resize: both;
+  /* overflow: auto; */
   overflow:hidden;
 height: 150px;
 transform: rotate("");
@@ -54,15 +45,26 @@ cursor: -webkit-grab;
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%); 
 }
 .header{
-   color:blue -50%;
-   width:100%;
+  position: absolute;
+  position: sticky;
+   color:blue -50% !important;
+   width:100% !important;
+   height:100% !important;
+   top: 0 !important;
+   right: 0 !important
 }
 .curr-container{
-  
-        /* width: 4rem; */
-        position: absolute;
-        top: 0;
-        right: -53px;
+  top: 1.8rem;
+    left: 9.5rem;
+  /* top: 20rem;
+  left: 25rem;
+position: fixed;  */
+
+position: absolute;
+ /* width: 4rem; */
+        /* position: absolute; */
+        /* top: 0;
+        right: -53px; */
 }
 
 .curr{
@@ -116,7 +118,7 @@ box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%);
   position: relative;
   z-index: 9999;
   top: 0px;
-  left: 2%;
+  /* left: 2%; */
   width: 100%;
   max-width: 100%;
   height: 100%;

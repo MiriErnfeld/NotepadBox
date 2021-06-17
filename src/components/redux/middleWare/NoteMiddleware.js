@@ -102,8 +102,8 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
 
         var raw = JSON.stringify({
             "textNote": action.payload.newText,
-            "placeX": action.payload.x,
-            "placeY": action.payload.y,
+            "placeX": action.payload.left,
+            "placeY": action.payload.top,
             "colors": action.payload.c
         });
         debugger
