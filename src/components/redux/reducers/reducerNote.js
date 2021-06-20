@@ -109,10 +109,13 @@ const noteData = {
         let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === i))
         let currentFlag = state.noteList[correctIndex].flagColor
         const f = state.noteList[correctIndex].flagColor
-        state.noteList[correctIndex].flagColor = (!f)
+        if (f === true)
+            state.noteList[correctIndex].flagColor = false
+        else
+            state.noteList[correctIndex].flagColor = true
     },
     closePreview(state, action) { //set flagColor only to false  from component myNote.js
-
+        debugger
         let index = action.payload
         state.noteList[index].flagColor = false
     },

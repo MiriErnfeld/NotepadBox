@@ -21,6 +21,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             .then(result => {
 
                 console.log(result);
+                debugger
                 dispatch(actions.getAllNotesForUser(result))
             })
             .catch(error => console.log('error', error));

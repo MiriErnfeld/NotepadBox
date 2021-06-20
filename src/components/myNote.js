@@ -7,17 +7,10 @@ import { FaGalacticSenate, FaGripHorizontal } from "react-icons/fa";
 import icon from '../images/icon.png'
 import { LightenDarkenColor } from 'lighten-darken-color';
 import { actions } from './redux/actions/action'
-
 import './myNote.css'
 import $ from 'jquery'
 import Draggable from 'react-draggable';
 
-// const styles = {
-//     zoomIn: {
-//         animation: 'x 50s',
-//         animationName: Radium.keyframes(zoomIn, 'zoomIn')
-//     }
-// }
 
 export default function Notes(props) {
 
@@ -27,13 +20,12 @@ export default function Notes(props) {
     const reduxCurrentItem = useSelector(state => state.reducerNote.currentItem)
 
     const [CcurrentItem, setCcurrentItem] = useState()
-    const [positionX, setpositionX] = useState()
-    const [positionY, setpositionY] = useState()
     const [Ccheck, setCcheck] = useState()
     const [yes, setYes] = useState()
     const [CFlagColor, setCFlagColor] = useState()
     const [Cindex, setCindex] = useState()
     const [size, setsize] = useState()
+    const [leftNote, setLeftNote] = useState()
 
     const { arrnums, } = props
     const nums = [30, 7, 0, 9, 60, 4, 40, 14, 6, 70, 18, 29, 10, 2,]
@@ -44,7 +36,6 @@ export default function Notes(props) {
     ];
 
     const dispatch = useDispatch()
-
     // useEffect(() => {
     //     alert("dataCheck   !!!" + (JSON.stringify(reduxCheck)) + "in state   ::" + (JSON.stringify(Ccheck)))
 
@@ -55,15 +46,16 @@ export default function Notes(props) {
 
     //     setCcurrentItem(reduxCurrentItem)
     // }, [reduxCurrentItem])
-
     function openCloseEditor(item) {
-
+        debugger
+        let currentIndex = noteList.indexOf(noteList.find(x => x.indexNote == item.indexNote))//find the current place in the state in redux
         // --search item with editor open 
         for (let index = 0; index < noteList.length; index++) { ///find the preview open editor
-            if (noteList[index].flagColor == true && index !== item.indexNote)
+            if (noteList[index].flagColor === true && index != currentIndex) {
+                debugger
                 dispatch(actions.closePreview(index))
+            }
         }
-
         dispatch(actions.setFlagColor(item))
     }
     function deleteItem(item) {
@@ -87,21 +79,6 @@ export default function Notes(props) {
         note.style.backgroundColor = c
         text.style.backgroundColor = c
     }
-    function setPlace(e, item) {
-        debugger
-        let i = item.indexNote
-        //   dispatch(actions.updateNote({ item, c }));
-        // let x = Cx / 5 + 'vh'
-        // let y = Cy / 5 + '%'
-        let currentclass = `note ${i}`
-        // let r = document.getElementsByClassName(currentclass)[0].getBoundingClientRect().x
-        let top = document.getElementsByClassName(currentclass)[0].getClientRects()[0].top
-        let left = document.getElementsByClassName(currentclass)[0].getClientRects()[0].left
-        dispatch(actions.updateNote({ left, top, item }));
-        debugger
-        dispatch(actions.placeNote({ left, top, item }))
-        debugger
-    }
     function saveText(item, newText) {
         if (newText !== "") {
             const i = item.indexNote
@@ -119,92 +96,90 @@ export default function Notes(props) {
     return (
         <>
             <div className="all-notes">
-
                 {noteList ? noteList.map((item) => {
                     debugger;
-                    //
-                    // </Draggable>
-                    // >
-
-                    //    
-                    // <div className="resize">
-                    return <Draggable onStop={(e) => setPlace(e, item)} ><div
-                        key={item.indexNote} className={`note ${item.indexNote}`}
-                        style={{
-                            position: "absolute",
-                            backgroundColor: item.colors,
-                            x: item.placeX,
-                           y: item.placeY
-                        }}
-                    // onDragLeave={(e) => setPlace(e, e.clientX, e.clientY, item)}
-                    >
-                        <div className={`header ${item.indexNote}`}
-                            style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
-                        >
-                            <BsX style={{
-                                color: "#0A102E",
-                                hoverBackground: "black",
-                                cursor: "auto",
-                                position: "relative",
-                                left: "-30%"
-                                // marginTop: "-8%"
-                            }} onClick={() => deleteItem(item)}></BsX>
-                            <img src={icon} alt="Icon" style={{
-                                fontWeight: "none",
-                                // marginTop: "4%",
-                                color: "#0A102E"
-                            }}></img>
-                            <BsPencil
-                                // onMouseEnter={e => closeEditor(item)}
-                                onClick={() => openCloseEditor(item)}
+                    return <Draggable >
+                        <div className="resize" draggable={false}>
+                            <div draggable={false}
+                                key={item.indexNote} className={`note ${item.indexNote}`}
                                 style={{
-                                    color: "#0A102E",
-                                    position: "relative",
-                                    right: "-30%",
-                                    // marginLeft: "-8%",
-                                    // marginTop: "-7%",
-                                    // paddingBottom: "3px",
-                                    cursor: "auto"
-                                }}></BsPencil>
-                            <textarea
-                                className={`textarea ${item.indexNote}`}
-                                style={{ backgroundColor: item.colors }}
-                                id="areaText"
-                                type="string"
-                                onBlur={e => saveText(item, e.target.value)}
-                            >{item.textNote}
-                            </textarea>
-
-                        </div>
-                        <div className="curr-container">
-                            {(item.flagColor === true) ?
-                                <div className="curr" >
-                                    {mycolors.map((c, i) => {
-                                        return <div key={i} className="divColors " className="colorDiv handPointer"
-                                            style={{ backgroundColor: c }} onClick={() => changeColor(c, item, i)}
-                                        >
-                                            {yes ?
-                                                <BsCheck
-                                                    style={{
-                                                        fontSize: "13px",
-                                                        marginTop: " 2px",
-                                                        color: "white",
-                                                        fontWeight: "bold"
-                                                    }}></BsCheck> : ""}
-                                        </div>
-                                    })}
+                                    position: "absolute",
+                                    backgroundColor: item.colors,
+                                    top: item.placeX,
+                                    left: item.placeY
+                                }}
+                            >
+                                <div className={`header ${item.indexNote}`} draggable={false}
+                                    style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
+                                >
+                                    <BsX style={{
+                                        color: "#0A102E",
+                                        hoverBackground: "black",
+                                        cursor: "auto",
+                                        position: "relative",
+                                        left: "-30%"
+                                        // marginTop: "-8%"
+                                    }} onClick={() => deleteItem(item)}></BsX>
+                                    <img src={icon} alt="Icon" style={{
+                                        fontWeight: "none",
+                                        // marginTop: "4%",
+                                        color: "#0A102E"
+                                    }}></img>
+                                    <BsPencil
+                                        // onMouseEnter={e => closeEditor(item)}
+                                        onClick={() => openCloseEditor(item)}
+                                        style={{
+                                            color: "#0A102E",
+                                            position: "relative",
+                                            right: "-30%",
+                                            // marginLeft: "-8%",
+                                            // marginTop: "-7%",
+                                            // paddingBottom: "3px",
+                                            cursor: "auto"
+                                        }}></BsPencil>
+                                    <textarea draggable={false}
+                                        className={`textarea ${item.indexNote}`}
+                                        style={{ backgroundColor: item.colors }}
+                                        id="areaText"
+                                        type="string"
+                                        onBlur={e => saveText(item, e.target.value)}
+                                    >{item.textNote}
+                                    </textarea>
                                 </div>
+                            </div>
+                            <div className="curr-container"
+                                style={{
+                                    top: item.placeX,
+                                    left: item.placeY
+                                }}
+                            >
+                                {(item.flagColor === true) ?
+                                    <div className="curr" >
+                                        {mycolors.map((c, i) => {
+                                            debugger
+                                            return <div key={i} className="divColors " className="colorDiv handPointer"
+                                                style={{ backgroundColor: c }} onClick={() => changeColor(c, item, i)}
+                                            >
 
-                                : ""}
+                                                {c === item.colors ?
+                                                    <BsCheck
+                                                        style={{
+                                                            fontSize: "13px",
+                                                            marginTop: " 2px",
+                                                            color: "white",
+                                                            fontWeight: "bold"
+                                                        }}></BsCheck> : ""}
+                                            </div>
+                                        })}
+                                    </div>
+                                    : ""}
+                            </div>
                         </div>
-                    </div>
-
-                        {/* </div> */}
                     </Draggable>
                 })
-                    : <p>No Notes</p>}
+                    : <p>No Notes</p>
+                }
             </div>
-
         </>
     )
 }

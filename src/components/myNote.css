@@ -26,11 +26,9 @@ textarea.textarea:focus {
   top: 0;
   left: 0;
 }
-/* .resize{
-  resize: both;
-  overflow: auto;
-} */
+
 .note{
+  float: left;
   min-height: fit-content;
   resize: both;
   /* overflow: auto; */
@@ -54,17 +52,10 @@ box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%);
    right: 0 !important
 }
 .curr-container{
-  top: 1.8rem;
-    left: 9.5rem;
-  /* top: 20rem;
-  left: 25rem;
-position: fixed;  */
-
-position: absolute;
- /* width: 4rem; */
-        /* position: absolute; */
-        /* top: 0;
-        right: -53px; */
+  float: left;
+position:absolute;
+/* top: 35%;
+left: 48vh; */
 }
 
 .curr{
