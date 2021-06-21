@@ -90,9 +90,9 @@ const noteData = {
             c = state.noteList.length + 1
         }
         let allNote = [...state.noteList]
-        let top = Math.floor(Math.random() * 52) + 'vh'
-        let left = Math.floor(Math.random() * 59) + '%'
-        allNote.push({ _id: "", indexNote: c, userName: "", createNote: "", textNote: "", placeX: top, placeY: left, colors: "#FFEB3B", check: "", flagColor: false, })
+        let top = Math.floor(Math.random() *238 )
+        let left = Math.floor(Math.random() * 580)
+        allNote.push({ _id: "", indexNote: c, userName: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
         state.noteList = [...allNote]
 
     },

@@ -98,11 +98,7 @@ export default function Configurator() {
                         </div> : ""}
                     </div> */}
                     <div class="row">
-                        
-                        <MyNote
-                            arrnums={arrnums}
-                            setarrnums={setarrnums}
-                        ></MyNote>
+                        <MyNote />
                     </div>
                 </div>
 

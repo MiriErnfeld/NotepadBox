@@ -1,38 +1,25 @@
-/* body{
-overflow:hidden;
-} */
+
 .textarea{
   font-size: 18px;
   padding: 5px;
   font-family: 'Shadows Into Light', 'Tangerine', Arial;
   background-color: yellow;
-    height: 100%;
-    min-height: fit-content;
+    height: 100% !important;
+    /* max-height: max-content; */
+
     margin: 0px;
     width:100%;
     border: none;
-    /* resize: none ; */
-    min-height: fit-content;
 }
 textarea.textarea:focus {
   outline-width: 0;
 }
-.first-column{
-  /* width: 20px; */
-  border-right:#3598F4 4px solid;
-  background-color: #3598F4;
-  /* height:50px */
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
 .note{
   float: left;
-  min-height: fit-content;
-  resize: both;
+  /* min-height: fit-content; */
+  /* resize: both; */
   /* overflow: auto; */
-  overflow:hidden;
+  /* overflow:hidden; */
 height: 150px;
 transform: rotate("");
 width: 150px;
@@ -41,19 +28,26 @@ margin: 30px 0;
 position: absolute;
 cursor: -webkit-grab;
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%); 
+min-height: 80px;
+min-width: 130px;
 }
 .header{
+  /* background-color: yellow; */
   position: absolute;
   position: sticky;
    color:blue -50% !important;
    width:100% !important;
    height:100% !important;
+   /* max-width: fit-content;
+   max-height: fit-content; */
    top: 0 !important;
    right: 0 !important
 }
 .curr-container{
-  float: left;
-position:absolute;
+  /* float: left; */
+position: absolute;
+left: 9.5rem;
+top: 0;
 /* top: 35%;
 left: 48vh; */
 }
@@ -71,8 +65,11 @@ left: 48vh; */
   }
   .openCloseEditor:hover{
     width: 30px;
-    margin-left: "141px";
-    margin-top: " 12px";
+    /* margin-left: "141px";
+    margin-top: " 12px"; */
+  }
+  .header{
+    background-color: yellow
   }
   .create-note{
     position: relative;
@@ -102,9 +99,6 @@ left: 48vh; */
   height: 18px;
   margin: 2px;
 }
-.header{
-  background-color: yellow
-}
 .all-notes{
   position: relative;
   z-index: 9999;
@@ -114,12 +108,8 @@ left: 48vh; */
   max-width: 100%;
   height: 100%;
 } 
-.zoomIn{
-  transition: transform .2s; /* Animation */ 
-}
-.zoomIn:hover {
-  transform: scale(1.5); /* (150% zoom)*/
-}
+
+
  .textarea::-webkit-scrollbar {
   width: 1px;
   background:black !important; 
@@ -136,4 +126,14 @@ left: 48vh; */
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888; 
+}
+.BsX_button:hover{
+  /* zoom: 1.5; */
+  font-size: larger;
+  font-weight: bold;
+}
+.BsPencil_button:hover{
+  zoom: 4;
+  font-weight: bold;
+  font-size :5px;;
 }

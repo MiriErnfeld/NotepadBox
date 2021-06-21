@@ -4,11 +4,10 @@ import './App.css';
 
 import React, { useState } from 'react'
 import { Provider } from 'react-redux'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Configurator from './components/configurator'
 import store from './components/redux/store'
-import Try from './components/try';
+
 
 
 function App() {
@@ -17,10 +16,7 @@ function App() {
 
     <Provider store={store}>
       <div className="App">
-        {/* <Try></Try> */}
         <Configurator></Configurator>
-
-
       </div>
     </Provider>
 
