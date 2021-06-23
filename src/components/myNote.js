@@ -27,6 +27,7 @@ export default function Notes() {
         '#BFD41F', '#8580FD', '#6DD41F', '#7bdcb5', '#44D7B6'
         , '#40D9ED', '#ff8a65', '#d9e3f0'
     ];
+    function ddd() { debugger }
 
     function openCloseEditor(item) {
         debugger
@@ -73,14 +74,34 @@ export default function Notes() {
             }
         }
     }
+    function inResize(item, end) {
+        debugger
+        if(item.flagColor==true)
+        dispatch(actions.setFlagColor(item))
+        // if (end === 1) {
+        //     debugger
+        //     let x = item.placeX
+        //     let place=x+3
+        //     $("curr-container").css("left", place)
+        // }
+    }
+
 
     return (
         <>
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {
                     debugger;
-                    return <>  <div className="resize">
+                    return <>  <div className="resize " >
+                        {/* // style={{height:"100%",width:"100%"}} */}
                         <Rnd
+                            onResizeStart={() => { inResize(item, 0) }}
+                            onResizeEnd={() => { inResize(item, 1) }}
+                            // onResizeStop={setresize}
+                            bounds="body"
+                            // bounds={{ top: "90%"}}
+                            // disabled={false}
+                            // onDragStop={(e, d) => { ddd({ x: d.x, y: d.y }) }}
                             key={item.indexNote}
                             className={`note ${item.indexNote}`}
                             default={{
@@ -100,11 +121,13 @@ export default function Notes() {
                                     hoverBackground: "black",
                                     cursor: "auto",
                                     position: "relative",
-                                    left: "-27%"
+                                    left: "-27%",
+                                    // marginTop: "2%"
                                 }} onClick={() => deleteItem(item)} className="BsX_button"></BsX>
                                 <img src={icon} alt="Icon" style={{
                                     fontWeight: "none",
-                                    color: "#0A102E"
+                                    color: "#0A102E",
+                                    // marginTop: "2%"
                                 }}></img>
                                 <BsPencil
                                     onClick={() => openCloseEditor(item)}
@@ -112,7 +135,8 @@ export default function Notes() {
                                         color: "#0A102E",
                                         position: "relative",
                                         right: "-27%",
-                                        cursor: "auto"
+                                        cursor: "auto",
+                                        // marginTop: "2%"
                                     }} className="BsPencil_button"></BsPencil>
                                 <textarea
                                     className={`textarea ${item.indexNote}`}
@@ -125,8 +149,7 @@ export default function Notes() {
                             </div>
                             <div className="curr-container"
                                 style={{
-                                    x: item.placeX + item.placeY,
-                                    y: item.placeY - "50"
+                                    // left: item.placeY
                                 }}
                             >
                                 {(item.flagColor === true) ?

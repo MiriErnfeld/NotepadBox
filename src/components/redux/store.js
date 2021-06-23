@@ -3,11 +3,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // import { extractJwt, getStaticData } from './middleware/crudMiddleware'
 // import staticDetailsReducer from './reducers/staticDetailsReducer'
 import reducerNote from './reducers/reducerNote'
+import reducerFolder from './reducers/reducerFolder'
 import { getData } from './middleWare/NoteMiddleware'
 
 
 
-const reducer = combineReducers({ reducerNote });
+const reducer = combineReducers({ reducerNote,reducerFolder });
 
 // const store = createStore(reducer, applyMiddleware(getData)));
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(getData)));

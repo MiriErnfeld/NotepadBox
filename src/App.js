@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Configurator from './components/configurator'
 import store from './components/redux/store'
+import Notes from './components/myNote'
 
 
 
@@ -17,6 +18,7 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <Configurator></Configurator>
+        {/* <Notes></Notes> */}
       </div>
     </Provider>
 

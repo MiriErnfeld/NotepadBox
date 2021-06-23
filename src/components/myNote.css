@@ -24,7 +24,7 @@ height: 150px;
 transform: rotate("");
 width: 150px;
 background-color: yellow;
-margin: 30px 0;
+/* margin: 30px 0; */
 position: absolute;
 cursor: -webkit-grab;
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%); 
@@ -45,6 +45,7 @@ min-width: 130px;
 }
 .curr-container{
   /* float: left; */
+  display:block;
 position: absolute;
 left: 9.5rem;
 top: 0;
@@ -72,18 +73,19 @@ left: 48vh; */
     background-color: yellow
   }
   .create-note{
-    position: relative;
-    padding-top: 13px;
-    width: 94%;
+    position: absolute;
+    padding-top: 0.5%;
+    width: 16%;
     cursor: pointer;
-    top: -35%;
+    right: 2%;
+    top: 1%;
+    background-color: lightgrey;
     display: block;
-    font: normal normal bold 18px/24px Roboto;
-    color: #FFFFFF;
-    height: 9%;
-    background: var(--unnamed-color-3598f4) 0% 0% no-repeat padding-box;
-    background: #3598F4 0% 0% no-repeat padding-box;
-    border-radius: 4px;
+    font-weight: bold;
+    /* font: normal normal bold 18px/24px Roboto; */
+    color: black;
+    height: 6%;
+
 }
   .colorDiv{
   width: 16px;

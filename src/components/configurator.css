@@ -1,7 +1,10 @@
 body{
     position:relative;
     background-color: #F1F1F3;
+    width:100%;
+height:100%;
     /* overflow:hidden; */
+    /* overflow: hidden; */
 }
 .headerConfig{
     background-color: aqua;
@@ -68,7 +71,7 @@ width:99%;
 
 }
 .container-notes{
-    width: 79%;
+    width: 99%;
     margin-left: 8px;
     /* height: 100vh; */
     border-radius: 10px;

@@ -3,6 +3,7 @@ import $ from 'jquery'
 import './configurator.css'
 
 import { actions } from '../components/redux/actions/action';
+import { Droppable, DragDropContext } from 'react-beautiful-dnd'
 import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
@@ -50,6 +51,7 @@ export default function Configurator() {
     //     $('.inputTitle' + index).css("font-weight", "bold");
     //     $('.inputTitle' + index).css("text-align", "center");
     // }
+    function onDropbb() { debugger }
     function insertNote() {
 
         dispatch(actions.setNoteList());
@@ -57,9 +59,13 @@ export default function Configurator() {
     }
     return (
         <>
+            {/* <DragDropContext
+                onDragEnd={onDropbb} > */}
+
             <div className="container-notes">
                 <div className="configurator-line row justify-content-start d-flex ">
                     <p className="my-notes col-2">My Notes:</p>
+                    <div className=" create-note" onClick={insertNote}>Create Note +</div>
 
                     {/* //not use::::::: */}
 
@@ -97,26 +103,29 @@ export default function Configurator() {
                         {countCol > 3 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
                         </div> : ""}
                     </div> */}
-                    <div class="row">
-                        <MyNote />
-                    </div>
+                    {/* <div class="row"> */}
+                    <MyNote />
+                    {/* </div> */}
                 </div>
 
             </div >
             {/* <div className="container container-configurator"> */}
-            <div className="container container-configurator">
-                <div className="row create-note" onClick={insertNote}>Create Note +</div>
-                <div className="row dragfolder">
-                    {/* <div className="row "> */}
-                    <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
-                    {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
-                    <p className="folder" style={{ fontSize: '15' }}>drag notes to create folder</p>
-                </div>
-                {/* <div className="row ">
-                    <FiFolder></FiFolder>
-                    folder name
-                </div> */}
-            </div>
+            {/* <div className="container container-configurator"> */}
+
+            {/* <div className="row dragfolder"> */}
+            {/* <div className="row "> */}
+            {/* <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img> */}
+            {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
+            {/* <p className="folder" style={{ fontSize: '15' }}>drag notes to create folder</p> */}
+            {/* </div> */}
+            {/* <Droppable > */}
+            {/* <div className="row " >
+                        <FiFolder ></FiFolder>
+                        folder name
+                    </div> */}
+
+            {/* </div> */}
+            {/* </DragDropContext> */}
         </>
     )
 }
