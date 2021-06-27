@@ -76,8 +76,8 @@ export default function Notes() {
     }
     function inResize(item, end) {
         debugger
-        if(item.flagColor==true)
-        dispatch(actions.setFlagColor(item))
+        if (item.flagColor == true)
+            dispatch(actions.setFlagColor(item))
         // if (end === 1) {
         //     debugger
         //     let x = item.placeX
@@ -87,6 +87,7 @@ export default function Notes() {
     }
 
 
+
     return (
         <>
             <div className="all-notes">
@@ -94,7 +95,7 @@ export default function Notes() {
                     debugger;
                     return <>  <div className="resize " >
                         {/* // style={{height:"100%",width:"100%"}} */}
-                        <Rnd
+                        <Rnd cancel="textarea"
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
                             // onResizeStop={setresize}
@@ -121,12 +122,14 @@ export default function Notes() {
                                     hoverBackground: "black",
                                     cursor: "auto",
                                     position: "relative",
-                                    left: "-27%",
+                                    float: "left",
+                                    margin: "1%"
                                     // marginTop: "2%"
                                 }} onClick={() => deleteItem(item)} className="BsX_button"></BsX>
                                 <img src={icon} alt="Icon" style={{
                                     fontWeight: "none",
                                     color: "#0A102E",
+                                    margin: "1%",
                                     // marginTop: "2%"
                                 }}></img>
                                 <BsPencil
@@ -134,10 +137,13 @@ export default function Notes() {
                                     style={{
                                         color: "#0A102E",
                                         position: "relative",
-                                        right: "-27%",
+                                        float: "right",
+                                        margin: "1%",
                                         cursor: "auto",
                                         // marginTop: "2%"
-                                    }} className="BsPencil_button"></BsPencil>
+                                    }} className="BsPencil_button"
+                                >
+                                </BsPencil>
                                 <textarea
                                     className={`textarea ${item.indexNote}`}
                                     style={{ backgroundColor: item.colors }}
