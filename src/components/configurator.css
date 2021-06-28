@@ -186,3 +186,16 @@ display:block;
     border-right: 4px solid #dee2e6;
     height: 600px;
 }
+.create-note-button {
+    position: relative;
+    padding-top: 13px;
+    width: 94%;
+    cursor: pointer;
+    top: -35%;
+    display: block;
+    color: rgb(255, 255, 255);
+    height: 9%;
+    font: 700 18px / 24px Roboto;
+    background: 0px 0px no-repeat padding-box padding-box rgb(53, 152, 244);
+    border-radius: 4px;
+}
