@@ -76,8 +76,8 @@ export default function Notes() {
     }
     function inResize(item, end) {
         debugger
-        if(item.flagColor==true)
-        dispatch(actions.setFlagColor(item))
+        if (item.flagColor == true)
+            dispatch(actions.setFlagColor(item))
         // if (end === 1) {
         //     debugger
         //     let x = item.placeX
@@ -85,20 +85,21 @@ export default function Notes() {
         //     $("curr-container").css("left", place)
         // }
     }
-
+    function handleDoubleClick(event) { event.target.select(); }
 
     return (
         <>
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {
                     debugger;
-                    return <>  <div className="resize " >
+                    return <>  <div className="resize">
                         {/* // style={{height:"100%",width:"100%"}} */}
-                        <Rnd
+                        <Rnd cancel="textarea"
+                            bounds=".container-notes"
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
                             // onResizeStop={setresize}
-                            bounds="body"
+                            
                             // bounds={{ top: "90%"}}
                             // disabled={false}
                             // onDragStop={(e, d) => { ddd({ x: d.x, y: d.y }) }}
@@ -124,7 +125,7 @@ export default function Notes() {
                                     left: "-27%",
                                     // marginTop: "2%"
                                 }} onClick={() => deleteItem(item)} className="BsX_button"></BsX>
-                                <img src={icon} alt="Icon" style={{
+                                <img src={icon} alt="Icon" draggable="false" style={{
                                     fontWeight: "none",
                                     color: "#0A102E",
                                     // marginTop: "2%"
@@ -144,6 +145,7 @@ export default function Notes() {
                                     id="areaText"
                                     type="string"
                                     onBlur={e => saveText(item, e.target.value)}
+                                    onDoubleClick={handleDoubleClick}
                                 >{item.textNote}
                                 </textarea>
                             </div>

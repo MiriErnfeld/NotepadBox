@@ -2,7 +2,7 @@ body{
     position:relative;
     background-color: #F1F1F3;
     width:100%;
-height:100%;
+height:95vh;
     /* overflow:hidden; */
     /* overflow: hidden; */
 }
@@ -71,7 +71,7 @@ width:99%;
 
 }
 .container-notes{
-    width: 99%;
+    width: 99vw;
     margin-left: 8px;
     /* height: 100vh; */
     border-radius: 10px;
@@ -79,7 +79,7 @@ width:99%;
     margin-top: 15px;
     bottom:0;
     right: 25px;
-    height: 95%;
+    height: 95vh;
 }
 .configurator-line{
 z-index: 9999;

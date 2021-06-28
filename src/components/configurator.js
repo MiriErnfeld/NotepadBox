@@ -87,7 +87,7 @@ export default function Configurator() {
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
                     </p> */}
                 </div>
-                <div class="container">
+              
 
                     {/* //not use::::::: */}
 
@@ -106,7 +106,7 @@ export default function Configurator() {
                     {/* <div class="row"> */}
                     <MyNote />
                     {/* </div> */}
-                </div>
+              
 
             </div >
             {/* <div className="container container-configurator"> */}
