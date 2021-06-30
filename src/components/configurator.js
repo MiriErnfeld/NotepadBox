@@ -52,6 +52,45 @@ export default function Configurator() {
     //     $('.inputTitle' + index).css("text-align", "center");
     // }
     function onDropbb() { debugger }
+
+    const onDragStart= (e,id)=>{
+        // e.dataTransfer.setData("text/plain",id)
+
+    }
+    const handleDragEnter = e => {
+        e.stopPropagation();
+        debugger
+    };
+    const handleDragLeave = e => {
+        e.preventDefault();
+        e.stopPropagation();
+        debugger
+    };
+    const handleDragOver = e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+        e.stopPropagation();
+        debugger
+    };
+    const handleDrop = e => {
+
+        e.preventDefault();
+        // e.stopPropagation();
+        // debugger
+        alert();
+    };
+    function allowDrop(e) {
+        debugger;
+        //  e.preventDefault();
+    }
+
+    // function drop(event) {
+    //     debugger
+    //     // event.preventDefault();
+    //     // var data = event.dataTransfer.getData("Text");
+    //     // event.target.appendChild(document.getElementById(data));
+    //     // document.getElementById("demo").innerHTML = "The p element was dropped";
+    // }
     function insertNote() {
 
         dispatch(actions.setNoteList());
@@ -87,11 +126,11 @@ export default function Configurator() {
                     <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
                     </p> */}
                 </div>
-                <div class="container">
 
-                    {/* //not use::::::: */}
 
-                    {/* <div class="row">
+                {/* //not use::::::: */}
+
+                {/* <div class="row">
                         <div class="col-sm-2" style={{ borderRight: "4px solid #dee2e6", height: "80%" }}>
                         </div>
                         {countCol > 0 ? <div class="col-sm-2   " style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
@@ -103,21 +142,28 @@ export default function Configurator() {
                         {countCol > 3 ? <div class="col-sm-2 " style={{ borderRight: "4px solid #dee2e6", minHeight: "100%" }}>
                         </div> : ""}
                     </div> */}
-                    {/* <div class="row"> */}
-                    <MyNote />
-                    {/* </div> */}
-                </div>
+                {/* <div class="row"> */}
+                <MyNote />
+                {/* </div> */}
+
 
             </div >
-            <div className="container container-configurator">
+            <div className="container container-configurator" style={{zIndex:"9999"}} >
                 {/* <div className="container container-configurator"> */}
                 <div className="create-note-button" onClick={insertNote}>Create Note +</div>
-                <div className="row dragfolder">
+                <div className="row dragfolder droppable" onDrop={handleDrop} onDragOver={handleDragOver}  >
                     {/* <div className="row "> */}
                     <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
                     {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
                     <p className="folder" style={{ fontSize: '15' }}>drag notes to create folder</p>
                 </div>
+                
+                {/* <div onDragStart={onDragStart} style={{backgroundColor:"red",width:"50px", height:"50px"}} draggable="true"></div> */}
+                {/* <div draggable="true"> */}
+
+                {/* </div> */}
+
+
                 {/* <Droppable > */}
                 {/* <div className="row " >
                         <FiFolder ></FiFolder>

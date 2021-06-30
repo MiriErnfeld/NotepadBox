@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
@@ -85,7 +83,7 @@ export default function Notes() {
         //     $("curr-container").css("left", place)
         // }
     }
-
+    function handleDoubleClick(event) { event.target.select(); }
 
 
     return (
@@ -93,13 +91,13 @@ export default function Notes() {
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {
                     debugger;
-                    return <>  <div className="resize " >
+                    return <>  <div className="resize" >
                         {/* // style={{height:"100%",width:"100%"}} */}
-                        <Rnd cancel="textarea"
+                        <Rnd cancel="textarea" draggable
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
                             // onResizeStop={setresize}
-                            bounds="body"
+                            
                             // bounds={{ top: "90%"}}
                             // disabled={false}
                             // onDragStop={(e, d) => { ddd({ x: d.x, y: d.y }) }}
@@ -126,7 +124,7 @@ export default function Notes() {
                                     margin: "1%"
                                     // marginTop: "2%"
                                 }} onClick={() => deleteItem(item)} className="BsX_button"></BsX>
-                                <img src={icon} alt="Icon" style={{
+                                <img src={icon} alt="Icon" draggable="false" style={{
                                     fontWeight: "none",
                                     color: "#0A102E",
                                     margin: "1%",
@@ -150,6 +148,7 @@ export default function Notes() {
                                     id="areaText"
                                     type="string"
                                     onBlur={e => saveText(item, e.target.value)}
+                                    onDoubleClick={handleDoubleClick}
                                 >{item.textNote}
                                 </textarea>
                             </div>
