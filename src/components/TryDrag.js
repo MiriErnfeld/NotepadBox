@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
@@ -13,11 +11,19 @@ import './myNote.css'
 import $ from 'jquery'
 import Draggable from 'react-draggable';
 
-
-export default function Notes() {
-
-    const noteList = useSelector(state => state.reducerNote.noteList)
-    const data = useSelector(state => state.reducerNote)
+export default function TryDrag() {
+    const [noteList,setNoteList] = useState([{
+        check: "",
+        colors: "#FFEB3B",
+        createNote: "2021-06-29T07:00:12.305Z",
+        flagColor: "false",
+        indexNote: 0,
+        placeX: 596,
+        placeY: 185,
+        textNote: "hhghgh",
+        userName: "60c1f21f7b1b09ba0067bc8f",
+        _id: "60dac4fca6d62e805f4e68a8"
+    }]);
     const [leftNote, setLeftNote] = useState()
 
     const dispatch = useDispatch()
@@ -87,15 +93,50 @@ export default function Notes() {
     }
     function handleDoubleClick(event) { event.target.select(); }
 
+    const onDragStart = (e, id) => {
+        // e.dataTransfer.setData("text/plain", id)
+// debugger
+    }
+    const handleDragEnter = e => {
+        e.stopPropagation();
+        // debugger
+    };
+    const handleDragLeave = e => {
+        e.preventDefault();
+        e.stopPropagation();
+        debugger
+    };
+    const handleDragOver = e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+        e.stopPropagation();
+        // debugger
+    };
+    const handleDrop = e => {
 
+        e.preventDefault();
+        // e.stopPropagation();
+        // setNoteList([])
+        // debugger
+        alert()
+    };
+   
     return (
         <>
+            <div className="row dragfolder droppable" style={{width:"1000px"}} onDrop={handleDrop} onDragOver={handleDragOver}   >
+                {/* <div className="row "> */}
+                {/* <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img> */}
+                {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
+                <p className="folder" style={{ fontSize: '15' }}>drag notes to create folder</p>
+            </div>
+
+            {/* <div onDragStart={onDragStart} style={{ backgroundColor: "red", width: "50px", height: "50px" }} draggable="true"></div> */}
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {
                     debugger;
-                    return <>  <div className="resize" >
+                    return <>  <div className="resize" draggable>
                         {/* // style={{height:"100%",width:"100%"}} */}
-                        <Rnd cancel="textarea" draggable
+                        <Rnd cancel="textarea" disableDragging
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
                             // onResizeStop={setresize}
@@ -186,6 +227,7 @@ export default function Notes() {
                     : <p>No Notes</p>
                 }
             </div>
+      
         </>
     )
 }

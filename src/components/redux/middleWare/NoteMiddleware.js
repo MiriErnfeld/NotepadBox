@@ -128,6 +128,5 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             .catch(error => console.log('error', error));
 
     }
-
     return next(action)
 }

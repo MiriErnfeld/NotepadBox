@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Configurator from './components/configurator'
 import store from './components/redux/store'
 import Notes from './components/myNote'
+import TryDrag from './components/TryDrag';
 
 
 
@@ -18,6 +19,7 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <Configurator></Configurator>
+      {/* <TryDrag/> */}
         {/* <Notes></Notes> */}
       </div>
     </Provider>
