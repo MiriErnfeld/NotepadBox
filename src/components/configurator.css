@@ -2,14 +2,14 @@ body{
     position:relative;
     background-color: #F1F1F3;
     width:100%;
-height:95vh;
+height:100%;
     /* overflow:hidden; */
     /* overflow: hidden; */
 }
 .headerConfig{
     background-color: aqua;
 }
-.folder{
+.newFolder{
     background-color:#0A102E;
     top: 299px;
 left: 1628px;
@@ -49,12 +49,11 @@ height: 15%;
 border: 2px dashed #707070;
 opacity: 1;
 position: relative;
-top:-32%;
+/* top:-32%; */
 width:99%;
 }
 .container-configurator{
     /* display: block; */
-    justify-content: center;
     display: flex;
     flex-direction: column;
     /* display: flex; */
@@ -71,7 +70,7 @@ width:99%;
 
 }
 .container-notes{
-    width: 99vw;
+    width: 79%;
     margin-left: 8px;
     /* height: 100vh; */
     border-radius: 10px;
@@ -79,7 +78,7 @@ width:99%;
     margin-top: 15px;
     bottom:0;
     right: 25px;
-    height: 95vh;
+    height: 95%;
 }
 .configurator-line{
 z-index: 9999;
@@ -191,7 +190,7 @@ display:block;
     padding-top: 13px;
     width: 94%;
     cursor: pointer;
-    top: -35%;
+    /* top: -35%; */
     display: block;
     color: rgb(255, 255, 255);
     height: 9%;
@@ -199,31 +198,17 @@ display:block;
     background: 0px 0px no-repeat padding-box padding-box rgb(53, 152, 244);
     border-radius: 4px;
 }
-
-
-
-
-
-
-
-
-
-.drag-drop-zone {
-    padding: 2rem;
+.folder{
+    width: 90%;
+    height: 6vh;
+    background-color: #F1F1F3;
+    border-radius: 4%;
+    margin: 5%;
     text-align: center;
-    background: #07F;
-    border-radius: 0.5rem;
-    box-shadow: 5px 5px 10px #C0C0C0;
-  }
-  .drag-drop-zone p {
-    color: #FFF;
-  }
-  .drag-drop-zone.inside-drag-area {
-    opacity: 0.7;
-  }
-  .dropped-files li {
-    color: #07F;
-    padding: 3px;
-    text-align: left;
-    font-weight: bold;
-  }
+    
+}
+.folderInput{
+    background: transparent;
+    border: none;
+    outline: none;
+}

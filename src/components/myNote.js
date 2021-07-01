@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
@@ -64,7 +62,7 @@ export default function Notes() {
         if (newText !== "") {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
-            debugger
+            // debugger
             if (noteList[currentItem].textNote) {
                 dispatch(actions.updateNote({ item, newText }));//to update note in midllaware
             }
@@ -75,7 +73,7 @@ export default function Notes() {
         }
     }
     function inResize(item, end) {
-        debugger
+        // debugger
         if (item.flagColor == true)
             dispatch(actions.setFlagColor(item))
         // if (end === 1) {
@@ -86,6 +84,11 @@ export default function Notes() {
         // }
     }
     function handleDoubleClick(event) { event.target.select(); }
+    function handleDragStop(e){
+        debugger
+        console.log(document.getElementById("rnd"))
+        document.getElementById("rnd").click();
+    }
 
 
     return (
@@ -93,18 +96,18 @@ export default function Notes() {
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {
                     debugger;
-                    return <>  <div className="resize" >
+                    return <>  <div className="resize">
                         {/* // style={{height:"100%",width:"100%"}} */}
-                        <Rnd cancel="textarea" draggable
+                        <Rnd id="rnd" cancel="textarea" draggable 
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
                             // onResizeStop={setresize}
                             
                             // bounds={{ top: "90%"}}
                             // disabled={false}
-                            // onDragStop={(e, d) => { ddd({ x: d.x, y: d.y }) }}
+                            onMouseUp={handleDragStop}
                             key={item.indexNote}
-                            className={`note ${item.indexNote}`}
+                            className={`note ${item.indexNote} note`}
                             default={{
                                 position: "absolute",
                                 backgroundColor: item.colors,

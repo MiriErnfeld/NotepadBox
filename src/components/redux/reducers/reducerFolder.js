@@ -6,12 +6,13 @@ const initialState = {
 }
 const folderData = {
 
-    createFolder(state, action) { //add a new folder to the state, from midlleWare
+    addFolder(state, action) { //push a new folder to the state, after creating the folder in midlleWare
+        debugger
         let folders = [...state.folders];
-        folders.push(action.payload.folder);
+        folders.push(action.payload.newFolder);
         state.folders = [...folders];
     },
-    getAllFoldersForUser(state, action) {
+    setAllFoldersForUser(state, action) {
         state.folders = action.payload.folders;
     }
 

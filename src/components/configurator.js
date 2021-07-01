@@ -14,16 +14,19 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 import MyNote from './myNote'
+import { FaSave } from 'react-icons/fa';
 var Color = require('color');
 
 
 export default function Configurator() {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const folders = useSelector(state => state.reducerFolder.folders);
     {/* //not use::::::: */ }
     // const [countCol, setCountCol] = useState(0)
-    const [arrnums, setarrnums] = useState([{}])
-    const [CcurrentItem, setCcurrentItem] = useState()
+    const [arrnums, setarrnums] = useState([{}]);
+    const [CcurrentItem, setCcurrentItem] = useState();
+    const [newFolder, setNewFolder] = useState();
 
 
 
@@ -51,51 +54,56 @@ export default function Configurator() {
     //     $('.inputTitle' + index).css("font-weight", "bold");
     //     $('.inputTitle' + index).css("text-align", "center");
     // }
-    function onDropbb() { debugger }
 
-    const onDragStart= (e,id)=>{
+    const onDragStart = (e, id) => {
         // e.dataTransfer.setData("text/plain",id)
 
     }
+
     const handleDragEnter = e => {
         e.stopPropagation();
-        debugger
+        // debugger
     };
+
     const handleDragLeave = e => {
         e.preventDefault();
         e.stopPropagation();
-        debugger
+        // debugger
     };
+
     const handleDragOver = e => {
         e.preventDefault();
         e.dataTransfer.dropEffect = 'copy';
         e.stopPropagation();
-        debugger
+        // debugger
     };
+
     const handleDrop = e => {
 
         e.preventDefault();
         // e.stopPropagation();
         // debugger
-        alert();
+        setNewFolder(!newFolder);
     };
-    function allowDrop(e) {
-        debugger;
-        //  e.preventDefault();
+
+
+    async function createFolder(event) {
+        let text = event.target.value;
+        if (text === "") {
+            text = "new folder";
+        }
+        console.log(text); debugger
+        await dispatch(actions.createFolder(text));
+        setNewFolder(!newFolder);
     }
 
-    // function drop(event) {
-    //     debugger
-    //     // event.preventDefault();
-    //     // var data = event.dataTransfer.getData("Text");
-    //     // event.target.appendChild(document.getElementById(data));
-    //     // document.getElementById("demo").innerHTML = "The p element was dropped";
-    // }
+
     function insertNote() {
 
         dispatch(actions.setNoteList());
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
     }
+
     return (
         <>
             {/* <DragDropContext
@@ -148,16 +156,35 @@ export default function Configurator() {
 
 
             </div >
-            <div className="container container-configurator">
+            <div className="container container-configurator d-flex align-items-center flex-column start" >
                 {/* <div className="container container-configurator"> */}
-                <div className="create-note-button" onClick={insertNote}>Create Note +</div>
-                <div className="row dragfolder droppable" onDrop={handleDrop} onDragOver={handleDragOver}style={{zIndex:"9999"}}   >
+                <div className="create-note-button m-2 mt-3" onClick={insertNote}>Create Note +</div>
+                <div className="row dragfolder droppable m-2" onDrop={handleDrop} onDragOver={handleDragOver}  >
                     {/* <div className="row "> */}
                     <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
                     {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
-                    <p className="folder" style={{ fontSize: '15' }}>drag notes to create folder</p>
+                    <p className="newFolder" style={{ fontSize: '15' }}>drag notes to create folder</p>
                 </div>
-                
+                {
+                    newFolder ? <div className="folder d-flex justify-content-around align-items-center">
+                        <FiFolder ></FiFolder>
+                        <input type="text" id="folderInput" placeholder="Folder name" className="folderInput" onBlur={createFolder} onKeyUp={(event) => {
+                            if (event.key === 13) {
+                                createFolder();
+                                document.getElementById("folderInput").blur();
+                            }
+                        }}></input>
+                    </div> : ""
+                }
+                {
+                    folders ? folders.map((folder) => (
+                        <div key={folder.folderIndex} className="folder m-2 d-flex justify-content-around align-items-center">
+                            <FiFolder ></FiFolder>
+                            <p>{folder.folderName}</p></div>
+                    ))
+                        : ""}
+
+
                 {/* <div onDragStart={onDragStart} style={{backgroundColor:"red",width:"50px", height:"50px"}} draggable="true"></div> */}
                 {/* <div draggable="true"> */}
 
