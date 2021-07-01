@@ -72,7 +72,12 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
     }
     if (action.type == "DELETE_NOTE") {
         debugger
+        var check = action.payload.newText//from save text function When user delete all text
         var index = action.payload.indexNote
+        if (check == "") {//from save text function
+            debugger
+            index = action.payload.item.indexNote
+        }
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
         myHeaders.append("Content-Type", "application/json");
@@ -82,13 +87,20 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             redirect: 'follow'
         };
         debugger
-        if (action.payload.textNote == "")
-            dispatch(actions.deleteOnlyFromClient(action.payload))//reducer
+
+        if (action.payload.textNote||check == ""&&action.payload.item._id=="" ) {//In case the note is not yet saved in the database
+            dispatch(actions.deleteOnlyFromClient(action.payload))//function in reducer
+            return
+        }
         fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/deleteNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log(result)
                 debugger
+                if (check == "") {// after note delete only from server dispatch to reducer
+                    dispatch(actions.setDummyNoteList(result))//enter to dummyNoteList only the index of this note
+                    return next(action)
+                }
                 dispatch(actions.deleteNoteAction(result))//reducer
             })
             .catch(error => console.log('error', error));
@@ -102,10 +114,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
         myHeaders.append("Content-Type", "application/json");
         debugger
         var raw = JSON.stringify({
-
             "textNote": action.payload.newText,
-            "placeX": action.payload.left,
-            "placeY": action.payload.top,
             "colors": action.payload.c,
             // "check": action.payload.check //if want that the check color saved
         });
@@ -126,8 +135,41 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
                 debugger
             })
             .catch(error => console.log('error', error));
-
     }
-
     return next(action)
+
+    // if (action.type == "SAVE_POSITION") {
+    //     debugger
+    //     var index = action.payload.item.indexNote
+    //     var position = action.payload.d
+    //     var myHeaders = new Headers();
+    //     // my:
+    //     myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
+    //     myHeaders.append("Content-Type", "application/json");
+    //     debugger
+    //     var raw = JSON.stringify({
+    //         "placeX": position.x.toFixed(0),
+    //         "placeY": position.y.toFixed(0)
+    //     });
+    //     debugger
+    //     var requestOptions = {
+    //         method: 'POST',
+    //         headers: myHeaders,
+    //         body: raw,
+    //         redirect: 'follow'
+    //     };
+
+    //     fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/updateNote`, requestOptions)
+    //         .then(response => response.json())
+    //         .then(result => {
+    //             alert("in position@@@@@@@@@")
+    //             console.log(result)
+    //             debugger
+    //             dispatch(actions.setPosition({ result, position }))//update in reducer
+    //             debugger
+    //         })
+    //         .catch(error => console.log('error', error));
+
+
+    // }
 }

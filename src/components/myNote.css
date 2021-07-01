@@ -30,7 +30,7 @@ cursor: -webkit-grab;
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%); 
 min-height: 80px;
 min-width: 130px;
-}
+display:-webkit-box !important;}
 .header{
   /* background-color: yellow; */
   position: absolute;
@@ -44,10 +44,10 @@ min-width: 130px;
    right: 0 !important
 }
 .curr-container{
-  /* float: left; */
+  float: left;
   display:block;
-position: absolute;
-left: 9.5rem;
+/* position: absolute; */
+/* left: 9.5rem; */
 top: 0;
 /* top: 35%;
 left: 48vh; */

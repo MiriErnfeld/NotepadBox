@@ -109,22 +109,22 @@ export default function Configurator() {
                 </div>
 
             </div >
-            {/* <div className="container container-configurator"> */}
-            {/* <div className="container container-configurator"> */}
-
-            {/* <div className="row dragfolder"> */}
-            {/* <div className="row "> */}
-            {/* <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img> */}
-            {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
-            {/* <p className="folder" style={{ fontSize: '15' }}>drag notes to create folder</p> */}
-            {/* </div> */}
-            {/* <Droppable > */}
-            {/* <div className="row " >
+            <div className="container container-configurator">
+                {/* <div className="container container-configurator"> */}
+                <div className=" create-note-button" onClick={insertNote}>Create Note +</div>
+                <div className="row dragfolder">
+                    {/* <div className="row "> */}
+                    <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
+                    {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
+                    <p className="folder" style={{ fontSize: '15' }}>drag notes to create folder</p>
+                </div>
+                {/* <Droppable > */}
+                {/* <div className="row " >
                         <FiFolder ></FiFolder>
                         folder name
                     </div> */}
 
-            {/* </div> */}
+            </div>
             {/* </DragDropContext> */}
         </>
     )

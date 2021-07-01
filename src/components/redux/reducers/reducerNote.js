@@ -6,7 +6,8 @@ const initialState = {
     currentItem: "",
     count: 0,
     topNote: "",
-    noteList: []
+    noteList: [],
+    dummyNoteList: []//notes After Delete In Server display only in client
 }
 const noteData = {
     setUser(state, action) { //from midlleWare
@@ -29,12 +30,18 @@ const noteData = {
         console.log(state.noteList);
     },
     getAllNotesForUser(state, action) { //from midlleWare
-
         state.noteList = (action.payload.notes);
-
-        console.log(state.noteList[0].flagColor);
-        console.log(state.noteList);
     },
+    // setPosition(state, action) {
+    //     debugger
+    //     let i = action.payload.ressult.user.indexNote
+    //     let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === i))
+    //     let x = action.payload.position.x
+    //     let y = action.payload.position.y
+    //     state.noteList[correctIndex].placeX = x
+    //     state.noteList[correctIndex].placeY = y
+    //     console.log(state.noteList);
+    // },
     updateNoteAction(state, action) { // from midlleWare 
         debugger
         let id = action.payload.user.indexNote
@@ -69,19 +76,42 @@ const noteData = {
     },
     deleteOnlyFromClient(state, action) {
         debugger
-        let note = action.payload
+        // let I = action.payload.item.indexNote//In case the note is without text 
+        //and has already been deleted from the server and now needs to be deleted only from client::::
+        // if (I >= 0) {
+        //     console.log(state.noteList);
+        //     debugger
+        //     // let Cnote = action.payload.currentItem//Which item delete
+        //     let arr1 = [...state.dummyNoteList]
+        //     arr1.splice(Cnote, 1)
+        //     state.dummyNoteList = [...arr1]
+        //     //delete in noteList:
+        //     let arr2 = [...state.noteList]
+        //     let index = action.payload.item.indexNote
+        //     const deleteItem = state.noteList.indexOf(state.noteList.find(x => x.indexNote == index))
+        //     if (deleteItem !== -1) {
+        //         debugger
+        //         arr2.splice(deleteItem, 1)
+        //     }
+        //     state.noteList = [...arr2]
+        //     console.log(state.noteList);
+        //     return
+        // }
+        // let note = action.payload
+        console.log(state.noteList);
         let index = action.payload.indexNote
+        if (index == undefined)
+            index = action.payload.item.indexNote;
         let arr = [...state.noteList]
         const deleteItem = state.noteList.indexOf(state.noteList.find(x => x.indexNote == index))
-        if (deleteItem !== -1)
+        if (deleteItem !== -1) {
             debugger
-        {
             arr.splice(deleteItem, 1)
         }
         state.noteList = [...arr]
         console.log(state.noteList);
     },
-    setNoteList(state, action) { //from component configurator.js onClick button insertNote
+    setNoteList(state) { //from component configurator.js onClick button insertNote
         debugger
         let c = state.noteList.length;
         let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === c))
@@ -90,11 +120,18 @@ const noteData = {
             c = state.noteList.length + 1
         }
         let allNote = [...state.noteList]
-        let top = Math.floor(Math.random() * 238)
-        let left = Math.floor(Math.random() * 800)
+        let top = Math.floor(Math.random() * 260)
+        let left = Math.floor(Math.random() * 600)
+
         allNote.push({ _id: "", indexNote: c, userName: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
         state.noteList = [...allNote]
 
+    },
+    setDummyNoteList(state, action) {
+        debugger
+        let note = action.payload.note_to_delete.indexNote
+        state.dummyNoteList.push(note)
+        console.log(state.dummyNoteList);
     },
     placeNote(state, action) {
         debugger

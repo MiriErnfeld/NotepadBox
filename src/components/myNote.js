@@ -17,8 +17,11 @@ import Draggable from 'react-draggable';
 export default function Notes() {
 
     const noteList = useSelector(state => state.reducerNote.noteList)
+
     const data = useSelector(state => state.reducerNote)
-    const [leftNote, setLeftNote] = useState()
+    // const [leftNote, setLeftNote] = useState()
+    // const [width, setWidth] = useState(150)
+    // const [height, setHeight] = useState(150)
 
     const dispatch = useDispatch()
 
@@ -27,7 +30,6 @@ export default function Notes() {
         '#BFD41F', '#8580FD', '#6DD41F', '#7bdcb5', '#44D7B6'
         , '#40D9ED', '#ff8a65', '#d9e3f0'
     ];
-    function ddd() { debugger }
 
     function openCloseEditor(item) {
         debugger
@@ -42,7 +44,14 @@ export default function Notes() {
         dispatch(actions.setFlagColor(item))
     }
     function deleteItem(item) {
-        dispatch(actions.deleteNote(item))//delete note in midlleWare
+        debugger
+        const i = item.indexNote
+        console.log(data);
+        let correctItem = data.dummyNoteList.indexOf(data.dummyNoteList.find(x => x == i))//find the current place in the dummyNoteList in redux if the note delete only from server
+        if (correctItem != -1) {
+            dispatch(actions.deleteOnlyFromClient(item))//dispatch to deleteOnlyFromClient function in reducer
+        }
+        dispatch(actions.deleteNote(item))//delete note in midlleWare 
     }
     function changeColor(c, item, index) {
         dispatch(actions.setCheck(index)) // index from the checked color
@@ -61,7 +70,8 @@ export default function Notes() {
         text.style.backgroundColor = c
     }
     function saveText(item, newText) {
-        if (newText !== "") {
+        debugger
+        if (newText) {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
             debugger
@@ -69,41 +79,44 @@ export default function Notes() {
                 dispatch(actions.updateNote({ item, newText }));//to update note in midllaware
             }
             else {
+                debugger
+
                 dispatch(actions.createNote1({ item, newText }));//to update in midlleWare when there is the first change
                 dispatch(actions.createNote({ item, newText }));//to update in redux
             }
         }
+        else {
+            dispatch(actions.deleteNote({ item, newText }))//delete note in midlleWare
+        }
     }
     function inResize(item, end) {
         debugger
-        if(item.flagColor==true)
+        // if (item.flagColor == true) {
         dispatch(actions.setFlagColor(item))
-        // if (end === 1) {
+        // if (end ==1) {
+        //     alert("inresizeEnd",item.placeX)
         //     debugger
         //     let x = item.placeX
-        //     let place=x+3
+        //     let place=x+30
         //     $("curr-container").css("left", place)
         // }
+        // }
     }
-
-
     return (
         <>
-            <div className="all-notes">
+            <div className="all-notes" style={{ width: '98%', height: "88%" }}>
+
                 {noteList ? noteList.map((item) => {
                     debugger;
-                    return <>  <div className="resize " >
-                        {/* // style={{height:"100%",width:"100%"}} */}
+                    const x = item.placeX
+                    return <>
                         <Rnd
-                            onResizeStart={() => { inResize(item, 0) }}
-                            onResizeEnd={() => { inResize(item, 1) }}
-                            // onResizeStop={setresize}
-                            bounds="body"
-                            // bounds={{ top: "90%"}}
-                            // disabled={false}
-                            // onDragStop={(e, d) => { ddd({ x: d.x, y: d.y }) }}
+                            // onResizeStart={() => { inResize(item, 0) }}
+                            // onResizeStop={() => { inResize(item, 1) }}
+                            bounds="parent"
                             key={item.indexNote}
                             className={`note ${item.indexNote}`}
+                            cancel="textarea"
                             default={{
                                 position: "absolute",
                                 backgroundColor: item.colors,
@@ -112,9 +125,22 @@ export default function Notes() {
                                 width: 150,
                                 height: 150
                             }}
+                        // style={{position:"absolute", backgroundColor:item.colors}}
+                        // size={{ width: width, height: height }}
+                        // position={{ x: item.placeX, y: item.placeY }}
+                        // onDragStop={(e, d) => {
+                        //     dispatch(actions.savePosition({d, item}))//update in midlleWare
+                        // }}
+                        // onResizeStop={(e, direction, ref, delta, position) => {
+                        //     this.setState({
+                        //         width: ref.style.width,
+                        //         height: ref.style.height,
+                        //         ...position,
+                        //     });
+                        // }}
                         >
                             <div className={`header ${item.indexNote}`}
-                                style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
+                                style={{ backgroundColor: LightenDarkenColor(item.colors, -30) }}
                             >
                                 <BsX style={{
                                     color: "#0A102E",
@@ -124,10 +150,10 @@ export default function Notes() {
                                     left: "-27%",
                                     // marginTop: "2%"
                                 }} onClick={() => deleteItem(item)} className="BsX_button"></BsX>
-                                <img src={icon} alt="Icon" style={{
+                                <img src={icon} alt="Icon" draggable="false" style={{
                                     fontWeight: "none",
                                     color: "#0A102E",
-                                    // marginTop: "2%"
+                                    marginTop: "1%"
                                 }}></img>
                                 <BsPencil
                                     onClick={() => openCloseEditor(item)}
@@ -136,7 +162,6 @@ export default function Notes() {
                                         position: "relative",
                                         right: "-27%",
                                         cursor: "auto",
-                                        // marginTop: "2%"
                                     }} className="BsPencil_button"></BsPencil>
                                 <textarea
                                     className={`textarea ${item.indexNote}`}
@@ -147,11 +172,7 @@ export default function Notes() {
                                 >{item.textNote}
                                 </textarea>
                             </div>
-                            <div className="curr-container"
-                                style={{
-                                    // left: item.placeY
-                                }}
-                            >
+                            <div className="curr-container">
                                 {(item.flagColor === true) ?
                                     <div className="curr" >
                                         {mycolors.map((c, i) => {
@@ -173,7 +194,7 @@ export default function Notes() {
                                     : ""}
                             </div>
                         </Rnd>
-                    </div>
+                        {/* </div> */}
                     </>
                 })
                     : <p>No Notes</p>
