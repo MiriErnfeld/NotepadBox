@@ -13,17 +13,16 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             headers: myHeaders,
             redirect: 'follow'
         };
-        fetch(`https://box.dev.leader.codes/api/${userName}/note/getNotesByUserName`, requestOptions)
+        fetch(`https://box.dev.leader.codes/api/${userName}/folder/getFoldersByUserName`)
             .then(response => response.json())
             .then(result => {
-                dispatch(actions.getAllFoldersForUser(result))
+                dispatch(actions.setAllFoldersForUser(result))
             })
             .catch(error => console.log('error', error));
 
     }
+
   
    
-   
-
     return next(action)
 }

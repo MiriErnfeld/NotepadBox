@@ -1,15 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-
-
 import React, { useState } from 'react'
 import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Configurator from './components/configurator'
 import store from './components/redux/store'
-import Notes from './components/myNote'
-
-
 
 function App() {
 

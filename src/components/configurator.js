@@ -1,25 +1,21 @@
 import React, { useState } from 'react'
-import $ from 'jquery'
 import './configurator.css'
-
 import { actions } from '../components/redux/actions/action';
-import { Droppable, DragDropContext } from 'react-beautiful-dnd'
 import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
 import { FcPlus } from "react-icons/fc";
 import Dropdown from 'react-bootstrap/Dropdown'
 import { BsFillPlusCircleFill } from "react-icons/bs";
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
 import MyNote from './myNote'
 var Color = require('color');
 
 
 export default function Configurator() {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const folders = useSelector(state => state.reducerFolder.folders)
+
     {/* //not use::::::: */ }
     // const [countCol, setCountCol] = useState(0)
     const [arrnums, setarrnums] = useState([{}])
@@ -53,7 +49,7 @@ export default function Configurator() {
     // }
     function onDropbb() { debugger }
 
-    const onDragStart= (e,id)=>{
+    const onDragStart = (e, id) => {
         // e.dataTransfer.setData("text/plain",id)
 
     }
@@ -75,8 +71,8 @@ export default function Configurator() {
     const handleDrop = e => {
 
         e.preventDefault();
-        // e.stopPropagation();
-        // debugger
+        e.stopPropagation();
+    //    dispatch(actions.noteToSpesificFolder)
         alert();
     };
     function allowDrop(e) {
@@ -144,20 +140,29 @@ export default function Configurator() {
                     </div> */}
                 {/* <div class="row"> */}
                 <MyNote />
+                {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
 
             </div >
-            <div className="container container-configurator" style={{zIndex:"9999"}} >
+            <div className="container container-configurator d-flex align-items-center flex-column start"  >
                 {/* <div className="container container-configurator"> */}
-                <div className="create-note-button" onClick={insertNote}>Create Note +</div>
-                <div className="row dragfolder droppable" onDrop={handleDrop} onDragOver={handleDragOver}  >
+                <div className="create-note-button m-2 mt-3" onClick={insertNote}>Create Note +</div>
+                <div className="row dragfolder droppable m-2" onDrop={handleDrop} onDragOver={handleDragOver}  >
                     {/* <div className="row "> */}
                     <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
                     {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
-                    <p className="folder" style={{ fontSize: '15' }}>drag notes to create folder</p>
+                    <p className="newFolder" style={{ fontSize: '15' }}>drag notes to create folder</p>
                 </div>
-                
+                {
+                folders ? folders.map((folder) =>(
+                    <div key={folder.folderIndex}
+                    onDrop={handleDrop} onDragOver={handleDragOver}
+                     className="folder m-2 d-flex justify-content-around align-items-center"> 
+                     <FiFolder ></FiFolder>
+                     <p>{folder.folderName}</p></div>
+                ))
+                 :""}
                 {/* <div onDragStart={onDragStart} style={{backgroundColor:"red",width:"50px", height:"50px"}} draggable="true"></div> */}
                 {/* <div draggable="true"> */}
 

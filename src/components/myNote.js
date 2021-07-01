@@ -85,7 +85,6 @@ export default function Notes() {
     }
     function handleDoubleClick(event) { event.target.select(); }
 
-
     return (
         <>
             <div className="all-notes">
@@ -93,11 +92,9 @@ export default function Notes() {
                     debugger;
                     return <>  <div className="resize" >
                         {/* // style={{height:"100%",width:"100%"}} */}
-                        <Rnd cancel="textarea" draggable
+                        <Rnd cancel="textarea" draggable 
                             onResizeStart={() => { inResize(item, 0) }}
-                            onResizeEnd={() => { inResize(item, 1) }}
-                            // onResizeStop={setresize}
-                            
+                            onResizeEnd={() => { inResize(item, 1) }}                       
                             // bounds={{ top: "90%"}}
                             // disabled={false}
                             // onDragStop={(e, d) => { ddd({ x: d.x, y: d.y }) }}

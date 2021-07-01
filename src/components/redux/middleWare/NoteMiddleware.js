@@ -128,6 +128,22 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             .catch(error => console.log('error', error));
 
     }
+    if(action.type == "NOTE_TO_SPESIFIC_FOLDER") {
+        // var myHeaders = new Headers();
+        // myHeaders.append("Cookie", "cf_ob_info=502:653dc5431dd14c13:AMS; cf_use_ob=0");
+
+        // var requestOptions = {
+        //     method: 'GET',
+        //     headers: myHeaders,
+        //     redirect: 'follow'
+        // };
+        // fetch(`https://box.dev.leader.codes/api/${userName}/note/${folderId}/${noteIndex}/NoteToSpesificFolder`)
+        //     .then(response => response.json())
+        //     .then(result => {
+        //         dispatch(actions.getAllNotesForUser(result))
+        //     })
+        //     .catch(error => console.log('error', error));
+    }
 
     return next(action)
 }

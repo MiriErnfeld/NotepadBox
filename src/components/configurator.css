@@ -9,7 +9,7 @@ height:100%;
 .headerConfig{
     background-color: aqua;
 }
-.folder{
+.newFolder{
     background-color:#0A102E;
     top: 299px;
 left: 1628px;
@@ -37,6 +37,7 @@ height: 29px;
     background-color:red
 }
 .dragfolder{
+    z-index: 8000;
     display:block;
     align-items:center;
     justify-content:center;
@@ -49,12 +50,12 @@ height: 15%;
 border: 2px dashed #707070;
 opacity: 1;
 position: relative;
-top:-32%;
+/* top:-32%; */
 width:99%;
 }
 .container-configurator{
+    overflow: auto;
     /* display: block; */
-    justify-content: center;
     display: flex;
     flex-direction: column;
     /* display: flex; */
@@ -191,11 +192,19 @@ display:block;
     padding-top: 13px;
     width: 94%;
     cursor: pointer;
-    top: -35%;
+    /* top: -35%; */
     display: block;
     color: rgb(255, 255, 255);
     height: 9%;
     font: 700 18px / 24px Roboto;
     background: 0px 0px no-repeat padding-box padding-box rgb(53, 152, 244);
     border-radius: 4px;
+}
+.folder{
+    width: 90%;
+    height: 6vh;
+    background-color: #F1F1F3;
+    border-radius: 5%;
+    margin: 5%;
+    z-index: 8888;
 }

@@ -16,3 +16,4 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(getData,f
 window.store = store;
 export default store;
 store.dispatch({ type: 'INIT_DATA' });
+store.dispatch({type:"GET_USER_FOLDER"})

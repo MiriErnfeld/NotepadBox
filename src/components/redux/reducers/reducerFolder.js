@@ -11,7 +11,7 @@ const folderData = {
         folders.push(action.payload.folder);
         state.folders = [...folders];
     },
-    getAllFoldersForUser(state, action) {
+    setAllFoldersForUser(state, action) {
         state.folders = action.payload.folders;
     }
 

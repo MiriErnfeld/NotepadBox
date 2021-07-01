@@ -143,7 +143,9 @@ const noteData = {
         state.noteList[correctIndex].placeY = action.payload.y
 
 
-    }
+    },
+
+    noteToSpesificFolder(state, action) {}
 };
 
 export default produce((state, action) => createReducer(state, action, noteData), initialState);
