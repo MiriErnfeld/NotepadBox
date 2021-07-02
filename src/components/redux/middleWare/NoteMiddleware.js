@@ -88,7 +88,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
         };
         debugger
 
-        if (action.payload.textNote||check == ""&&action.payload.item._id=="" ) {//In case the note is not yet saved in the database
+        if (action.payload.textNote==""||check == ""&&action.payload.item._id=="" ) {//In case the note is not yet saved in the database
             dispatch(actions.deleteOnlyFromClient(action.payload))//function in reducer
             return
         }
