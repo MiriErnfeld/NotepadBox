@@ -43,10 +43,6 @@ export const getData = ({ dispatch, getState }) => next => action => {
 
 
 
-
-
-
-
         //     let url = window.location;
         //     let userName = (url.pathname.split('/')[1]);
         //     debugger
