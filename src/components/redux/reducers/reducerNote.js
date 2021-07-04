@@ -15,13 +15,7 @@ const noteData = {
         state.noteList.userName = action.payload
     },
     createNote(state, action) { //from midlleWare
-
         let i = action.payload.item.indexNote
-        //option 1:
-        // let currentNote=state.noteList.filter(note => note.indexNote==i)
-        // currentNote.textNote= action.payload.newText
-
-        //option 2:
         //find the relevant current aouo index in the array in atate
         let c = state.noteList.indexOf(state.noteList.find(note => note.indexNote === i))
         console.log(c);
@@ -100,7 +94,7 @@ const noteData = {
         // let note = action.payload
         console.log(state.noteList);
         let index = action.payload.indexNote
-        if (index == undefined)
+        if (index == undefined)// ||if(action.payload.textNote)
             index = action.payload.item.indexNote;
         let arr = [...state.noteList]
         const deleteItem = state.noteList.indexOf(state.noteList.find(x => x.indexNote == index))
@@ -110,6 +104,7 @@ const noteData = {
         }
         state.noteList = [...arr]
         console.log(state.noteList);
+        //missing delete index in dummyNoteList When the note saved in this list!!!!!!!
     },
     setNoteList(state) { //from component configurator.js onClick button insertNote
         debugger

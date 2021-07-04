@@ -80,7 +80,6 @@ export default function Notes() {
             }
             else {
                 debugger
-
                 dispatch(actions.createNote1({ item, newText }));//to update in midlleWare when there is the first change
                 dispatch(actions.createNote({ item, newText }));//to update in redux
             }
