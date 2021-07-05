@@ -11,16 +11,17 @@ const initialState = {
 }
 const noteData = {
     setUser(state, action) { //from midlleWare
-
+        debugger
         state.noteList.userName = action.payload
     },
-    createNote(state, action) { //from midlleWare
-        let i = action.payload.item.indexNote
+    createNote(state, action) { //from middleWare
+        debugger
+        let i = action.payload.new_note.indexNote
         //find the relevant current aouo index in the array in atate
         let c = state.noteList.indexOf(state.noteList.find(note => note.indexNote === i))
         console.log(c);
-        state.noteList[c].textNote = action.payload.newText
-        // state.noteList[i].textNote = action.payload.newText;
+        state.noteList[c].textNote = action.payload.new_note.newText
+        state.noteList[c]._id = action.payload.new_note._id
         console.log(state.noteList);
     },
     getAllNotesForUser(state, action) { //from midlleWare
@@ -110,10 +111,21 @@ const noteData = {
         debugger
         let c = state.noteList.length;
         let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === c))
-        if (correctIndex !== -1) {
+        // if (correctIndex !== -1) {//in case that in noteList there is note with this index
+        //     debugger
+        for (let i = 0; correctIndex !== -1; i++) {
             debugger
-            c = state.noteList.length + 1
+            c = c + 1
+            let s = state.noteList.indexOf(state.noteList.find(note => note.indexNote === c))
+            if (s !== -1) {
+                debugger
+                correctIndex = s
+            }
+            else {
+                correctIndex = -1
+            }
         }
+        // }
         let allNote = [...state.noteList]
         let top = Math.floor(Math.random() * 260)
         let left = Math.floor(Math.random() * 600)
@@ -128,13 +140,13 @@ const noteData = {
         state.dummyNoteList.push(note)
         console.log(state.dummyNoteList);
     },
-    placeNote(state, action) {
-        debugger
-        let x = action.payload.item.indexNote
-        let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
-        state.noteList[correctIndex].placeX = action.payload.left
-        state.noteList[correctIndex].placeY = action.payload.top
-    },
+    // placeNote(state, action) {
+    //     debugger
+    //     let x = action.payload.item.indexNote
+    //     let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
+    //     state.noteList[correctIndex].placeX = action.payload.left
+    //     state.noteList[correctIndex].placeY = action.payload.top
+    // },
     setFlagColor(state, action) {  //set flagColor only to true from component myNote.js
         debugger
         let i = action.payload.indexNote
@@ -168,14 +180,14 @@ const noteData = {
 
         state.currentItem = action.payload
     },
-    setPlaceNote(state, action) {
-        let x = action.payload.item.indexNote
-        let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
-        state.noteList[correctIndex].placeX = action.payload.x
-        state.noteList[correctIndex].placeY = action.payload.y
+    // setPlaceNote(state, action) {
+    //     let x = action.payload.item.indexNote
+    //     let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
+    //     state.noteList[correctIndex].placeX = action.payload.x
+    //     state.noteList[correctIndex].placeY = action.payload.y
 
 
-    }
+    // }
 };
 
 export default produce((state, action) => createReducer(state, action, noteData), initialState);

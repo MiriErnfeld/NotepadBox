@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
-import { FaGalacticSenate, FaGripHorizontal } from "react-icons/fa";
+import { BsPencil, BsX, BsCheck } from "react-icons/bs";
 import { Rnd } from "react-rnd";
 
 import icon from '../images/icon.png'
@@ -48,8 +47,10 @@ export default function Notes() {
         const i = item.indexNote
         console.log(data);
         let correctItem = data.dummyNoteList.indexOf(data.dummyNoteList.find(x => x == i))//find the current place in the dummyNoteList in redux if the note delete only from server
-        if (correctItem != -1) {
+        if (correctItem != -1 || item.textNote == "" || item._id == "") { //In case one of the options is up there is no need to contact the server
             dispatch(actions.deleteOnlyFromClient(item))//dispatch to deleteOnlyFromClient function in reducer
+            alert("correctItem != -1 || item.textNote =empty||item._id ==empty ")
+            return
         }
         dispatch(actions.deleteNote(item))//delete note in midlleWare 
     }
@@ -81,10 +82,14 @@ export default function Notes() {
             else {
                 debugger
                 dispatch(actions.createNote1({ item, newText }));//to update in midlleWare when there is the first change
-                dispatch(actions.createNote({ item, newText }));//to update in redux
+                // dispatch(actions.createNote({ item, newText }));//to update in redux
             }
         }
         else {
+            if (item._id == "") { //In case the note is not yet saved in the database and the text is empty
+                debugger
+                return;
+            }
             dispatch(actions.deleteNote({ item, newText }))//delete note in midlleWare
         }
     }
@@ -104,7 +109,6 @@ export default function Notes() {
     return (
         <>
             <div className="all-notes" style={{ width: '98%', height: "88%" }}>
-
                 {noteList ? noteList.map((item) => {
                     debugger;
                     const x = item.placeX

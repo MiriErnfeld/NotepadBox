@@ -5,9 +5,6 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
     let url = window.location;
     let userName = (url.pathname.split('/')[1]);
     if (action.type == "INIT_DATA") {
-
-        let url = window.location;
-        let userName = (url.pathname.split('/')[1]);//miri
         var myHeaders = new Headers();
         myHeaders.append("Cookie", "cf_ob_info=502:653dc5431dd14c13:AMS; cf_use_ob=0");
 
@@ -29,12 +26,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
     }
     if (action.type == "CREATE_NOTE1") {
         debugger
-        let url = window.location;
-        let user = (url.pathname.split('/')[1]);
-        //    var myHeaders.append(): {
-        //         'Content-Type': 'application/json',
-        //        ' Authorization':' eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJmWEpmZzJSNnBrUzdvUFkydEtiNUlQTXdEU2IyIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMjM1NzQ4OX0.blk6OJdgrkzW1rIiKkmAPTiF7KHp1nA7Ojs9cMf2zrc',
-        //       },
+
         var myHeaders = new Headers();
         //jwt from userName miri!!!!
         myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
@@ -58,13 +50,12 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/${user}/note/createNote`, requestOptions)
+        fetch(`https://box.dev.leader.codes/api/${userName}/note/createNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
 
                 console.log(result)
-                dispatch(actions.setUser(user))
-
+                dispatch(actions.createNote(result))//update note in reducer
             })
             .catch(error => console.log('error', error));
 
@@ -90,9 +81,10 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
         // if (action.payload.textNote == "" || check == "" && action.payload.item._id == "") {//In case the note is not yet saved in the database
         if (action.payload.textNote == "" || action.payload._id == "") {//In case the note is not yet saved in the database
             dispatch(actions.deleteOnlyFromClient(action.payload))//function in reducer
+            alert("delete-only from client by midlleWare!!!!!!!!")
             return
         }
-        if (index) {
+        if (index !== null) {
             fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/deleteNote`, requestOptions)
                 .then(response => response.json())
                 .then(result => {
