@@ -13,7 +13,7 @@ const folderData = {
     },
     setAllFoldersForUser(state, action) {
         state.folders = action.payload.folders;
-    }
+    },
 
 }
 

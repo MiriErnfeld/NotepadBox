@@ -12,8 +12,9 @@ import $ from 'jquery'
 import Draggable from 'react-draggable';
 
 
-export default function Notes() {
+export default function Notes(props) {
 
+    const { setCurrentNote } = props;
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
     const [leftNote, setLeftNote] = useState()
@@ -85,16 +86,21 @@ export default function Notes() {
     }
     function handleDoubleClick(event) { event.target.select(); }
 
+    function onDragStart(indexNote) {
+        setCurrentNote(indexNote)
+    }
+
     return (
         <>
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {
-                    debugger;
+
                     return <>  <div className="resize" >
                         {/* // style={{height:"100%",width:"100%"}} */}
-                        <Rnd cancel="textarea" draggable 
+                        <Rnd cancel="textarea" draggable
                             onResizeStart={() => { inResize(item, 0) }}
-                            onResizeEnd={() => { inResize(item, 1) }}                       
+                            onResizeEnd={() => { inResize(item, 1) }}
+                            onDragStart={() => onDragStart(item.indexNote)}
                             // bounds={{ top: "90%"}}
                             // disabled={false}
                             // onDragStop={(e, d) => { ddd({ x: d.x, y: d.y }) }}

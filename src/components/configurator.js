@@ -1,27 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './configurator.css'
 import { actions } from '../components/redux/actions/action';
 import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
 import { FcPlus } from "react-icons/fc";
-import Dropdown from 'react-bootstrap/Dropdown'
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import MyNote from './myNote'
+import MyNote from './myNote';
+import { BsX } from "react-icons/bs";
+import { Modal, Button, Dropdown } from 'react-bootstrap'
 var Color = require('color');
+
 
 
 export default function Configurator() {
 
     const dispatch = useDispatch();
-    const folders = useSelector(state => state.reducerFolder.folders)
+    const folders = useSelector(state => state.reducerFolder.folders);
 
     {/* //not use::::::: */ }
     // const [countCol, setCountCol] = useState(0)
     const [arrnums, setarrnums] = useState([{}])
-    const [CcurrentItem, setCcurrentItem] = useState()
+    const [currentNote, setCurrentNote] = useState();
+    // 
+    const [currentFolder, setCurrentFolder] = useState();
+    const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
+    useEffect(() => {
+        folders && folders[0] ?
+            setCurrentFolder(folders[0]) :
+            console.log("not contain folders");
+    }, [folders])
 
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
@@ -47,51 +59,49 @@ export default function Configurator() {
     //     $('.inputTitle' + index).css("font-weight", "bold");
     //     $('.inputTitle' + index).css("text-align", "center");
     // }
-    function onDropbb() { debugger }
 
-    const onDragStart = (e, id) => {
-        // e.dataTransfer.setData("text/plain",id)
-
-    }
-    const handleDragEnter = e => {
-        e.stopPropagation();
-        debugger
-    };
-    const handleDragLeave = e => {
-        e.preventDefault();
-        e.stopPropagation();
-        debugger
-    };
-    const handleDragOver = e => {
+    function handleDragOver(e) {
         e.preventDefault();
         e.dataTransfer.dropEffect = 'copy';
         e.stopPropagation();
-        debugger
     };
-    const handleDrop = e => {
-
+    function handleDrop(e, targetFolderId) {
+        debugger
         e.preventDefault();
         e.stopPropagation();
-    //    dispatch(actions.noteToSpesificFolder)
-        alert();
+        dispatch(actions.noteToSpesificFolder({
+            sourceFolder: currentFolder._id,
+            targetFolder: targetFolderId,
+            indexNote: currentNote
+        }))
     };
-    function allowDrop(e) {
-        debugger;
-        //  e.preventDefault();
-    }
 
-    // function drop(event) {
-    //     debugger
-    //     // event.preventDefault();
-    //     // var data = event.dataTransfer.getData("Text");
-    //     // event.target.appendChild(document.getElementById(data));
-    //     // document.getElementById("demo").innerHTML = "The p element was dropped";
-    // }
     function insertNote() {
 
         dispatch(actions.setNoteList());
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
     }
+
+    function deleteFolder() {
+        dispatch(actions.deleteFolder(currentFolder._id));
+        handleClose();
+    }
+
+    function setDeleteFolder(e, folder) {
+        e.stopPropagation()
+        setCurrentFolder(folder);
+        handleShow();
+    }
+
+    function setCurrentNoteOnDrag(indexNote) {
+        setCurrentNote(indexNote)
+    }
+
+    function getFolderNotesByUser(folder) {
+        setCurrentFolder(folder);
+        dispatch(actions.getFolderNotesByUser(folder._id));
+    }
+
     return (
         <>
             {/* <DragDropContext
@@ -139,7 +149,7 @@ export default function Configurator() {
                         </div> : ""}
                     </div> */}
                 {/* <div class="row"> */}
-                <MyNote />
+                <MyNote setCurrentNote={setCurrentNoteOnDrag} />
                 {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
@@ -155,14 +165,18 @@ export default function Configurator() {
                     <p className="newFolder" style={{ fontSize: '15' }}>drag notes to create folder</p>
                 </div>
                 {
-                folders ? folders.map((folder) =>(
-                    <div key={folder.folderIndex}
-                    onDrop={handleDrop} onDragOver={handleDragOver}
-                     className="folder m-2 d-flex justify-content-around align-items-center"> 
-                     <FiFolder ></FiFolder>
-                     <p>{folder.folderName}</p></div>
-                ))
-                 :""}
+                    folders ? folders.map((folder) => (
+                        <div key={folder._id}
+                            onClick={(e) => getFolderNotesByUser(folder)}
+                            onDrop={(e) => handleDrop(e, folder._id)} onDragOver={handleDragOver}
+
+                            className="folder m-2 d-flex justify-content-around align-items-center">
+                            <FiFolder ></FiFolder>
+                            <p>{folder.folderName}</p>
+                            <div><BsX onClick={(e) => setDeleteFolder(e, folder)} className="BsX_button"></BsX></div>
+                        </div>
+                    ))
+                        : ""}
                 {/* <div onDragStart={onDragStart} style={{backgroundColor:"red",width:"50px", height:"50px"}} draggable="true"></div> */}
                 {/* <div draggable="true"> */}
 
@@ -177,6 +191,21 @@ export default function Configurator() {
 
             </div>
             {/* </DragDropContext> */}
+
+            {/* modal to delete folder */}
+            <Modal show={show} onHide={handleClose} className='modal'>
+                <Modal.Header closeButton>
+                    <Modal.Title>מחיקת תקייה </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>שים לב מחיקת התקייה תמחק אוטומטית את כל הפתקים המשוייכים אליה...!</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        בטל                    </Button>
+                    <Button variant="primary" onClick={deleteFolder}>
+                        מחק                     </Button>
+                </Modal.Footer>
+            </Modal>
+
         </>
     )
 }
