@@ -17,7 +17,7 @@ const folderData = {
     setAllFoldersForUser(state, action) {
         action.payload.folders.sort((a, b) => a.folderName.localeCompare(b.folderName))
         state.folders = action.payload.folders;
-    }
+    },
 
 }
 

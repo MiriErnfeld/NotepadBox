@@ -30,10 +30,8 @@ const noteData = {
     },
     getAllNotesForUser(state, action) { //from midlleWare
 
-        state.noteList = (action.payload.notes);
+        state.noteList = (action.payload.notesFolder);
 
-        console.log(state.noteList[0].flagColor);
-        console.log('notelist',state.noteList);
     },
     updateNoteAction(state, action) { // from midlleWare 
         debugger
@@ -96,13 +94,13 @@ const noteData = {
         state.noteList = [...allNote]
 
     },
-    placeNote(state, action) {
-        debugger
-        let x = action.payload.item.indexNote
-        let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
-        state.noteList[correctIndex].placeX = action.payload.left
-        state.noteList[correctIndex].placeY = action.payload.top
-    },
+    // placeNote(state, action) {
+    //     debugger
+    //     let x = action.payload.item.indexNote
+    //     let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
+    //     state.noteList[correctIndex].placeX = action.payload.left
+    //     state.noteList[correctIndex].placeY = action.payload.top
+    // },
     setFlagColor(state, action) {  //set flagColor only to true from component myNote.js
         debugger
         let i = action.payload.indexNote
@@ -136,14 +134,14 @@ const noteData = {
 
         state.currentItem = action.payload
     },
-    setPlaceNote(state, action) {
-        let x = action.payload.item.indexNote
-        let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
-        state.noteList[correctIndex].placeX = action.payload.x
-        state.noteList[correctIndex].placeY = action.payload.y
+    // setPlaceNote(state, action) {
+    //     let x = action.payload.item.indexNote
+    //     let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
+    //     state.noteList[correctIndex].placeX = action.payload.x
+    //     state.noteList[correctIndex].placeY = action.payload.y
 
 
-    },
+    // },
 
     noteToSpesificFolder(state, action) {}
 };

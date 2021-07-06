@@ -12,8 +12,9 @@ import $ from 'jquery'
 import Draggable from 'react-draggable';
 
 
-export default function Notes() {
+export default function Notes(props) {
 
+    const { setCurrentNote } = props;
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
     const [leftNote, setLeftNote] = useState()
@@ -90,6 +91,10 @@ export default function Notes() {
         document.getElementById("rnd").click();
     }
 
+    function onDragStart(indexNote) {
+        setCurrentNote(indexNote)
+    }
+
     return (
         <>
             <div className="all-notes">
@@ -99,7 +104,8 @@ export default function Notes() {
                         {/* // style={{height:"100%",width:"100%"}} */}
                         <Rnd id="rnd" cancel="textarea" draggable 
                             onResizeStart={() => { inResize(item, 0) }}
-                            onResizeEnd={() => { inResize(item, 1) }}                       
+                            onResizeEnd={() => { inResize(item, 1) }}
+                            onDragStart={() => onDragStart(item.indexNote)}
                             // bounds={{ top: "90%"}}
                             // disabled={false}
                             onMouseUp={handleDragStop}

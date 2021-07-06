@@ -245,3 +245,8 @@ display:block;
       
       min-width: 1em;
   }
+
+
+.modal{
+    z-index: 9999;
+}

@@ -1,15 +1,16 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import './configurator.css'
 import { actions } from '../components/redux/actions/action';
 import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
 import { FcPlus } from "react-icons/fc";
-import Dropdown from 'react-bootstrap/Dropdown'
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import MyNote from './myNote'
-import { FaSave } from 'react-icons/fa';
+import MyNote from './myNote';
+import { BsX } from "react-icons/bs";
+import { Modal, Button, Dropdown } from 'react-bootstrap'
 var Color = require('color');
+
 
 
 export default function Configurator() {
@@ -19,10 +20,22 @@ export default function Configurator() {
 
     {/* //not use::::::: */ }
     // const [countCol, setCountCol] = useState(0)
-    const [arrnums, setarrnums] = useState([{}]);
-    const [CcurrentItem, setCcurrentItem] = useState();
-    const [newFolder, setNewFolder] = useState();
 
+    const [arrnums, setarrnums] = useState([{}])
+    const [currentNote, setCurrentNote] = useState();
+    const [newFolder, setNewFolder] = useState();
+    // 
+    const [currentFolder, setCurrentFolder] = useState();
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    useEffect(() => {
+        folders && folders[0] ?
+            setCurrentFolder(folders[0]) :
+            console.log("not contain folders");
+    }, [folders])
 
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
@@ -49,30 +62,17 @@ export default function Configurator() {
     //     $('.inputTitle' + index).css("text-align", "center");
     // }
 
-    const onDragStart = (e, id) => {
-        // e.dataTransfer.setData("text/plain",id)
 
-    }
 
-    const handleDragEnter = e => {
-        e.stopPropagation();
-        // debugger
-    };
 
-    const handleDragLeave = e => {
-        e.preventDefault();
-        e.stopPropagation();
-        // debugger
-    };
-
-    const handleDragOver = e => {
+    function handleDragOver(e) {
         e.preventDefault();
         e.dataTransfer.dropEffect = 'copy';
         e.stopPropagation();
-        // debugger
     };
 
-    const handleDrop = e => {
+
+    function onDropNewFolder(e) {
 
         e.preventDefault();
         e.stopPropagation();
@@ -80,6 +80,18 @@ export default function Configurator() {
         setNewFolder(!newFolder);
     };
 
+
+
+    function onDropExistsFolder(e, targetFolderId) {
+        debugger
+        e.preventDefault();
+        e.stopPropagation();
+        dispatch(actions.noteToSpesificFolder({
+            sourceFolder: currentFolder._id,
+            targetFolder: targetFolderId,
+            indexNote: currentNote
+        }))
+    };
 
     async function createFolder(event) {
         // alert("create");
@@ -92,7 +104,6 @@ export default function Configurator() {
         setNewFolder(!newFolder);
     }
 
-
     function insertNote() {
 
         dispatch(actions.setNoteList());
@@ -101,9 +112,28 @@ export default function Configurator() {
 
     function updateFolder(e, id) {
         // debugger
-            dispatch(actions.updateFolder({ id, folderName: e.target.value }))
-            e.target.readOnly = true;
-            e.target.autoFocus = false;
+        dispatch(actions.updateFolder({ id, folderName: e.target.value }))
+        e.target.readOnly = true;
+        e.target.autoFocus = false;
+    }
+    function deleteFolder() {
+        dispatch(actions.deleteFolder(currentFolder._id));
+        handleClose();
+    }
+
+    function setDeleteFolder(e, folder) {
+        e.stopPropagation()
+        setCurrentFolder(folder);
+        handleShow();
+    }
+
+    function setCurrentNoteOnDrag(indexNote) {
+        setCurrentNote(indexNote)
+    }
+
+    function getFolderNotesByUser(folder) {
+        setCurrentFolder(folder);
+        dispatch(actions.getFolderNotesByUser(folder._id));
     }
 
     return (
@@ -153,7 +183,7 @@ export default function Configurator() {
                         </div> : ""}
                     </div> */}
                 {/* <div class="row"> */}
-                <MyNote />
+                <MyNote setCurrentNote={setCurrentNoteOnDrag} />
                 {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
@@ -162,7 +192,7 @@ export default function Configurator() {
             <div className="container container-configurator d-flex align-items-center flex-column start custom-scrollbar" >
                 {/* <div className="container container-configurator"> */}
                 <div className="create-note-button m-2 mt-3 text-justify text-center" onClick={insertNote}>Create Note +</div>
-                <div className="row dragfolder droppable m-2" onDrop={handleDrop} onDragOver={handleDragOver}  >
+                <div className="row dragfolder droppable m-2" onDrop={onDropNewFolder} onDragOver={handleDragOver}  >
                     {/* <div className="row "> */}
                     <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
                     {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
@@ -185,7 +215,9 @@ export default function Configurator() {
                 {
                     folders ? folders.map((folder) => {
                         return <>
-                            <div key={folder._id} className="folder m-2 d-flex justify-content-around align-items-center">
+                            <div key={folder._id} className="folder m-2 d-flex justify-content-around align-items-center"
+                                onClick={(e) => getFolderNotesByUser(folder)}
+                                onDrop={(e) => onDropExistsFolder(e, folder._id)} onDragOver={handleDragOver}>
                                 <FiFolder className="icon"></FiFolder>
                                 <input type="text" className="folderInput" readOnly defaultValue={folder.folderName}
                                     onBlur={(e) => { updateFolder(e, folder._id) }}
@@ -196,7 +228,8 @@ export default function Configurator() {
                                         }
                                     }}
                                     onDoubleClick={(e) => { e.target.readOnly = false }}
-                                ></input></div>
+                                ></input><BsX onClick={(e) => setDeleteFolder(e, folder)} className="BsX_button"></BsX>
+                            </div>
                         </>
                     })
                         : ""}
@@ -216,6 +249,21 @@ export default function Configurator() {
 
             </div>
             {/* </DragDropContext> */}
+
+            {/* modal to delete folder */}
+            <Modal show={show} onHide={handleClose} className='modal'>
+                <Modal.Header closeButton>
+                    <Modal.Title>מחיקת תקייה </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>שים לב מחיקת התקייה תמחק אוטומטית את כל הפתקים המשוייכים אליה...!</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        בטל                    </Button>
+                    <Button variant="primary" onClick={deleteFolder}>
+                        מחק                     </Button>
+                </Modal.Footer>
+            </Modal>
+
         </>
     )
 }
