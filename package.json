@@ -17,6 +17,7 @@
     "jquery-ui-dist": "^1.12.1",
     "konva": "^7.2.5",
     "lighten-darken-color": "^1.0.0",
+    "lodash": "^4.17.21",
     "path": "^0.12.7",
     "radium": "^0.26.1",
     "react": "^17.0.2",

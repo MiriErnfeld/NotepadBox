@@ -20,8 +20,10 @@ export default function Configurator() {
 
     {/* //not use::::::: */ }
     // const [countCol, setCountCol] = useState(0)
+
     const [arrnums, setarrnums] = useState([{}])
     const [currentNote, setCurrentNote] = useState();
+    const [newFolder, setNewFolder] = useState();
     // 
     const [currentFolder, setCurrentFolder] = useState();
     const [show, setShow] = useState(false);
@@ -60,12 +62,27 @@ export default function Configurator() {
     //     $('.inputTitle' + index).css("text-align", "center");
     // }
 
+
+
+
     function handleDragOver(e) {
         e.preventDefault();
         e.dataTransfer.dropEffect = 'copy';
         e.stopPropagation();
     };
-    function handleDrop(e, targetFolderId) {
+
+
+    function onDropNewFolder(e) {
+
+        e.preventDefault();
+        e.stopPropagation();
+        // debugger
+        setNewFolder(!newFolder);
+    };
+
+
+
+    function onDropExistsFolder(e, targetFolderId) {
         debugger
         e.preventDefault();
         e.stopPropagation();
@@ -76,11 +93,28 @@ export default function Configurator() {
         }))
     };
 
+    async function createFolder(event) {
+        // alert("create");
+        let text = event.target.value;
+        if (text === "") {
+            text = "new folder";
+        }
+        debugger
+        await dispatch(actions.createFolder(text));
+        setNewFolder(!newFolder);
+    }
+
     function insertNote() {
 
         dispatch(actions.setNoteList());
     }
 
+    function updateFolder(e, id) {
+        // debugger
+        dispatch(actions.updateFolder({ id, folderName: e.target.value }))
+        e.target.readOnly = true;
+        e.target.autoFocus = false;
+    }
     function deleteFolder() {
         dispatch(actions.deleteFolder(currentFolder._id));
         handleClose();
@@ -154,28 +188,52 @@ export default function Configurator() {
 
 
             </div >
-            <div className="container container-configurator d-flex align-items-center flex-column start"  >
+            <div className="container container-configurator d-flex align-items-center flex-column start custom-scrollbar" >
                 {/* <div className="container container-configurator"> */}
-                <div className="create-note-button m-2 mt-3" onClick={insertNote}>Create Note +</div>
-                <div className="row dragfolder droppable m-2" onDrop={handleDrop} onDragOver={handleDragOver}  >
+                <div className="create-note-button m-2 mt-3 text-justify text-center" onClick={insertNote}>Create Note +</div>
+                <div className="row dragfolder droppable m-2" onDrop={onDropNewFolder} onDragOver={handleDragOver}  >
                     {/* <div className="row "> */}
                     <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
                     {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
                     <p className="newFolder" style={{ fontSize: '15' }}>drag notes to create folder</p>
                 </div>
                 {
-                    folders ? folders.map((folder) => (
-                        <div key={folder._id}
-                            onClick={(e) => getFolderNotesByUser(folder)}
-                            onDrop={(e) => handleDrop(e, folder._id)} onDragOver={handleDragOver}
-
-                            className="folder m-2 d-flex justify-content-around align-items-center">
-                            <FiFolder ></FiFolder>
-                            <p>{folder.folderName}</p>
-                            <div><BsX onClick={(e) => setDeleteFolder(e, folder)} className="BsX_button"></BsX></div>
-                        </div>
-                    ))
+                    newFolder ? <div className="folder d-flex justify-content-around align-items-center">
+                        <FiFolder className="icon"></FiFolder>
+                        <input type="text" id="folderInput" placeholder="Folder name" className="folderInput"
+                            onBlur={createFolder}
+                            onKeyUp={(event) => {
+                                //    alert("onkeyup");
+                                if (event.key === 'Enter') {
+                                    createFolder(event);
+                                    // document.getElementById("folderInput").blur();
+                                }
+                            }}></input>
+                    </div> : ""
+                }
+                {
+                    folders ? folders.map((folder) => {
+                        return <>
+                            <div key={folder._id} className="folder m-2 d-flex justify-content-around align-items-center"
+                                onClick={(e) => getFolderNotesByUser(folder)}
+                                onDrop={(e) => onDropExistsFolder(e, folder._id)} onDragOver={handleDragOver}>
+                                <FiFolder className="icon"></FiFolder>
+                                <input type="text" className="folderInput" readOnly defaultValue={folder.folderName}
+                                    onBlur={(e) => { updateFolder(e, folder._id) }}
+                                    // onChange={console.log("sss")}
+                                    onKeyUp={(e) => {
+                                        if (e.key === 'Enter') {
+                                            updateFolder(e, folder._id)
+                                        }
+                                    }}
+                                    onDoubleClick={(e) => { e.target.readOnly = false }}
+                                ></input><BsX onClick={(e) => setDeleteFolder(e, folder)} className="BsX_button"></BsX>
+                            </div>
+                        </>
+                    })
                         : ""}
+
+
                 {/* <div onDragStart={onDragStart} style={{backgroundColor:"red",width:"50px", height:"50px"}} draggable="true"></div> */}
                 {/* <div draggable="true"> */}
 

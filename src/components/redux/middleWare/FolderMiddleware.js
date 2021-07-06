@@ -24,6 +24,30 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             .catch(error => console.log('error', error));
 
     }
+    if (action.type === "CREATE_FOLDER") {
+        var myHeaders = new Headers();
+        //jwt from userName miri!!!!
+        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
+        myHeaders.append("Content-Type", "application/json");
+
+        var folder = JSON.stringify({
+            "folderName": action.payload,
+        });
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: folder,
+            redirect: 'follow'
+        };
+
+        fetch(`https://box.dev.leader.codes/api/miri/folder/addFolder`, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                debugger
+                console.log(result)
+                dispatch(actions.addFolder(result));
+            })
+    }
     if (action.type == "DELETE_FOLDER") {
         var requestOptions = {
             method: 'DELETE',
@@ -37,7 +61,36 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             })
             .catch(error => console.log('error', error));
     }
+    if (action.type == "UPDATE_FOLDER") {
+        var index = action.payload.id
+        var myHeaders = new Headers();
+        // my:
+        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
+        myHeaders.append("Content-Type", "application/json");
+        debugger
+        var folderToUpdate = JSON.stringify({
 
+            "folderName": action.payload.folderName,
+        });
+        debugger
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: folderToUpdate,
+            redirect: 'follow'
+        };
+
+        fetch(`https://box.dev.leader.codes/api/folder/${index}/updateFolder`, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result)
+                // debugger
+                dispatch(actions.updateNoteAction(result))
+                // debugger
+            })
+            .catch(error => console.log('error', error));
+
+    }
     if (action.type == "GET_FOLDER_NOTES_BY_USER") {
         var requestOptions = {
             method: 'GET',
