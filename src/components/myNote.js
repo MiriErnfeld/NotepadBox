@@ -90,7 +90,6 @@ export default function Notes() {
         document.getElementById("rnd").click();
     }
 
-
     return (
         <>
             <div className="all-notes">
@@ -100,9 +99,7 @@ export default function Notes() {
                         {/* // style={{height:"100%",width:"100%"}} */}
                         <Rnd id="rnd" cancel="textarea" draggable 
                             onResizeStart={() => { inResize(item, 0) }}
-                            onResizeEnd={() => { inResize(item, 1) }}
-                            // onResizeStop={setresize}
-                            
+                            onResizeEnd={() => { inResize(item, 1) }}                       
                             // bounds={{ top: "90%"}}
                             // disabled={false}
                             onMouseUp={handleDragStop}
@@ -117,6 +114,7 @@ export default function Notes() {
                                 height: 150
                             }}
                         >
+                           
                             <div className={`header ${item.indexNote}`}
                                 style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
                             >

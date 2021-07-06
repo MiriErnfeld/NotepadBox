@@ -33,7 +33,7 @@ const noteData = {
         state.noteList = (action.payload.notes);
 
         console.log(state.noteList[0].flagColor);
-        console.log(state.noteList);
+        console.log('notelist',state.noteList);
     },
     updateNoteAction(state, action) { // from midlleWare 
         debugger
@@ -143,7 +143,9 @@ const noteData = {
         state.noteList[correctIndex].placeY = action.payload.y
 
 
-    }
+    },
+
+    noteToSpesificFolder(state, action) {}
 };
 
 export default produce((state, action) => createReducer(state, action, noteData), initialState);

@@ -1,4 +1,5 @@
 import produce from 'immer';
+import _ from 'lodash';
 import { createReducer } from "./reducerUtils";
 
 const initialState = {
@@ -9,10 +10,12 @@ const folderData = {
     addFolder(state, action) { //push a new folder to the state, after creating the folder in midlleWare
         debugger
         let folders = [...state.folders];
-        folders.push(action.payload.newFolder);
+        folders = folders.concat(action.payload.newFolder)
+            .sort((a, b) => a.folderName.localeCompare(b.folderName))
         state.folders = [...folders];
     },
     setAllFoldersForUser(state, action) {
+        action.payload.folders.sort((a, b) => a.folderName.localeCompare(b.folderName))
         state.folders = action.payload.folders;
     }
 

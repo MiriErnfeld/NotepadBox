@@ -1,18 +1,12 @@
-import React, { useState } from 'react'
-import $ from 'jquery'
+import React, { useState} from 'react'
 import './configurator.css'
-
 import { actions } from '../components/redux/actions/action';
-import { Droppable, DragDropContext } from 'react-beautiful-dnd'
 import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
 import { FcPlus } from "react-icons/fc";
 import Dropdown from 'react-bootstrap/Dropdown'
 import { BsFillPlusCircleFill } from "react-icons/bs";
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
 import MyNote from './myNote'
 import { FaSave } from 'react-icons/fa';
 var Color = require('color');
@@ -22,12 +16,12 @@ export default function Configurator() {
 
     const dispatch = useDispatch();
     const folders = useSelector(state => state.reducerFolder.folders);
+
     {/* //not use::::::: */ }
     // const [countCol, setCountCol] = useState(0)
     const [arrnums, setarrnums] = useState([{}]);
     const [CcurrentItem, setCcurrentItem] = useState();
     const [newFolder, setNewFolder] = useState();
-
 
 
     const randomBetween = (min = 1, max = 900) => {
@@ -81,18 +75,19 @@ export default function Configurator() {
     const handleDrop = e => {
 
         e.preventDefault();
-        // e.stopPropagation();
+        e.stopPropagation();
         // debugger
         setNewFolder(!newFolder);
     };
 
 
     async function createFolder(event) {
+        // alert("create");
         let text = event.target.value;
         if (text === "") {
             text = "new folder";
         }
-        console.log(text); debugger
+        debugger
         await dispatch(actions.createFolder(text));
         setNewFolder(!newFolder);
     }
@@ -102,6 +97,13 @@ export default function Configurator() {
 
         dispatch(actions.setNoteList());
         setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
+    }
+
+    function updateFolder(e, id) {
+        // debugger
+            dispatch(actions.updateFolder({ id, folderName: e.target.value }))
+            e.target.readOnly = true;
+            e.target.autoFocus = false;
     }
 
     return (
@@ -152,13 +154,14 @@ export default function Configurator() {
                     </div> */}
                 {/* <div class="row"> */}
                 <MyNote />
+                {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
 
             </div >
-            <div className="container container-configurator d-flex align-items-center flex-column start" >
+            <div className="container container-configurator d-flex align-items-center flex-column start custom-scrollbar" >
                 {/* <div className="container container-configurator"> */}
-                <div className="create-note-button m-2 mt-3" onClick={insertNote}>Create Note +</div>
+                <div className="create-note-button m-2 mt-3 text-justify text-center" onClick={insertNote}>Create Note +</div>
                 <div className="row dragfolder droppable m-2" onDrop={handleDrop} onDragOver={handleDragOver}  >
                     {/* <div className="row "> */}
                     <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
@@ -167,21 +170,35 @@ export default function Configurator() {
                 </div>
                 {
                     newFolder ? <div className="folder d-flex justify-content-around align-items-center">
-                        <FiFolder ></FiFolder>
-                        <input type="text" id="folderInput" placeholder="Folder name" className="folderInput" onBlur={createFolder} onKeyUp={(event) => {
-                            if (event.key === 13) {
-                                createFolder();
-                                document.getElementById("folderInput").blur();
-                            }
-                        }}></input>
+                        <FiFolder className="icon"></FiFolder>
+                        <input type="text" id="folderInput" placeholder="Folder name" className="folderInput"
+                            onBlur={createFolder}
+                            onKeyUp={(event) => {
+                                //    alert("onkeyup");
+                                if (event.key === 'Enter') {
+                                    createFolder(event);
+                                    // document.getElementById("folderInput").blur();
+                                }
+                            }}></input>
                     </div> : ""
                 }
                 {
-                    folders ? folders.map((folder) => (
-                        <div key={folder.folderIndex} className="folder m-2 d-flex justify-content-around align-items-center">
-                            <FiFolder ></FiFolder>
-                            <p>{folder.folderName}</p></div>
-                    ))
+                    folders ? folders.map((folder) => {
+                        return <>
+                            <div key={folder._id} className="folder m-2 d-flex justify-content-around align-items-center">
+                                <FiFolder className="icon"></FiFolder>
+                                <input type="text" className="folderInput" readOnly defaultValue={folder.folderName}
+                                    onBlur={(e) => { updateFolder(e, folder._id) }}
+                                    // onChange={console.log("sss")}
+                                    onKeyUp={(e) => {
+                                        if (e.key === 'Enter') {
+                                            updateFolder(e, folder._id)
+                                        }
+                                    }}
+                                    onDoubleClick={(e) => { e.target.readOnly = false }}
+                                ></input></div>
+                        </>
+                    })
                         : ""}
 
 

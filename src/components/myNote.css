@@ -31,6 +31,7 @@ box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%);
 min-height: 80px;
 min-width: 130px;
 display:-webkit-box !important;
+z-index: 9999;
 }
 .header{
   /* background-color: yellow; */

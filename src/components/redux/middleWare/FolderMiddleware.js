@@ -13,7 +13,7 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             headers: myHeaders,
             redirect: 'follow'
         };
-        fetch(`https://box.dev.leader.codes/api/${userName}/note/getNotesByUserName`, requestOptions)
+        fetch(`https://box.dev.leader.codes/api/${userName}/folder/getFoldersByUserName`)
             .then(response => response.json())
             .then(result => {
                 dispatch(actions.setAllFoldersForUser(result))
@@ -35,8 +35,7 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
         myHeaders.append("Content-Type", "application/json");
 
         var folder = JSON.stringify({
-            "folderName": action.payload,
-          
+            "folderName": action.payload,          
         });
         var requestOptions = {
             method: 'POST',
@@ -56,7 +55,37 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             .catch(error => console.log('error', error));
     }
 
+    if (action.type == "UPDATE_FOLDER") {
+        debugger
+        var index = action.payload.id
+        var myHeaders = new Headers();
+        // my:
+        myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
+        myHeaders.append("Content-Type", "application/json");
+        debugger
+        var folderToUpdate = JSON.stringify({
 
+            "folderName": action.payload.folderName,
+        });
+        debugger
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: folderToUpdate,
+            redirect: 'follow'
+        };
+
+        fetch(`https://box.dev.leader.codes/api/folder/${index}/updateFolder`, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                console.log(result)
+                // debugger
+                dispatch(actions.updateNoteAction(result))
+                // debugger
+            })
+            .catch(error => console.log('error', error));
+
+    }
 
 
     return next(action)
