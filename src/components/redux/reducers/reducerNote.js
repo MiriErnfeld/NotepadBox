@@ -9,12 +9,8 @@ const initialState = {
     noteList: []
 }
 const noteData = {
-    setUser(state, action) { //from midlleWare
 
-        state.noteList.userName = action.payload
-    },
     createNote(state, action) { //from midlleWare
-
         let i = action.payload.item.indexNote
         //option 1:
         // let currentNote=state.noteList.filter(note => note.indexNote==i)
@@ -29,9 +25,7 @@ const noteData = {
         console.log(state.noteList);
     },
     getAllNotesForUser(state, action) { //from midlleWare
-
         state.noteList = (action.payload.notesFolder);
-
     },
     updateNoteAction(state, action) { // from midlleWare 
         debugger
@@ -44,21 +38,15 @@ const noteData = {
             // }
             arr[updateIndex].textNote = action.payload.user.textNote
             arr[updateIndex].colors = action.payload.user.colors
-
-
         } state.noteList = [...arr]
     },
     deleteNoteAction(state, action) { // from midlleWare delete note in state.noteList
-        debugger
         let note = action.payload.note_to_delete
-        // state.noteList.
-        // console.log(state.noteList);
         let index = note.indexNote
         let arr = [...state.noteList]
 
         const deleteItem = state.noteList.indexOf(state.noteList.find(x => x.indexNote == index))
         if (deleteItem !== -1)
-            debugger
         {
             arr.splice(deleteItem, 1)
         }
@@ -66,13 +54,11 @@ const noteData = {
         console.log(state.noteList);
     },
     deleteOnlyFromClient(state, action) {
-        debugger
         let note = action.payload
         let index = action.payload.indexNote
         let arr = [...state.noteList]
         const deleteItem = state.noteList.indexOf(state.noteList.find(x => x.indexNote == index))
         if (deleteItem !== -1)
-            debugger
         {
             arr.splice(deleteItem, 1)
         }
@@ -80,11 +66,9 @@ const noteData = {
         console.log(state.noteList);
     },
     setNoteList(state, action) { //from component configurator.js onClick button insertNote
-        debugger
         let c = state.noteList.length;
         let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === c))
         if (correctIndex !== -1) {
-            debugger
             c = state.noteList.length + 1
         }
         let allNote = [...state.noteList]
@@ -102,7 +86,6 @@ const noteData = {
     //     state.noteList[correctIndex].placeY = action.payload.top
     // },
     setFlagColor(state, action) {  //set flagColor only to true from component myNote.js
-        debugger
         let i = action.payload.indexNote
         let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === i))
         let currentFlag = state.noteList[correctIndex].flagColor
@@ -113,12 +96,10 @@ const noteData = {
             state.noteList[correctIndex].flagColor = true
     },
     closePreview(state, action) { //set flagColor only to false  from component myNote.js
-        debugger
         let index = action.payload
         state.noteList[index].flagColor = false
     },
     changeColorAction(state, action) { // set color in state.noteList from component myNote.js
-        debugger
         let currentColor = action.payload.c
         let x = action.payload.item.indexNote
         let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
@@ -127,11 +108,9 @@ const noteData = {
         state.noteList = [...arr]
     },
     setCheck(state, action) {// set check from component myNote.js
-
         state.check = action.payload
     },
     setCurrentItem(state, action) { //set setCurrentItem  from component myNote.js
-
         state.currentItem = action.payload
     },
     // setPlaceNote(state, action) {

@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
-import { FaGalacticSenate, FaGripHorizontal } from "react-icons/fa";
+import { BsPencil, BsX, BsCheck } from "react-icons/bs";
 import { Rnd } from "react-rnd";
-
 import icon from '../images/icon.png'
 import { LightenDarkenColor } from 'lighten-darken-color';
 import { actions } from './redux/actions/action'
 import './myNote.css'
-import $ from 'jquery'
-import Draggable from 'react-draggable';
-
 
 export default function Notes(props) {
 
@@ -18,7 +13,6 @@ export default function Notes(props) {
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
     const [leftNote, setLeftNote] = useState()
-
     const dispatch = useDispatch()
 
     const mycolors = [
@@ -41,14 +35,12 @@ export default function Notes(props) {
         dispatch(actions.setFlagColor(item))
     }
     function deleteItem(item) {
-        dispatch(actions.deleteNote({note:item,currentFolder}))//delete note in midlleWare
+        dispatch(actions.deleteNote({ note: item, currentFolder }))//delete note in midlleWare
     }
     function changeColor(c, item, index) {
         dispatch(actions.setCheck(index)) // index from the checked color
         dispatch(actions.setCurrentItem(item))
-        debugger
         dispatch(actions.updateNote({ item, c }));//a function use to update color & text ib midlleWare
-        debugger
         dispatch(actions.changeColorAction({ c, item }))
         let i = item.indexNote//2//1
         let correctIndex = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
@@ -63,30 +55,23 @@ export default function Notes(props) {
         if (newText !== "") {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
-            // debugger
             if (noteList[currentItem].textNote) {
                 dispatch(actions.updateNote({ item, newText }));//to update note in midllaware
             }
             else {
-                dispatch(actions.createNote1({ item, newText,currentFolder:currentFolder._id }));//to update in midlleWare when there is the first change
+                dispatch(actions.createNote1({ item, newText, currentFolder: currentFolder._id }));//to update in midlleWare when there is the first change
                 dispatch(actions.createNote({ item, newText }));//to update in redux
             }
         }
     }
     function inResize(item, end) {
-        // debugger
         if (item.flagColor == true)
             dispatch(actions.setFlagColor(item))
-        // if (end === 1) {
-        //     debugger
-        //     let x = item.placeX
-        //     let place=x+3
-        //     $("curr-container").css("left", place)
-        // }
     }
+
     function handleDoubleClick(event) { event.target.select(); }
-    function handleDragStop(e){
-        debugger
+
+    function handleDragStop(e) {
         console.log(document.getElementById("rnd"))
         document.getElementById("rnd").click();
     }
@@ -101,13 +86,10 @@ export default function Notes(props) {
                 {noteList ? noteList.map((item) => {
                     debugger;
                     return <>  <div className="resize">
-                        {/* // style={{height:"100%",width:"100%"}} */}
-                        <Rnd id="rnd" cancel="textarea" draggable 
+                        <Rnd id="rnd" cancel="textarea" draggable
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
                             onDragStart={() => onDragStart(item.indexNote)}
-                            // bounds={{ top: "90%"}}
-                            // disabled={false}
                             onMouseUp={handleDragStop}
                             key={item.indexNote}
                             className={`note ${item.indexNote} note`}
@@ -118,12 +100,10 @@ export default function Notes(props) {
                                 y: item.placeY,
                                 width: 150,
                                 height: 150
-                            }}
-                        >
-                           
+                            }}>
+
                             <div className={`header ${item.indexNote}`}
-                                style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
-                            >
+                                style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }} >
                                 <BsX style={{
                                     color: "#0A102E",
                                     hoverBackground: "black",
@@ -131,13 +111,11 @@ export default function Notes(props) {
                                     position: "relative",
                                     float: "left",
                                     margin: "1%"
-                                    // marginTop: "2%"
                                 }} onClick={() => deleteItem(item)} className="BsX_button"></BsX>
                                 <img src={icon} alt="Icon" draggable="false" style={{
                                     fontWeight: "none",
                                     color: "#0A102E",
                                     margin: "1%",
-                                    // marginTop: "2%"
                                 }}></img>
                                 <BsPencil
                                     onClick={() => openCloseEditor(item)}
@@ -147,7 +125,6 @@ export default function Notes(props) {
                                         float: "right",
                                         margin: "1%",
                                         cursor: "auto",
-                                        // marginTop: "2%"
                                     }} className="BsPencil_button"
                                 >
                                 </BsPencil>
@@ -163,7 +140,6 @@ export default function Notes(props) {
                             </div>
                             <div className="curr-container"
                                 style={{
-                                    // left: item.placeY
                                 }}
                             >
                                 {(item.flagColor === true) ?
