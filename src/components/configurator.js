@@ -94,7 +94,6 @@ export default function Configurator() {
                 <div className="configurator-line row justify-content-start d-flex ">
                     <p className="my-notes col-2">My Notes:</p>                 
                 </div>
-}
                 <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder}/>
 
             </div >
