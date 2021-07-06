@@ -8,7 +8,6 @@ const initialState = {
 const folderData = {
 
     addFolder(state, action) { //push a new folder to the state, after creating the folder in midlleWare
-        debugger
         let folders = [...state.folders];
         folders = folders.concat(action.payload.newFolder)
             .sort((a, b) => a.folderName.localeCompare(b.folderName))

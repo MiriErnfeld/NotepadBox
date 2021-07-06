@@ -45,7 +45,6 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
         fetch(`https://box.dev.leader.codes/api/miri/folder/addFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                debugger
                 console.log(result)
                 dispatch(actions.addFolder(result));
             })
@@ -85,14 +84,12 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                // debugger
                 dispatch(actions.updateNoteAction(result))
-                // debugger
             })
             .catch(error => console.log('error', error));
 
     }
-    
+
     if (action.type == "GET_FOLDER_NOTES_BY_USER") {
         var requestOptions = {
             method: 'GET',

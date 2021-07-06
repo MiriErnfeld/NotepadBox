@@ -39,7 +39,6 @@ export default function Configurator() {
     };
 
     function onDropExistsFolder(e, targetFolderId) {
-        debugger
         e.preventDefault();
         e.stopPropagation();
         dispatch(actions.noteToSpesificFolder({

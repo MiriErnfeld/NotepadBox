@@ -28,7 +28,6 @@ const noteData = {
         state.noteList = (action.payload.notesFolder);
     },
     updateNoteAction(state, action) { // from midlleWare 
-        debugger
         let id = action.payload.user.indexNote
         let updateIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === id))
         let arr = [...state.noteList]
@@ -79,7 +78,6 @@ const noteData = {
 
     },
     // placeNote(state, action) {
-    //     debugger
     //     let x = action.payload.item.indexNote
     //     let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === x))
     //     state.noteList[correctIndex].placeX = action.payload.left

@@ -20,15 +20,12 @@ export default function Notes(props) {
         '#BFD41F', '#8580FD', '#6DD41F', '#7bdcb5', '#44D7B6'
         , '#40D9ED', '#ff8a65', '#d9e3f0'
     ];
-    function ddd() { debugger }
 
     function openCloseEditor(item) {
-        debugger
         let currentIndex = noteList.indexOf(noteList.find(x => x.indexNote == item.indexNote))//find the current place in the state in redux
         // --search item with editor open 
         for (let index = 0; index < noteList.length; index++) { ///find the preview open editor
             if (noteList[index].flagColor === true && index != currentIndex) {
-                debugger
                 dispatch(actions.closePreview(index))
             }
         }
@@ -84,7 +81,6 @@ export default function Notes(props) {
         <>
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {
-                    debugger;
                     return <>  <div className="resize">
                         <Rnd id="rnd" cancel="textarea" draggable
                             onResizeStart={() => { inResize(item, 0) }}
@@ -145,7 +141,6 @@ export default function Notes(props) {
                                 {(item.flagColor === true) ?
                                     <div className="curr" >
                                         {mycolors.map((c, i) => {
-                                            debugger
                                             return <div key={i} className="divColors " className="colorDiv handPointer"
                                                 style={{ backgroundColor: c }} onClick={() => changeColor(c, item, i)}
                                             >
