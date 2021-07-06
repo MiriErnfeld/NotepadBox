@@ -14,7 +14,7 @@ import Draggable from 'react-draggable';
 
 export default function Notes(props) {
 
-    const { setCurrentNote } = props;
+    const { setCurrentNote, currentFolder } = props;
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
     const [leftNote, setLeftNote] = useState()
@@ -41,7 +41,7 @@ export default function Notes(props) {
         dispatch(actions.setFlagColor(item))
     }
     function deleteItem(item) {
-        dispatch(actions.deleteNote(item))//delete note in midlleWare
+        dispatch(actions.deleteNote({note:item,currentFolder}))//delete note in midlleWare
     }
     function changeColor(c, item, index) {
         dispatch(actions.setCheck(index)) // index from the checked color
@@ -68,7 +68,7 @@ export default function Notes(props) {
                 dispatch(actions.updateNote({ item, newText }));//to update note in midllaware
             }
             else {
-                dispatch(actions.createNote1({ item, newText }));//to update in midlleWare when there is the first change
+                dispatch(actions.createNote1({ item, newText,currentFolder:currentFolder._id }));//to update in midlleWare when there is the first change
                 dispatch(actions.createNote({ item, newText }));//to update in redux
             }
         }

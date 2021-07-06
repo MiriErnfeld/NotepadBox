@@ -48,7 +48,8 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             "placeX": action.payload.item.placeX,
             "placeY": action.payload.item.placeY,
             "flagColor": false,
-            "check": action.payload.item.check
+            "check": action.payload.item.check,
+            "folderId":action.payload.currentFolder
         });
 
         var requestOptions = {
@@ -72,18 +73,19 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
     }
     if (action.type == "DELETE_NOTE") {
         debugger
-        var index = action.payload.indexNote
+        var index = action.payload.note.indexNote
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
         myHeaders.append("Content-Type", "application/json");
         var requestOptions = {
             method: 'DELETE',
             headers: myHeaders,
-            redirect: 'follow'
+            redirect: 'follow',
+            body:JSON.stringify({id:action.payload.currentFolder._id}) 
         };
         debugger
-        if (action.payload.textNote == "")
-            dispatch(actions.deleteOnlyFromClient(action.payload))//reducer
+        if (action.payload.note.textNote == "")
+            dispatch(actions.deleteOnlyFromClient(action.payload.note))//reducer
         fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/deleteNote`, requestOptions)
             .then(response => response.json())
             .then(result => {

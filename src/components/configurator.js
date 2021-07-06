@@ -79,7 +79,6 @@ export default function Configurator() {
     function insertNote() {
 
         dispatch(actions.setNoteList());
-        setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
     }
 
     function deleteFolder() {
@@ -149,7 +148,7 @@ export default function Configurator() {
                         </div> : ""}
                     </div> */}
                 {/* <div class="row"> */}
-                <MyNote setCurrentNote={setCurrentNoteOnDrag} />
+                <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder}/>
                 {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
