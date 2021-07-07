@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './configurator.css'
 import { actions } from '../components/redux/actions/action';
 import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
+import { RiDeleteBinLine } from "react-icons/ri";
+
 import { FcPlus } from "react-icons/fc";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import MyNote from './myNote';
@@ -17,19 +19,26 @@ export default function Configurator() {
 
     const dispatch = useDispatch();
     const folders = useSelector(state => state.reducerFolder.folders);
+    const newFolder = useSelector(state => state.reducerFolder.newFolder);
 
     {/* //not use::::::: */ }
     // const [countCol, setCountCol] = useState(0)
 
     const [arrnums, setarrnums] = useState([{}])
     const [currentNote, setCurrentNote] = useState();
-    const [newFolder, setNewFolder] = useState();
+    const [newFolderFlag, setNewFolderFlag] = useState();
     // 
     const [currentFolder, setCurrentFolder] = useState();
     const [show, setShow] = useState(false);
+    const [draggedNote, setDraggedNote] = useState({});
+    const [dragFlag, setDragFlag] = useState();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const dropRef = useRef();
+    // const dragRef=useRef();
+    const divDrop = dropRef.current;
 
     useEffect(() => {
         folders && folders[0] ?
@@ -62,7 +71,14 @@ export default function Configurator() {
     //     $('.inputTitle' + index).css("text-align", "center");
     // }
 
+    function onDragEnter(e) {
+        // e.target.style.backgroundColor = "#F1F1F3";
 
+        divDrop.style.backgroundColor = "#F1F1F3";
+        // alert(draggedNote)
+        // draggedNote.style.class="draggedNote";
+        // setDragFlag(!dragFlag);
+    }
 
 
     function handleDragOver(e) {
@@ -73,35 +89,39 @@ export default function Configurator() {
 
 
     function onDropNewFolder(e) {
+        divDrop.style.backgroundColor = "white";
 
         e.preventDefault();
         e.stopPropagation();
-        // debugger
-        setNewFolder(!newFolder);
+        setNewFolderFlag(!newFolderFlag);
+        // setDragFlag(!dragFlag);
     };
 
 
+    function noteToSpesificFolder(targetFolderId){
+        dispatch(actions.noteToSpesificFolder({
+            sourceFolder: currentFolder,
+            targetFolder: targetFolderId,
+            indexNote: currentNote
+        }))
+    }
 
     function onDropExistsFolder(e, targetFolderId) {
         debugger
         e.preventDefault();
         e.stopPropagation();
-        dispatch(actions.noteToSpesificFolder({
-            sourceFolder: currentFolder._id,
-            targetFolder: targetFolderId,
-            indexNote: currentNote
-        }))
+        noteToSpesificFolder(targetFolderId);
     };
 
-    async function createFolder(event) {
-        // alert("create");
-        let text = event.target.value;
+    async function createFolder(e) {
+        let text = e.target.value;
         if (text === "") {
             text = "new folder";
         }
-        debugger
         await dispatch(actions.createFolder(text));
-        setNewFolder(!newFolder);
+        // console.log(newFolder);
+        noteToSpesificFolder(newFolder._id)
+        setNewFolderFlag(!newFolderFlag);
     }
 
     function insertNote() {
@@ -128,7 +148,11 @@ export default function Configurator() {
     }
 
     function setCurrentNoteOnDrag(indexNote) {
-        setCurrentNote(indexNote)
+        // console.log(draggedNote1);
+        setCurrentNote(indexNote);
+        // setDraggedNote(draggedNote1);
+        console.log(currentNote);
+        console.log(draggedNote);
     }
 
     function getFolderNotesByUser(folder) {
@@ -183,7 +207,7 @@ export default function Configurator() {
                         </div> : ""}
                     </div> */}
                 {/* <div class="row"> */}
-                <MyNote setCurrentNote={setCurrentNoteOnDrag} />
+                <MyNote setCurrentNote={setCurrentNoteOnDrag} dragFlag={dragFlag} currentNote={currentNote} />
                 {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
@@ -191,20 +215,24 @@ export default function Configurator() {
             </div >
             <div className="container container-configurator d-flex align-items-center flex-column start custom-scrollbar" >
                 {/* <div className="container container-configurator"> */}
-                <div className="create-note-button m-2 mt-3 text-justify text-center" onClick={insertNote}>Create Note +</div>
-                <div className="row dragfolder droppable m-2" onDrop={onDropNewFolder} onDragOver={handleDragOver}  >
+                <div className="create-note-button m-2 mt-3 text-justify text-center"
+                    onClick={insertNote}>Create Note +</div>
+                <div className="row dragfolder droppable m-2"
+                    ref={dropRef}
+                    onDragEnter={onDragEnter}
+                    onDrop={onDropNewFolder}
+                    onDragOver={handleDragOver}  >
                     {/* <div className="row "> */}
                     <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
                     {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
-                    <p className="newFolder" style={{ fontSize: '15' }}>drag notes to create folder</p>
+                    <p className="newFolderFlag" style={{ fontSize: '15' }}>drag notes to create folder</p>
                 </div>
                 {
-                    newFolder ? <div className="folder d-flex justify-content-around align-items-center">
+                    newFolderFlag ? <div className="folder folderColor d-flex justify-content-around align-items-center">
                         <FiFolder className="icon"></FiFolder>
-                        <input type="text" id="folderInput" placeholder="Folder name" className="folderInput"
+                        <input type="text" className="folderInput" style={{ cursor: "auto" }} id="folderInput" placeholder="Folder name"
                             onBlur={createFolder}
                             onKeyUp={(event) => {
-                                //    alert("onkeyup");
                                 if (event.key === 'Enter') {
                                     createFolder(event);
                                     // document.getElementById("folderInput").blur();
@@ -215,9 +243,11 @@ export default function Configurator() {
                 {
                     folders ? folders.map((folder) => {
                         return <>
-                            <div key={folder._id} className="folder m-2 d-flex justify-content-around align-items-center"
+                            <div key={folder._id}
+                                className={`folder m-2 d-flex justify-content-around align-items-center ${currentFolder && folder._id===currentFolder._id?  'folderChosenColor':'folderColor'}`}
                                 onClick={(e) => getFolderNotesByUser(folder)}
-                                onDrop={(e) => onDropExistsFolder(e, folder._id)} onDragOver={handleDragOver}>
+                                onDrop={(e) => onDropExistsFolder(e, folder._id)}
+                                onDragOver={handleDragOver}>
                                 <FiFolder className="icon"></FiFolder>
                                 <input type="text" className="folderInput" readOnly defaultValue={folder.folderName}
                                     onBlur={(e) => { updateFolder(e, folder._id) }}
@@ -228,7 +258,10 @@ export default function Configurator() {
                                         }
                                     }}
                                     onDoubleClick={(e) => { e.target.readOnly = false }}
-                                ></input><BsX onClick={(e) => setDeleteFolder(e, folder)} className="BsX_button"></BsX>
+                                ></input>
+                                <RiDeleteBinLine className="icon"
+                                    onClick={(e) => setDeleteFolder(e, folder)} >
+                                </RiDeleteBinLine>
                             </div>
                         </>
                     })

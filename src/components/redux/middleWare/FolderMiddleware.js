@@ -42,10 +42,12 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
 
         fetch(`https://box.dev.leader.codes/api/miri/folder/addFolder`, requestOptions)
             .then(response => response.json())
-            .then(result => {
+            .then( async(result) => {
+                // debugger
+                // console.log(result)
+                await dispatch(actions.addFolder(result));
+                dispatch(actions.setNewFolder(result));
                 debugger
-                console.log(result)
-                dispatch(actions.addFolder(result));
             })
     }
     if (action.type == "DELETE_FOLDER") {

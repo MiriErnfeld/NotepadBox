@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { BsPencil, BsX, BsThreeDotsת, BsCheck } from "react-icons/bs";
 import { FaGalacticSenate, FaGripHorizontal } from "react-icons/fa";
@@ -14,10 +14,11 @@ import Draggable from 'react-draggable';
 
 export default function Notes(props) {
 
-    const { setCurrentNote } = props;
+    const { setCurrentNote, dragFlag,currentNote } = props;
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
     const [leftNote, setLeftNote] = useState()
+    const dragRef = useRef();
 
     const dispatch = useDispatch()
 
@@ -85,14 +86,16 @@ export default function Notes(props) {
         // }
     }
     function handleDoubleClick(event) { event.target.select(); }
-    function handleDragStop(e){
+    function handleDragStop(e) {
         debugger
         console.log(document.getElementById("rnd"))
         document.getElementById("rnd").click();
     }
 
     function onDragStart(indexNote) {
-        setCurrentNote(indexNote)
+        // const draggedNote = dragRef.current;
+        // console.log(draggedNote);
+        setCurrentNote(indexNote);
     }
 
     return (
@@ -102,7 +105,7 @@ export default function Notes(props) {
                     debugger;
                     return <>  <div className="resize">
                         {/* // style={{height:"100%",width:"100%"}} */}
-                        <Rnd id="rnd" cancel="textarea" draggable 
+                        <Rnd id="rnd" cancel="textarea" draggable
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
                             onDragStart={() => onDragStart(item.indexNote)}
@@ -110,6 +113,7 @@ export default function Notes(props) {
                             // disabled={false}
                             onMouseUp={handleDragStop}
                             key={item.indexNote}
+                            // ref={dragRef}
                             className={`note ${item.indexNote} note`}
                             default={{
                                 position: "absolute",
@@ -119,8 +123,10 @@ export default function Notes(props) {
                                 width: 150,
                                 height: 150
                             }}
+                            style={{ zoom: dragFlag&&currentNote===item.indexNote ? '30%' : "100%" }}
+
                         >
-                           
+
                             <div className={`header ${item.indexNote}`}
                                 style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }}
                             >

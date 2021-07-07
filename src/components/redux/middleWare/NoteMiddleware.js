@@ -141,7 +141,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             body: JSON.stringify(action.payload),
             redirect: 'follow'
         };
-
+        console.log(requestOptions);
         fetch("https://box.dev.leader.codes/api/note/enterNoteToFolder", requestOptions)
             .then(response => response.json())
             .then(result => {

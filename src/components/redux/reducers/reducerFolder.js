@@ -3,7 +3,8 @@ import _ from 'lodash';
 import { createReducer } from "./reducerUtils";
 
 const initialState = {
-    folders: []
+    folders: [],
+    newFolder:{}
 }
 const folderData = {
 
@@ -13,6 +14,9 @@ const folderData = {
         folders = folders.concat(action.payload.newFolder)
             .sort((a, b) => a.folderName.localeCompare(b.folderName))
         state.folders = [...folders];
+    },
+    setNewFolder(state,action){
+        state.newFolder=action.payload.newFolder;
     },
     setAllFoldersForUser(state, action) {
         action.payload.folders.sort((a, b) => a.folderName.localeCompare(b.folderName))
