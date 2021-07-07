@@ -39,19 +39,21 @@ const noteData = {
             arr[updateIndex].colors = action.payload.user.colors
         } state.noteList = [...arr]
     },
-    deleteNoteAction(state, action) { // from midlleWare delete note in state.noteList
-        let note = action.payload.note_to_delete
-        let index = note.indexNote
-        let arr = [...state.noteList]
+    // deleteNoteAction(state, action) { // from midlleWare delete note in state.noteList
+    //     debugger
+    //     let note = action.payload.note_to_delete
+    //     let index = note.indexNote
+    //     let arr = [...state.noteList]
 
-        const deleteItem = state.noteList.indexOf(state.noteList.find(x => x.indexNote == index))
-        if (deleteItem !== -1)
-        {
-            arr.splice(deleteItem, 1)
-        }
-        state.noteList = [...arr]
-        console.log(state.noteList);
-    },
+    //     const deleteItem = state.noteList.indexOf(state.noteList.find(x => x.indexNote == index))
+    //     if (deleteItem !== -1)
+    //     {
+    //         arr.splice(deleteItem, 1)
+    //     }
+    //     state.noteList = [...arr]
+    //     console.log(state.noteList);
+    // },
+  
     deleteOnlyFromClient(state, action) {
         let note = action.payload
         let index = action.payload.indexNote

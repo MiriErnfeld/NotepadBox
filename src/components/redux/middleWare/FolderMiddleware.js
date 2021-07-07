@@ -59,7 +59,7 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
         fetch(`https://box.dev.leader.codes/api/miri/folder/${action.payload}/deleteFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                dispatch(actions.setAllFoldersForUser(result))
+                dispatch(actions.deleteFolderFromList(result));
             })
             .catch(error => console.log('error', error));
     }

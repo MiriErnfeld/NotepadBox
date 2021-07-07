@@ -55,7 +55,8 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
         fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/deleteNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                dispatch(actions.deleteNoteAction(result))//reducer
+                debugger
+                dispatch(actions.getAllNotesForUser(result))//reducer
             })
             .catch(error => console.log('error', error));
     }
@@ -87,10 +88,8 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
         fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/updateNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result)
-                
-                dispatch(actions.updateNoteAction(result))
-                
+                console.log(result)     
+                dispatch(actions.updateNoteAction(result))   
             })
             .catch(error => console.log('error', error));
 
@@ -112,7 +111,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
         fetch("https://box.dev.leader.codes/api/note/enterNoteToFolder", requestOptions)
             .then(response => response.json())
             .then(result => {
-                dispatch(actions.getAllNotesForUser(result))
+                dispatch(actions.deleteNoteAction(result.folderNotes))
             })
             .catch(error => console.log('error', error));
     }

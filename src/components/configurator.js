@@ -68,6 +68,7 @@ export default function Configurator() {
     }
 
     function deleteFolder() {
+        debugger
         dispatch(actions.deleteFolder(currentFolder._id));
         handleClose();
     }
@@ -91,9 +92,9 @@ export default function Configurator() {
         <>
             <div className="container-notes">
                 <div className="configurator-line row justify-content-start d-flex ">
-                    <p className="my-notes col-2">My Notes:</p>                 
+                    <p className="my-notes col-2">My Notes:</p>
                 </div>
-                <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder}/>
+                <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder} />
 
             </div >
             <div className="container container-configurator d-flex align-items-center flex-column start custom-scrollbar" >

@@ -17,6 +17,10 @@ const folderData = {
         action.payload.folders.sort((a, b) => a.folderName.localeCompare(b.folderName))
         state.folders = action.payload.folders;
     },
+    deleteFolderFromList(state, action) {
+        const updateFolderList = state.folders.filter(x => x._id !==action.payload.folderToDelete)
+        state.folders = [...updateFolderList]
+    }
 
 }
 
