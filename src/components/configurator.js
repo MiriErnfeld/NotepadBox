@@ -13,8 +13,6 @@ import { BsX } from "react-icons/bs";
 import { Modal, Button, Dropdown } from 'react-bootstrap'
 var Color = require('color');
 
-
-
 export default function Configurator() {
 
     const dispatch = useDispatch();
@@ -75,9 +73,13 @@ export default function Configurator() {
         // e.target.style.backgroundColor = "#F1F1F3";
 
         divDrop.style.backgroundColor = "#F1F1F3";
+        let note=document.getElementsByClassName(`note ${currentNote} note`);
+        console.log(note);
+
+        note[0].style.transform ="scale(0.4)";
         // alert(draggedNote)
         // draggedNote.style.class="draggedNote";
-        // setDragFlag(!dragFlag);
+        setDragFlag(!dragFlag);
     }
 
 
@@ -86,7 +88,6 @@ export default function Configurator() {
         e.dataTransfer.dropEffect = 'copy';
         e.stopPropagation();
     };
-
 
     function onDropNewFolder(e) {
         divDrop.style.backgroundColor = "white";
@@ -107,7 +108,6 @@ export default function Configurator() {
     }
 
     function onDropExistsFolder(e, targetFolderId) {
-        debugger
         e.preventDefault();
         e.stopPropagation();
         noteToSpesificFolder(targetFolderId);
@@ -120,23 +120,23 @@ export default function Configurator() {
         }
         await dispatch(actions.createFolder(text));
         // console.log(newFolder);
+        debugger
         noteToSpesificFolder(newFolder._id)
         setNewFolderFlag(!newFolderFlag);
     }
 
     function insertNote() {
-
         dispatch(actions.setNoteList());
-        setarrnums([...arrnums, { x: randomBetween(), y: randomBetween() }])
     }
 
     function updateFolder(e, id) {
-        // debugger
         dispatch(actions.updateFolder({ id, folderName: e.target.value }))
         e.target.readOnly = true;
         e.target.autoFocus = false;
     }
+
     function deleteFolder() {
+        debugger
         dispatch(actions.deleteFolder(currentFolder._id));
         handleClose();
     }
@@ -156,39 +156,16 @@ export default function Configurator() {
     }
 
     function getFolderNotesByUser(folder) {
+        // debugger
         setCurrentFolder(folder);
         dispatch(actions.getFolderNotesByUser(folder._id));
     }
 
     return (
         <>
-            {/* <DragDropContext
-                onDragEnd={onDropbb} > */}
-
             <div className="container-notes">
                 <div className="configurator-line row justify-content-start d-flex ">
                     <p className="my-notes col-2">My Notes:</p>
-                    {/* <div className="create-note" onClick={insertNote}>Create Note +</div> */}
-
-                    {/* //not use::::::: */}
-
-                    {/* {countCol > 0 ? <div class="col-2"> <input type="text" className="inputTitle1" onChange={e => changeStyle(1)} /> </div> : ""}
-
-                    {countCol > 1 ? <div className="col-2">
-                        <input type="text" className="inputTitle2" onChange={e => changeStyle(2)} />    </div> : ""}
-
-                    {countCol > 2 ? <div className="col-2">
-                        <input type="text" className="inputTitle3" onChange={e => changeStyle(3)} />   </div> : ""}
-
-                    {countCol > 3 ? <div className="col-2">
-                        <input type="text" className="inputTitle4" onChange={e => changeStyle(4)} />    </div> : " "}
-
-                    {countCol > 4 ? <div className="col-2">
-                        <input type="text" className="inputTitle5" onChange={e => changeStyle(5)} /> </div> : " "} */}
-                    {/* <p className="p-cloumn col-2" onClick={addCol}>
-                        new coloumn
-                    <BsFillPlusCircleFill className="plus-icon" ></BsFillPlusCircleFill>
-                    </p> */}
                 </div>
 
 
@@ -207,7 +184,7 @@ export default function Configurator() {
                         </div> : ""}
                     </div> */}
                 {/* <div class="row"> */}
-                <MyNote setCurrentNote={setCurrentNoteOnDrag} dragFlag={dragFlag} currentNote={currentNote} />
+                <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder} dragFlag={dragFlag} currentNote={currentNote} />
                 {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
@@ -215,17 +192,18 @@ export default function Configurator() {
             </div >
             <div className="container container-configurator d-flex align-items-center flex-column start custom-scrollbar" >
                 {/* <div className="container container-configurator"> */}
-                <div className="create-note-button m-2 mt-3 text-justify text-center"
-                    onClick={insertNote}>Create Note +</div>
-                <div className="row dragfolder droppable m-2"
+                <div className="create-note-button m-2 mt-3 d-flex justify-content-center align-items-center"
+                    onClick={insertNote}>
+                        <p className="text-justify text-center m-auto">Create Note +</p></div>
+                <div className="row dragfolder droppable m-2 p-3 justify-content-center align-items-center"
                     ref={dropRef}
                     onDragEnter={onDragEnter}
                     onDrop={onDropNewFolder}
                     onDragOver={handleDragOver}  >
                     {/* <div className="row "> */}
-                    <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
+                    <img src={folserPlus} alt="img" style={{ zoom: "100%", color: "#7B7D70" }}></img>
                     {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
-                    <p className="newFolderFlag" style={{ fontSize: '15' }}>drag notes to create folder</p>
+                    <p className="newFolder" style={{ fontSize: '15' }}>drag notes to create folder</p>
                 </div>
                 {
                     newFolderFlag ? <div className="folder folderColor d-flex justify-content-around align-items-center">
@@ -235,7 +213,6 @@ export default function Configurator() {
                             onKeyUp={(event) => {
                                 if (event.key === 'Enter') {
                                     createFolder(event);
-                                    // document.getElementById("folderInput").blur();
                                 }
                             }}></input>
                     </div> : ""
@@ -244,14 +221,13 @@ export default function Configurator() {
                     folders ? folders.map((folder) => {
                         return <>
                             <div key={folder._id}
-                                className={`folder m-2 d-flex justify-content-around align-items-center ${currentFolder && folder._id===currentFolder._id?  'folderChosenColor':'folderColor'}`}
+                                className={`folder m-2 d-flex justify-content-around px-5 align-items-center ${currentFolder && folder._id===currentFolder._id?  'folderChosenColor':'folderColor'}`}
                                 onClick={(e) => getFolderNotesByUser(folder)}
                                 onDrop={(e) => onDropExistsFolder(e, folder._id)}
                                 onDragOver={handleDragOver}>
                                 <FiFolder className="icon"></FiFolder>
                                 <input type="text" className="folderInput" readOnly defaultValue={folder.folderName}
                                     onBlur={(e) => { updateFolder(e, folder._id) }}
-                                    // onChange={console.log("sss")}
                                     onKeyUp={(e) => {
                                         if (e.key === 'Enter') {
                                             updateFolder(e, folder._id)
@@ -267,23 +243,7 @@ export default function Configurator() {
                     })
                         : ""}
 
-
-                {/* <div onDragStart={onDragStart} style={{backgroundColor:"red",width:"50px", height:"50px"}} draggable="true"></div> */}
-                {/* <div draggable="true"> */}
-
-                {/* </div> */}
-
-
-                {/* <Droppable > */}
-                {/* <div className="row " >
-                        <FiFolder ></FiFolder>
-                        folder name
-                    </div> */}
-
             </div>
-            {/* </DragDropContext> */}
-
-            {/* modal to delete folder */}
             <Modal show={show} onHide={handleClose} className='modal'>
                 <Modal.Header closeButton>
                     <Modal.Title>מחיקת תקייה </Modal.Title>
@@ -296,7 +256,6 @@ export default function Configurator() {
                         מחק                     </Button>
                 </Modal.Footer>
             </Modal>
-
         </>
     )
 }

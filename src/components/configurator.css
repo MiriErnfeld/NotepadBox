@@ -25,7 +25,6 @@ font: normal normal normal 16px/21px Roboto;
 letter-spacing: -0.16px;
 color: #7B7D86;
 text-transform: capitalize;
-opacity: 1;
 }
 .foldrplus{
     top: 205px;
@@ -40,8 +39,8 @@ height: 29px;
 .dragfolder{
     z-index: 8000;
     display:block;
-    align-items:center;
-    justify-content:center;
+    align-items:center!important;
+    justify-content:center!important;
     /* width: 231px; */
     /* margin-right: 10px;
     margin-bottom: 30px;
@@ -164,7 +163,7 @@ display:block;
     min-height: 6vh;
     border-radius: 4px;
     margin: 5%;
-    text-align: center; 
+    /* text-align: center;  */
 }
 .folderColor{
     background-color: #F1F1F3;
@@ -174,6 +173,7 @@ display:block;
     background-color: #c1c1c1;
 }
 .folderInput{
+    width:11vw;
     background: transparent;
     border: none;
     outline: none;
