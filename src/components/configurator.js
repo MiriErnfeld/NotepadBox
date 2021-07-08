@@ -130,8 +130,11 @@ export default function Configurator() {
                                         }
                                     }}
                                     onDoubleClick={(e) => { e.target.readOnly = false }}
-                                ></input><BsX onClick={(e) => setDeleteFolder(e, folder)} className="BsX_button"></BsX>
-                            </div>
+                                ></input>
+                                {
+                                folder.folderName !== "default"? <BsX onClick={(e) => setDeleteFolder(e, folder)} className="BsX_button"></BsX>
+                                :"" }
+                                 </div>
                         </>
                     })
                         : ""}

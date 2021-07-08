@@ -6,7 +6,8 @@ const initialState = {
     currentItem: "",
     count: 0,
     topNote: "",
-    noteList: []
+    noteList: [],
+    dummyNoteList: []//notes After Delete In Server display only in client
 }
 const noteData = {
 
@@ -39,20 +40,6 @@ const noteData = {
             arr[updateIndex].colors = action.payload.user.colors
         } state.noteList = [...arr]
     },
-    // deleteNoteAction(state, action) { // from midlleWare delete note in state.noteList
-    //     debugger
-    //     let note = action.payload.note_to_delete
-    //     let index = note.indexNote
-    //     let arr = [...state.noteList]
-
-    //     const deleteItem = state.noteList.indexOf(state.noteList.find(x => x.indexNote == index))
-    //     if (deleteItem !== -1)
-    //     {
-    //         arr.splice(deleteItem, 1)
-    //     }
-    //     state.noteList = [...arr]
-    //     console.log(state.noteList);
-    // },
   
     deleteOnlyFromClient(state, action) {
         let note = action.payload
@@ -66,15 +53,29 @@ const noteData = {
         state.noteList = [...arr]
         console.log(state.noteList);
     },
-    setNoteList(state, action) { //from component configurator.js onClick button insertNote
+    setNoteList(state) { //from component configurator.js onClick button insertNote
+        debugger
         let c = state.noteList.length;
         let correctIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === c))
-        if (correctIndex !== -1) {
-            c = state.noteList.length + 1
+        // if (correctIndex !== -1) {//in case that in noteList there is note with this index
+        //     debugger
+        for (let i = 0; correctIndex !== -1; i++) {
+            debugger
+            c = c + 1
+            let s = state.noteList.indexOf(state.noteList.find(note => note.indexNote === c))
+            if (s !== -1) {
+                debugger
+                correctIndex = s
+            }
+            else {
+                correctIndex = -1
+            }
         }
+        // }
         let allNote = [...state.noteList]
-        let top = Math.floor(Math.random() * 238)
-        let left = Math.floor(Math.random() * 800)
+        let top = Math.floor(Math.random() * 260)
+        let left = Math.floor(Math.random() * 600)
+
         allNote.push({ _id: "", indexNote: c, userName: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
         state.noteList = [...allNote]
 
