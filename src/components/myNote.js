@@ -40,12 +40,22 @@ export default function Notes(props) {
         dispatch(actions.setFlagColor(item))
     }
     function deleteItem(item) {
-        dispatch(actions.deleteNote({ note: item, currentFolder }))//delete note in midlleWare
+        debugger
+        const i = item.indexNote
+        console.log(data);
+        let correctItem = data.dummyNoteList.indexOf(data.dummyNoteList.find(x => x == i))//find the current place in the dummyNoteList in redux if the note delete only from server
+        if (correctItem != -1 || item.textNote == "" || item._id == "") { //In case one of the options is up there is no need to contact the server
+            dispatch(actions.deleteOnlyFromClient(item))//dispatch to deleteOnlyFromClient function in reducer
+            // alert("correctItem != -1 || item.textNote =empty||item._id ==empty ")
+            return
+        }
+        dispatch(actions.deleteNote({item,currentFolder}))//delete note in midlleWare 
     }
+
     function changeColor(c, item, index) {
         dispatch(actions.setCheck(index)) // index from the checked color
         dispatch(actions.setCurrentItem(item))
-        dispatch(actions.updateNote({ item, c }));//a function use to update color & text ib midlleWare
+        dispatch(actions.updateNote({ item, c,currentFolder }));//a function use to update color & text ib midlleWare
         dispatch(actions.changeColorAction({ c, item }))
         let i = item.indexNote//2//1
         let correctIndex = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
@@ -57,16 +67,26 @@ export default function Notes(props) {
         text.style.backgroundColor = c
     }
     function saveText(item, newText) {
-        if (newText !== "") {
+        debugger
+        if (newText) {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
+            debugger
             if (noteList[currentItem].textNote) {
-                dispatch(actions.updateNote({ item, newText }));//to update note in midllaware
+                dispatch(actions.updateNote({ item, newText ,currentFolder}));//to update note in midllaware
             }
             else {
-                dispatch(actions.createNote1({ item, newText, currentFolder: currentFolder._id }));//to update in midlleWare when there is the first change
-                dispatch(actions.createNote({ item, newText }));//to update in redux
+                debugger
+                dispatch(actions.createNote1({ item, newText ,currentFolder}));//to update in midlleWare when there is the first change
+                // dispatch(actions.createNote({ item, newText }));//to update in redux
             }
+        }
+        else {
+            if (item._id == "") { //In case the note is not yet saved in the database and the text is empty
+                debugger
+                return;
+            }
+            dispatch(actions.deleteNote({ item, newText,currentFolder }))//delete note in midlleWare
         }
     }
     function inResize(item, end) {
@@ -100,7 +120,7 @@ export default function Notes(props) {
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {
                     return <>  <div className="resize">
-                        <Rnd ref={rndRef} cancel="textarea" draggable
+                        <Rnd id="rnd" ref={rndRef} cancel="textarea .curr-container BsX BsPencil" draggable
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
                             onDragStart={() => onDragStart(item.indexNote)}

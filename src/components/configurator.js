@@ -73,10 +73,10 @@ export default function Configurator() {
         // e.target.style.backgroundColor = "#F1F1F3";
 
         divDrop.style.backgroundColor = "#F1F1F3";
-        let note=document.getElementsByClassName(`note ${currentNote} note`);
+        let note = document.getElementsByClassName(`note ${currentNote} note`);
         console.log(note);
 
-        note[0].style.transform ="scale(0.4)";
+        note[0].style.transform = "scale(0.4)";
         // alert(draggedNote)
         // draggedNote.style.class="draggedNote";
         setDragFlag(!dragFlag);
@@ -99,7 +99,7 @@ export default function Configurator() {
     };
 
 
-    function noteToSpesificFolder(targetFolderId){
+    function noteToSpesificFolder(targetFolderId) {
         dispatch(actions.noteToSpesificFolder({
             sourceFolder: currentFolder,
             targetFolder: targetFolderId,
@@ -194,7 +194,7 @@ export default function Configurator() {
                 {/* <div className="container container-configurator"> */}
                 <div className="create-note-button m-2 mt-3 d-flex justify-content-center align-items-center"
                     onClick={insertNote}>
-                        <p className="text-justify text-center m-auto">Create Note +</p></div>
+                    <p className="text-justify text-center m-auto">Create Note +</p></div>
                 <div className="row dragfolder droppable m-2 p-3 justify-content-center align-items-center"
                     ref={dropRef}
                     onDragEnter={onDragEnter}
@@ -221,7 +221,7 @@ export default function Configurator() {
                     folders ? folders.map((folder) => {
                         return <>
                             <div key={folder._id}
-                                className={`folder m-2 d-flex justify-content-around px-5 align-items-center ${currentFolder && folder._id===currentFolder._id?  'folderChosenColor':'folderColor'}`}
+                                className={`folder m-2 d-flex justify-content-around px-5 align-items-center ${currentFolder && folder._id === currentFolder._id ? 'folderChosenColor' : 'folderColor'}`}
                                 onClick={(e) => getFolderNotesByUser(folder)}
                                 onDrop={(e) => onDropExistsFolder(e, folder._id)}
                                 onDragOver={handleDragOver}>
@@ -235,9 +235,13 @@ export default function Configurator() {
                                     }}
                                     onDoubleClick={(e) => { e.target.readOnly = false }}
                                 ></input>
-                                <RiDeleteBinLine className="icon"
-                                    onClick={(e) => setDeleteFolder(e, folder)} >
-                                </RiDeleteBinLine>
+                                {
+                                    folder.folderName !== "default" ? 
+                                    <RiDeleteBinLine className="icon"
+                                        onClick={(e) => setDeleteFolder(e, folder)} >
+                                    </RiDeleteBinLine>
+                                        : ""}
+
                             </div>
                         </>
                     })
