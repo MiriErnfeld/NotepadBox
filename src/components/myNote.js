@@ -41,13 +41,13 @@ export default function Notes(props) {
             // alert("correctItem != -1 || item.textNote =empty||item._id ==empty ")
             return
         }
-        dispatch(actions.deleteNote({item,currentFolder:currentFolder._id}))//delete note in midlleWare 
+        dispatch(actions.deleteNote({item,currentFolder}))//delete note in midlleWare 
     }
 
     function changeColor(c, item, index) {
         dispatch(actions.setCheck(index)) // index from the checked color
         dispatch(actions.setCurrentItem(item))
-        dispatch(actions.updateNote({ item, c }));//a function use to update color & text ib midlleWare
+        dispatch(actions.updateNote({ item, c,currentFolder }));//a function use to update color & text ib midlleWare
         dispatch(actions.changeColorAction({ c, item }))
         let i = item.indexNote//2//1
         let correctIndex = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
@@ -65,11 +65,11 @@ export default function Notes(props) {
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
             debugger
             if (noteList[currentItem].textNote) {
-                dispatch(actions.updateNote({ item, newText }));//to update note in midllaware
+                dispatch(actions.updateNote({ item, newText ,currentFolder}));//to update note in midllaware
             }
             else {
                 debugger
-                dispatch(actions.createNote1({ item, newText }));//to update in midlleWare when there is the first change
+                dispatch(actions.createNote1({ item, newText ,currentFolder}));//to update in midlleWare when there is the first change
                 // dispatch(actions.createNote({ item, newText }));//to update in redux
             }
         }
@@ -78,7 +78,7 @@ export default function Notes(props) {
                 debugger
                 return;
             }
-            dispatch(actions.deleteNote({ item, newText }))//delete note in midlleWare
+            dispatch(actions.deleteNote({ item, newText,currentFolder }))//delete note in midlleWare
         }
     }
     function inResize(item, end) {

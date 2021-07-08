@@ -20,7 +20,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             "placeY": action.payload.item.placeY,
             "flagColor": false,
             "check": action.payload.item.check,
-            "folderId": action.payload.currentFolder
+            "folderId": action.payload.currentFolder._id
         });
 
         var requestOptions = {
@@ -33,6 +33,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
         fetch(`https://box.dev.leader.codes/api/${userName}/note/createNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
+                dispatch(actions.createNote(result));
             })
             .catch(error => console.log('error', error));
     }
@@ -47,7 +48,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             method: 'DELETE',
             headers: myHeaders,
             redirect: 'follow',
-            body: JSON.stringify({ id: action.payload.currentFolder })
+            body: JSON.stringify({ id: action.payload.currentFolder._id })
         };
 
         if (check == "") {//from save text function
@@ -60,7 +61,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             .then(result => {
                 debugger
                 if (check == "") {// after note delete only from server dispatch to reducer
-                    dispatch(actions.setDummyNoteList(result))//enter to dummyNoteList only the index of this note
+                    dispatch(actions.setDummyNoteList(result.folder))//enter to dummyNoteList only the index of this note
                     return next(action)
                 }
                 dispatch(actions.getAllNotesForUser(result.folder))//reducer
@@ -83,6 +84,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             "placeY": action.payload.top,
             "colors": action.payload.c,
             // "check": action.payload.check //if want that the check color saved
+            "currentFolder":action.payload.currentFolder._id
         });
 
         var requestOptions = {
