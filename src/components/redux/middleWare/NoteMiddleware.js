@@ -61,10 +61,10 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             .then(result => {
                 debugger
                 if (check == "") {// after note delete only from server dispatch to reducer
-                    dispatch(actions.setDummyNoteList(result.folder))//enter to dummyNoteList only the index of this note
+                    dispatch(actions.setDummyNoteList(result))//enter to dummyNoteList only the index of this note
                     return next(action)
                 }
-                dispatch(actions.getAllNotesForUser(result.folder))//reducer
+                dispatch(actions.deleteNoteAction(result))//reducer
             })
             .catch(error => console.log('error', error));
     }

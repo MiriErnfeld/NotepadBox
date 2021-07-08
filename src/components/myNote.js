@@ -167,6 +167,7 @@ export default function Notes(props) {
                                     }} className="BsPencil_button"
                                 >
                                 </BsPencil>
+                                <h1>{item.indexNote}</h1>
                                 <textarea
                                     className={`textarea ${item.indexNote}`}
                                     style={{ backgroundColor: item.colors }}

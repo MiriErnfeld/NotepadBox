@@ -127,7 +127,10 @@ const noteData = {
         console.log(state.dummyNoteList);
     },
 
-    noteToSpesificFolder(state, action) { }
+    deleteNoteAction(state, action) { 
+        const updateNoteList = state.noteList.filter(x => x._id !==action.payload.noteToDelete._id)
+        state.noteList = updateNoteList;
+    },
 };
 
 export default produce((state, action) => createReducer(state, action, noteData), initialState);
