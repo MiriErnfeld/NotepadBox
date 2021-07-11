@@ -30,7 +30,13 @@ cursor: -webkit-grab;
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%); 
 min-height: 80px;
 min-width: 130px;
+<<<<<<< HEAD
 display:-webkit-box !important;}
+=======
+display:-webkit-box !important;
+z-index: 9999;
+}
+>>>>>>> 35d37c27d95852d577dfa3387e35e3581ccf3f31
 .header{
   /* background-color: yellow; */
   position: absolute;
@@ -106,9 +112,9 @@ left: 48vh; */
   z-index: 9999;
   top: 0px;
   /* left: 2%; */
-  width: 100%;
+  width: 100vw;
   max-width: 100%;
-  height: 100%;
+  height: 100vh;
 } 
 
 
