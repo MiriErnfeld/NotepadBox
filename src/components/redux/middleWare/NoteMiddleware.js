@@ -78,12 +78,11 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             redirect: 'follow'
         };
         debugger
-        // if (action.payload.textNote == "" || check == "" && action.payload.item._id == "") {//In case the note is not yet saved in the database
-        if (action.payload.textNote == "" || action.payload._id == "") {//In case the note is not yet saved in the database
-            dispatch(actions.deleteOnlyFromClient(action.payload))//function in reducer
-            alert("delete-only from client by midlleWare!!!!!!!!")
-            return
-        }
+        // if (action.payload.textNote == "" || action.payload._id == "") {//In case the note is not yet saved in the database
+        //     dispatch(actions.deleteOnlyFromClient(action.payload))//function in reducer
+        //     alert("delete-only from client by midlleWare!!!!!!!!")
+        //     return
+        // }
         if (index !== null) {
             fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/deleteNote`, requestOptions)
                 .then(response => response.json())

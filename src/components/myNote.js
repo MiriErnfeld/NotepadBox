@@ -15,6 +15,13 @@ import Draggable from 'react-draggable';
 
 export default function Notes() {
 
+
+    useEffect(() => {
+        return () => {
+            alert("in rhe component out")
+        }
+    }, [])
+
     const noteList = useSelector(state => state.reducerNote.noteList)
 
     const data = useSelector(state => state.reducerNote)
@@ -49,7 +56,7 @@ export default function Notes() {
         let correctItem = data.dummyNoteList.indexOf(data.dummyNoteList.find(x => x == i))//find the current place in the dummyNoteList in redux if the note delete only from server
         if (correctItem != -1 || item.textNote == "" || item._id == "") { //In case one of the options is up there is no need to contact the server
             dispatch(actions.deleteOnlyFromClient(item))//dispatch to deleteOnlyFromClient function in reducer
-            alert("correctItem != -1 || item.textNote =empty||item._id ==empty ")
+            // alert("correctItem != -1 || item.textNote =empty||item._id ==empty ")
             return
         }
         dispatch(actions.deleteNote(item))//delete note in midlleWare 
@@ -93,19 +100,6 @@ export default function Notes() {
             dispatch(actions.deleteNote({ item, newText }))//delete note in midlleWare
         }
     }
-    function inResize(item, end) {
-        debugger
-        // if (item.flagColor == true) {
-        dispatch(actions.setFlagColor(item))
-        // if (end ==1) {
-        //     alert("inresizeEnd",item.placeX)
-        //     debugger
-        //     let x = item.placeX
-        //     let place=x+30
-        //     $("curr-container").css("left", place)
-        // }
-        // }
-    }
     return (
         <>
             <div className="all-notes" style={{ width: '98%', height: "88%" }}>
@@ -114,8 +108,6 @@ export default function Notes() {
                     const x = item.placeX
                     return <>
                         <Rnd
-                            // onResizeStart={() => { inResize(item, 0) }}
-                            // onResizeStop={() => { inResize(item, 1) }}
                             bounds="parent"
                             key={item.indexNote}
                             className={`note ${item.indexNote}`}
