@@ -9,6 +9,7 @@ import icon from '../images/icon.png'
 import { LightenDarkenColor } from 'lighten-darken-color';
 import { actions } from './redux/actions/action'
 import './myNote.css'
+import './TryDrag.css'
 
 export default function Notes(props) {
 
@@ -16,6 +17,7 @@ export default function Notes(props) {
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
     const [leftNote, setLeftNote] = useState()
+    const [isDown, setIsDown]=useState();
     // const dragRef = useRef();
     const rndRef = useRef();
 
@@ -111,82 +113,47 @@ export default function Notes(props) {
         // console.log(draggedNote);
         setCurrentNote(indexNote);
     }
-    function onDragStop(e) {
-        // debugger
-        // let el=document.getElementById("rnd").getBoundingClientRect();
-        // let elements=document.querySelectorAll('*');
-        // let pos;
-        // // console.log(elements);
-        // elements.forEach((elem)=>{
-        //     pos=elem.getBoundingClientRect();
-        //     if(pos.left>=elem.left && pos.right<=elem.right){
-        //         console.log("ccccccccccccccccccc");
-        //     }
-        //     // console.log(elem.getBoundingClientRect());
-        // })
-        // // console.log(el.getBoundingClientRect());
-        // console.log(el);
-        // console.log(el.right-el.left);
+    // function onDragStop(e) {
+    //     // debugger
+    //     // let el=document.getElementById("rnd").getBoundingClientRect();
+    //     // let elements=document.querySelectorAll('*');
+    //     // let pos;
+    //     // // console.log(elements);
+    //     // elements.forEach((elem)=>{
+    //     //     pos=elem.getBoundingClientRect();
+    //     //     if(pos.left>=elem.left && pos.right<=elem.right){
+    //     //         console.log("ccccccccccccccccccc");
+    //     //     }
+    //     //     // console.log(elem.getBoundingClientRect());
+    //     // })
+    //     // // console.log(el.getBoundingClientRect());
+    //     // console.log(el);
+    //     // console.log(el.right-el.left);
 
-        document.getElementById("rnd").dispatchEvent(new Event('drop'));
-        // document.getElementById("rnd").mousedown();
+    //     document.getElementById("rnd").dispatchEvent(new Event('drop'));
+    //     // document.getElementById("rnd").mousedown();
 
-    }
-    function onMouseUp(e) {
-        console.log("rrrrrrrrrrrrrrrrrrrrrr");
-        // document.getElementById("rnd").dispatchEvent(new Event('mousedown'));
-    }
-    const extendsProps = {
+    // }
+    // function onMouseUp(e) {
+    //     console.log("rrrrrrrrrrrrrrrrrrrrrr");
+    //     // document.getElementById("rnd").dispatchEvent(new Event('mousedown'));
+    // }
+    // const extendsProps = {
 
-        ondrop: () => { console.log("ppppppppppppppppppppppppp"); },
-    };
+    //     ondrop: () => { console.log("ppppppppppppppppppppppppp"); },
+    // };
     /* The dragging code for '.draggable' from the demo above
 * applies to this demo as well so it doesn't have to be repeated. */
 
     // enable draggables to be dropped into this
-    interact('.dropzone').dropzone({
-        // only accept elements matching this CSS selector
-        accept: '#yes-drop',
-        // Require a 75% element overlap for a drop to be possible
-        overlap: 0.75,
-
-        // listen for drop related events:
-
-        ondropactivate: function (event) {
-            // add active dropzone feedback
-            event.target.classList.add('drop-active')
-        },
-        ondragenter: function (event) {
-            var draggableElement = event.relatedTarget
-            var dropzoneElement = event.target
-
-            // feedback the possibility of a drop
-            dropzoneElement.classList.add('drop-target')
-            draggableElement.classList.add('can-drop')
-            draggableElement.textContent = 'Dragged in'
-        },
-        ondragleave: function (event) {
-            // remove the drop feedback style
-            event.target.classList.remove('drop-target')
-            event.relatedTarget.classList.remove('can-drop')
-            event.relatedTarget.textContent = 'Dragged out'
-        },
-        ondrop: function (event) {
-            event.relatedTarget.textContent = 'Dropped'
-        },
-        ondropdeactivate: function (event) {
-            // remove active dropzone feedback
-            event.target.classList.remove('drop-active')
-            event.target.classList.remove('drop-target')
-        }
-    })
+    
 
     interact('.drag-drop')
         .draggable({
             inertia: true,
             modifiers: [
                 interact.modifiers.restrictRect({
-                    restriction: 'parent',
+                    restriction: 'body',
                     endOnly: true
                 })
             ],
@@ -208,47 +175,73 @@ export default function Notes(props) {
             target.setAttribute('data-y', y)
           }
           
+          // this function is used later in the resizing and gesture demos
+          window.dragMoveListener = dragMoveListener
+    // function onmousedown(event) {
+    //     const dragged=document.getElementById("drag");
 
+    //     // (1) prepare to moving: make absolute and on top by z-index
+    //     dragged.style.position = 'absolute';
+    //     dragged.style.zIndex = 1000;
+
+    //     // move it out of any current parents directly into body
+    //     // to make it positioned relative to the body
+    //     document.body.append(dragged);
+
+    //     // centers the ball at (pageX, pageY) coordinates
+    //     function moveAt(pageX, pageY) {
+    //         dragged.style.left = pageX - dragged.offsetWidth / 2 + 'px';
+    //         dragged.style.top = pageY - dragged.offsetHeight / 2 + 'px';
+    //     }
+
+    //     // move our absolutely positioned ball under the pointer
+    //     moveAt(event.pageX, event.pageY);
+
+    //     function onMouseMove(event) {
+    //         moveAt(event.pageX, event.pageY);
+    //     }
+
+    //     // (2) move the ball on mousemove
+    //     document.addEventListener('mousemove', onMouseMove);
+
+    //     // (3) drop the ball, remove unneeded handlers
+    //     dragged.onmouseup = function () {
+    //         document.removeEventListener('mousemove', onMouseMove);
+    //         dragged.onmouseup = null;
+    //     };
+    //      function ondragstart() {
+    //         return false;
+    //       };
+
+    // };
+    // function onMouseDown(e){
+    //     setIsDown(true);
+    // }
+    // function onMouseUp(e){
+    //     setIsDown(false);
+    // }
+    // function onMouseMove(e){
+    //     let rnd=rndRef.current;
+    //     e.preventDefault();
+    //     if (isDown) {
+    //     var deltaX = e.movementX;
+    //     var deltaY = e.movementY;
+    //    var rect = rnd.getBoundingClientRect();
+    //    rnd.style.left = rect.x + deltaX + 'px';
+    //    rnd.style.top  = rect.x + deltaX + 'px';
+    //   }
+    // }
     return (
         <>
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {
                     console.log(item);
                     return <>  <div className="resize" >
-                        {/* <div ref={rndRef} draggable="true" 
-                        onResizeStart={() => { inResize(item, 0) }}
-                        onResizeEnd={() => { inResize(item, 1) }}
-                        ondragstart={() => onDragStart(item.indexNote)}
-                        onDragStop={(e)=>onDragStop(e)}
-                        onMouseUp={onMouseUp}
-                        key={item.indexNote}
-                            // ref={dragRef}
-                            className={`note ${item.indexNote} note`}
-                         width="336" height="69"> */}
-                        {/* <Rnd id="rnd" ref={rndRef} cancel=".textarea .curr-container BsX BsPencil"
-                            onResizeStart={() => { inResize(item, 0) }}
-                            onResizeEnd={() => { inResize(item, 1) }}
-                            onDragStart={() => onDragStart(item.indexNote)}
-                            onDragStop={(e)=>onDragStop(e)}
-                            onMouseUp={onMouseUp}
-                            extendsProps={extendsProps}
-                            // onDragStop={onDragStop}
-                            key={item.indexNote}
-                            // ref={dragRef}
-                            className={`note ${item.indexNote} note`}
-                            default={{
-                                position: "absolute",
-                                backgroundColor: item.colors,
-                                x: item.placeX,
-                                y: item.placeY,
-                                width: 150,
-                                height: 150
-                            }}
-                            // style={{ zoom: dragFlag&&currentNote===item.indexNote ? '30%' : "100%" }}
+                        {/* <div id="no-drop" class="drag-drop"> #no-drop </div> */}
 
-                        > */}
-
-                        {/* <div className={`header ${item.indexNote}`}
+                        <div key={item.indexNote} id="yes-drop" className="drag-drop">
+                            
+                            <div className={`header ${item.indexNote}`}
                                 style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }} >
                                 <BsX style={{
                                     color: "#0A102E",
@@ -283,8 +276,8 @@ export default function Notes(props) {
                                     onDoubleClick={handleDoubleClick}
                                 >{item.textNote}
                                 </textarea>
-                            </div> */}
-                        {/* <div className="curr-container"
+                            </div>
+                            <div className="curr-container"
                                 style={{
                                 }}
                             >
@@ -306,8 +299,55 @@ export default function Notes(props) {
                                         })}
                                     </div>
                                     : ""}
-                            </div> */}
-                        {/* </Rnd> */}
+                            </div>
+                        </div>
+
+                        {/* <div id="outer-dropzone" class="dropzone">
+                            #outer-dropzone
+                            <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
+                        </div> */}
+
+
+
+
+
+                        {/* <div ref={rndRef} id="drag" draggable="true"
+                            onResizeStart={() => { inResize(item, 0) }}
+                            onResizeEnd={() => { inResize(item, 1) }}
+                            onMouseDown={onmousedown}
+                            onDragStop={(e) => onDragStop(e)}
+                            onMouseUp={onMouseUp}
+                            onMouseDown={onMouseDown}
+                            onMouseMove={onMouseMove}
+                            onDragStart={ondragstart}
+                            key={item.indexNote}
+                            // ref={dragRef}
+                            className={`note ${item.indexNote} note`}
+                            width="336" height="69"> */}
+                            {/* <Rnd id="rnd" ref={rndRef} cancel=".textarea .curr-container BsX BsPencil"
+                            onResizeStart={() => { inResize(item, 0) }}
+                            onResizeEnd={() => { inResize(item, 1) }}
+                            onDragStart={() => onDragStart(item.indexNote)}
+                            onDragStop={(e)=>onDragStop(e)}
+                            onMouseUp={onMouseUp}
+                            extendsProps={extendsProps}
+                            // onDragStop={onDragStop}
+                            key={item.indexNote}
+                            // ref={dragRef}
+                            className={`note ${item.indexNote} note`}
+                            default={{
+                                position: "absolute",
+                                backgroundColor: item.colors,
+                                x: item.placeX,
+                                y: item.placeY,
+                                width: 150,
+                                height: 150
+                            }}
+                            // style={{ zoom: dragFlag&&currentNote===item.indexNote ? '30%' : "100%" }}
+
+                        > */}
+
+                            {/* </Rnd> */}
                         {/* </div> */}
                     </div>
                     </>

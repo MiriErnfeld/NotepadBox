@@ -143,7 +143,7 @@ const noteData = {
         state.noteList = updateNoteList;
     },
 
-    setNoteList1(state, action) {
+    setNoteList1(state, action) {debugger
         state.newNoteIndex=action.payload;
         let top = Math.floor(Math.random() * 260)
         let left = Math.floor(Math.random() * 600)

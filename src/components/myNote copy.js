@@ -105,7 +105,9 @@ export default function Notes(props) {
 
     }
 
-    function onDragStart(indexNote) {
+    function onDragStart(e,indexNote) {
+        // e.preventDefault();
+        // e.stopPropagation();
         // const draggedNote = dragRef.current;
         // console.log(draggedNote);
         setCurrentNote(indexNote);
@@ -145,10 +147,10 @@ export default function Notes(props) {
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {console.log(item);
                     return <>  <div className="resize" >
-                        <Rnd id="rnd" ref={rndRef} cancel=".textarea .curr-container BsX BsPencil"
+                        <Rnd id="rnd" ref={rndRef} cancel=".textarea .curr-container BsX BsPencil" draggable
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
-                            onDragStart={() => onDragStart(item.indexNote)}
+                            onDragStart={(e) => onDragStart(e,item.indexNote)}
                             onDragStop={(e)=>onDragStop(e)}
                             onMouseUp={onMouseUp}
                             extendsProps={extendsProps}

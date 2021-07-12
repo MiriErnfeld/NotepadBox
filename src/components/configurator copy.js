@@ -137,7 +137,6 @@ export default function Configurator() {
     }
 
     function insertNote() {
-        debugger
         dispatch(actions.setNoteList1(--newNoteIndex));
     }
 
@@ -244,7 +243,7 @@ export default function Configurator() {
                 <div className="create-note-button m-2 mt-3 d-flex justify-content-center align-items-center"
                     onClick={insertNote}>
                     <p className="text-justify text-center m-auto">Create Note +</p></div>
-                <div className="dropzone row dragfolder droppable m-2 p-3 justify-content-center align-items-center"
+                <div className="row dragfolder droppable m-2 p-3 justify-content-center align-items-center"
                     ref={dropRef}
                     onDragEnter={onDragEnter}
                     onDrop={onDropNewFolder}
@@ -254,18 +253,6 @@ export default function Configurator() {
                     {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
                     <p className="newFolder" style={{ fontSize: '15' }}>drag notes to create folder</p>
                 </div>
-
-{/* 
-                <div id="no-drop" class="drag-drop"> #no-drop </div>
-
-<div id="yes-drop" class="drag-drop"> #yes-drop </div>
-
-<div id="outer-dropzone" class="dropzone">
-  #outer-dropzone
-  <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
- </div> */}
-
-
                 {
                     newFolderFlag ? <div className="folder folderColor d-flex justify-content-around align-items-center">
                         <FiFolder className="icon"></FiFolder>
