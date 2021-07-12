@@ -99,7 +99,7 @@ export default function Configurator() {
     };
 
 
-    function noteToSpesificFolder(targetFolderId) {
+    function noteToSpesificFolder(e, targetFolderId) {
         if (currentNote >= 0)
             dispatch(actions.noteToSpesificFolder({
                 sourceFolder: currentFolder._id,
@@ -107,13 +107,15 @@ export default function Configurator() {
                 indexNote: currentNote
             }))
         else
-            alert("tou cant move note without text!")
+            alert("tou cant move note without text!");
+        e.stopPropagation();
     }
 
     function onDropExistsFolder(e, targetFolderId) {
         e.preventDefault();
+
+        noteToSpesificFolder(e, targetFolderId);
         e.stopPropagation();
-        noteToSpesificFolder(targetFolderId);
     };
 
     async function createFolder(e) {
@@ -124,7 +126,7 @@ export default function Configurator() {
         await dispatch(actions.createFolder(text));
         // console.log(newFolder);
         debugger
-        noteToSpesificFolder(newFolder._id)
+        noteToSpesificFolder(e, newFolder._id)
         setNewFolderFlag(!newFolderFlag);
     }
 
