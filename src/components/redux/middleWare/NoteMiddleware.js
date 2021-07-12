@@ -5,6 +5,27 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
     let url = window.location;
     let userName = (url.pathname.split('/')[1]);
 
+    if (action.type == "INIT_DATA") {
+        var myHeaders = new Headers();
+        myHeaders.append("Cookie", "cf_ob_info=502:653dc5431dd14c13:AMS; cf_use_ob=0");
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        fetch(`https://box.dev.leader.codes/api/${userName}/note/getNotesByUserName`, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                if (!result.status) {
+                    console.log(result);
+                    dispatch(actions.setAllNoteUser(result))
+                }
+            })
+            .catch(error => console.log('error', error));
+
+    }
+
     if (action.type == "CREATE_NOTE1") {
         var myHeaders = new Headers();
         //jwt from userName miri!!!!
@@ -13,7 +34,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
 
         var raw = JSON.stringify({
             "indexNote": action.payload.item.indexNote,
-            "userName": "",
+            "userId": "",
             "textNote": action.payload.newText,
             "colors": action.payload.item.colors,
             "placeX": action.payload.item.placeX,
@@ -33,7 +54,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
         fetch(`https://box.dev.leader.codes/api/${userName}/note/createNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                dispatch(actions.createNote(result));
+                if (!result.status) { dispatch(actions.createNote(result)); }
             })
             .catch(error => console.log('error', error));
     }
@@ -59,12 +80,14 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
         fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/deleteNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                debugger
-                if (check == "") {// after note delete only from server dispatch to reducer
-                    dispatch(actions.setDummyNoteList(result))//enter to dummyNoteList only the index of this note
-                    return next(action)
+                if (!result.status) {
+                    debugger
+                    if (check == "") {// after note delete only from server dispatch to reducer
+                        dispatch(actions.setDummyNoteList(result))//enter to dummyNoteList only the index of this note
+                        return next(action)
+                    }
+                    dispatch(actions.deleteNoteAction(result))//reducer
                 }
-                dispatch(actions.deleteNoteAction(result))//reducer
             })
             .catch(error => console.log('error', error));
     }
@@ -84,7 +107,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             "placeY": action.payload.top,
             "colors": action.payload.c,
             // "check": action.payload.check //if want that the check color saved
-            "currentFolder":action.payload.currentFolder._id
+            "currentFolder": action.payload.currentFolder._id
         });
 
         var requestOptions = {
@@ -94,11 +117,13 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/updateNote`, requestOptions)
+        fetch(`https://box.dev.leader.codes/api/note/${index}/updateNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result)
-                dispatch(actions.updateNoteAction(result))
+                if (!result.status) {
+                    console.log(result)
+                    // dispatch(actions.updateNoteAction(result))
+                }
             })
             .catch(error => console.log('error', error));
 
@@ -120,9 +145,11 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
         fetch("https://box.dev.leader.codes/api/note/enterNoteToFolder", requestOptions)
             .then(response => response.json())
             .then(result => {
-                debugger
-                if (!result.status)
-                    dispatch(actions.getAllNotesForUser(result))
+                if (!result.status) {
+                    debugger
+                    if (!result.status)
+                        dispatch(actions.setAllNotesFolder(result))
+                }
             })
             .catch(error => console.log('error', error));
     }

@@ -100,7 +100,6 @@ export default function Notes(props) {
         console.log();
         console.log(document.getElementById("rnd"))
         // document.getElementById("rnd").dispatchEvent(new DragEvent('onDragStop'));
-
     }
 
     function onDragStart(indexNote) {
@@ -167,7 +166,7 @@ export default function Notes(props) {
                                     }} className="BsPencil_button"
                                 >
                                 </BsPencil>
-                                <h1>{item.indexNote}</h1>
+                                <h4>{item.indexNote}</h4>
                                 <textarea
                                     className={`textarea ${item.indexNote}`}
                                     style={{ backgroundColor: item.colors }}

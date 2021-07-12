@@ -8,7 +8,8 @@ const initialState = {
     count: 0,
     topNote: "",
     noteList: [],
-    dummyNoteList: []//notes After Delete In Server display only in client
+    dummyNoteList: [],//notes After Delete In Server display only in client
+    newNoteIndex:null
 }
 const noteData = {
 
@@ -20,25 +21,35 @@ const noteData = {
 
         //option 2:
         //find the relevant current aouo index in the array in atate
-        let c = state.noteList.indexOf(state.noteList.find(note => note.indexNote === i))
-        state.noteList[c] = action.payload.new_note
+        // let c = state.noteList.indexOf(state.noteList.find(note => note.indexNote === i))
+        // state.noteList[c] = action.payload.new_note
+        // console.log(state.noteList[c]);
+
+
+        let c = state.noteList.indexOf(state.noteList.find(note => note.indexNote === state.newNoteIndex));
+        state.noteList[c] = action.payload.new_note;
         console.log(state.noteList[c]);
+        debugger
     },
-    getAllNotesForUser(state, action) { //from midlleWare
-        state.noteList = (action.payload.folderNotes);
+    setAllNoteUser(state, action) {
+        state.allNoteUser = action.payload.notes;
+
     },
-    updateNoteAction(state, action) { // from midlleWare 
-        let id = action.payload.user.indexNote
-        let updateIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === id))
-        let arr = [...state.noteList]
-        if (updateIndex !== -1) {
-            // if (action.payload.c) {
-            //     arr[updateIndex].colors = action.payload.user.colors
-            // }
-            arr[updateIndex].textNote = action.payload.user.textNote
-            arr[updateIndex].colors = action.payload.user.colors
-        } state.noteList = [...arr]
+    setAllNotesFolder(state, action) { //from midlleWare
+        state.noteList = action.payload.folderNotes;
     },
+    // updateNoteAction(state, action) { // from midlleWare 
+    //     let id = action.payload.user.indexNote
+    //     let updateIndex = state.noteList.indexOf(state.noteList.find(note => note.indexNote === id))
+    //     let arr = [...state.noteList]
+    //     if (updateIndex !== -1) {
+    //         // if (action.payload.c) {
+    //         //     arr[updateIndex].colors = action.payload.user.colors
+    //         // }
+    //         arr[updateIndex].textNote = action.payload.user.textNote
+    //         arr[updateIndex].colors = action.payload.user.colors
+    //     } state.noteList = [...arr]
+    // },
 
     deleteOnlyFromClient(state, action) {
         let note = action.payload
@@ -127,9 +138,17 @@ const noteData = {
         console.log(state.dummyNoteList);
     },
 
-    deleteNoteAction(state, action) { 
-        const updateNoteList = state.noteList.filter(x => x._id !==action.payload.noteToDelete._id)
+    deleteNoteAction(state, action) {
+        const updateNoteList = state.noteList.filter(x => x._id !== action.payload.noteToDelete._id)
         state.noteList = updateNoteList;
+    },
+
+    setNoteList1(state, action) {
+        state.newNoteIndex=action.payload;
+        let top = Math.floor(Math.random() * 260)
+        let left = Math.floor(Math.random() * 600)
+
+        state.noteList.push({ _id: "", indexNote: state.newNoteIndex, userName: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
     },
 };
 

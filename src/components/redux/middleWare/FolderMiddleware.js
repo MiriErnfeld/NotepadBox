@@ -17,10 +17,12 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
         fetch(`https://box.dev.leader.codes/api/${userName}/folder/getFoldersByUserName`)
             .then(response => response.json())
             .then(result => {
-                dispatch(actions.setAllFoldersForUser(result))
-                // if (result && result.folders[0] && result.folders[0].folderName === "בישולים") {
-                dispatch(actions.getFolderNotesByUser(result.folders[0]._id));
-                // }
+                if (!result.status) {
+                    dispatch(actions.setAllFoldersForUser(result))
+                    // if (result && result.folders[0] && result.folders[0].folderName === "בישולים") {
+                    dispatch(actions.getFolderNotesByUser(result.folders[0]._id));
+                    // }
+                }
             })
             .catch(error => console.log('error', error));
 
@@ -44,14 +46,16 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
 
         fetch(`https://box.dev.leader.codes/api/miri/folder/addFolder`, requestOptions)
             .then(response => response.json())
-            .then( async(result) => {
+            .then(async (result) => {
                 debugger
-                // console.log(result)
-                Promise.resolve(dispatch(actions.addFolder(result))).then(
-                    () =>{debugger; dispatch(actions.setNewFolder(result))});
-                // await dispatch(actions.addFolder(result));
-                debugger
-                // dispatch(actions.setNewFolder(result));
+                if (!result.status) {
+                    // console.log(result)
+                    Promise.resolve(dispatch(actions.addFolder(result))).then(
+                        () => { debugger; dispatch(actions.setNewFolder(result)) });
+                    // await dispatch(actions.addFolder(result));
+                    debugger
+                    // dispatch(actions.setNewFolder(result));
+                }
             })
     }
 
@@ -64,7 +68,9 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
         fetch(`https://box.dev.leader.codes/api/miri/folder/${action.payload}/deleteFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                dispatch(actions.deleteFolderFromList(result));
+                if (!result.status) {
+                    dispatch(actions.deleteFolderFromList(result));
+                }
             })
             .catch(error => console.log('error', error));
     }
@@ -88,8 +94,10 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
         fetch(`https://box.dev.leader.codes/api/folder/${index}/updateFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result)
-                dispatch(actions.updateNoteAction(result))
+                if (!result.status) {
+                    console.log(result)
+                    dispatch(actions.updateNoteAction(result))
+                }
             })
             .catch(error => console.log('error', error));
 
@@ -103,7 +111,11 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
 
         fetch(`https://box.dev.leader.codes/api/${userName}/folder/${action.payload}/folderNotes`, requestOptions)
             .then(response => response.json())
-            .then(result => dispatch(actions.getAllNotesForUser(result)))
+            .then(result => {
+                if (!result.status) {
+                    dispatch(actions.setAllNotesFolder(result))
+                }
+            })
             .catch(error => console.log('error', error));
     }
 
