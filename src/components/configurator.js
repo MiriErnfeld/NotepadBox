@@ -8,7 +8,10 @@ import { RiDeleteBinLine } from "react-icons/ri";
 
 import { FcPlus } from "react-icons/fc";
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import MyNote from './myNote';
+// import MyNote from './TrySmoothDnd';
+import MyNote from './TryDrag';
+// import MyNote from './myNote copy';
+// import MyNote from './myNote';
 import { BsX } from "react-icons/bs";
 import { Modal, Button, Dropdown } from 'react-bootstrap'
 var Color = require('color');
@@ -30,6 +33,9 @@ export default function Configurator() {
     const [show, setShow] = useState(false);
     const [draggedNote, setDraggedNote] = useState({});
     const [dragFlag, setDragFlag] = useState();
+
+    const [dragNewFolder,setDragNewFolder]=useState();
+    const [dragExistsFolder,setDragExistsFolder]=useState();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -184,7 +190,8 @@ export default function Configurator() {
                         </div> : ""}
                     </div> */}
                 {/* <div class="row"> */}
-                <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder} dragFlag={dragFlag} currentNote={currentNote} />
+                {/* <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder} dragFlag={dragFlag} currentNote={currentNote} /> */}
+                <MyNote setCurrentNote={setCurrentNoteOnDrag} dragExistsFolder={dragExistsFolder} dragNewFolder={dragNewFolder} currentFolder={currentFolder} dragFlag={dragFlag} currentNote={currentNote} />
                 {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
