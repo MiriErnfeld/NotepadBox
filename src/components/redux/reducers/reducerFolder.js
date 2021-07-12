@@ -24,7 +24,7 @@ const folderData = {
     },
     deleteFolderFromList(state, action) {
         const updateFolderList = state.folders.filter(x => x._id !==action.payload.folderToDelete)
-        state.folders = [...updateFolderList]
+        state.folders = updateFolderList
     }
 
 }

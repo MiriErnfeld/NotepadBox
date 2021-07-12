@@ -33,6 +33,7 @@ export default function Configurator() {
     const [show, setShow] = useState(false);
     const [draggedNote, setDraggedNote] = useState({});
     const [dragFlag, setDragFlag] = useState();
+    let newNoteIndex = 0;
 
     const [dragNewFolder,setDragNewFolder]=useState();
     const [dragExistsFolder,setDragExistsFolder]=useState();
@@ -106,11 +107,14 @@ export default function Configurator() {
 
 
     function noteToSpesificFolder(targetFolderId) {
-        dispatch(actions.noteToSpesificFolder({
-            sourceFolder: currentFolder,
-            targetFolder: targetFolderId,
-            indexNote: currentNote
-        }))
+        if (currentNote >= 0)
+            dispatch(actions.noteToSpesificFolder({
+                sourceFolder: currentFolder._id,
+                targetFolder: targetFolderId,
+                indexNote: currentNote
+            }))
+        else
+            alert("tou cant move note without text!")
     }
 
     function onDropExistsFolder(e, targetFolderId) {
@@ -132,7 +136,7 @@ export default function Configurator() {
     }
 
     function insertNote() {
-        dispatch(actions.setNoteList());
+        dispatch(actions.setNoteList1(--newNoteIndex));
     }
 
     function updateFolder(e, id) {
@@ -243,10 +247,10 @@ export default function Configurator() {
                                     onDoubleClick={(e) => { e.target.readOnly = false }}
                                 ></input>
                                 {
-                                    folder.folderName !== "default" ? 
-                                    <RiDeleteBinLine className="icon"
-                                        onClick={(e) => setDeleteFolder(e, folder)} >
-                                    </RiDeleteBinLine>
+                                    folder.folderName !== "default" ?
+                                        <RiDeleteBinLine className="icon"
+                                            onClick={(e) => setDeleteFolder(e, folder)} >
+                                        </RiDeleteBinLine>
                                         : ""}
 
                             </div>
