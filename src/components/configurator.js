@@ -23,14 +23,13 @@ export default function Configurator() {
     // const [countCol, setCountCol] = useState(0)
 
     const [arrnums, setarrnums] = useState([{}])
-    const [currentNote, setCurrentNote] = useState();
+    const [currentNote, setCurrentNote] = useState(null);
     const [newFolderFlag, setNewFolderFlag] = useState();
     // 
     const [currentFolder, setCurrentFolder] = useState();
     const [show, setShow] = useState(false);
     const [draggedNote, setDraggedNote] = useState({});
     const [dragFlag, setDragFlag] = useState();
-    let newNoteIndex = 0;
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -130,7 +129,7 @@ export default function Configurator() {
     }
 
     function insertNote() {
-        dispatch(actions.setNoteList1(--newNoteIndex));
+        dispatch(actions.setNoteList1(currentNote));
     }
 
     function updateFolder(e, id) {

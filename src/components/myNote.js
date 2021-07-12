@@ -9,9 +9,9 @@ import './myNote.css'
 
 export default function Notes(props) {
 
-    const { setCurrentNote, dragFlag,currentNote, currentFolder } = props;
+    const { setCurrentNote, dragFlag, currentNote, currentFolder } = props;
     const noteList = useSelector(state => state.reducerNote.noteList)
-    const data = useSelector(state => state.reducerNote)
+    const data = useSelector(state => state.reducerNote);
     const [leftNote, setLeftNote] = useState()
     // const dragRef = useRef();
     const rndRef = useRef();
@@ -25,8 +25,8 @@ export default function Notes(props) {
     ];
 
     useEffect(() => {
-        let rnd=rndRef.current;
-        dragFlag ? rnd.updateSize({ width: "30%", height: "30%" }): console.log();;
+        let rnd = rndRef.current;
+        dragFlag ? rnd.updateSize({ width: "30%", height: "30%" }) : console.log();;
     }, [dragFlag])
 
     function openCloseEditor(item) {
@@ -49,13 +49,13 @@ export default function Notes(props) {
             // alert("correctItem != -1 || item.textNote =empty||item._id ==empty ")
             return
         }
-        dispatch(actions.deleteNote({item,currentFolder}))//delete note in midlleWare 
+        dispatch(actions.deleteNote({ item, currentFolder }))//delete note in midlleWare 
     }
 
     function changeColor(c, item, index) {
         dispatch(actions.setCheck(index)) // index from the checked color
         dispatch(actions.setCurrentItem(item))
-        dispatch(actions.updateNote({ item, c,currentFolder }));//a function use to update color & text ib midlleWare
+        dispatch(actions.updateNote({ item, c, currentFolder }));//a function use to update color & text ib midlleWare
         dispatch(actions.changeColorAction({ c, item }))
         let i = item.indexNote//2//1
         let correctIndex = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
@@ -68,16 +68,23 @@ export default function Notes(props) {
     }
     function saveText(item, newText) {
         debugger
+        
         if (newText) {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
             debugger
-            if (noteList[currentItem].textNote) {
-                dispatch(actions.updateNote({ item, newText ,currentFolder}));//to update note in midllaware
+            let currentDummyIndex = data.dummyNoteList.find(x => x == i)//find the current place in the state in redux
+            if (noteList[currentItem].textNote && !currentDummyIndex) {
+                dispatch(actions.updateNote({ item, newText, currentFolder }));//to update note in midllaware
             }
             else {
                 debugger
-                dispatch(actions.createNote1({ item, newText ,currentFolder}));//to update in midlleWare when there is the first change
+                if (currentDummyIndex) {
+                    debugger
+                    dispatch(actions.deleteDummyNoteList(currentDummyIndex))
+                }
+                dispatch(actions.setNewNoteIndex(item.indexNote));
+                dispatch(actions.createNote1({ item, newText, currentFolder }));//to update in midlleWare when there is the first change
                 // dispatch(actions.createNote({ item, newText }));//to update in redux
             }
         }
@@ -86,7 +93,7 @@ export default function Notes(props) {
                 debugger
                 return;
             }
-            dispatch(actions.deleteNote({ item, newText,currentFolder }))//delete note in midlleWare
+            dispatch(actions.deleteNote({ item, newText, currentFolder }))//delete note in midlleWare
         }
     }
     function inResize(item, end) {
@@ -107,7 +114,7 @@ export default function Notes(props) {
         // console.log(draggedNote);
         setCurrentNote(indexNote);
     }
-    function onDragStop(e){
+    function onDragStop(e) {
         debugger
         console.log(e);
         document.getElementById("rnd").dispatchEvent(new Event('mousedown'));
@@ -136,7 +143,7 @@ export default function Notes(props) {
                                 width: 150,
                                 height: 150
                             }}
-                            // style={{ zoom: dragFlag&&currentNote===item.indexNote ? '30%' : "100%" }}
+                        // style={{ zoom: dragFlag&&currentNote===item.indexNote ? '30%' : "100%" }}
 
                         >
 

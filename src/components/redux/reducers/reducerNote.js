@@ -9,7 +9,8 @@ const initialState = {
     topNote: "",
     noteList: [],
     dummyNoteList: [],//notes After Delete In Server display only in client
-    newNoteIndex:null
+    newNoteIndex: null,//to get witch new note saved now
+    clientNoteIndex: 0//to notes that not save in server
 }
 const noteData = {
 
@@ -62,6 +63,13 @@ const noteData = {
         state.noteList = [...arr]
         console.log(state.noteList);
     },
+    deleteDummyNoteList(state, action) {
+        debugger
+        let index = action.payload
+        let arr = [...state.dummyNoteList]
+        arr.splice(index, 1)
+        state.dummyNoteList = [...arr]
+    },
     setNoteList(state) { //from component configurator.js onClick button insertNote
         debugger
         let c = state.noteList.length;
@@ -85,7 +93,7 @@ const noteData = {
         let top = Math.floor(Math.random() * 260)
         let left = Math.floor(Math.random() * 600)
 
-        allNote.push({ _id: "", indexNote: c, userName: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
+        allNote.push({ _id: "", indexNote: c, userId: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
         state.noteList = [...allNote]
 
     },
@@ -133,8 +141,12 @@ const noteData = {
     // },
     setDummyNoteList(state, action) {
         debugger
-        let note = action.payload.noteToDelete.indexNote
-        state.dummyNoteList.push(note)
+        const index = state.noteList.indexOf(state.noteList.find(x => x.indexNote == action.payload.noteToDelete.indexNote))
+        state.noteList[index]._id="";
+        state.noteList[index].indexNote=--state.clientNoteIndex;
+        state.noteList[index].textNote="";
+        
+        state.dummyNoteList.push(state.clientNoteIndex);
         console.log(state.dummyNoteList);
     },
 
@@ -144,12 +156,15 @@ const noteData = {
     },
 
     setNoteList1(state, action) {
-        state.newNoteIndex=action.payload;
+        
         let top = Math.floor(Math.random() * 260)
         let left = Math.floor(Math.random() * 600)
 
-        state.noteList.push({ _id: "", indexNote: state.newNoteIndex, userName: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
+        state.noteList.push({ _id: "", indexNote: --state.clientNoteIndex, userName: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
     },
+    setNewNoteIndex(state, action) {
+        state.newNoteIndex=action.payload;
+    }
 };
 
 export default produce((state, action) => createReducer(state, action, noteData), initialState);
