@@ -5,8 +5,12 @@ import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
+<<<<<<< HEAD
 import interact from 'interactjs';
 
+=======
+import { createFolderApi } from '../api/foldersApi';
+>>>>>>> 04bb7a74c15d32e26362b91aa3b434baa3488c63
 import { FcPlus } from "react-icons/fc";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 // import MyNote from './TrySmoothDnd';
@@ -92,7 +96,7 @@ export default function Configurator() {
     // };
 
 
-    function noteToSpesificFolder(targetFolderId) {
+    function noteToSpesificFolder(e, targetFolderId) {
         if (currentNote >= 0)
             dispatch(actions.noteToSpesificFolder({
                 sourceFolder: currentFolder._id,
@@ -100,6 +104,7 @@ export default function Configurator() {
                 indexNote: currentNote
             }))
         else
+<<<<<<< HEAD
             alert("you cannot move note without text!")
     }
 
@@ -108,16 +113,39 @@ export default function Configurator() {
     //     e.stopPropagation();
     //     noteToSpesificFolder(targetFolderId);
     // };
+=======
+            alert("tou cant move note without text!");
+        e.stopPropagation();
+    }
+
+    function onDropExistsFolder(e, targetFolderId) {
+        e.preventDefault();
+
+        noteToSpesificFolder(e, targetFolderId);
+        e.stopPropagation();
+    };
+>>>>>>> 04bb7a74c15d32e26362b91aa3b434baa3488c63
 
     async function createFolder(e) {
         let text = e.target.value;
         if (text === "") {
             text = "new folder";
         }
+<<<<<<< HEAD
         await dispatch(actions.createFolder(text));
         // console.log(newFolder);
         noteToSpesificFolder(newFolder._id)
         setNewFolderFlag(!newFolderFlag);
+=======
+        const result = await createFolderApi(text);
+        if (result) {
+            dispatch(actions.addFolder(result));
+            dispatch(actions.setNewFolder(result));
+            noteToSpesificFolder(e, result.newFolder._id);
+            setNewFolderFlag(!newFolderFlag);
+        }
+        e.stopPropagation();
+>>>>>>> 04bb7a74c15d32e26362b91aa3b434baa3488c63
     }
 
     function insertNote() {
