@@ -1,3 +1,4 @@
+import keyss from '../../../config/env/keys';
 import { actions } from '../actions/action'
 
 
@@ -14,14 +15,13 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             headers: myHeaders,
             redirect: 'follow'
         };
-        fetch(`https://box.dev.leader.codes/api/${userName}/folder/getFoldersByUserName`)
+        fetch(`${keyss.BASE_URL}/${userName}/folder/getFoldersByUserName`)
             .then(response => response.json())
             .then(result => {
+                debugger
                 if (!result.status) {
                     dispatch(actions.setAllFoldersForUser(result))
-                    // if (result && result.folders[0] && result.folders[0].folderName === "בישולים") {
                     dispatch(actions.getFolderNotesByUser(result.folders[0]._id));
-                    // }
                 }
             })
             .catch(error => console.log('error', error));
@@ -44,7 +44,7 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/${userName}/folder/addFolder`, requestOptions)
+        fetch(`${keyss.BASE_URL}/${userName}/folder/addFolder`, requestOptions)
             .then(response => response.json())
             .then(async (result) => {
                 debugger
@@ -64,7 +64,7 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/miri/folder/${action.payload}/deleteFolder`, requestOptions)
+        fetch(`${keyss.BASE_URL}/${userName}/folder/${action.payload}/deleteFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (!result.status) {
@@ -90,7 +90,7 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/folder/${index}/updateFolder`, requestOptions)
+        fetch(`${keyss.BASE_URL}/folder/${index}/updateFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (!result.status) {
@@ -108,7 +108,7 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/${userName}/folder/${action.payload}/folderNotes`, requestOptions)
+        fetch(`${keyss.BASE_URL}/${userName}/folder/${action.payload}/folderNotes`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (!result.status) {

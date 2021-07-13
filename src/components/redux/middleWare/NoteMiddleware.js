@@ -1,3 +1,4 @@
+import keyss from '../../../config/env/keys';
 import { actions } from '../actions/action'
 
 
@@ -33,7 +34,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/${userName}/note/createNote`, requestOptions)
+        fetch(`${keyss.BASE_URL}/${userName}/note/createNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (!result.status) { dispatch(actions.createNote(result)); }
@@ -59,7 +60,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             index = action.payload.item.indexNote
         }
 
-        fetch(`https://box.dev.leader.codes/api/${userName}/note/${index}/deleteNote`, requestOptions)
+        fetch(`${keyss.BASE_URL}/${userName}/note/${index}/deleteNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (!result.status) {
@@ -99,9 +100,11 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/note/${index}/updateNote`, requestOptions)
+        fetch(`${keyss.BASE_URL}/note/${index}/updateNote`, requestOptions)
+
             .then(response => response.json())
             .then(result => {
+                debugger
                 if (!result.status) {
                     console.log(result)
                     // dispatch(actions.updateNoteAction(result))
@@ -124,7 +127,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             redirect: 'follow'
         };
         console.log(requestOptions);
-        fetch("https://box.dev.leader.codes/api/note/enterNoteToFolder", requestOptions)
+        fetch(`${keyss.BASE_URL}/note/enterNoteToFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (!result.status) {

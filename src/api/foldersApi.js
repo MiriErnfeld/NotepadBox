@@ -1,3 +1,5 @@
+import keyss from "../config/env/keys";
+
 export async function createFolderApi(text) {
     let url = window.location;
     let userName = (url.pathname.split('/')[1]);
@@ -15,7 +17,7 @@ export async function createFolderApi(text) {
         redirect: 'follow'
     };
 
-    let result = await fetch(`https://box.dev.leader.codes/api/${userName}/folder/addFolder`, requestOptions)
+    let result = await fetch(`${keyss.BASE_URL}/${userName}/folder/addFolder`, requestOptions)
     .then(response => response.json())
     .then(result => {
     if (!result.status)
