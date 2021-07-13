@@ -5,7 +5,7 @@ import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
-
+import { createFolderApi } from '../api/foldersApi';
 import { FcPlus } from "react-icons/fc";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import MyNote from './myNote';
@@ -123,11 +123,14 @@ export default function Configurator() {
         if (text === "") {
             text = "new folder";
         }
-        await dispatch(actions.createFolder(text));
-        // console.log(newFolder);
-        debugger
-        noteToSpesificFolder(e, newFolder._id)
-        setNewFolderFlag(!newFolderFlag);
+        const result = await createFolderApi(text);
+        if (result) {
+            dispatch(actions.addFolder(result));
+            dispatch(actions.setNewFolder(result));
+            noteToSpesificFolder(e, result.newFolder._id);
+            setNewFolderFlag(!newFolderFlag);
+        }
+        e.stopPropagation();
     }
 
     function insertNote() {

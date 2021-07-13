@@ -44,17 +44,16 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`https://box.dev.leader.codes/api/miri/folder/addFolder`, requestOptions)
+        fetch(`https://box.dev.leader.codes/api/${userName}/folder/addFolder`, requestOptions)
             .then(response => response.json())
             .then(async (result) => {
                 debugger
                 if (!result.status) {
+                    
                     // console.log(result)
                     Promise.resolve(dispatch(actions.addFolder(result))).then(
-                        () => { debugger; dispatch(actions.setNewFolder(result)) });
-                    // await dispatch(actions.addFolder(result));
-                    debugger
-                    // dispatch(actions.setNewFolder(result));
+                        () => { debugger; dispatch(actions.setNewFolder(result))
+                         });
                 }
             })
     }
