@@ -13,11 +13,11 @@ import './TryDrag.css'
 
 export default function Notes(props) {
 
-    const { setCurrentNote, dragFlag, currentNote, currentFolder, dragNewFolder, dragExistsFolder } = props;
+    const { setCurrentNote, draggedNoteFlag, currentNote, currentFolder, dragNewFolder, dragExistsFolder } = props;
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
     const [leftNote, setLeftNote] = useState()
-    const [isDown, setIsDown]=useState();
+    const [isDown, setIsDown] = useState();
     // const dragRef = useRef();
     const rndRef = useRef();
 
@@ -29,10 +29,10 @@ export default function Notes(props) {
         , '#40D9ED', '#ff8a65', '#d9e3f0'
     ];
 
-    useEffect(() => {
-        let rnd = rndRef.current;
-        dragFlag ? rnd.updateSize({ width: "30%", height: "30%" }) : console.log();;
-    }, [dragFlag])
+    // useEffect(() => {
+    //     let rnd = rndRef.current;
+    //     draggedNoteFlag ? rnd.updateSize({ width: "30%", height: "30%" }) : console.log();;
+    // }, [draggedNoteFlag])
 
     function openCloseEditor(item) {
         let currentIndex = noteList.indexOf(noteList.find(x => x.indexNote == item.indexNote))//find the current place in the state in redux
@@ -108,45 +108,18 @@ export default function Notes(props) {
 
     }
 
-    function onDragStart(indexNote) {
+    function onDragStart(e) {
         // const draggedNote = dragRef.current;
         // console.log(draggedNote);
-        setCurrentNote(indexNote);
+        console.log(e.target.getAttribute("data-key"));
+        setCurrentNote(e.target.getAttribute("data-key"));
     }
-    // function onDragStop(e) {
-    //     // debugger
-    //     // let el=document.getElementById("rnd").getBoundingClientRect();
-    //     // let elements=document.querySelectorAll('*');
-    //     // let pos;
-    //     // // console.log(elements);
-    //     // elements.forEach((elem)=>{
-    //     //     pos=elem.getBoundingClientRect();
-    //     //     if(pos.left>=elem.left && pos.right<=elem.right){
-    //     //         console.log("ccccccccccccccccccc");
-    //     //     }
-    //     //     // console.log(elem.getBoundingClientRect());
-    //     // })
-    //     // // console.log(el.getBoundingClientRect());
-    //     // console.log(el);
-    //     // console.log(el.right-el.left);
 
-    //     document.getElementById("rnd").dispatchEvent(new Event('drop'));
-    //     // document.getElementById("rnd").mousedown();
-
-    // }
-    // function onMouseUp(e) {
-    //     console.log("rrrrrrrrrrrrrrrrrrrrrr");
-    //     // document.getElementById("rnd").dispatchEvent(new Event('mousedown'));
-    // }
-    // const extendsProps = {
-
-    //     ondrop: () => { console.log("ppppppppppppppppppppppppp"); },
-    // };
     /* The dragging code for '.draggable' from the demo above
 * applies to this demo as well so it doesn't have to be repeated. */
 
     // enable draggables to be dropped into this
-    
+
 
     interact('.drag-drop')
         .draggable({
@@ -159,88 +132,81 @@ export default function Notes(props) {
             ],
             autoScroll: true,
             // dragMoveListener from the dragging demo above
-            listeners: { move: dragMoveListener }
-        })
-        function dragMoveListener (event) {
-            var target = event.target
-            // keep the dragged position in the data-x/data-y attributes
-            var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-            var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
-          
-            // translate the element
-            target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
-          
-            // update the posiion attributes
-            target.setAttribute('data-x', x)
-            target.setAttribute('data-y', y)
-          }
-          
-          // this function is used later in the resizing and gesture demos
-          window.dragMoveListener = dragMoveListener
-    // function onmousedown(event) {
-    //     const dragged=document.getElementById("drag");
+            listeners: {
+                move: dragMoveListener,
+                start:onDragStart
+            }
+        }).resizable({
+            // resize from all edges and corners
+            edges: { left: true, right: true, bottom: true, top: true },
+        
+            listeners: {
+              move (event) {
+                var target = event.target
+                var x = (parseFloat(target.getAttribute('data-x')) || 0)
+                var y = (parseFloat(target.getAttribute('data-y')) || 0)
+        
+                // update the element's style
+                target.style.width = event.rect.width + 'px'
+                target.style.height = event.rect.height + 'px'
+        
+                // translate when resizing from top or left edges
+                x += event.deltaRect.left
+                y += event.deltaRect.top
+        
+                target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+        
+                target.setAttribute('data-x', x)
+                target.setAttribute('data-y', y)
+                // target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+              }
+            },
+            modifiers: [
+              // keep the edges inside the parent
+              interact.modifiers.restrictEdges({
+                outer: 'all-notes'
+              }),
+        
+              // minimum size
+              interact.modifiers.restrictSize({
+                min: { width: 100, height: 50 }
+              })
+            ],
+        
+            inertia: true
+          })
+    function dragMoveListener(event) {
+        var target = event.target
+        // keep the dragged position in the data-x/data-y attributes
+        var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+        var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
 
-    //     // (1) prepare to moving: make absolute and on top by z-index
-    //     dragged.style.position = 'absolute';
-    //     dragged.style.zIndex = 1000;
+        // translate the element
+        target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
 
-    //     // move it out of any current parents directly into body
-    //     // to make it positioned relative to the body
-    //     document.body.append(dragged);
-
-    //     // centers the ball at (pageX, pageY) coordinates
-    //     function moveAt(pageX, pageY) {
-    //         dragged.style.left = pageX - dragged.offsetWidth / 2 + 'px';
-    //         dragged.style.top = pageY - dragged.offsetHeight / 2 + 'px';
-    //     }
-
-    //     // move our absolutely positioned ball under the pointer
-    //     moveAt(event.pageX, event.pageY);
-
-    //     function onMouseMove(event) {
-    //         moveAt(event.pageX, event.pageY);
-    //     }
-
-    //     // (2) move the ball on mousemove
-    //     document.addEventListener('mousemove', onMouseMove);
-
-    //     // (3) drop the ball, remove unneeded handlers
-    //     dragged.onmouseup = function () {
-    //         document.removeEventListener('mousemove', onMouseMove);
-    //         dragged.onmouseup = null;
-    //     };
-    //      function ondragstart() {
-    //         return false;
-    //       };
-
-    // };
-    // function onMouseDown(e){
-    //     setIsDown(true);
-    // }
-    // function onMouseUp(e){
-    //     setIsDown(false);
-    // }
-    // function onMouseMove(e){
-    //     let rnd=rndRef.current;
-    //     e.preventDefault();
-    //     if (isDown) {
-    //     var deltaX = e.movementX;
-    //     var deltaY = e.movementY;
-    //    var rect = rnd.getBoundingClientRect();
-    //    rnd.style.left = rect.x + deltaX + 'px';
-    //    rnd.style.top  = rect.x + deltaX + 'px';
+        // update the posiion attributes
+        target.setAttribute('data-x', x)
+        target.setAttribute('data-y', y)
+    }
+    //   function dragEndListener(e){
+    //       debugger
+    //       console.log(e);
     //   }
-    // }
+
+    // this function is used later in the resizing and gesture demos
+    window.dragMoveListener = dragMoveListener
+
     return (
         <>
             <div className="all-notes">
                 {noteList ? noteList.map((item) => {
+                    console.log(noteList);
                     console.log(item);
                     return <>  <div className="resize" >
                         {/* <div id="no-drop" class="drag-drop"> #no-drop </div> */}
 
-                        <div key={item.indexNote} id="yes-drop" className="drag-drop">
-                            
+                        <div key={item.indexNote} id="yes-drop" data-key={item.indexNote} className={`drag-drop note ${item.indexNote}`}>
+                      
                             <div className={`header ${item.indexNote}`}
                                 style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }} >
                                 <BsX style={{
@@ -324,7 +290,7 @@ export default function Notes(props) {
                             // ref={dragRef}
                             className={`note ${item.indexNote} note`}
                             width="336" height="69"> */}
-                            {/* <Rnd id="rnd" ref={rndRef} cancel=".textarea .curr-container BsX BsPencil"
+                        {/* <Rnd id="rnd" ref={rndRef} cancel=".textarea .curr-container BsX BsPencil"
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
                             onDragStart={() => onDragStart(item.indexNote)}
@@ -347,7 +313,7 @@ export default function Notes(props) {
 
                         > */}
 
-                            {/* </Rnd> */}
+                        {/* </Rnd> */}
                         {/* </div> */}
                     </div>
                     </>

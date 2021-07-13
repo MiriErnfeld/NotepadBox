@@ -214,3 +214,21 @@ display:block;
 .draggedNote{
    zoom:50%!important;
 }
+
+.dropzone {
+    background-color: #F1F1F3;
+    border: dashed 4px transparent;
+    border-radius: 4px;
+    margin: 10px auto 30px;
+    padding: 10px;
+    width: 80%;
+    transition: background-color 0.3s;
+  }
+
+  .drop-target {
+    /* background-color: #F1F1F3; */
+    border-color: #fff;
+    border-style: solid;
+  }
+
+  

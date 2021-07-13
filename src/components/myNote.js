@@ -26,7 +26,7 @@ export default function Notes(props) {
 
     const { setCurrentNote, dragFlag, currentNote, currentFolder } = props;
     const noteList = useSelector(state => state.reducerNote.noteList)
-    const data = useSelector(state => state.reducerNote)
+    const data = useSelector(state => state.reducerNote);
     const [leftNote, setLeftNote] = useState()
 
     //TryDnd---------------------------------------------------------------
@@ -124,15 +124,22 @@ export default function Notes(props) {
     }
     function saveText(item, newText) {
         debugger
+        
         if (newText) {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
             debugger
-            if (noteList[currentItem].textNote) {
+            let currentDummyIndex = data.dummyNoteList.find(x => x == i)//find the current place in the state in redux
+            if (noteList[currentItem].textNote && !currentDummyIndex) {
                 dispatch(actions.updateNote({ item, newText, currentFolder }));//to update note in midllaware
             }
             else {
                 debugger
+                if (currentDummyIndex) {
+                    debugger
+                    dispatch(actions.deleteDummyNoteList(currentDummyIndex))
+                }
+                dispatch(actions.setNewNoteIndex(item.indexNote));
                 dispatch(actions.createNote1({ item, newText, currentFolder }));//to update in midlleWare when there is the first change
                 // dispatch(actions.createNote({ item, newText }));//to update in redux
             }

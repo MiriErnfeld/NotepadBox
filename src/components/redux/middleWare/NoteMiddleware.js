@@ -5,28 +5,10 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
     let url = window.location;
     let userName = (url.pathname.split('/')[1]);
 
-    if (action.type == "INIT_DATA") {
-        var myHeaders = new Headers();
-        myHeaders.append("Cookie", "cf_ob_info=502:653dc5431dd14c13:AMS; cf_use_ob=0");
-
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
-        fetch(`https://box.dev.leader.codes/api/${userName}/note/getNotesByUserName`, requestOptions)
-            .then(response => response.json())
-            .then(result => {
-                if (!result.status) {
-                    console.log(result);
-                    dispatch(actions.setAllNoteUser(result))
-                }
-            })
-            .catch(error => console.log('error', error));
-
-    }
 
     if (action.type == "CREATE_NOTE1") {
+
+        
         var myHeaders = new Headers();
         //jwt from userName miri!!!!
         myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
@@ -60,7 +42,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
     }
 
     if (action.type == "DELETE_NOTE") {
-        var check = action.payload.item.newText;
+        var check = action.payload.newText;
         var index = action.payload.item.indexNote
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
