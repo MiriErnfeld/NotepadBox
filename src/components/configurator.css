@@ -166,11 +166,11 @@ display:block;
     /* text-align: center;  */
 }
 .folderColor{
-    background-color: #F1F1F3;
+    background-color: #F1F1F3!important;
 
 }
 .folderChosenColor{
-    background-color: #c1c1c1;
+    background-color: #c1c1c1!important;
 }
 .folderInput{
     width:11vw;
@@ -180,7 +180,7 @@ display:block;
     cursor: default;
 }
 .folder:hover {
-    background-color: #c1c1c1;
+    background-color: #c1c1c1!important;
   }
 
 ::-webkit-scrollbar {
@@ -219,9 +219,9 @@ display:block;
     background-color: #F1F1F3;
     border: dashed 4px transparent;
     border-radius: 4px;
-    margin: 10px auto 30px;
-    padding: 10px;
-    width: 80%;
+    /* margin: 10px auto 30px; */
+    /* padding: 10px; */
+    /* width: 80%; */
     transition: background-color 0.3s;
   }
 

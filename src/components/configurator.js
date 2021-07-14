@@ -5,12 +5,9 @@ import folserPlus from '../images/folder-plus.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { FiFolderPlus, FiFolder, FiMoreVertical } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
-<<<<<<< HEAD
 import interact from 'interactjs';
 
-=======
 import { createFolderApi } from '../api/foldersApi';
->>>>>>> 04bb7a74c15d32e26362b91aa3b434baa3488c63
 import { FcPlus } from "react-icons/fc";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 // import MyNote from './TrySmoothDnd';
@@ -36,11 +33,11 @@ export default function Configurator() {
     const [currentNote, setCurrentNote] = useState(null);
     const [newFolderFlag, setNewFolderFlag] = useState();
     // 
-    const [currentFolder, setCurrentFolder] = useState();
+    const [currentFolder, setCurrentFolder] = useState(null);
     const [show, setShow] = useState(false);
     const [draggedNote, setDraggedNote] = useState({});
     const [draggedNoteFlag, setDraggedNoteFlag] = useState();
-    const [defaultFolder, setDefaultFolder] = useState();
+    const [defaultFolder, setDefaultFolder] = useState(null);
 
     // const [dragNewFolder, setDragNewFolder] = useState();
     // const [dragExistsFolder, setDragExistsFolder] = useState();
@@ -52,18 +49,25 @@ export default function Configurator() {
     // const dragRef=useRef();
     const divDrop = dropRef.current;
 
-    useEffect(() => {
+    useEffect(async () => {
         if (folders && folders[0]) {
             let defaultF = folders.find(f => f.folderName === "default");
-            setCurrentFolder(defaultF);
-            setDefaultFolder(defaultF);
-
+            console.log(defaultF);
+            await setCurrentFolder(defaultF);
+            await setDefaultFolder(defaultF);
+            console.log(currentFolder);
+            console.log(currentNote);
         }
 
     }, [folders])
 
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
+    }
+
+    function setCurrentNote1(note){
+        debugger
+        setCurrentNote(note);
     }
 
     // function onDragEnter(e) {
@@ -96,16 +100,17 @@ export default function Configurator() {
     // };
 
 
-    function noteToSpesificFolder(e, targetFolderId) {
-        if (currentNote >= 0)
+    function noteToSpesificFolder(targetFolderId) {
+        console.log(currentNote);
+        if (currentNote >= 0 && currentFolder)
             dispatch(actions.noteToSpesificFolder({
                 sourceFolder: currentFolder._id,
                 targetFolder: targetFolderId,
                 indexNote: currentNote
             }))
-        else
-<<<<<<< HEAD
-            alert("you cannot move note without text!")
+        // else
+        //     alert("you cannot move note without text!")
+            // e.stopPropagation();
     }
 
     // function onDropExistsFolder(e, targetFolderId) {
@@ -113,42 +118,25 @@ export default function Configurator() {
     //     e.stopPropagation();
     //     noteToSpesificFolder(targetFolderId);
     // };
-=======
-            alert("tou cant move note without text!");
-        e.stopPropagation();
-    }
-
-    function onDropExistsFolder(e, targetFolderId) {
-        e.preventDefault();
-
-        noteToSpesificFolder(e, targetFolderId);
-        e.stopPropagation();
-    };
->>>>>>> 04bb7a74c15d32e26362b91aa3b434baa3488c63
 
     async function createFolder(e) {
         let text = e.target.value;
         if (text === "") {
             text = "new folder";
         }
-<<<<<<< HEAD
-        await dispatch(actions.createFolder(text));
-        // console.log(newFolder);
-        noteToSpesificFolder(newFolder._id)
-        setNewFolderFlag(!newFolderFlag);
-=======
         const result = await createFolderApi(text);
         if (result) {
             dispatch(actions.addFolder(result));
             dispatch(actions.setNewFolder(result));
-            noteToSpesificFolder(e, result.newFolder._id);
+            noteToSpesificFolder(result.newFolder._id);
             setNewFolderFlag(!newFolderFlag);
         }
         e.stopPropagation();
->>>>>>> 04bb7a74c15d32e26362b91aa3b434baa3488c63
     }
 
     function insertNote() {
+        console.log("ooooppp");
+        debugger
         dispatch(actions.setNoteList1(currentNote));
     }
 
@@ -178,7 +166,7 @@ export default function Configurator() {
     // }
 
     function getFolderNotesByUser(folder) {
-        // debugger
+        debugger
         setCurrentFolder(folder);
         dispatch(actions.getFolderNotesByUser(folder._id));
     }
@@ -226,10 +214,12 @@ export default function Configurator() {
             // e.preventDefault();
             // e.stopPropagation();
             let currentNoteId = event.relatedTarget.getAttribute('data-key');
+            console.log(currentNoteId);
             if (currentNoteId) {
                 await setCurrentNote(currentNoteId);
 
             }
+            debugger
             let droppedDiv = event.target.getAttribute('data-key');
             if (droppedDiv && droppedDiv === "newFolder") {
                 setNewFolderFlag(!newFolderFlag);
@@ -275,7 +265,7 @@ export default function Configurator() {
                     </div> */}
                 {/* <div class="row"> */}
                 {/* <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder} dragFlag={dragFlag} currentNote={currentNote} /> */}
-                <MyNote draggedNoteFlag={draggedNoteFlag} currentFolder={currentFolder} currentNote={currentNote} setCurrentNote={setCurrentNote} />
+                <MyNote draggedNoteFlag={draggedNoteFlag} currentFolder={currentFolder} currentNote={currentNote} setCurrentNote={setCurrentNote1} />
                 {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
@@ -318,7 +308,7 @@ export default function Configurator() {
                     folders && defaultFolder ?
 
                         <div key={defaultFolder._id}
-                            className={`dropzone folder m-2 d-flex justify-content-around px-5 align-items-center ${currentFolder && defaultFolder._id === currentFolder._id ? 'folderChosenColor' : 'folderColor'}`}
+                            className={`dropzone folder m-2 d-flex justify-content-around px-5 align-items-center ${currentFolder && (defaultFolder._id === currentFolder._id) ? 'folderChosenColor' : 'folderColor'}`}
                             onClick={(e) => getFolderNotesByUser(defaultFolder)}
                             // onDrop={(e) => onDropExistsFolder(e, folder._id)}
                             // onDragOver={handleDragOver}
@@ -338,7 +328,7 @@ export default function Configurator() {
                         {
                             folder.folderName !== "default" ?
                                 <div key={folder._id}
-                                    className={`dropzone folder m-2 d-flex justify-content-around px-5 align-items-center ${currentFolder && folder._id === currentFolder._id ? 'folderChosenColor' : 'folderColor'}`}
+                                    className={`dropzone folder m-2 d-flex justify-content-around px-5 align-items-center ${currentFolder && (folder._id === currentFolder._id) ? 'folderChosenColor' : 'folderColor'}`}
                                     onClick={(e) => getFolderNotesByUser(folder)}
                                     // onDrop={(e) => onDropExistsFolder(e, folder._id)}
                                     // onDragOver={handleDragOver}

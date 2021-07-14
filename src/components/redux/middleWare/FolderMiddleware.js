@@ -107,10 +107,10 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             method: 'GET',
             redirect: 'follow'
         };
-
+debugger
         fetch(`${keyss.BASE_URL}/${userName}/folder/${action.payload}/folderNotes`, requestOptions)
             .then(response => response.json())
-            .then(result => {
+            .then(result => { debugger
                 if (!result.status) {
                     dispatch(actions.setAllNotesFolder(result))
                 }

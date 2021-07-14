@@ -9,7 +9,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
 
     if (action.type == "CREATE_NOTE1") {
 
-        
+        debugger
         var myHeaders = new Headers();
         //jwt from userName miri!!!!
         myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
@@ -36,7 +36,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
 
         fetch(`${keyss.BASE_URL}/${userName}/note/createNote`, requestOptions)
             .then(response => response.json())
-            .then(result => {
+            .then(result => { debugger
                 if (!result.status) { dispatch(actions.createNote(result)); }
             })
             .catch(error => console.log('error', error));
@@ -114,7 +114,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
 
     }
     if (action.type == "NOTE_TO_SPESIFIC_FOLDER") {
-
+debugger
         var myHeaders = new Headers();
         myHeaders.append("Cookie", "cf_ob_info=502:653dc5431dd14c13:AMS; cf_use_ob=0");
         myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");

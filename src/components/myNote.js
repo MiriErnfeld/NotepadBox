@@ -122,6 +122,7 @@ export default function Notes(props) {
         note.style.backgroundColor = c
         text.style.backgroundColor = c
     }
+    
     function saveText(item, newText) {
         debugger
         

@@ -28,8 +28,10 @@ const noteData = {
 
 
         let c = state.noteList.indexOf(state.noteList.find(note => note.indexNote === state.newNoteIndex));
+        console.log(action.payload.new_note);
         state.noteList[c] = action.payload.new_note;
         console.log(state.noteList[c]);
+        console.log(state.noteList);
         debugger
     },
     setAllNoteUser(state, action) {
@@ -37,6 +39,7 @@ const noteData = {
 
     },
     setAllNotesFolder(state, action) { //from midlleWare
+        debugger
         state.noteList = action.payload.folderNotes;
     },
     // updateNoteAction(state, action) { // from midlleWare 
@@ -92,7 +95,7 @@ const noteData = {
         let allNote = [...state.noteList]
         let top = Math.floor(Math.random() * 260)
         let left = Math.floor(Math.random() * 600)
-
+debugger
         allNote.push({ _id: "", indexNote: c, userId: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
         state.noteList = [...allNote]
 
@@ -156,13 +159,14 @@ const noteData = {
     },
 
     setNoteList1(state, action) {
-        
+        debugger
         let top = Math.floor(Math.random() * 260)
         let left = Math.floor(Math.random() * 600)
 
         state.noteList.push({ _id: "", indexNote: --state.clientNoteIndex, userName: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
     },
     setNewNoteIndex(state, action) {
+        debugger
         state.newNoteIndex=action.payload;
     }
 };

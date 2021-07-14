@@ -44,10 +44,11 @@ export default function Notes(props) {
         }
         dispatch(actions.setFlagColor(item))
     }
+
     function deleteItem(item) {
         debugger
         const i = item.indexNote
-        console.log(data);
+        // console.log(data);
         let correctItem = data.dummyNoteList.indexOf(data.dummyNoteList.find(x => x == i))//find the current place in the dummyNoteList in redux if the note delete only from server
         if (correctItem != -1 || item.textNote == "" || item._id == "") { //In case one of the options is up there is no need to contact the server
             dispatch(actions.deleteOnlyFromClient(item))//dispatch to deleteOnlyFromClient function in reducer
@@ -72,16 +73,24 @@ export default function Notes(props) {
         text.style.backgroundColor = c
     }
     function saveText(item, newText) {
+        console.log("saveeeeeeeeeeeeeeeeee");
         debugger
+        
         if (newText) {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
             debugger
-            if (noteList[currentItem].textNote) {
+            let currentDummyIndex = data.dummyNoteList.find(x => x == i)//find the current place in the state in redux
+            if (noteList[currentItem].textNote && !currentDummyIndex) {
                 dispatch(actions.updateNote({ item, newText, currentFolder }));//to update note in midllaware
             }
             else {
                 debugger
+                if (currentDummyIndex) {
+                    debugger
+                    dispatch(actions.deleteDummyNoteList(currentDummyIndex))
+                }
+                dispatch(actions.setNewNoteIndex(item.indexNote));
                 dispatch(actions.createNote1({ item, newText, currentFolder }));//to update in midlleWare when there is the first change
                 // dispatch(actions.createNote({ item, newText }));//to update in redux
             }
@@ -94,6 +103,7 @@ export default function Notes(props) {
             dispatch(actions.deleteNote({ item, newText, currentFolder }))//delete note in midlleWare
         }
     }
+
     function inResize(item, end) {
         if (item.flagColor == true)
             dispatch(actions.setFlagColor(item))
@@ -126,7 +136,7 @@ export default function Notes(props) {
             inertia: true,
             modifiers: [
                 interact.modifiers.restrictRect({
-                    restriction: 'body',
+                    restriction: '.App',
                     endOnly: true
                 })
             ],
@@ -202,10 +212,18 @@ export default function Notes(props) {
                 {noteList ? noteList.map((item) => {
                     console.log(noteList);
                     console.log(item);
-                    return <>  <div className="resize" >
+                    return <>  
+                    {/* <div className="resize" > */}
                         {/* <div id="no-drop" class="drag-drop"> #no-drop </div> */}
 
-                        <div key={item.indexNote} id="yes-drop" data-key={item.indexNote} className={`drag-drop note ${item.indexNote}`}>
+                        <div key={item.indexNote} 
+                        id="yes-drop" 
+                        data-key={item.indexNote} 
+                        className={`drag-drop note ${item.indexNote}`}
+                        style={{backgroundColor: item.colors, top: item.placeX,
+                                left: item.placeY}}
+                        
+                        >
                       
                             <div className={`header ${item.indexNote}`}
                                 style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }} >
@@ -315,7 +333,7 @@ export default function Notes(props) {
 
                         {/* </Rnd> */}
                         {/* </div> */}
-                    </div>
+                    {/* </div> */}
                     </>
                 })
                     : <p>No Notes</p>
