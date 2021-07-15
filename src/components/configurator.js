@@ -213,11 +213,12 @@ export default function Configurator() {
         ondrop: async function (event) {
             // e.preventDefault();
             // e.stopPropagation();
-            let currentNoteId = event.relatedTarget.getAttribute('data-key');
+            let current=event.relatedTarget;
+            let currentNoteId = current.getAttribute('data-key');
             console.log(currentNoteId);
-            if (currentNoteId) {
+            if (current) {
                 await setCurrentNote(currentNoteId);
-
+                current.classList.add("currentNote")
             }
             debugger
             let droppedDiv = event.target.getAttribute('data-key');
@@ -294,7 +295,7 @@ export default function Configurator() {
                 {
                     newFolderFlag ? <div className="folder folderColor d-flex justify-content-around align-items-center">
                         <FiFolder className="icon"></FiFolder>
-                        <input type="text" className="folderInput" style={{ cursor: "auto" }} id="folderInput" placeholder="Folder name"
+                        <input type="text" className="folderInput"  id="folderInput" placeholder="Folder name"
                             onBlur={createFolder}
                             onKeyUp={(event) => {
                                 if (event.key === 'Enter') {

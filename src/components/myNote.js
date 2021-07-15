@@ -192,7 +192,7 @@ export default function Notes(props) {
                                     <BsX style={{
                                         color: "#0A102E",
                                         hoverBackground: "black",
-                                        cursor: "auto",
+                                        // cursor: "auto",
                                         position: "relative",
                                         float: "left",
                                         margin: "1%"
@@ -209,7 +209,7 @@ export default function Notes(props) {
                                             position: "relative",
                                             float: "right",
                                             margin: "1%",
-                                            cursor: "auto",
+                                            // cursor: "auto",
                                         }} className="BsPencil_button"
                                     >
                                     </BsPencil>
