@@ -302,10 +302,6 @@ export default function Notes(props) {
                             <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
                         </div> */}
 
-
-
-
-
                             {/* <div ref={rndRef} id="drag" draggable="true"
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
