@@ -34,6 +34,7 @@ export default function Configurator() {
     const [draggedNote, setDraggedNote] = useState({});
     const [draggedNoteFlag, setDraggedNoteFlag] = useState();
     const [defaultFolder, setDefaultFolder] = useState(null);
+    const [sizeScreen, setSizeScreen] = useState();
 
     // const [dragNewFolder, setDragNewFolder] = useState();
     // const [dragExistsFolder, setDragExistsFolder] = useState();
@@ -61,8 +62,8 @@ export default function Configurator() {
         return (min + Math.ceil(Math.random() * max));
     }
 
-    function setCurrentNote1(note){
-        debugger
+    function setCurrentNote1(note) {
+
         setCurrentNote(note);
     }
 
@@ -96,7 +97,7 @@ export default function Configurator() {
     // };
 
 
-    function noteToSpesificFolder(targetFolderId) {
+    function noteToSpesificFolder(e, targetFolderId) {
         console.log(currentNote);
         if (currentNote >= 0 && currentFolder)
             dispatch(actions.noteToSpesificFolder({
@@ -106,7 +107,7 @@ export default function Configurator() {
             }))
         // else
         //     alert("you cannot move note without text!")
-            // e.stopPropagation();
+        // e.stopPropagation();
     }
 
     // function onDropExistsFolder(e, targetFolderId) {
@@ -131,9 +132,9 @@ export default function Configurator() {
     }
 
     function insertNote() {
-        console.log("ooooppp");
+        console.log(sizeScreen);
         debugger
-        dispatch(actions.setNoteList1(currentNote));
+        dispatch(actions.setNoteList1(sizeScreen));
     }
 
     function updateFolder(e, id) {
@@ -207,21 +208,24 @@ export default function Configurator() {
             // event.relatedTarget.textContent = 'Dragged out'
         },
         ondrop: async function (event) {
+            console.log("dropppppp");
+            event.stopImmediatePropagation();
+
             // e.preventDefault();
             // e.stopPropagation();
             let current=event.relatedTarget;
-            let currentNoteId = current.getAttribute('data-key');
-            console.log(currentNoteId);
-            if (current) {
-                await setCurrentNote(currentNoteId);
-                current.classList.add("currentNote")
+            if(current){
+                let currentNote = current.getAttribute('data-key');
+                if(currentNote){
+                     await setCurrentNote(currentNote.indexNote);
+                current.classList.add("currentNote");
+                }
             }
-            debugger
             let droppedDiv = event.target.getAttribute('data-key');
             if (droppedDiv && droppedDiv === "newFolder") {
                 setNewFolderFlag(true);
             }
-            else if (droppedDiv) {
+            else if (droppedDiv) { 
                 noteToSpesificFolder(droppedDiv);
             }
             // noteToSpesificFolder(targetFolderId);
@@ -278,7 +282,7 @@ export default function Configurator() {
         ondrop: async function (event) {
             // e.preventDefault();
             // e.stopPropagation();
-            let current=event.relatedTarget;
+            let current = event.relatedTarget;
             let currentNoteId = current.getAttribute('data-key');
             console.log(currentNoteId);
             if (current) {
@@ -291,12 +295,11 @@ export default function Configurator() {
                 setNewFolderFlag(true);
             }
             else if (droppedDiv) {
-                noteToSpesificFolder(droppedDiv);
+                noteToSpesificFolder(event, droppedDiv);
             }
             // noteToSpesificFolder(targetFolderId);
             // event.relatedTarget.textContent = 'Dropped'
             setDraggedNoteFlag(!draggedNoteFlag);
-
 
         },
         ondropdeactivate: function (event) {
@@ -306,6 +309,9 @@ export default function Configurator() {
         }
     })
 
+    function setSizeScreenFromChild(sizeScreen) {
+        setSizeScreen(sizeScreen);
+    }
 
     return (
         <>
@@ -331,7 +337,7 @@ export default function Configurator() {
                     </div> */}
                 {/* <div class="row"> */}
                 {/* <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder} dragFlag={dragFlag} currentNote={currentNote} /> */}
-                <MyNote draggedNoteFlag={draggedNoteFlag} currentFolder={currentFolder} currentNote={currentNote} setCurrentNote={setCurrentNote1} />
+                <MyNote draggedNoteFlag={draggedNoteFlag} currentFolder={currentFolder} currentNote={currentNote} setCurrentNote={setCurrentNote1} setSizeScreen={setSizeScreenFromChild}/>
                 {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
@@ -360,7 +366,7 @@ export default function Configurator() {
                 {
                     newFolderFlag ? <div className="folder folderColor d-flex justify-content-around align-items-center">
                         <FiFolder className="icon"></FiFolder>
-                        <input type="text" className="folderInput"  id="folderInput" placeholder="Folder name"
+                        <input type="text" className="folderInput" id="folderInput" placeholder="Folder name"
                             onBlur={createFolder}
                             onKeyUp={(event) => {
                                 if (event.key === 'Enter') {
@@ -398,17 +404,19 @@ export default function Configurator() {
                                     onClick={(e) => getFolderNotesByUser(folder)}
                                     // onDrop={(e) => onDropExistsFolder(e, folder._id)}
                                     // onDragOver={handleDragOver}
+
                                     data-key={folder._id}
                                 >
                                     <FiFolder className="icon"></FiFolder>
                                     <input type="text" className="folderInput" readOnly defaultValue={folder.folderName}
-                                        onBlur={(e) => { updateFolder(e, folder._id) }}
                                         onKeyUp={(e) => {
                                             if (e.key === 'Enter') {
                                                 updateFolder(e, folder._id)
                                             }
                                         }}
-                                        onDoubleClick={(e) => { e.target.readOnly = false }}
+                                        onDoubleClick={(e) => { console.log('e', e); e.target.readOnly = false }}
+                                        onBlur={(e) => !e.target.readOnly ?
+                                            updateFolder(e, folder._id) : console.log()}
                                     ></input>
                                     {
                                         folder.folderName !== "default" ?

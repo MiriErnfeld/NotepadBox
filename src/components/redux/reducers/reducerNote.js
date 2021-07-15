@@ -160,10 +160,10 @@ debugger
 
     setNoteList1(state, action) {
         debugger
-        let top = Math.floor(Math.random() * 260)
-        let left = Math.floor(Math.random() * 600)
+        let left = Math.floor(Math.random() * action.payload.clientWidth)
+        let top = Math.floor(Math.random() *  action.payload.clientHeight)
 
-        state.noteList.push({ _id: "", indexNote: --state.clientNoteIndex, userName: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
+        state.noteList.push({ _id: "", indexNote: --state.clientNoteIndex, userName: "", createNote: "", textNote: "", placeX: top, placeY: left, colors: "#FFEB3B", check: "", flagColor: false, })
     },
     setNewNoteIndex(state, action) {
         debugger

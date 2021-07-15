@@ -10,13 +10,15 @@ import './myNote.css'
 
 export default function Notes(props) {
 
-    const { setCurrentNote, draggedNoteFlag, currentNote, currentFolder, dragNewFolder, dragExistsFolder } = props;
+    const { setCurrentNote, draggedNoteFlag, currentNote, currentFolder, dragNewFolder, dragExistsFolder, setSizeScreen } = props;
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
     const [leftNote, setLeftNote] = useState()
     const [isDown, setIsDown] = useState();
+    // const [dragEnd, setDragEnd] = useState();
     // const dragRef = useRef();
     const rndRef = useRef();
+    const allNoteRef = useRef();
 
     const dispatch = useDispatch()
 
@@ -31,9 +33,13 @@ export default function Notes(props) {
     //     draggedNoteFlag ? rnd.updateSize({ width: "30%", height: "30%" }) : console.log();;
     // }, [draggedNoteFlag])
 
+    useEffect(() => {
+        setSizeScreen({ clientHeight: allNoteRef.current.clientHeight, clientWidth: allNoteRef.current.clientWidth });
+    }, [])
+
     function openCloseEditor(item) {
         let currentIndex = noteList.indexOf(noteList.find(x => x.indexNote == item.indexNote))//find the current place in the state in redux
-        // --search item with editor open 
+        // --search item with editor open
         for (let index = 0; index < noteList.length; index++) { ///find the preview open editor
             if (noteList[index].flagColor === true && index != currentIndex) {
                 dispatch(actions.closePreview(index))
@@ -52,7 +58,7 @@ export default function Notes(props) {
             // alert("correctItem != -1 || item.textNote =empty||item._id ==empty ")
             return
         }
-        dispatch(actions.deleteNote({ item, currentFolder }))//delete note in midlleWare 
+        dispatch(actions.deleteNote({ item, currentFolder }))//delete note in midlleWare
     }
 
     function changeColor(c, item, index) {
@@ -71,8 +77,9 @@ export default function Notes(props) {
     }
 
     function savePositionNote(item, left, top, index) {
-        // dispatch(actions.updateNote({ item, left, top }));//a function use to update color & text ib midlleWare
-// console.log(item);
+        console.log("upppppphhnn");
+        // dispatch(actions.updateNote({ item, left, top,currentFolder }));//a function use to update color & text ib midlleWare
+        // console.log(item);
     }
 
     function saveText(item, newText) {
@@ -123,8 +130,9 @@ export default function Notes(props) {
     function onDragStart(e) {
         // const draggedNote = dragRef.current;
         // console.log(draggedNote);
-        console.log(e.target.getAttribute("data-key"));
-        setCurrentNote(e.target.getAttribute("data-key"));
+        let note = e.target.getAttribute("data-key");
+        setCurrentNote(note.indexNote);
+        // setDragEnd(false);
     }
 
     /* The dragging code for '.draggable' from the demo above
@@ -136,6 +144,7 @@ export default function Notes(props) {
     interact('.drag-drop')
         .draggable({
             ignoreFrom: '.textarea',
+            // origin: 'self',
             inertia: true,
             modifiers: [
                 interact.modifiers.restrictRect({
@@ -148,7 +157,7 @@ export default function Notes(props) {
             listeners: {
                 move: dragMoveListener,
                 start: onDragStart,
-                onend:savePositionNote("c","r","g")
+                // onend:savePositionNote("c","r","g")
                 // ,
                 // dragLeave:
             }
@@ -191,6 +200,29 @@ export default function Notes(props) {
 
             inertia: true
         })
+
+    interact('.dropDrag').dropzone({
+        // only accept elements matching this CSS selector
+        accept: '#yes-drop',
+        // Require a 75% element overlap for a drop to be possible
+        overlap: 1,
+
+      
+        ondrop: function (event) {
+            event.stopImmediatePropagation();
+
+            console.log("droo");
+            //   event.relatedTarget.textContent = 'Dropped'
+            //    await setDragEnd(true);
+            dragEndListener(event.relatedTarget);
+
+        },
+        ondropdeactivate: function (event) {
+            // remove active dropzone feedback
+            event.target.classList.remove('drop-active')
+            event.target.classList.remove('drop-target')
+        }
+    })
     function dragMoveListener(event) {
         var target = event.target
         // keep the dragged position in the data-x/data-y attributes
@@ -203,6 +235,16 @@ export default function Notes(props) {
         // update the posiion attributes
         target.setAttribute('data-x', x)
         target.setAttribute('data-y', y)
+      
+    }
+
+    function dragEndListener(target) {
+        var x = (parseFloat(target.getAttribute('data-x')) || 0) + target.dx
+        var y = (parseFloat(target.getAttribute('data-y')) || 0) + target.dy
+        console.log("end");
+        let item = target.getAttribute("data-key");
+        savePositionNote(item, x, y);
+
     }
     //   function dragEndListener(e){
     //       debugger
@@ -214,7 +256,7 @@ export default function Notes(props) {
 
     return (
         <>
-            <div className="all-notes">
+            <div className="all-notes dropDrag" ref={allNoteRef}>
                 {noteList ? noteList.map((item) => {
                     console.log(noteList);
                     console.log(item);
@@ -224,7 +266,7 @@ export default function Notes(props) {
 
                             <div key={item.indexNote}
                                 id="yes-drop"
-                                data-key={item.indexNote}
+                                data-key={item}
                                 className={`drag-drop note ${item.indexNote}`}
                                 style={{
                                     backgroundColor: item.colors, top: item.placeX,
@@ -299,10 +341,6 @@ export default function Notes(props) {
                             <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
                         </div> */}
 
-
-
-
-
                             {/* <div ref={rndRef} id="drag" draggable="true"
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
@@ -350,3 +388,4 @@ export default function Notes(props) {
         </>
     )
 }
+
