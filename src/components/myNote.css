@@ -10,6 +10,7 @@
     margin: 0px;
     width:100%;
     border: none;
+    cursor: text!important;
 }
 textarea.textarea:focus {
   outline-width: 0;
@@ -26,7 +27,7 @@ width: 150px;
 /* background-color: yellow; */
 /* margin: 30px 0; */
 position: absolute;
-cursor: -webkit-grab;
+/* cursor: -webkit-grab; */
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%); 
 min-height: 80px;
 min-width: 130px;
@@ -130,14 +131,4 @@ left: 48vh; */
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888; 
-}
-.BsX_button:hover{
-  /* zoom: 1.5; */
-  font-size: larger;
-  font-weight: bold;
-}
-.BsPencil_button:hover{
-  zoom: 4;
-  font-weight: bold;
-  font-size :5px;;
 }

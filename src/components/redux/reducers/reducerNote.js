@@ -93,8 +93,8 @@ const noteData = {
         }
         // }
         let allNote = [...state.noteList]
-        let top = Math.floor(Math.random() * 260)
-        let left = Math.floor(Math.random() * 600)
+        let top = Math.floor(Math.random() * 160)
+        let left = Math.floor(Math.random() * 1000)
 debugger
         allNote.push({ _id: "", indexNote: c, userId: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
         state.noteList = [...allNote]

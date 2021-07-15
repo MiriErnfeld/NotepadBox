@@ -192,7 +192,7 @@ export default function Notes(props) {
                                         position: "relative",
                                         float: "right",
                                         margin: "1%",
-                                        cursor: "auto",
+                                        // cursor: "auto",
                                     }} className="BsPencil_button"
                                 >
                                 </BsPencil>
