@@ -139,7 +139,7 @@ export default function Notes(props) {
             inertia: true,
             modifiers: [
                 interact.modifiers.restrictRect({
-                    restriction: '.body',
+                    restriction: '.App',
                     endOnly: true
                 })
             ],
@@ -149,6 +149,8 @@ export default function Notes(props) {
                 move: dragMoveListener,
                 start: onDragStart,
                 onend:savePositionNote("c","r","g")
+                // ,
+                // dragLeave:
             }
         }).resizable({
             // resize from all edges and corners

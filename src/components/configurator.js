@@ -125,7 +125,7 @@ export default function Configurator() {
             dispatch(actions.addFolder(result));
             dispatch(actions.setNewFolder(result));
             noteToSpesificFolder(result.newFolder._id);
-            setNewFolderFlag(!newFolderFlag);
+            setNewFolderFlag(false);
         }
         e.stopPropagation();
     }
@@ -219,7 +219,7 @@ export default function Configurator() {
             debugger
             let droppedDiv = event.target.getAttribute('data-key');
             if (droppedDiv && droppedDiv === "newFolder") {
-                setNewFolderFlag(!newFolderFlag);
+                setNewFolderFlag(true);
             }
             else if (droppedDiv) {
                 noteToSpesificFolder(droppedDiv);
@@ -288,7 +288,7 @@ export default function Configurator() {
             debugger
             let droppedDiv = event.target.getAttribute('data-key');
             if (droppedDiv && droppedDiv === "newFolder") {
-                setNewFolderFlag(!newFolderFlag);
+                setNewFolderFlag(true);
             }
             else if (droppedDiv) {
                 noteToSpesificFolder(droppedDiv);
