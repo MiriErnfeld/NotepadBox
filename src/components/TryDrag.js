@@ -13,13 +13,15 @@ import './TryDrag.css'
 
 export default function Notes(props) {
 
-    const { setCurrentNote, draggedNoteFlag, currentNote, currentFolder, dragNewFolder, dragExistsFolder } = props;
+    const { setCurrentNote, draggedNoteFlag, currentNote, currentFolder, dragNewFolder
+        , dragExistsFolder ,setSizeScreen} = props;
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote)
     const [leftNote, setLeftNote] = useState()
     const [isDown, setIsDown] = useState();
     // const dragRef = useRef();
     const rndRef = useRef();
+    const allNoteRef=useRef();
 
     const dispatch = useDispatch()
 
@@ -28,6 +30,10 @@ export default function Notes(props) {
         '#BFD41F', '#8580FD', '#6DD41F', '#7bdcb5', '#44D7B6'
         , '#40D9ED', '#ff8a65', '#d9e3f0'
     ];
+
+    useEffect(() => {
+        setSizeScreen({clientHeight:allNoteRef.current.clientHeight,clientWidth:allNoteRef.current.clientWidth});
+     }, [])
 
     // useEffect(() => {
     //     let rnd = rndRef.current;
@@ -215,7 +221,7 @@ export default function Notes(props) {
 
     return (
         <>
-            <div className="all-notes">
+            <div className="all-notes" ref={allNoteRef}>
                 {noteList ? noteList.map((item) => {
                     console.log(noteList);
                     console.log(item);

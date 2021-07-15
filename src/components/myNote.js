@@ -28,6 +28,7 @@ export default function Notes(props) {
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote);
     const [leftNote, setLeftNote] = useState()
+    const allNoteRef=useRef();
 
     //TryDnd---------------------------------------------------------------
 
@@ -84,6 +85,10 @@ export default function Notes(props) {
         console.log(notes1);
         console.log(noteList);
     }, [dragFlag, noteList])
+
+    useEffect(() => {
+       console.log(allNoteRef);
+    }, [])
 
     function openCloseEditor(item) {
         let currentIndex = noteList.indexOf(noteList.find(x => x.indexNote == item.indexNote))//find the current place in the state in redux
@@ -180,7 +185,7 @@ export default function Notes(props) {
 
     return (
         <>
-            <div className="all-notes">
+            <div className="all-notes" ref={allNoteRef}>
                 <div ref={drop} style={styles}>
                     {notes1.length>0 ? notes1.map((item, key) => {console.log(item);
                         // const { left, top, ...note } = notes[key];

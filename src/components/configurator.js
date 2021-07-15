@@ -38,6 +38,7 @@ export default function Configurator() {
     const [draggedNote, setDraggedNote] = useState({});
     const [draggedNoteFlag, setDraggedNoteFlag] = useState();
     const [defaultFolder, setDefaultFolder] = useState(null);
+    const [sizeScreen, setSizeScreen] = useState();
 
     // const [dragNewFolder, setDragNewFolder] = useState();
     // const [dragExistsFolder, setDragExistsFolder] = useState();
@@ -135,9 +136,9 @@ export default function Configurator() {
     }
 
     function insertNote() {
-        console.log("ooooppp");
+        console.log(sizeScreen);
         debugger
-        dispatch(actions.setNoteList1(currentNote));
+        dispatch(actions.setNoteList1(sizeScreen));
     }
 
     function updateFolder(e, id) {
@@ -213,7 +214,7 @@ export default function Configurator() {
         ondrop: async function (event) {
             // e.preventDefault();
             // e.stopPropagation();
-            let current=event.relatedTarget;
+            let current = event.relatedTarget;
             let currentNoteId = current.getAttribute('data-key');
             console.log(currentNoteId);
             if (current) {
@@ -241,6 +242,9 @@ export default function Configurator() {
         }
     })
 
+    function setSizeScreenFromChild(sizeScreen) {
+        setSizeScreen(sizeScreen);
+    }
 
     return (
         <>
@@ -266,7 +270,7 @@ export default function Configurator() {
                     </div> */}
                 {/* <div class="row"> */}
                 {/* <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder} dragFlag={dragFlag} currentNote={currentNote} /> */}
-                <MyNote draggedNoteFlag={draggedNoteFlag} currentFolder={currentFolder} currentNote={currentNote} setCurrentNote={setCurrentNote1} />
+                <MyNote draggedNoteFlag={draggedNoteFlag} currentFolder={currentFolder} currentNote={currentNote} setCurrentNote={setCurrentNote1} setSizeScreen={setSizeScreenFromChild}/>
                 {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
@@ -295,7 +299,7 @@ export default function Configurator() {
                 {
                     newFolderFlag ? <div className="folder folderColor d-flex justify-content-around align-items-center">
                         <FiFolder className="icon"></FiFolder>
-                        <input type="text" className="folderInput"  id="folderInput" placeholder="Folder name"
+                        <input type="text" className="folderInput" id="folderInput" placeholder="Folder name"
                             onBlur={createFolder}
                             onKeyUp={(event) => {
                                 if (event.key === 'Enter') {
@@ -333,7 +337,7 @@ export default function Configurator() {
                                     onClick={(e) => getFolderNotesByUser(folder)}
                                     // onDrop={(e) => onDropExistsFolder(e, folder._id)}
                                     // onDragOver={handleDragOver}
-                                   
+
                                     data-key={folder._id}
                                 >
                                     <FiFolder className="icon"></FiFolder>
@@ -343,10 +347,10 @@ export default function Configurator() {
                                                 updateFolder(e, folder._id)
                                             }
                                         }}
-                                        onDoubleClick={(e) => {console.log('e',e); e.target.readOnly = false }}
-                                        onBlur={(e) => !e.target.readOnly? 
-                                             updateFolder(e, folder._id):console.log()}
-                                   ></input>
+                                        onDoubleClick={(e) => { console.log('e', e); e.target.readOnly = false }}
+                                        onBlur={(e) => !e.target.readOnly ?
+                                            updateFolder(e, folder._id) : console.log()}
+                                    ></input>
                                     {
                                         folder.folderName !== "default" ?
                                             <RiDeleteBinLine className="icon"
