@@ -107,7 +107,7 @@ export default function Configurator() {
             }))
         // else
         //     alert("you cannot move note without text!")
-        e.stopPropagation();
+        // e.stopPropagation();
     }
 
     // function onDropExistsFolder(e, targetFolderId) {
