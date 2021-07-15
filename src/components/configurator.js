@@ -10,13 +10,9 @@ import interact from 'interactjs';
 import { createFolderApi } from '../api/foldersApi';
 import { FcPlus } from "react-icons/fc";
 import { BsFillPlusCircleFill } from "react-icons/bs";
-// import MyNote from './TrySmoothDnd';
-import MyNote from './TryDrag';
-// import MyNote from './myNote copy';
-// import MyNote from './myNote';
+import MyNote from './myNote';
 import { BsX } from "react-icons/bs";
 import { Modal, Button, Dropdown } from 'react-bootstrap';
-// import './TryDrag.css';
 
 var Color = require('color');
 
@@ -175,7 +171,76 @@ export default function Configurator() {
         // only accept elements matching this CSS selector
         accept: '#yes-drop',
         // Require a 75% element overlap for a drop to be possible
-        overlap: 0.1,
+        overlap: 0.2,
+
+        // listen for drop related events:
+
+        ondropactivate: function (event) {
+            // add active dropzone feedback
+            // event.target.classList.add('drop-active')
+        },
+        ondragenter: function (event) {
+            // setDraggedNoteFlag(!draggedNoteFlag);
+            var draggableElement = event.relatedTarget
+            var dropzoneElement = event.target
+
+            // feedback the possibility of a drop
+            event.target.classList.add('drop-active')
+            dropzoneElement.classList.add('drop-target')
+            draggableElement.classList.add('can-drop')
+
+            console.log(currentNote);
+            // let note = document.getElementsByClassName(`note ${currentNote}`);
+            // console.log(note);
+
+            // note[0].style.transform = "scale(0.4)";
+
+
+
+            // draggableElement.textContent = 'Dragged in'
+        },
+        ondragleave: function (event) {
+            // remove the drop feedback style
+            event.target.classList.remove('drop-active')
+            event.target.classList.remove('drop-target')
+            event.relatedTarget.classList.remove('can-drop')
+            // event.relatedTarget.textContent = 'Dragged out'
+        },
+        ondrop: async function (event) {
+            // e.preventDefault();
+            // e.stopPropagation();
+            let current=event.relatedTarget;
+            let currentNoteId = current.getAttribute('data-key');
+            console.log(currentNoteId);
+            if (current) {
+                await setCurrentNote(currentNoteId);
+                current.classList.add("currentNote")
+            }
+            debugger
+            let droppedDiv = event.target.getAttribute('data-key');
+            if (droppedDiv && droppedDiv === "newFolder") {
+                setNewFolderFlag(!newFolderFlag);
+            }
+            else if (droppedDiv) {
+                noteToSpesificFolder(droppedDiv);
+            }
+            // noteToSpesificFolder(targetFolderId);
+            // event.relatedTarget.textContent = 'Dropped'
+            setDraggedNoteFlag(!draggedNoteFlag);
+
+
+        },
+        ondropdeactivate: function (event) {
+            // remove active dropzone feedback
+            event.target.classList.remove('drop-active')
+            event.target.classList.remove('drop-target')
+        }
+    })
+    interact('.dropNewFolder').dropzone({
+        // only accept elements matching this CSS selector
+        accept: '#yes-drop',
+        // Require a 75% element overlap for a drop to be possible
+        overlap: 0.5,
 
         // listen for drop related events:
 
@@ -277,7 +342,7 @@ export default function Configurator() {
                 <div className="create-note-button m-2 mt-3 d-flex justify-content-center align-items-center"
                     onClick={insertNote}>
                     <p className="text-justify text-center m-auto">Create Note +</p></div>
-                <div className="dropzone row dragfolder m-2 p-3 justify-content-center align-items-center"
+                <div className="dropNewFolder row dragfolder m-2 p-3 justify-content-center align-items-center"
                     ref={dropRef}
                     // onDragEnter={onDragEnter}
                     // onDrop={onDropNewFolder}
