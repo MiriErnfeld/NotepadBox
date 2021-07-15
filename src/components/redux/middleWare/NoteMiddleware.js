@@ -1,11 +1,10 @@
-import keyss from '../../../config/env/keys';
+import keys from '../../../config/env/keys'
 import { actions } from '../actions/action'
 
 
 export const getData = ({ getState, dispatch }) => (next) => (action) => {
     let url = window.location;
     let userName = (url.pathname.split('/')[1]);
-
 
     if (action.type == "CREATE_NOTE1") {
 
@@ -34,9 +33,10 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             redirect: 'follow'
         };
 
-        fetch(`${keyss.BASE_URL}/${userName}/note/createNote`, requestOptions)
+        fetch(`${keys.BASE_URL}/${userName}/note/createNote`, requestOptions)
             .then(response => response.json())
-            .then(result => { debugger
+            .then(result => {
+                debugger
                 if (!result.status) { dispatch(actions.createNote(result)); }
             })
             .catch(error => console.log('error', error));
@@ -60,7 +60,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             index = action.payload.item.indexNote
         }
 
-        fetch(`${keyss.BASE_URL}/${userName}/note/${index}/deleteNote`, requestOptions)
+        fetch(`${keys.BASE_URL}/${userName}/note/${index}/deleteNote`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (!result.status) {
@@ -100,7 +100,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
             redirect: 'follow'
         };
 
-        fetch(`${keyss.BASE_URL}/note/${index}/updateNote`, requestOptions)
+        fetch(`${keys.BASE_URL}/note/${index}/updateNote`, requestOptions)
 
             .then(response => response.json())
             .then(result => {
@@ -114,7 +114,7 @@ export const getData = ({ getState, dispatch }) => (next) => (action) => {
 
     }
     if (action.type == "NOTE_TO_SPESIFIC_FOLDER") {
-debugger
+        debugger
         var myHeaders = new Headers();
         myHeaders.append("Cookie", "cf_ob_info=502:653dc5431dd14c13:AMS; cf_use_ob=0");
         myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI0a3F0Q2RBM0Z4Y2dNYzBQOHJ6Tk90eTR3ejAzIiwiZW1haWwiOiJtaXJpQGxlYWRlci5jb2RlcyIsImlhdCI6MTYyMzY1NTA5N30.u8PdX0AXdt7qyIP1XmmXgxq4wAdxBdaI_cRpvhJ8ATQ");
@@ -127,7 +127,7 @@ debugger
             redirect: 'follow'
         };
         console.log(requestOptions);
-        fetch(`${keyss.BASE_URL}/note/enterNoteToFolder`, requestOptions)
+        fetch(`${keys.BASE_URL}/note/enterNoteToFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (!result.status) {

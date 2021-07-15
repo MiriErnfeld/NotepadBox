@@ -65,8 +65,8 @@ export default function Configurator() {
         return (min + Math.ceil(Math.random() * max));
     }
 
-    function setCurrentNote1(note){
-        debugger
+    function setCurrentNote1(note) {
+
         setCurrentNote(note);
     }
 
@@ -100,7 +100,7 @@ export default function Configurator() {
     // };
 
 
-    function noteToSpesificFolder(targetFolderId) {
+    function noteToSpesificFolder(e, targetFolderId) {
         console.log(currentNote);
         if (currentNote >= 0 && currentFolder)
             dispatch(actions.noteToSpesificFolder({
@@ -110,7 +110,7 @@ export default function Configurator() {
             }))
         // else
         //     alert("you cannot move note without text!")
-            // e.stopPropagation();
+        e.stopPropagation();
     }
 
     // function onDropExistsFolder(e, targetFolderId) {
@@ -128,7 +128,7 @@ export default function Configurator() {
         if (result) {
             dispatch(actions.addFolder(result));
             dispatch(actions.setNewFolder(result));
-            noteToSpesificFolder(result.newFolder._id);
+            noteToSpesificFolder(e, result.newFolder._id);
             setNewFolderFlag(!newFolderFlag);
         }
         e.stopPropagation();
@@ -225,7 +225,7 @@ export default function Configurator() {
                 setNewFolderFlag(!newFolderFlag);
             }
             else if (droppedDiv) {
-                noteToSpesificFolder(droppedDiv);
+                noteToSpesificFolder(event, droppedDiv);
             }
             // noteToSpesificFolder(targetFolderId);
             // event.relatedTarget.textContent = 'Dropped'
@@ -332,18 +332,20 @@ export default function Configurator() {
                                     onClick={(e) => getFolderNotesByUser(folder)}
                                     // onDrop={(e) => onDropExistsFolder(e, folder._id)}
                                     // onDragOver={handleDragOver}
+                                   
                                     data-key={folder._id}
                                 >
                                     <FiFolder className="icon"></FiFolder>
                                     <input type="text" className="folderInput" readOnly defaultValue={folder.folderName}
-                                        onBlur={(e) => { updateFolder(e, folder._id) }}
                                         onKeyUp={(e) => {
                                             if (e.key === 'Enter') {
                                                 updateFolder(e, folder._id)
                                             }
                                         }}
-                                        onDoubleClick={(e) => { e.target.readOnly = false }}
-                                    ></input>
+                                        onDoubleClick={(e) => {console.log('e',e); e.target.readOnly = false }}
+                                        onBlur={(e) => !e.target.readOnly? 
+                                             updateFolder(e, folder._id):console.log()}
+                                   ></input>
                                     {
                                         folder.folderName !== "default" ?
                                             <RiDeleteBinLine className="icon"
