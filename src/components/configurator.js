@@ -97,7 +97,7 @@ export default function Configurator() {
     // };
 
 
-    function noteToSpesificFolder(e, targetFolderId) {
+    function noteToSpesificFolder(targetFolderId) {
         console.log(currentNote);
         if (currentNote >= 0 && currentFolder)
             dispatch(actions.noteToSpesificFolder({
@@ -295,7 +295,7 @@ export default function Configurator() {
                 setNewFolderFlag(true);
             }
             else if (droppedDiv) {
-                noteToSpesificFolder(event, droppedDiv);
+                noteToSpesificFolder(droppedDiv);
             }
             // noteToSpesificFolder(targetFolderId);
             // event.relatedTarget.textContent = 'Dropped'
