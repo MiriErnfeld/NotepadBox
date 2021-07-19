@@ -1,4 +1,4 @@
-import keyss from "../config/env/keys";
+import keys from "../config/env/keys";
 
 export async function createFolderApi(text) {
     let url = window.location;
@@ -17,12 +17,12 @@ export async function createFolderApi(text) {
         redirect: 'follow'
     };
 
-    let result = await fetch(`${keyss.BASE_URL}/${userName}/folder/addFolder`, requestOptions)
-    .then(response => response.json())
-    .then(result => {
-    if (!result.status)
-            return result
-    })
+    let result = await fetch(`${keys.BASE_URL}/${userName}/folder/addFolder`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            if (!result.status)
+                return result
+        })
     return result;
 
 }

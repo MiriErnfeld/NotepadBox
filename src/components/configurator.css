@@ -215,7 +215,7 @@ display:block;
    zoom:50%!important;
 }
 
-.dropzone {
+.dropzone.dropNewFolder {
     background-color: #F1F1F3;
     border: dashed 4px transparent;
     border-radius: 4px;

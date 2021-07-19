@@ -10,6 +10,7 @@
     margin: 0px;
     width:100%;
     border: none;
+    cursor: text!important;
 }
 textarea.textarea:focus {
   outline-width: 0;
@@ -26,7 +27,7 @@ width: 150px;
 /* background-color: yellow; */
 /* margin: 30px 0; */
 position: absolute;
-cursor: -webkit-grab;
+/* cursor: -webkit-grab; */
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%); 
 min-height: 80px;
 min-width: 130px;
@@ -132,3 +133,79 @@ left: 48vh; */
   background: #888; 
 }
 
+/* #outer-dropzone {
+    height: 140px;
+  }
+  
+  #inner-dropzone {
+    height: 80px;
+  } */
+  
+ 
+  .drop-active {
+    border-color: #aaa;
+  }
+  
+
+  .drag-drop {
+    display: inline-block;
+    /* min-width: 40px; */
+    /* padding: 2em 0.5em; */
+    /* margin: 1rem 0 0 1rem; */
+  
+    /* color: #fff; */
+    /* background-color: #29e; */
+    /* border: solid 2px #fff; */
+  
+    touch-action: none;
+    transform: translate(0px, 0px);
+  
+    transition: background-color 0.3s;
+    position: "absolute",                                     
+    /* width: 150px,
+    height: 150px */
+  }
+  
+  .drag-drop.can-drop {
+    color: #000;
+    background-color: #4e4;
+  }
+
+  
+  .resize-drag {
+    width: 120px;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 1rem;
+    /* background-color: #29e; */
+    /* color: white; */
+    /* font-size: 20px; */
+    /* font-family: sans-serif; */
+  
+    touch-action: none;
+  
+    /* This makes things *much* easier */
+    box-sizing: border-box;
+  }
+   
+
+    .currentNote{
+    /* margin: 24px;
+    width: 50px;
+    height: 50px; */
+    animation: zoom-in-zoom-out 2s ease-out forwards;
+  }
+  
+  @keyframes zoom-in-zoom-out {
+    0% {
+      transform: scale(1, 1);
+
+    }
+    /* 50% {
+      transform: scale(0.5, 0.5);
+    } */
+    100% {
+      transform: scale(0, 0);
+      display:none;
+    }
+  }

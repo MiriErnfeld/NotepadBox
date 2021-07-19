@@ -8,6 +8,7 @@ import store from './components/redux/store'
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 
+
 function App() {
 
   return (
@@ -15,8 +16,7 @@ function App() {
       {/* <DndProvider backend={HTML5Backend}> */}
       <div className="App">
         <Configurator></Configurator>
-        {/* <Bucket></Bucket>
-        <Box/> */}
+
       </div>
       {/* </DndProvider> */}
     </Provider>

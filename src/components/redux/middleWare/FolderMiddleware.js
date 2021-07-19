@@ -1,4 +1,4 @@
-import keyss from '../../../config/env/keys';
+import keys from '../../../config/env/keys';
 import { actions } from '../actions/action'
 
 
@@ -15,13 +15,13 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             headers: myHeaders,
             redirect: 'follow'
         };
-        fetch(`${keyss.BASE_URL}/${userName}/folder/getFoldersByUserName`)
+        fetch(`${keys.BASE_URL}/${userName}/folder/getFoldersByUserName`)
             .then(response => response.json())
             .then(result => {
                 debugger
                 if (!result.status) {
                     dispatch(actions.setAllFoldersForUser(result))
-                    dispatch(actions.getFolderNotesByUser(result.folders[0]._id));
+                    dispatch(actions.getFolderNotesByUser(result.folders.find(x => x.folderName == "default")._id));
                 }
             })
             .catch(error => console.log('error', error));
@@ -44,16 +44,17 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`${keyss.BASE_URL}/${userName}/folder/addFolder`, requestOptions)
+        fetch(`${keys.BASE_URL}/${userName}/folder/addFolder`, requestOptions)
             .then(response => response.json())
             .then(async (result) => {
                 debugger
                 if (!result.status) {
-                    
+
                     // console.log(result)
                     Promise.resolve(dispatch(actions.addFolder(result))).then(
-                        () => { debugger; dispatch(actions.setNewFolder(result))
-                         });
+                        () => {
+                            debugger; dispatch(actions.setNewFolder(result))
+                        });
                 }
             })
     }
@@ -64,7 +65,7 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`${keyss.BASE_URL}/${userName}/folder/${action.payload}/deleteFolder`, requestOptions)
+        fetch(`${keys.BASE_URL}/${userName}/folder/${action.payload}/deleteFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (!result.status) {
@@ -90,7 +91,7 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`${keyss.BASE_URL}/folder/${index}/updateFolder`, requestOptions)
+        fetch(`${keys.BASE_URL}/folder/${index}/updateFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (!result.status) {
@@ -107,10 +108,10 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             method: 'GET',
             redirect: 'follow'
         };
-debugger
-        fetch(`${keyss.BASE_URL}/${userName}/folder/${action.payload}/folderNotes`, requestOptions)
+        fetch(`${keys.BASE_URL}/${userName}/folder/${action.payload}/folderNotes`, requestOptions)
             .then(response => response.json())
-            .then(result => { debugger
+            .then(result => {
+                debugger
                 if (!result.status) {
                     dispatch(actions.setAllNotesFolder(result))
                 }

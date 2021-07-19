@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useDrop } from 'react-dnd';
 
 import { BsPencil, BsX, BsCheck } from "react-icons/bs";
-import { Rnd } from "react-rnd";
+import { BsFillGrid3X2GapFill } from "react-icons/bs";
+import interact from 'interactjs';
+
 import icon from '../images/icon.png'
 import { LightenDarkenColor } from 'lighten-darken-color';
 import { actions } from './redux/actions/action'
@@ -23,45 +25,17 @@ const styles = {
 
 
 export default function Notes(props) {
+    debugger
 
-    const { setCurrentNote, dragFlag, currentNote, currentFolder } = props;
+    const { setCurrentNote, draggedNoteFlag, currentNote, currentFolder, dragNewFolder, dragExistsFolder, setSizeScreen } = props;
     const noteList = useSelector(state => state.reducerNote.noteList)
     const data = useSelector(state => state.reducerNote);
     const [leftNote, setLeftNote] = useState()
-
-    //TryDnd---------------------------------------------------------------
-
-    const [notes, setNotes] = useState();
-    const [notes1, setNotes1] = useState([]);
-    const moveNote = useCallback((id, left, top) => {
-        console.log(id);
-        console.log(left);
-        console.log(top);
-
-        // setNotes1(notes.map(key,item)=>(item._id===id? return {...item,[left]:left,[top]:top}:item))
-        setNotes1(update(notes1, {
-            ["_id"]: {
-                $merge: { left, top },
-            },
-        }));
-    }, [notes1, setNotes1]);
-
-    const [, drop] = useDrop(() => ({
-        accept: ItemTypes.BOX,
-        drop(item, monitor) {
-            const delta = monitor.getDifferenceFromInitialOffset();
-            const left = Math.round(item.left + delta.x);
-            const top = Math.round(item.top + delta.y);
-            console.log(item);
-            moveNote(item._id, left, top);
-            return undefined;
-        },
-    }), [moveNote]);
-
-    //TryDnd---------------------------------------------------------------
-
+    const [isDown, setIsDown] = useState();
+    // const [dragEnd, setDragEnd] = useState();
     // const dragRef = useRef();
     const rndRef = useRef();
+    const allNoteRef = useRef();
 
     const dispatch = useDispatch()
 
@@ -71,23 +45,20 @@ export default function Notes(props) {
         , '#40D9ED', '#ff8a65', '#d9e3f0'
     ];
 
+    // useEffect(() => {
+    //     let rnd = rndRef.current;
+    //     draggedNoteFlag ? rnd.updateSize({ width: "30%", height: "30%" }) : console.log();;
+    // }, [draggedNoteFlag])
+
     useEffect(() => {
-        let rnd = rndRef.current;
-        dragFlag ? rnd.updateSize({ width: "30%", height: "30%" }) : console.log();
-        let allNotes = [...noteList];
-
-        allNotes = allNotes.map(obj => ({ ...obj, top: 20, left: 80 }));
-
-        console.log(allNotes);
-        setNotes1([...allNotes]);
-        // setNotes1("ooo");
-        console.log(notes1);
-        console.log(noteList);
-    }, [dragFlag, noteList])
+        debugger
+        alert("useeee effect called")
+        setSizeScreen({ clientHeight: allNoteRef.current.clientHeight, clientWidth: allNoteRef.current.clientWidth });
+    }, [])
 
     function openCloseEditor(item) {
         let currentIndex = noteList.indexOf(noteList.find(x => x.indexNote == item.indexNote))//find the current place in the state in redux
-        // --search item with editor open 
+        // --search item with editor open
         for (let index = 0; index < noteList.length; index++) { ///find the preview open editor
             if (noteList[index].flagColor === true && index != currentIndex) {
                 dispatch(actions.closePreview(index))
@@ -95,6 +66,7 @@ export default function Notes(props) {
         }
         dispatch(actions.setFlagColor(item))
     }
+
     function deleteItem(item) {
         debugger
         const i = item.indexNote
@@ -105,7 +77,7 @@ export default function Notes(props) {
             // alert("correctItem != -1 || item.textNote =empty||item._id ==empty ")
             return
         }
-        dispatch(actions.deleteNote({ item, currentFolder }))//delete note in midlleWare 
+        dispatch(actions.deleteNote({ item, currentFolder }))//delete note in midlleWare
     }
 
     function changeColor(c, item, index) {
@@ -122,10 +94,16 @@ export default function Notes(props) {
         note.style.backgroundColor = c
         text.style.backgroundColor = c
     }
-    
+
+    function savePositionNote(item, left, top, index) {
+        console.log("upppppphhnn");
+        // dispatch(actions.updateNote({ item, left, top,currentFolder }));//a function use to update color & text ib midlleWare
+        // console.log(item);
+    }
+
     function saveText(item, newText) {
         debugger
-        
+
         if (newText) {
             const i = item.indexNote
             let currentItem = noteList.indexOf(noteList.find(x => x.indexNote == i))//find the current place in the state in redux
@@ -153,6 +131,7 @@ export default function Notes(props) {
             dispatch(actions.deleteNote({ item, newText, currentFolder }))//delete note in midlleWare
         }
     }
+
     function inResize(item, end) {
         if (item.flagColor == true)
             dispatch(actions.setFlagColor(item))
@@ -166,42 +145,170 @@ export default function Notes(props) {
         // document.getElementById("rnd").dispatchEvent(new DragEvent('onDragStop'));
     }
 
-    function onDragStart(indexNote) {
+    function onDragStart(e) {
         // const draggedNote = dragRef.current;
         // console.log(draggedNote);
-        setCurrentNote(indexNote);
+        let note = e.target.getAttribute("data-key");
+        setCurrentNote(note.indexNote);
+        // setDragEnd(false);
     }
-    function onDragStop(e) {
-        debugger
-        console.log(e);
-        document.getElementById("rnd").dispatchEvent(new Event('mousedown'));
+
+    /* The dragging code for '.draggable' from the demo above
+* applies to this demo as well so it doesn't have to be repeated. */
+
+    // enable draggables to be dropped into this
+
+
+    interact('.drag-drop')
+        .draggable({
+            ignoreFrom: '.textarea',
+            // origin: 'self',
+            inertia: true,
+            modifiers: [
+                interact.modifiers.restrictRect({
+                    restriction: '.App',
+                    endOnly: true
+                })
+            ],
+            autoScroll: true,
+            // dragMoveListener from the dragging demo above
+            listeners: {
+                move: dragMoveListener,
+                start: onDragStart,
+                // onend:savePositionNote("c","r","g")
+                // ,
+                // dragLeave:
+            }
+        }).resizable({
+            // resize from all edges and corners
+            edges: { left: true, right: true, bottom: true },
+
+            listeners: {
+                move(event) {
+                    var target = event.target
+                    var x = (parseFloat(target.getAttribute('data-x')) || 0)
+                    var y = (parseFloat(target.getAttribute('data-y')) || 0)
+
+                    // update the element's style
+                    target.style.width = event.rect.width + 'px'
+                    target.style.height = event.rect.height + 'px'
+
+                    // translate when resizing from top or left edges
+                    x += event.deltaRect.left
+                    y += event.deltaRect.top
+
+                    target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+
+                    target.setAttribute('data-x', x)
+                    target.setAttribute('data-y', y)
+                    // target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+                }
+            },
+            modifiers: [
+                // keep the edges inside the parent
+                interact.modifiers.restrictEdges({
+                    outer: 'all-notes'
+                }),
+
+                // minimum size
+                interact.modifiers.restrictSize({
+                    min: { width: 100, height: 50 }
+                })
+            ],
+
+            inertia: true
+        })
+
+    interact('.dropDrag').dropzone({
+        // only accept elements matching this CSS selector
+        accept: '#yes-drop',
+        // Require a 75% element overlap for a drop to be possible
+        overlap: 1,
+
+
+        ondrop: function (event) {
+            event.stopImmediatePropagation();
+
+            console.log("droo");
+            //   event.relatedTarget.textContent = 'Dropped'
+            //    await setDragEnd(true);
+            dragEndListener(event.relatedTarget);
+
+        },
+        ondropdeactivate: function (event) {
+            // remove active dropzone feedback
+            event.target.classList.remove('drop-active')
+            event.target.classList.remove('drop-target')
+        }
+    })
+    function dragMoveListener(event) {
+        var target = event.target
+        // keep the dragged position in the data-x/data-y attributes
+        var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+        var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+        // translate the element
+        target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
+
+        // update the posiion attributes
+        target.setAttribute('data-x', x)
+        target.setAttribute('data-y', y)
 
     }
+
+    function dragEndListener(target) {
+        var x = (parseFloat(target.getAttribute('data-x')) || 0) + target.dx
+        var y = (parseFloat(target.getAttribute('data-y')) || 0) + target.dy
+        console.log("end");
+        let item = target.getAttribute("data-key");
+        savePositionNote(item, x, y);
+
+    }
+    //   function dragEndListener(e){
+    //       debugger
+    //       console.log(e);
+    //   }
+
+    // this function is used later in the resizing and gesture demos
+    window.dragMoveListener = dragMoveListener
 
     return (
         <>
-            <div className="all-notes">
-                <div ref={drop} style={styles}>
-                    {notes1.length>0 ? notes1.map((item, key) => {console.log(item);
-                        // const { left, top, ...note } = notes[key];
-                        return (<div className="resize">
-                            <Box key={key} id={item._id} left={item.left} top={item.top} hideSourceOnDrag={true}>
+            <div className="all-notes dropDrag" ref={allNoteRef}>
+                {noteList ? noteList.map((item) => {
+                    console.log(noteList);
+                    console.log(item);
+                    return <>
+                        <div className="resize" >
+                            {/* <div id="no-drop" class="drag-drop"> #no-drop </div> */}
+
+                            <div key={item.indexNote}
+                                id="yes-drop"
+                                data-key={item}
+                                className={`drag-drop note ${item.indexNote}`}
+                                style={{
+                                    backgroundColor: item.colors, top: item.placeX,
+                                    left: item.placeY
+                                }}
+
+                            >
+
                                 <div className={`header ${item.indexNote}`}
-                                    // style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }} 
-                                    >
+                                    style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }} >
                                     <BsX style={{
                                         color: "#0A102E",
                                         hoverBackground: "black",
-                                        cursor: "auto",
+                                        // cursor: "auto",
                                         position: "relative",
                                         float: "left",
                                         margin: "1%"
                                     }} onClick={() => deleteItem(item)} className="BsX_button"></BsX>
-                                    <img src={icon} alt="Icon" draggable="false" style={{
+                                    <BsFillGrid3X2GapFill draggable="false"> </BsFillGrid3X2GapFill>
+                                    {/* <img src={icon} alt="Icon" draggable="false" style={{
                                         fontWeight: "none",
                                         color: "#0A102E",
                                         margin: "1%",
-                                    }}></img>
+                                    }}></img> */}
                                     <BsPencil
                                         onClick={() => openCloseEditor(item)}
                                         style={{
@@ -209,12 +316,12 @@ export default function Notes(props) {
                                             position: "relative",
                                             float: "right",
                                             margin: "1%",
-                                            cursor: "auto",
+                                            // cursor: "auto",
                                         }} className="BsPencil_button"
                                     >
                                     </BsPencil>
                                     <textarea
-                                        className={`textarea ${item.indexNote}`}
+                                        className={`textarea ${item.indexNote} textarea`}
                                         style={{ backgroundColor: item.colors }}
                                         id="areaText"
                                         type="string"
@@ -223,21 +330,56 @@ export default function Notes(props) {
                                     >{item.textNote}
                                     </textarea>
                                 </div>
-                            </Box></div>);
-                    })
-                        : <p>No Notes</p>
-                    }
+                                <div className="curr-container"
+                                    style={{
+                                    }}
+                                >
+                                    {(item.flagColor === true) ?
+                                        <div className="curr" >
+                                            {mycolors.map((c, i) => {
+                                                return <div key={i} className="divColors " className="colorDiv handPointer"
+                                                    style={{ backgroundColor: c }} onClick={() => changeColor(c, item, i)}
+                                                >
+                                                    {c === item.colors ?
+                                                        <BsCheck
+                                                            style={{
+                                                                fontSize: "13px",
+                                                                marginTop: " 2px",
+                                                                color: "white",
+                                                                fontWeight: "bold"
+                                                            }}></BsCheck> : ""}
+                                                </div>
+                                            })}
+                                        </div>
+                                        : ""}
+                                </div>
+                            </div>
 
-                </div>);
+                            {/* <div id="outer-dropzone" class="dropzone">
+                            #outer-dropzone
+                            <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
+                        </div> */}
 
-
-                {/* {notes ? notes.map((item) => {
-                    return <>  <div className="resize">
-                        <Rnd id="rnd" ref={rndRef} cancel="textarea .curr-container BsX BsPencil" draggable
+                            {/* <div ref={rndRef} id="drag" draggable="true"
+                            onResizeStart={() => { inResize(item, 0) }}
+                            onResizeEnd={() => { inResize(item, 1) }}
+                            onMouseDown={onmousedown}
+                            onDragStop={(e) => onDragStop(e)}
+                            onMouseUp={onMouseUp}
+                            onMouseDown={onMouseDown}
+                            onMouseMove={onMouseMove}
+                            onDragStart={ondragstart}
+                            key={item.indexNote}
+                            // ref={dragRef}
+                            className={`note ${item.indexNote} note`}
+                            width="336" height="69"> */}
+                            {/* <Rnd id="rnd" ref={rndRef} cancel=".textarea .curr-container BsX BsPencil"
                             onResizeStart={() => { inResize(item, 0) }}
                             onResizeEnd={() => { inResize(item, 1) }}
                             onDragStart={() => onDragStart(item.indexNote)}
-                            onDragStop={handleDragStop}
+                            onDragStop={(e)=>onDragStop(e)}
+                            onMouseUp={onMouseUp}
+                            extendsProps={extendsProps}
                             // onDragStop={onDragStop}
                             key={item.indexNote}
                             // ref={dragRef}
@@ -252,78 +394,17 @@ export default function Notes(props) {
                             }}
                         // style={{ zoom: dragFlag&&currentNote===item.indexNote ? '30%' : "100%" }}
 
-                        >
+                        > */}
 
-                            <div className={`header ${item.indexNote}`}
-                                style={{ backgroundColor: LightenDarkenColor(item.colors, -45) }} >
-                                <BsX style={{
-                                    color: "#0A102E",
-                                    hoverBackground: "black",
-                                    cursor: "auto",
-                                    position: "relative",
-                                    float: "left",
-                                    margin: "1%"
-                                }} onClick={() => deleteItem(item)} className="BsX_button"></BsX>
-                                <img src={icon} alt="Icon" draggable="false" style={{
-                                    fontWeight: "none",
-                                    color: "#0A102E",
-                                    margin: "1%",
-                                }}></img>
-                                <BsPencil
-                                    onClick={() => openCloseEditor(item)}
-                                    style={{
-                                        color: "#0A102E",
-                                        position: "relative",
-                                        float: "right",
-                                        margin: "1%",
-                                        cursor: "auto",
-                                    }} className="BsPencil_button"
-                                >
-                                </BsPencil>
-                                <h4>{item.indexNote}</h4>
-                                <textarea
-                                    className={`textarea ${item.indexNote}`}
-                                    style={{ backgroundColor: item.colors }}
-                                    id="areaText"
-                                    type="string"
-                                    onBlur={e => saveText(item, e.target.value)}
-                                    onDoubleClick={handleDoubleClick}
-                                >{item.textNote}
-                                </textarea>
-                            </div>
-                            <div className="curr-container"
-                                style={{
-                                }}
-                            >
-                                {(item.flagColor === true) ?
-                                    <div className="curr" >
-                                        {mycolors.map((c, i) => {
-                                            return <div key={i} className="divColors " className="colorDiv handPointer"
-                                                style={{ backgroundColor: c }} onClick={() => changeColor(c, item, i)}
-                                            >
-                                                {c === item.colors ?
-                                                    <BsCheck
-                                                        style={{
-                                                            fontSize: "13px",
-                                                            marginTop: " 2px",
-                                                            color: "white",
-                                                            fontWeight: "bold"
-                                                        }}></BsCheck> : ""}
-                                            </div>
-                                        })}
-                                    </div>
-                                    : ""}
-                            </div>
-                        </Rnd>
-
-
-
-                    </div>
+                            {/* </Rnd> */}
+                            {/* </div> */}
+                        </div>
                     </>
                 })
                     : <p>No Notes</p>
-                } */}
+                }
             </div>
         </>
     )
 }
+
