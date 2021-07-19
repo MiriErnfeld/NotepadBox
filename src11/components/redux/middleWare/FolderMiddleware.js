@@ -1,4 +1,3 @@
-import keyss from '../../../config/env/keys';
 import { actions } from '../actions/action'
 
 
@@ -15,14 +14,13 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             headers: myHeaders,
             redirect: 'follow'
         };
-        fetch(`${keyss.BASE_URL}/${userName}/folder/getFoldersByUserName`)
+        fetch(`https://box.dev.leader.codes/api/${userName}/folder/getFoldersByUserName`)
             .then(response => response.json())
             .then(result => {
-                debugger
-                if (!result.status) {
-                    dispatch(actions.setAllFoldersForUser(result))
-                    dispatch(actions.getFolderNotesByUser(result.folders[0]._id));
-                }
+                dispatch(actions.setAllFoldersForUser(result))
+                // if (result && result.folders[0] && result.folders[0].folderName === "בישולים") {
+                dispatch(actions.getFolderNotesByUser(result.folders[0]._id));
+                // }
             })
             .catch(error => console.log('error', error));
 
@@ -44,17 +42,16 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`${keyss.BASE_URL}/${userName}/folder/addFolder`, requestOptions)
+        fetch(`https://box.dev.leader.codes/api/miri/folder/addFolder`, requestOptions)
             .then(response => response.json())
-            .then(async (result) => {
+            .then( async(result) => {
                 debugger
-                if (!result.status) {
-                    
-                    // console.log(result)
-                    Promise.resolve(dispatch(actions.addFolder(result))).then(
-                        () => { debugger; dispatch(actions.setNewFolder(result))
-                         });
-                }
+                // console.log(result)
+                Promise.resolve(dispatch(actions.addFolder(result))).then(
+                    () =>{debugger; dispatch(actions.setNewFolder(result))});
+                // await dispatch(actions.addFolder(result));
+                debugger
+                // dispatch(actions.setNewFolder(result));
             })
     }
 
@@ -64,12 +61,10 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`${keyss.BASE_URL}/${userName}/folder/${action.payload}/deleteFolder`, requestOptions)
+        fetch(`https://box.dev.leader.codes/api/miri/folder/${action.payload}/deleteFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                if (!result.status) {
-                    dispatch(actions.deleteFolderFromList(result));
-                }
+                dispatch(actions.deleteFolderFromList(result));
             })
             .catch(error => console.log('error', error));
     }
@@ -90,13 +85,11 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             redirect: 'follow'
         };
 
-        fetch(`${keyss.BASE_URL}/folder/${index}/updateFolder`, requestOptions)
+        fetch(`https://box.dev.leader.codes/api/folder/${index}/updateFolder`, requestOptions)
             .then(response => response.json())
             .then(result => {
-                if (!result.status) {
-                    console.log(result)
-                    dispatch(actions.updateNoteAction(result))
-                }
+                console.log(result)
+                dispatch(actions.updateNoteAction(result))
             })
             .catch(error => console.log('error', error));
 
@@ -107,14 +100,10 @@ export const folderMiddleware = ({ getState, dispatch }) => (next) => (action) =
             method: 'GET',
             redirect: 'follow'
         };
-debugger
-        fetch(`${keyss.BASE_URL}/${userName}/folder/${action.payload}/folderNotes`, requestOptions)
+
+        fetch(`https://box.dev.leader.codes/api/${userName}/folder/${action.payload}/folderNotes`, requestOptions)
             .then(response => response.json())
-            .then(result => { debugger
-                if (!result.status) {
-                    dispatch(actions.setAllNotesFolder(result))
-                }
-            })
+            .then(result => dispatch(actions.getAllNotesForUser(result)))
             .catch(error => console.log('error', error));
     }
 

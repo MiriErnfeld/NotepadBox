@@ -23,16 +23,20 @@ textarea.textarea:focus {
 height: 150px;
 transform: rotate("");
 width: 150px;
-/* background-color: yellow; */
+background-color: yellow;
 /* margin: 30px 0; */
 position: absolute;
 cursor: -webkit-grab;
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%); 
 min-height: 80px;
 min-width: 130px;
+<<<<<<< HEAD
+display:-webkit-box !important;}
+=======
 display:-webkit-box !important;
-z-index: 99999;
+z-index: 9999;
 }
+>>>>>>> 35d37c27d95852d577dfa3387e35e3581ccf3f31
 .header{
   /* background-color: yellow; */
   position: absolute;
@@ -72,7 +76,7 @@ left: 48vh; */
     margin-top: " 12px"; */
   }
   .header{
-    /* background-color: yellow */
+    background-color: yellow
   }
   .create-note{
     position: absolute;
@@ -131,4 +135,13 @@ left: 48vh; */
 ::-webkit-scrollbar-thumb {
   background: #888; 
 }
-
+.BsX_button:hover{
+  /* zoom: 1.5; */
+  font-size: larger;
+  font-weight: bold;
+}
+.BsPencil_button:hover{
+  zoom: 4;
+  font-weight: bold;
+  font-size :5px;;
+}
