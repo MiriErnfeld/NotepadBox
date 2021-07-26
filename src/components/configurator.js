@@ -11,9 +11,9 @@ import { createFolderApi } from '../api/foldersApi';
 import { FcPlus } from "react-icons/fc";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 // import MyNote from './TrySmoothDnd';
-import MyNote from './TryDrag';
+// import MyNote from './TryDrag';
 // import MyNote from './myNote copy';
-// import MyNote from './myNote';
+import MyNote from './myNote';
 import { BsX } from "react-icons/bs";
 import { Modal, Button, Dropdown } from 'react-bootstrap';
 
@@ -99,7 +99,7 @@ export default function Configurator() {
     // };
 
 
-    function noteToSpesificFolder(e, targetFolderId) {
+    function noteToSpesificFolder(targetFolderId) {
         console.log(currentNote);
         if (currentNote >= 0 && currentFolder)
             dispatch(actions.noteToSpesificFolder({
@@ -297,7 +297,7 @@ export default function Configurator() {
                 setNewFolderFlag(true);
             }
             else if (droppedDiv) {
-                noteToSpesificFolder(event, droppedDiv);
+                noteToSpesificFolder(droppedDiv);
             }
             // noteToSpesificFolder(targetFolderId);
             // event.relatedTarget.textContent = 'Dropped'

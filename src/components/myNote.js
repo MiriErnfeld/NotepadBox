@@ -6,12 +6,12 @@ import { BsPencil, BsX, BsCheck } from "react-icons/bs";
 import { BsFillGrid3X2GapFill } from "react-icons/bs";
 import interact from 'interactjs';
 
-import icon from '../images/icon.png'
+// import icon from '../images/icon.png'
 import { LightenDarkenColor } from 'lighten-darken-color';
 import { actions } from './redux/actions/action'
-import update from 'immutability-helper';
-import ItemTypes from './ItemTypes';
-import Box from './Box';
+// import update from 'immutability-helper';
+// import ItemTypes from './ItemTypes';
+// import Box from './Box';
 
 
 import './myNote.css'
@@ -52,7 +52,6 @@ export default function Notes(props) {
 
     useEffect(() => {
         debugger
-        alert("useeee effect called")
         setSizeScreen({ clientHeight: allNoteRef.current.clientHeight, clientWidth: allNoteRef.current.clientWidth });
     }, [])
 
@@ -298,12 +297,12 @@ export default function Notes(props) {
                                     <BsX style={{
                                         color: "#0A102E",
                                         hoverBackground: "black",
-                                        // cursor: "auto",
+                                        cursor: "auto",
                                         position: "relative",
                                         float: "left",
                                         margin: "1%"
                                     }} onClick={() => deleteItem(item)} className="BsX_button"></BsX>
-                                    <BsFillGrid3X2GapFill draggable="false"> </BsFillGrid3X2GapFill>
+                                    <BsFillGrid3X2GapFill draggable="false" style={{ marginTop: "1%" }}> </BsFillGrid3X2GapFill>
                                     {/* <img src={icon} alt="Icon" draggable="false" style={{
                                         fontWeight: "none",
                                         color: "#0A102E",
@@ -316,7 +315,7 @@ export default function Notes(props) {
                                             position: "relative",
                                             float: "right",
                                             margin: "1%",
-                                            // cursor: "auto",
+                                            cursor: "auto",
                                         }} className="BsPencil_button"
                                     >
                                     </BsPencil>

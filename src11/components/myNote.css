@@ -1,16 +1,7 @@
 
-.textarea{
-  font-size: 18px;
-  padding: 5px;
-  font-family: 'Shadows Into Light', 'Tangerine', Arial;
-  background-color: yellow;
-    height: 100% !important;
-    /* max-height: max-content; */
 
-    margin: 0px;
-    width:100%;
-    border: none;
-}
+
+
 textarea.textarea:focus {
   outline-width: 0;
 }
@@ -30,13 +21,9 @@ cursor: -webkit-grab;
 box-shadow: 5px 5px 15px 0 rgb(0 0 0 / 20%); 
 min-height: 80px;
 min-width: 130px;
-<<<<<<< HEAD
-display:-webkit-box !important;}
-=======
 display:-webkit-box !important;
 z-index: 9999;
 }
->>>>>>> 35d37c27d95852d577dfa3387e35e3581ccf3f31
 .header{
   /* background-color: yellow; */
   position: absolute;

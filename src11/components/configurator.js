@@ -190,25 +190,6 @@ export default function Configurator() {
 
 
             </div >
-<<<<<<< HEAD
-            <div className="container container-configurator">
-                {/* <div className="container container-configurator"> */}
-                <div className=" create-note-button" onClick={insertNote}>Create Note +</div>
-                <div className="row dragfolder">
-                    {/* <div className="row "> */}
-                    <img src={folserPlus} alt="img" style={{ zoom: 0.8, color: "#7B7D70", marginTop: "3px" }}></img>
-                    {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
-                    <p className="folder" style={{ fontSize: '15' }}>drag notes to create folder</p>
-                </div>
-                {/* <Droppable > */}
-                {/* <div className="row " >
-                        <FiFolder ></FiFolder>
-                        folder name
-                    </div> */}
-
-            </div>
-            {/* </DragDropContext> */}
-=======
             <div className="container container-configurator d-flex align-items-center flex-column start custom-scrollbar" >
                 {/* <div className="container container-configurator"> */}
                 <div className="create-note-button m-2 mt-3 d-flex justify-content-center align-items-center"
@@ -255,10 +236,10 @@ export default function Configurator() {
                                     onDoubleClick={(e) => { e.target.readOnly = false }}
                                 ></input>
                                 {
-                                    folder.folderName !== "default" ? 
-                                    <RiDeleteBinLine className="icon"
-                                        onClick={(e) => setDeleteFolder(e, folder)} >
-                                    </RiDeleteBinLine>
+                                    folder.folderName !== "default" ?
+                                        <RiDeleteBinLine className="icon"
+                                            onClick={(e) => setDeleteFolder(e, folder)} >
+                                        </RiDeleteBinLine>
                                         : ""}
 
                             </div>
@@ -279,7 +260,6 @@ export default function Configurator() {
                         מחק                     </Button>
                 </Modal.Footer>
             </Modal>
->>>>>>> 35d37c27d95852d577dfa3387e35e3581ccf3f31
         </>
     )
 }
