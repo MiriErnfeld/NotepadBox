@@ -120,18 +120,18 @@ export default function Notes(props) {
 
     function handleDoubleClick(e) { e.target.select(); }
 
-    function handleDragStop(e) {
-        console.log();
-        console.log(document.getElementById("rnd"))
-        // document.getElementById("rnd").dispatchEvent(new DragEvent('onDragStop'));
+    // function handleDragStop(e) {
+    //     console.log();
+    //     console.log(document.getElementById("rnd"))
+    //     // document.getElementById("rnd").dispatchEvent(new DragEvent('onDragStop'));
 
-    }
+    // }
 
     function onDragStart(e) {
         // const draggedNote = dragRef.current;
         // console.log(draggedNote);
         let note = e.target.getAttribute("data-key");
-        setCurrentNote(note.indexNote);
+        setCurrentNote(note._id);
         // setDragEnd(false);
     }
 
@@ -149,7 +149,7 @@ export default function Notes(props) {
             modifiers: [
                 interact.modifiers.restrictRect({
                     restriction: '.App',
-                    endOnly: true
+                    // endOnly: true
                 })
             ],
             autoScroll: true,
@@ -164,7 +164,7 @@ export default function Notes(props) {
         }).resizable({
             // resize from all edges and corners
             edges: { left: true, right: true, bottom: true },
-
+            ignoreFrom: '.curr-container',
             listeners: {
                 move(event) {
                     var target = event.target
@@ -189,7 +189,7 @@ export default function Notes(props) {
             modifiers: [
                 // keep the edges inside the parent
                 interact.modifiers.restrictEdges({
-                    outer: 'all-notes'
+                    outer: '.all-notes'
                 }),
 
                 // minimum size
@@ -207,7 +207,7 @@ export default function Notes(props) {
         // Require a 75% element overlap for a drop to be possible
         overlap: 1,
 
-      
+
         ondrop: function (event) {
             event.stopImmediatePropagation();
 
@@ -235,7 +235,7 @@ export default function Notes(props) {
         // update the posiion attributes
         target.setAttribute('data-x', x)
         target.setAttribute('data-y', y)
-      
+
     }
 
     function dragEndListener(target) {
@@ -266,7 +266,7 @@ export default function Notes(props) {
 
                             <div key={item.indexNote}
                                 id="yes-drop"
-                                data-key={item}
+                                data-key={item._id}
                                 className={`drag-drop note ${item.indexNote}`}
                                 style={{
                                     backgroundColor: item.colors, top: item.placeX,

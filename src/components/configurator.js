@@ -27,7 +27,7 @@ export default function Configurator() {
 
     const [arrnums, setarrnums] = useState([{}])
     const [currentNote, setCurrentNote] = useState(null);
-    const [newFolderFlag, setNewFolderFlag] = useState();
+    const [newFolderFlag, setNewFolderFlag] = useState(false);
     // 
     const [currentFolder, setCurrentFolder] = useState(null);
     const [show, setShow] = useState(false);
@@ -56,7 +56,7 @@ export default function Configurator() {
             console.log(currentNote);
         }
 
-    }, [folders])
+    }, [folders,newFolderFlag,currentNote])
 
     const randomBetween = (min = 1, max = 900) => {
         return (min + Math.ceil(Math.random() * max));
@@ -97,13 +97,13 @@ export default function Configurator() {
     // };
 
 
-    function noteToSpesificFolder(e, targetFolderId) {
+    function noteToSpesificFolder(targetFolderId) {
         console.log(currentNote);
         if (currentNote >= 0 && currentFolder)
             dispatch(actions.noteToSpesificFolder({
                 sourceFolder: currentFolder._id,
                 targetFolder: targetFolderId,
-                indexNote: currentNote
+                indexNote: folders.find(f=>f._id===currentNote).indexNote
             }))
         // else
         //     alert("you cannot move note without text!")
@@ -213,19 +213,20 @@ export default function Configurator() {
 
             // e.preventDefault();
             // e.stopPropagation();
-            let current=event.relatedTarget;
-            if(current){
-                let currentNote = current.getAttribute('data-key');
-                if(currentNote){
-                     await setCurrentNote(currentNote.indexNote);
-                current.classList.add("currentNote");
+            let note = event.relatedTarget;
+            debugger
+            if (note) {
+                let currentNoteId = note.getAttribute('data-key');
+                if (currentNoteId) {
+                    await setCurrentNote(currentNoteId);
+                    note.classList.add("currentNote");
                 }
             }
             let droppedDiv = event.target.getAttribute('data-key');
-            if (droppedDiv && droppedDiv === "newFolder") {
-                setNewFolderFlag(true);
-            }
-            else if (droppedDiv) { 
+            // if (droppedDiv && droppedDiv === "newFolder") {
+            //     setNewFolderFlag(true);
+            // }
+            if (droppedDiv) {
                 noteToSpesificFolder(droppedDiv);
             }
             // noteToSpesificFolder(targetFolderId);
@@ -281,22 +282,23 @@ export default function Configurator() {
         },
         ondrop: async function (event) {
             // e.preventDefault();
-            // e.stopPropagation();
-            let current = event.relatedTarget;
-            let currentNoteId = current.getAttribute('data-key');
+            // event.stopPropagation();
+            // event.stopImmediatePropagation();
+            let note = event.relatedTarget;
+            let currentNoteId = note.getAttribute('data-key');
             console.log(currentNoteId);
-            if (current) {
+            if (note) {
                 await setCurrentNote(currentNoteId);
-                current.classList.add("currentNote")
+                note.classList.add("currentNote")
             }
             debugger
             let droppedDiv = event.target.getAttribute('data-key');
             if (droppedDiv && droppedDiv === "newFolder") {
-                setNewFolderFlag(true);
+              await setNewFolderFlag(true)
+            
+                console.log(newFolderFlag);
             }
-            else if (droppedDiv) {
-                noteToSpesificFolder(event, droppedDiv);
-            }
+            
             // noteToSpesificFolder(targetFolderId);
             // event.relatedTarget.textContent = 'Dropped'
             setDraggedNoteFlag(!draggedNoteFlag);
@@ -337,7 +339,7 @@ export default function Configurator() {
                     </div> */}
                 {/* <div class="row"> */}
                 {/* <MyNote setCurrentNote={setCurrentNoteOnDrag} currentFolder={currentFolder} dragFlag={dragFlag} currentNote={currentNote} /> */}
-                <MyNote draggedNoteFlag={draggedNoteFlag} currentFolder={currentFolder} currentNote={currentNote} setCurrentNote={setCurrentNote1} setSizeScreen={setSizeScreenFromChild}/>
+                <MyNote draggedNoteFlag={draggedNoteFlag} currentFolder={currentFolder} currentNote={currentNote} setCurrentNote={setCurrentNote1} setSizeScreen={setSizeScreenFromChild} />
                 {/* <NoteResize></NoteResize> */}
                 {/* </div> */}
 
@@ -395,8 +397,9 @@ export default function Configurator() {
                         : ""
 
                 }
-                {folders ? folders.map((folder) =>
-                    <>
+                {folders ? folders.map((folder) => {
+                    console.log(folder._id);
+                    return <>
                         {
                             folder.folderName !== "default" ?
                                 <div key={folder._id}
@@ -437,7 +440,8 @@ export default function Configurator() {
 
 
 
-                    </>)
+                    </>
+                })
                     : ""
                 }
 
