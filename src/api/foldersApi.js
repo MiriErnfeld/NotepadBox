@@ -18,11 +18,11 @@ export async function createFolderApi(text) {
     };
 
     let result = await fetch(`${keys.BASE_URL}/${userName}/folder/addFolder`, requestOptions)
-    .then(response => response.json())
-    .then(result => {
-    if (!result.status)
-            return result
-    })
+        .then(response => response.json())
+        .then(result => {
+            if (!result.status)
+                return result
+        })
     return result;
 
 }

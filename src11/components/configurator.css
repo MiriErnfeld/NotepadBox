@@ -1,11 +1,10 @@
 body{
     overflow: hidden;
     position:relative;
-    background-color: #e8eaec;
+    background-color: #F1F1F3;
     width:100%;
 height:100%;
-    /* overflow:hidden; */
-    /* overflow: hidden; */
+    overflow:hidden;
 }
 .headerConfig{
     background-color: aqua;
@@ -69,10 +68,24 @@ width:99%;
     align-items: center;
 
     bottom:0;
-    height:97%;
+    height:95%;
     width: 18%;
 
 }
+.create-note-button {
+    cursor: pointer;
+    position: relative;
+    padding-top: 13px;
+    width: 94%;
+    cursor: pointer;
+    top: -35%;
+    display: block;
+    color: rgb(255, 255, 255);
+    height: 9%;
+    font: 700 18px / 24px Roboto;
+    background: 0px 0px no-repeat padding-box padding-box rgb(53, 152, 244);
+    border-radius: 4px;
+} 
 .container-notes{
     width: 79%;
     margin-left: 8px;
@@ -88,13 +101,13 @@ width:99%;
 z-index: 9999;
 width: 100%;
     margin-left:1px;
-    /* background-color: #F1F1F3; */
+    background-color: #F1F1F3;
     border: 1px solid white; 
     top: 91px;
 left: 269px;
 height: 43px;
-/* background: var(--unnamed-color-f1f1f3) 0% 0% no-repeat padding-box;
-background: #F1F1F3 0% 0% no-repeat padding-box; */
+background: var(--unnamed-color-f1f1f3) 0% 0% no-repeat padding-box;
+background: #F1F1F3 0% 0% no-repeat padding-box;
 border-radius: 10px 10px 0px 0px;
 opacity: 1;
 box-shadow: #707070;
@@ -149,7 +162,7 @@ display:block;
     position: relative;
     /* padding: 13%; */
     width: 15vw;
-    min-height:7%!important;
+    min-height: 10%!important;
     cursor: pointer;
     /* top: -35%; */
     display: block;
@@ -166,11 +179,11 @@ display:block;
     /* text-align: center;  */
 }
 .folderColor{
-    background-color: #F1F1F3!important;
+    background-color: #F1F1F3;
 
 }
 .folderChosenColor{
-    background-color: #c1c1c1!important;
+    background-color: #c1c1c1;
 }
 .folderInput{
     width:11vw;
@@ -180,7 +193,7 @@ display:block;
     cursor: default;
 }
 .folder:hover {
-    background-color: #c1c1c1!important;
+    background-color: #c1c1c1;
   }
 
 ::-webkit-scrollbar {
@@ -214,21 +227,3 @@ display:block;
 .draggedNote{
    zoom:50%!important;
 }
-
-.dropzone.dropNewFolder {
-    background-color: #F1F1F3;
-    border: dashed 4px transparent;
-    border-radius: 4px;
-    /* margin: 10px auto 30px; */
-    /* padding: 10px; */
-    /* width: 80%; */
-    transition: background-color 0.3s;
-  }
-
-  .drop-target {
-    /* background-color: #F1F1F3; */
-    border-color: #fff;
-    border-style: solid;
-  }
-
-  

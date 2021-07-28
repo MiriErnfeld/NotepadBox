@@ -10,6 +10,9 @@ import interact from 'interactjs';
 import { createFolderApi } from '../api/foldersApi';
 import { FcPlus } from "react-icons/fc";
 import { BsFillPlusCircleFill } from "react-icons/bs";
+// import MyNote from './TrySmoothDnd';
+// import MyNote from './TryDrag';
+// import MyNote from './myNote copy';
 import MyNote from './myNote';
 import { BsX } from "react-icons/bs";
 import { Modal, Button, Dropdown } from 'react-bootstrap';
@@ -63,7 +66,6 @@ export default function Configurator() {
     }
 
     function setCurrentNote1(note) {
-
         setCurrentNote(note);
     }
 
@@ -359,7 +361,8 @@ export default function Configurator() {
                 >
 
                     {/* <div className="row "> */}
-                    <img src={folserPlus} alt="img" style={{ zoom: "100%", color: "#7B7D70" }}></img>
+                    {/* <RiFolderAddLine style={{ zoom: "1.5", color: "#7B7D70" }}></RiFolderAddLine> */}
+                    {/* <img src={folserPlus} alt="img" style={{ zoom: "100%", color: "#7B7D70" }}></img> */}
                     {/* <FiFolderPlus className="folderplus" style={{ zoom: 1.8, color: "#7B7D70", marginTop: "3px" }}></FiFolderPlus> */}
                     <p className="newFolder" style={{ fontSize: '15' }}>drag notes to create folder</p>
                 </div>
@@ -407,7 +410,6 @@ export default function Configurator() {
                                     onClick={(e) => getFolderNotesByUser(folder)}
                                     // onDrop={(e) => onDropExistsFolder(e, folder._id)}
                                     // onDragOver={handleDragOver}
-
                                     data-key={folder._id}
                                 >
                                     <FiFolder className="icon"></FiFolder>

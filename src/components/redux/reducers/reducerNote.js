@@ -95,7 +95,7 @@ const noteData = {
         let allNote = [...state.noteList]
         let top = Math.floor(Math.random() * 160)
         let left = Math.floor(Math.random() * 1000)
-debugger
+        debugger
         allNote.push({ _id: "", indexNote: c, userId: "", createNote: "", textNote: "", placeX: left, placeY: top, colors: "#FFEB3B", check: "", flagColor: false, })
         state.noteList = [...allNote]
 
@@ -145,10 +145,10 @@ debugger
     setDummyNoteList(state, action) {
         debugger
         const index = state.noteList.indexOf(state.noteList.find(x => x.indexNote == action.payload.noteToDelete.indexNote))
-        state.noteList[index]._id="";
-        state.noteList[index].indexNote=--state.clientNoteIndex;
-        state.noteList[index].textNote="";
-        
+        state.noteList[index]._id = "";
+        state.noteList[index].indexNote = --state.clientNoteIndex;
+        state.noteList[index].textNote = "";
+
         state.dummyNoteList.push(state.clientNoteIndex);
         console.log(state.dummyNoteList);
     },
@@ -161,13 +161,13 @@ debugger
     setNoteList1(state, action) {
         debugger
         let left = Math.floor(Math.random() * action.payload.clientWidth)
-        let top = Math.floor(Math.random() *  action.payload.clientHeight)
+        let top = Math.floor(Math.random() * action.payload.clientHeight)
 
         state.noteList.push({ _id: "", indexNote: --state.clientNoteIndex, userName: "", createNote: "", textNote: "", placeX: top, placeY: left, colors: "#FFEB3B", check: "", flagColor: false, })
     },
     setNewNoteIndex(state, action) {
         debugger
-        state.newNoteIndex=action.payload;
+        state.newNoteIndex = action.payload;
     }
 };
 
